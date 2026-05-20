@@ -1,3 +1,3 @@
 export const appConfig = {
-  appName: 'School CRM',
+  appName: 'Scholaris',
 };

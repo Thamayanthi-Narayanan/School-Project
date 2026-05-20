@@ -1,0 +1,18 @@
+export const themeColors = {
+  primary: '#2563eb',
+  primaryHover: '#1d4ed8',
+  primaryLight: '#dbeafe',
+  pageBg: '#f8fafc',
+  cardBg: '#ffffff',
+  textPrimary: '#0f172a',
+  textSecondary: '#64748b',
+  textMuted: '#94a3b8',
+  textInverse: '#ffffff',
+  border: '#e2e8f0',
+  overlayDark: 'rgba(15, 23, 42, 0.28)',
+  statPillBg: 'rgba(255, 255, 255, 0.14)',
+  statPillBorder: 'rgba(255, 255, 255, 0.22)',
+  loginPanelGradient: 'linear-gradient(165deg, #eef4ff 0%, #f5f8fc 42%, #ffffff 100%)',
+  loginCardBorder: 'rgba(37, 99, 235, 0.1)',
+  success: '#16a34a',
+};

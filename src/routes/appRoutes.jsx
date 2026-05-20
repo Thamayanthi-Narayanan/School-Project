@@ -1,12 +1,14 @@
+import { Navigate } from 'react-router-dom';
 import { routePaths } from '../constants/routePaths';
+import LoginPage from '../pages/login/js/loginPage';
 
-/**
- * Add page routes here when modules are implemented.
- * Example:
- * { path: routePaths.dashboard, element: <DashboardPage /> }
- */
 export const appRoutes = [
-  // screens will be registered here
+  {
+    path: routePaths.root,
+    element: <Navigate to={routePaths.login} replace />,
+  },
+  {
+    path: routePaths.login,
+    element: <LoginPage />,
+  },
 ];
-
-export const defaultRoutePath = routePaths.root;

@@ -24,11 +24,19 @@ Production School CRM / School Management SaaS. Admin dashboard style.
 ```
 src/
   assets/{images,icons,fonts}
+  theme/          → theme.css (CSS variables), themeColors.js (JS constants)
   apis/
   components/{sidebar,navbar,dashboardCards,common}/ → each: js/, css/, hooks/
   pages/ layouts/ routes/ hooks/ context/ utils/ constants/ services/ data/ styles/
   App.jsx  main.jsx
 ```
+
+## Theme colors
+
+- All shared colors live in `src/theme/theme.css` and `src/theme/themeColors.js`
+- Import `theme/theme.css` once in `main.jsx` (before `global.css`)
+- Use `var(--theme-*)` in CSS; use `themeColors` in JS when needed
+- Do not hardcode hex values in components — add new tokens to `theme/` first
 
 Component folders: `js/` (components), `css/` (styles), `hooks/` (component-specific hooks).
 

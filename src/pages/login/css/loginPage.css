@@ -1,0 +1,446 @@
+/* ── Full-page background (one image for entire login) ── */
+
+.loginPage {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.loginPageBg {
+  position: absolute;
+  inset: 0;
+  background-image: var(--login-hero-image);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.loginPageOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.5) 0%,
+    rgba(15, 23, 42, 0.2) 38%,
+    rgba(15, 23, 42, 0.12) 55%,
+    rgba(15, 23, 42, 0.18) 100%
+  );
+  pointer-events: none;
+}
+
+.loginPageContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ── Left brand (55%) — transparent, same bg shows through ── */
+
+.loginBrandPanel {
+  flex: 0 0 55%;
+  width: 55%;
+  display: flex;
+  min-height: 100vh;
+}
+
+.loginBrandInner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  padding: 2.5rem 2rem 2.5rem 2.75rem;
+  color: var(--theme-text-inverse);
+}
+
+.loginBrandHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.loginBrandLogoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--theme-radius-sm);
+  background: rgba(255, 255, 255, 0.18);
+  color: var(--theme-text-inverse);
+  backdrop-filter: blur(8px);
+}
+
+.loginBrandName {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--theme-text-inverse);
+}
+
+.loginBrandHero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 30rem;
+  padding: 3rem 0;
+}
+
+.loginBrandTitle {
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+  color: var(--theme-text-inverse);
+  text-shadow: 0 2px 20px rgba(15, 23, 42, 0.4);
+}
+
+.loginBrandSubtitle {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+  max-width: 28rem;
+  text-shadow: 0 1px 12px rgba(15, 23, 42, 0.35);
+}
+
+.loginBrandStats {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+}
+
+.loginBrandStat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  border-radius: var(--theme-radius-pill);
+  background: var(--theme-stat-pill-bg);
+  border: 1px solid var(--theme-stat-pill-border);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-inverse);
+  backdrop-filter: blur(8px);
+}
+
+.loginBrandStat svg {
+  color: var(--theme-text-inverse);
+}
+
+.loginBrandFooter {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* ── Right form (45%) — same full bg, glass card ── */
+
+.loginFormPanel {
+  flex: 0 0 45%;
+  width: 45%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 2.75rem 2rem 1.5rem;
+}
+
+.loginFormWrapper {
+  width: 100%;
+  max-width: 30rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.loginFormCard {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: var(--theme-login-card-shadow);
+  padding: 2rem 2.25rem 1.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.loginFormCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--theme-primary) 0%,
+    var(--theme-primary-light) 100%
+  );
+}
+
+.loginFormHeader {
+  margin-bottom: 1.35rem;
+  padding-top: 0.25rem;
+}
+
+.loginFormTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.375rem;
+}
+
+.loginFormSubtitle {
+  font-size: 0.9375rem;
+  color: var(--theme-text-secondary);
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.loginFormField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.loginFormLabelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.loginFormLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-label);
+}
+
+.loginFormInput {
+  width: 100%;
+  height: 2.75rem;
+  padding: 0 1rem;
+  border: 1px solid var(--theme-border-input);
+  border-radius: var(--theme-radius-md);
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--theme-text-primary);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.loginFormInput::placeholder {
+  color: var(--theme-text-muted);
+}
+
+.loginFormInput:focus {
+  outline: none;
+  border-color: var(--theme-border-focus);
+  box-shadow: 0 0 0 3px var(--theme-primary-focus-ring);
+}
+
+.loginFormInput:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.loginFormInputError {
+  border-color: #ef4444;
+}
+
+.loginFormError {
+  font-size: 0.8125rem;
+  color: #ef4444;
+}
+
+.loginFormLink {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-primary);
+}
+
+.loginFormLink:hover {
+  color: var(--theme-primary-hover);
+}
+
+.loginFormRemember {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 0.875rem;
+  color: var(--theme-text-label);
+  cursor: pointer;
+  user-select: none;
+}
+
+.loginFormCheckbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.loginFormCheckboxUi {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  border: 2px solid var(--theme-border);
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.loginFormCheckbox:checked + .loginFormCheckboxUi {
+  background: var(--theme-primary);
+  border-color: var(--theme-primary);
+}
+
+.loginFormCheckbox:checked + .loginFormCheckboxUi::after {
+  content: '';
+  width: 0.3rem;
+  height: 0.5rem;
+  border: solid var(--theme-text-inverse);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.loginFormSubmit {
+  width: 100%;
+  height: 2.75rem;
+  margin-top: 0;
+  border: none;
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-primary);
+  color: var(--theme-text-inverse);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+}
+
+.loginFormSubmit:hover:not(:disabled) {
+  background: var(--theme-primary-hover);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.4);
+}
+
+.loginFormSubmit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.loginFormSecure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--theme-success-muted);
+  margin-top: 0.25rem;
+}
+
+.loginFormSecureIcon {
+  display: flex;
+  color: var(--theme-success);
+}
+
+.loginFormFooter {
+  margin-top: 1.5rem;
+  font-size: 0.875rem;
+  color: var(--theme-text-inverse);
+  text-align: center;
+  text-shadow: 0 1px 8px rgba(15, 23, 42, 0.5);
+}
+
+.loginFormFooter .loginFormLink {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.loginFormFooter .loginFormLink:hover {
+  color: var(--theme-primary-light);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 1024px) {
+  .loginFormWrapper {
+    max-width: 26rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .loginPageContent {
+    flex-direction: column;
+  }
+
+  .loginBrandPanel {
+    width: 100%;
+    flex: none;
+    min-height: auto;
+  }
+
+  .loginBrandInner {
+    min-height: auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .loginBrandHero {
+    padding: 1.5rem 0;
+  }
+
+  .loginBrandStats {
+    margin-bottom: 1.5rem;
+  }
+
+  .loginFormPanel {
+    width: 100%;
+    flex: none;
+    min-height: auto;
+    padding: 1.5rem 1.5rem 2.5rem;
+  }
+
+  .loginFormWrapper {
+    max-width: 32rem;
+  }
+
+  .loginPageOverlay {
+    background: linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.45) 0%,
+      rgba(15, 23, 42, 0.25) 50%,
+      rgba(15, 23, 42, 0.35) 100%
+    );
+  }
+}
+
+@media (max-width: 480px) {
+  .loginFormCard {
+    padding: 1.75rem 1.25rem 1.5rem;
+    border-radius: 16px;
+  }
+
+  .loginBrandStats {
+    flex-direction: column;
+  }
+
+  .loginBrandStat {
+    width: 100%;
+  }
+}
