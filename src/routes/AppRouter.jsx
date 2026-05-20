@@ -3,6 +3,8 @@ import { routePaths } from '../constants/routePaths';
 import LoginPage from '../pages/login/js/loginPage';
 import DashboardLayout from '../layouts/dashboardLayout/js/dashboardLayout';
 import DashboardPage from '../pages/dashboard/js/dashboardPage';
+import StudentsPage from '../pages/students/js/studentsPage';
+import StaffPage from '../pages/staff/js/staffPage';
 
 const AppRouter = () => {
   return (
@@ -10,8 +12,10 @@ const AppRouter = () => {
       <Routes>
         <Route path={routePaths.root} element={<Navigate to={routePaths.login} replace />} />
         <Route path={routePaths.login} element={<LoginPage />} />
-        <Route path={routePaths.dashboard} element={<DashboardLayout />}>
-          <Route index element={<DashboardPage />} />
+        <Route element={<DashboardLayout />}>
+          <Route path={routePaths.dashboard} element={<DashboardPage />} />
+          <Route path={routePaths.students} element={<StudentsPage />} />
+          <Route path={routePaths.staff} element={<StaffPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

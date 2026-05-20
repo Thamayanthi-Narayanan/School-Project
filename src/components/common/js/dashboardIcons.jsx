@@ -153,6 +153,45 @@ export const DashboardIcons = {
       <path d="M4 8l6 6 4-4 6 8" />
     </svg>
   ),
+  upload: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M12 16V4M8 8l4-4 4 4" />
+      <path d="M4 20h16" />
+    </svg>
+  ),
+  download: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M12 4v12M8 12l4 4 4-4" />
+      <path d="M4 20h16" />
+    </svg>
+  ),
+  eye: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+      <circle cx="12" cy="12" r="2.5" />
+    </svg>
+  ),
+  edit: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+    </svg>
+  ),
+  trash: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M10 11v6M14 11v6M6 7l1 14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-14" />
+    </svg>
+  ),
+  chevronDown: (size = 16) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  ),
+  calendar: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <rect x="3" y="5" width="18" height="16" rx="2" />
+      <path d="M16 3v4M8 3v4M3 11h18" />
+    </svg>
+  ),
 };
 
 export const renderNavIcon = (iconName, size = 18) => {

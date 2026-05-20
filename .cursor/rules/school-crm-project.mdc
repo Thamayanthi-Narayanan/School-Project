@@ -26,7 +26,7 @@ src/
   assets/{images,icons,fonts}
   theme/          → theme.css (CSS variables), themeColors.js (JS constants)
   apis/
-  components/{sidebar,navbar,dashboardCards,common}/ → each: js/, css/, hooks/
+  components/{sidebar,navbar,dashboardCards,common,reusable}/ → each: js/, css/, hooks/
   pages/ layouts/ routes/ hooks/ context/ utils/ constants/ services/ data/ styles/
   App.jsx  main.jsx
 ```
@@ -48,8 +48,33 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
   - `navbar/navbar.mock.js` — breadcrumbs, search, user profile
   - `dashboard/dashboardPage.mock.js` — dashboard cards, tables, feeds
   - `login/loginPage.mock.js` — login copy and stats
+  - `students/studentsPage.mock.js` — students list, filters, add-student modal fields
+  - `staff/staffPage.mock.js` — staff list, search, add-staff modal fields
 - Export shared entries from `src/data/mocks/index.js`
 - Add a new mock file when creating each new screen or layout section
+
+## Reusable UI (`src/components/reusable/`)
+
+**Always reuse** these for list pages (Students, Staff, and similar CRUD screens). Import from `components/reusable/js/index.js` and `components/reusable/css/crmReusable.css`.
+
+| Component | Use for |
+|-----------|---------|
+| `CrmButton` | `primary`, `outline`, `pagination`, `icon` variants |
+| `PageHeader` | Page title, subtitle, action buttons slot |
+| `FormSearchBar` | Search inputs |
+| `FilterToolbar` | Search + dropdown filters + export (Students) |
+| `StaffSearchCard` | Single full-width search card (Staff) |
+| `FormInput` / `FormSelect` | Form fields inside modals |
+| `EntityFormModal` | Add/Edit modals — pass `modalData` with `fields[]` from mock |
+| `DataTableCard` | White table container + optional footer |
+| `PersonCell` | Avatar + name + optional subtext |
+| `TableRowActions` | View (eye), Edit, Delete — uses `DashboardIcons` |
+| `useModal` | Open/close modal, body scroll lock, Escape key |
+| `useListPagination` | Paginated lists (pass `entityLabel`, e.g. `'students'`) |
+
+- **Icons:** always use `DashboardIcons` from `components/common/js/dashboardIcons.jsx` — never duplicate SVGs
+- **Modal fields:** define as array in mock: `{ id, type: 'text'|'select'|'tel', label, placeholder?, icon?, options? }`
+- New list pages: compose reusables + page mock; do not copy button/form/modal CSS into page files
 
 ## Sidebar layout
 

@@ -1,6 +1,6 @@
 import '../css/statusPill.css';
 
-const statusClassMap = {
+const workflowStatusMap = {
   Success: 'statusPillSuccess',
   Approved: 'statusPillSuccess',
   Pending: 'statusPillPending',
@@ -8,8 +8,15 @@ const statusClassMap = {
   Rejected: 'statusPillRejected',
 };
 
-const StatusPill = ({ status }) => {
-  const className = statusClassMap[status] || 'statusPillPending';
+const feeStatusMap = {
+  Paid: 'statusPillSuccess',
+  Pending: 'statusPillFeePending',
+  Partial: 'statusPillReview',
+};
+
+const StatusPill = ({ status, type = 'workflow' }) => {
+  const map = type === 'fee' ? feeStatusMap : workflowStatusMap;
+  const className = map[status] || 'statusPillPending';
   return (
     <span className={`statusPill ${className}`}>
       <span className="statusPillDot" />

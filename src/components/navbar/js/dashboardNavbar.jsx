@@ -1,8 +1,11 @@
+import { useLocation } from 'react-router-dom';
 import '../css/dashboardNavbar.css';
 import { navbarMock } from '../../../data/mocks/navbar/navbar.mock';
+import { pageTitles } from '../../../constants/pageTitles';
 import { DashboardIcons } from '../../common/js/dashboardIcons';
 
-const DashboardNavbar = ({ pageTitle }) => {
+const DashboardNavbar = () => {
+  const { pathname } = useLocation();
   const {
     schoolName,
     pageTitle: defaultPageTitle,
@@ -12,7 +15,7 @@ const DashboardNavbar = ({ pageTitle }) => {
     user,
   } = navbarMock;
 
-  const currentPageTitle = pageTitle || defaultPageTitle;
+  const currentPageTitle = pageTitles[pathname] || defaultPageTitle;
 
   return (
     <header className="dashboardNavbar">

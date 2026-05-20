@@ -9,6 +9,13 @@
   height: var(--dashboard-header-height);
   min-height: var(--dashboard-header-height);
   box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  opacity: 1;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 0 1px 0 var(--theme-border);
 }
 
 .dashboardNavbarBreadcrumb {

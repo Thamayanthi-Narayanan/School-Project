@@ -3,6 +3,8 @@ import { routePaths } from '../constants/routePaths';
 import LoginPage from '../pages/login/js/loginPage';
 import DashboardLayout from '../layouts/dashboardLayout/js/dashboardLayout';
 import DashboardPage from '../pages/dashboard/js/dashboardPage';
+import StudentsPage from '../pages/students/js/studentsPage';
+import StaffPage from '../pages/staff/js/staffPage';
 
 /**
  * Route config reference. Actual routing is in AppRouter.jsx
@@ -12,8 +14,11 @@ export const appRoutes = [
   { path: routePaths.root, element: <Navigate to={routePaths.login} replace /> },
   { path: routePaths.login, element: <LoginPage /> },
   {
-    path: routePaths.dashboard,
     element: <DashboardLayout />,
-    children: [{ index: true, element: <DashboardPage /> }],
+    children: [
+      { path: routePaths.dashboard, element: <DashboardPage /> },
+      { path: routePaths.students, element: <StudentsPage /> },
+      { path: routePaths.staff, element: <StaffPage /> },
+    ],
   },
 ];
