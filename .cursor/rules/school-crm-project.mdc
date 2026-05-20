@@ -40,6 +40,23 @@ src/
 
 Component folders: `js/` (components), `css/` (styles), `hooks/` (component-specific hooks).
 
+## Mock data
+
+- All mock/static UI data lives in `src/data/mocks/`
+- One folder per area — never hardcode labels, rows, or nav in components:
+  - `sidebar/sidebar.mock.js` — brand, menu sections, logout
+  - `navbar/navbar.mock.js` — breadcrumbs, search, user profile
+  - `dashboard/dashboardPage.mock.js` — dashboard cards, tables, feeds
+  - `login/loginPage.mock.js` — login copy and stats
+- Export shared entries from `src/data/mocks/index.js`
+- Add a new mock file when creating each new screen or layout section
+
+## Sidebar layout
+
+- **Fixed (no scroll):** Scholaris brand + `SCHOOL ERP · V2.4` header, Logout footer
+- **Scrollable only:** navigation list between header and footer (`.sidebarNavScroll`)
+- Do not include Upgrade to Pro card
+
 ## Development
 
 - Reusable components; logic in hooks/services, not UI

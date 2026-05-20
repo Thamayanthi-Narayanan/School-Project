@@ -1,13 +1,18 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { appRoutes } from './appRoutes';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { routePaths } from '../constants/routePaths';
+import LoginPage from '../pages/login/js/loginPage';
+import DashboardLayout from '../layouts/dashboardLayout/js/dashboardLayout';
+import DashboardPage from '../pages/dashboard/js/dashboardPage';
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        {appRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
+        <Route path={routePaths.root} element={<Navigate to={routePaths.login} replace />} />
+        <Route path={routePaths.login} element={<LoginPage />} />
+        <Route path={routePaths.dashboard} element={<DashboardLayout />}>
+          <Route index element={<DashboardPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
