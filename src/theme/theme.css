@@ -37,6 +37,13 @@
   --theme-login-card-border: rgba(37, 99, 235, 0.1);
   --theme-login-card-shadow: 0 12px 40px rgba(37, 99, 235, 0.1), 0 4px 12px rgba(15, 23, 42, 0.06);
   --theme-login-bridge: linear-gradient(90deg, transparent 0%, rgba(238, 244, 255, 0.95) 100%);
+  --theme-brand-icon-bg: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(219, 234, 254, 0.35) 100%
+  );
+  --theme-brand-glow: 0 0 24px rgba(37, 99, 235, 0.5);
+  --theme-brand-text-shadow: 0 0 24px rgba(37, 99, 235, 0.5), 0 2px 12px rgba(15, 23, 42, 0.45);
 
   /* Status */
   --theme-success: #16a34a;
