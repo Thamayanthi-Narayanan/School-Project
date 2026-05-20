@@ -1,0 +1,50 @@
+---
+description: School CRM React SaaS — architecture, stack, and coding standards
+alwaysApply: true
+---
+
+# School CRM React Project
+
+Production School CRM / School Management SaaS. Admin dashboard style.
+
+## Stack (strict)
+
+- React functional components + hooks only
+- React Router, Axios, normal CSS only
+- No TypeScript, Tailwind, Bootstrap, MUI, Chakra, styled-components, or CSS frameworks
+- No inline styles; separate camelCase CSS files per component
+
+## Naming
+
+- camelCase: files, folders, hooks, CSS, utils, services (e.g. `studentTable.jsx`, `useStudentData.js`)
+- PascalCase: React component names (e.g. `StudentTable`)
+
+## Folder structure
+
+```
+src/
+  assets/{images,icons,fonts}
+  apis/
+  components/{sidebar,navbar,dashboardCards,common}/ → each: js/, css/, hooks/
+  pages/ layouts/ routes/ hooks/ context/ utils/ constants/ services/ data/ styles/
+  App.jsx  main.jsx
+```
+
+Component folders: `js/` (components), `css/` (styles), `hooks/` (component-specific hooks).
+
+## Development
+
+- Reusable components; logic in hooks/services, not UI
+- async/await for APIs; loading/error/success states
+- API URLs via env vars; modules in `apis/` (e.g. `authApi.js`)
+- Tables: pagination, search, filter, responsive scroll, empty/loading states
+- Forms: validation, friendly errors, disable submit while loading
+- Preserve existing behavior; minimal scope changes; no unnecessary files or renames
+
+## UI
+
+SaaS CRM dashboard: sidebar, navbar, cards, tables, forms. Professional, minimal, soft shadows, rounded corners, responsive media queries. Consistent spacing across modules (Dashboard, Students, Teachers, Attendance, Fees, Timetable, Exams, Results, Notifications, Parent Portal, Settings).
+
+## Priority
+
+Scalability → clean architecture → reusability → responsiveness → maintainability → professional UI → stable functionality.
