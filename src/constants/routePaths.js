@@ -9,4 +9,5 @@ export const routePaths = {
   scholarships: '/scholarships',
   invoices: '/invoices',
   payments: '/payments',
+  settings: '/settings',
 };

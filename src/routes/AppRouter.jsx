@@ -10,6 +10,7 @@ import AttendancePage from '../pages/attendance/js/attendancePage';
 import ScholarshipsPage from '../pages/scholarships/js/scholarshipsPage';
 import InvoicesPage from '../pages/invoices/js/invoicesPage';
 import PaymentsPage from '../pages/payments/js/paymentsPage';
+import SettingsPage from '../pages/settings/js/settingsPage';
 
 const AppRouter = () => {
   return (
@@ -26,6 +27,7 @@ const AppRouter = () => {
           <Route path={routePaths.scholarships} element={<ScholarshipsPage />} />
           <Route path={routePaths.invoices} element={<InvoicesPage />} />
           <Route path={routePaths.payments} element={<PaymentsPage />} />
+          <Route path={routePaths.settings} element={<SettingsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

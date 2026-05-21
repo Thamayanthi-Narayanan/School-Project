@@ -1,0 +1,170 @@
+/* Page header divider */
+.settingsPage .settingsPageHeader {
+  width: 100%;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+/* Tabs */
+.settingsTabs {
+  display: inline-flex;
+  padding: 0.25rem;
+  margin-bottom: 1.25rem;
+  background: var(--theme-bg-page);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  gap: 0.25rem;
+}
+
+.settingsTab {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: var(--theme-radius-sm);
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-secondary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.settingsTab:hover:not(.settingsTabActive) {
+  color: var(--theme-text-primary);
+}
+
+.settingsTabActive {
+  background: var(--theme-bg-card);
+  color: var(--theme-text-primary);
+  font-weight: 600;
+  box-shadow: var(--theme-shadow-sm);
+}
+
+/* Settings card */
+.settingsCard {
+  max-width: 720px;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  padding: 1.5rem;
+}
+
+.settingsCardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.settingsFormGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.settingsFormGridStacked {
+  grid-template-columns: 1fr;
+  max-width: 100%;
+}
+
+.settingsCardActions {
+  display: flex;
+  padding-top: 0.25rem;
+}
+
+.settingsCardActionsEnd {
+  justify-content: flex-end;
+}
+
+.settingsCardActionsCenter {
+  justify-content: center;
+}
+
+/* Notification toggles */
+.settingsNotifList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.settingsNotifItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.125rem;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+}
+
+.settingsNotifLabel {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-primary);
+}
+
+.settingsToggle {
+  position: relative;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 1.5rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--theme-radius-pill);
+  background: var(--theme-border);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.settingsToggleOn {
+  background: var(--theme-primary);
+}
+
+.settingsToggleThumb {
+  position: absolute;
+  top: 0.1875rem;
+  left: 0.1875rem;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--theme-bg-card);
+  box-shadow: var(--theme-shadow-sm);
+  transition: transform 0.2s ease;
+}
+
+.settingsToggleOn .settingsToggleThumb {
+  transform: translateX(1.25rem);
+}
+
+.settingsSectionDelay1 {
+  animation-delay: 0.08s;
+}
+
+@media (max-width: 640px) {
+  .settingsTabs {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .settingsTab {
+    flex: 1 1 auto;
+    min-width: calc(50% - 0.25rem);
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .settingsFormGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .settingsCard {
+    max-width: none;
+  }
+}

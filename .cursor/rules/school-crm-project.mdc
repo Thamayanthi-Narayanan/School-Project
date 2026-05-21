@@ -55,6 +55,7 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
   - `scholarships/scholarshipsPage.mock.js` — scheme cards, pending requests table
   - `invoices/invoicesPage.mock.js` — invoice document, line items, summary
   - `payments/paymentsPage.mock.js` — collect fee form, receipt preview, recent payments
+  - `settings/settingsPage.mock.js` — profile, school, security, notification tabs
 - Export shared entries from `src/data/mocks/index.js`
 - Add a new mock file when creating each new screen or layout section
 
