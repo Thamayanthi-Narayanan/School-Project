@@ -1,8 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import '../../../components/reusable/css/crmReusable.css';
 import '../css/settingsPage.css';
 import { settingsPageMock } from '../../../data/mocks/settings/settingsPage.mock';
 import { PageHeader, CrmButton, FormInput } from '../../../components/reusable/js/index';
+
+const resolveTab = (tabParam, panels, fallback) => {
+  if (tabParam && panels[tabParam]) {
+    return tabParam;
+  }
+  return fallback;
+};
 
 const SettingsPage = () => {
   const {
@@ -13,7 +21,14 @@ const SettingsPage = () => {
     panels,
   } = settingsPageMock;
 
-  const [activeTab, setActiveTab] = useState(defaultTab);
+  const [searchParams] = useSearchParams();
+  const tabFromUrl = searchParams.get('tab');
+  const [activeTab, setActiveTab] = useState(() => resolveTab(tabFromUrl, panels, defaultTab));
+
+  useEffect(() => {
+    const nextTab = resolveTab(searchParams.get('tab'), panels, defaultTab);
+    setActiveTab(nextTab);
+  }, [searchParams, panels, defaultTab]);
   const [notificationState, setNotificationState] = useState(() => {
     const initial = {};
     panels.notifications.items.forEach((item) => {

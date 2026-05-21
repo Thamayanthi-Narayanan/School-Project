@@ -159,22 +159,126 @@
   background: var(--theme-primary-hover);
 }
 
+.dashboardNavbarProfile {
+  position: relative;
+  margin-left: 0.25rem;
+}
+
 .dashboardNavbarProfileWrap {
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  margin-left: 0.25rem;
   padding: 0.3rem 0.875rem 0.3rem 0.3rem;
   border: 1px solid var(--theme-border);
   border-radius: var(--theme-radius-pill);
   background: var(--theme-bg-card);
   box-shadow: var(--theme-shadow-sm);
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.dashboardNavbarProfileWrap:hover {
+.dashboardNavbarProfileWrap:hover,
+.dashboardNavbarProfileWrapOpen {
   border-color: rgba(37, 99, 235, 0.35);
   box-shadow: 0 0 0 3px var(--theme-primary-light);
+}
+
+.dashboardNavbarProfileMenu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 60;
+  width: 15.5rem;
+  padding: 0.75rem 0;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-card);
+  animation: dashboardProfileMenuIn 0.18s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes dashboardProfileMenuIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboardNavbarProfileMenuHeader {
+  padding: 0.25rem 1rem 0.75rem;
+}
+
+.dashboardNavbarProfileMenuName {
+  margin: 0 0 0.2rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  line-height: 1.3;
+}
+
+.dashboardNavbarProfileMenuEmail {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  line-height: 1.35;
+}
+
+.dashboardNavbarProfileMenuDivider {
+  height: 1px;
+  margin: 0;
+  background: var(--theme-border);
+}
+
+.dashboardNavbarProfileMenuSectionLabel {
+  margin: 0.625rem 1rem 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--theme-text-muted);
+}
+
+.dashboardNavbarProfileMenuList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboardNavbarProfileMenuItem {
+  display: block;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-primary);
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dashboardNavbarProfileMenuItem:hover {
+  background: var(--theme-bg-page);
+  color: var(--theme-primary);
+}
+
+.dashboardNavbarProfileMenuSignOut {
+  display: block;
+  padding: 0.625rem 1rem 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #dc2626;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dashboardNavbarProfileMenuSignOut:hover {
+  background: #fef2f2;
+  color: #b91c1c;
 }
 
 .dashboardNavbarAvatar {
@@ -269,6 +373,10 @@
     padding: 0.2rem 0.5rem 0.2rem 0.2rem;
   }
 
+  .dashboardNavbarProfileMenu {
+    width: min(15.5rem, calc(100vw - 2rem));
+  }
+
   .dashboardNavbarProfileText {
     display: flex;
   }
@@ -279,5 +387,11 @@
 
   .dashboardNavbarProfileRole {
     font-size: 0.6875rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dashboardNavbarProfileMenu {
+    animation: none;
   }
 }
