@@ -8,3 +8,4 @@ export { admissionPageMock } from './admission/admissionPage.mock';
 export { attendancePageMock } from './attendance/attendancePage.mock';
 export { scholarshipsPageMock } from './scholarships/scholarshipsPage.mock';
 export { invoicesPageMock } from './invoices/invoicesPage.mock';
+export { paymentsPageMock } from './payments/paymentsPage.mock';

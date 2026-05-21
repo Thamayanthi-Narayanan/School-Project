@@ -218,6 +218,11 @@ export const DashboardIcons = {
       <path d="M6 6l12 12M18 6L6 18" />
     </svg>
   ),
+  dollarSign: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M12 2v20M17 6.5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H7" />
+    </svg>
+  ),
   printer: (size = 18) => (
     <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
       <path d="M6 18H4a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-2" />

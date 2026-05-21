@@ -9,6 +9,7 @@ const FormInput = ({
   label,
   type = 'text',
   placeholder,
+  defaultValue,
   icon,
   autoFocus = false,
   className = '',
@@ -21,6 +22,7 @@ const FormInput = ({
         type={type}
         className="crmFormInput crmFormInputWithIcon"
         placeholder={placeholder}
+        defaultValue={defaultValue}
         autoFocus={autoFocus}
       />
       <span className="crmFormInputIcon" aria-hidden="true">
@@ -32,6 +34,7 @@ const FormInput = ({
       type={type}
       className="crmFormInput"
       placeholder={placeholder}
+      defaultValue={defaultValue}
       autoFocus={autoFocus}
     />
   );
