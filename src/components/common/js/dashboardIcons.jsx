@@ -218,6 +218,12 @@ export const DashboardIcons = {
       <path d="M6 6l12 12M18 6L6 18" />
     </svg>
   ),
+  printer: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M6 18H4a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-2" />
+      <path d="M6 9V3h12v6M6 14h12v7H6z" />
+    </svg>
+  ),
   uploadCloud: (size = 18) => (
     <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
       <path d="M12 16V4M8 8l4-4 4 4" />

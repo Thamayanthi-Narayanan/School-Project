@@ -8,6 +8,7 @@ import StaffPage from '../pages/staff/js/staffPage';
 import AdmissionPage from '../pages/admission/js/admissionPage';
 import AttendancePage from '../pages/attendance/js/attendancePage';
 import ScholarshipsPage from '../pages/scholarships/js/scholarshipsPage';
+import InvoicesPage from '../pages/invoices/js/invoicesPage';
 
 const AppRouter = () => {
   return (
@@ -22,6 +23,7 @@ const AppRouter = () => {
           <Route path={routePaths.admission} element={<AdmissionPage />} />
           <Route path={routePaths.attendance} element={<AttendancePage />} />
           <Route path={routePaths.scholarships} element={<ScholarshipsPage />} />
+          <Route path={routePaths.invoices} element={<InvoicesPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

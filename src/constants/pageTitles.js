@@ -7,4 +7,5 @@ export const pageTitles = {
   [routePaths.admission]: 'Admission',
   [routePaths.attendance]: 'Attendance',
   [routePaths.scholarships]: 'Scholarships',
+  [routePaths.invoices]: 'Invoices',
 };

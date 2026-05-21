@@ -1,0 +1,248 @@
+.invoicesPage .crmPageActions {
+  flex-wrap: wrap;
+}
+
+/* Invoice document card */
+.invoiceDocument {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  padding: 2rem 2.5rem;
+  box-shadow: var(--theme-shadow-sm);
+  max-width: 900px;
+}
+
+.invoiceDocumentHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--theme-border);
+  flex-wrap: wrap;
+}
+
+.invoiceSchoolBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  max-width: 280px;
+  min-width: 0;
+}
+
+.invoiceSchoolLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-primary);
+  color: var(--theme-text-inverse);
+  flex-shrink: 0;
+}
+
+.invoiceSchoolName {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin-bottom: 0.35rem;
+  line-height: 1.3;
+  max-width: 220px;
+}
+
+.invoiceSchoolLine {
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  line-height: 1.5;
+}
+
+.invoiceMetaBlock {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.invoiceMetaLabel {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--theme-text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.invoiceMetaNumber {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.invoiceMetaDate {
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  line-height: 1.45;
+}
+
+/* Billed to / academic year */
+.invoiceDetailsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--theme-border);
+  margin-top: 0;
+}
+
+.invoiceDetailBlockRight {
+  text-align: right;
+}
+
+.invoiceDetailLabel {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--theme-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.invoiceDetailName {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.invoiceDetailSub {
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  line-height: 1.45;
+}
+
+/* Line items table */
+.invoiceLineTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.invoiceLineTable th {
+  text-align: left;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--theme-text-muted);
+  padding: 0 0 0.75rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.invoiceLineTable th:last-child {
+  text-align: right;
+}
+
+.invoiceLineTable td {
+  padding: 0.875rem 0;
+  font-size: 0.875rem;
+  color: var(--theme-text-label);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.invoiceLineTable td:last-child {
+  text-align: right;
+  font-weight: 500;
+  color: var(--theme-text-primary);
+}
+
+.invoiceLineTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Summary */
+.invoiceSummary {
+  margin-left: auto;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 1.5rem;
+}
+
+.invoiceSummaryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  font-size: 0.875rem;
+}
+
+.invoiceSummaryRowDefault .invoiceSummaryLabel {
+  color: var(--theme-text-secondary);
+}
+
+.invoiceSummaryRowDefault .invoiceSummaryAmount {
+  color: var(--theme-text-primary);
+  font-weight: 500;
+}
+
+.invoiceSummaryRowDeduction .invoiceSummaryLabel {
+  color: var(--theme-text-secondary);
+}
+
+.invoiceSummaryRowDeduction .invoiceSummaryAmount {
+  color: var(--theme-text-secondary);
+}
+
+.invoiceSummaryRowTotal {
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--theme-border);
+}
+
+.invoiceSummaryRowTotal .invoiceSummaryLabel {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.invoiceSummaryRowTotal .invoiceSummaryAmount {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--theme-primary);
+}
+
+.invoiceFooterNote {
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--theme-text-muted);
+  line-height: 1.5;
+  padding-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .invoiceDocument {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .invoiceDocumentHeader {
+    flex-direction: column;
+  }
+
+  .invoiceMetaBlock {
+    text-align: left;
+  }
+
+  .invoiceDetailsRow {
+    grid-template-columns: 1fr;
+  }
+
+  .invoiceDetailBlockRight {
+    text-align: left;
+  }
+
+  .invoiceSummary {
+    max-width: none;
+  }
+}
