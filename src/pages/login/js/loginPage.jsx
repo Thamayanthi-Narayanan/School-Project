@@ -5,7 +5,7 @@ import { appConfig } from '../../../constants/appConfig';
 import loginHeroImage from '../../../assets/images/loginHero.png';
 
 const GraduationCapIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <path
       d="M12 3L2 8.5l10 5.5 10-5.5L12 3z"
       stroke="currentColor"
@@ -76,6 +76,30 @@ const ShieldIcon = () => (
   </svg>
 );
 
+const UserInputIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.6" />
+    <path
+      d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+const LockInputIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.6" />
+    <path
+      d="M8 11V8a4 4 0 0 1 8 0v3"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 const brandStats = [
   { id: 'students', icon: UsersIcon, label: '1,284 Students' },
   { id: 'fees', icon: ReceiptIcon, label: '₹38.6L Collected' },
@@ -98,7 +122,8 @@ const LoginPage = () => {
       className="loginPage"
       style={{ '--login-hero-image': `url(${loginHeroImage})` }}
     >
-      <div className="loginPageBg" aria-hidden="true" />
+      <div className="loginPageBg loginPageBgBlur" aria-hidden="true" />
+      <div className="loginPageBg loginPageBgSharp" aria-hidden="true" />
       <div className="loginPageOverlay" aria-hidden="true" />
 
       <div className="loginPageContent">
@@ -128,10 +153,7 @@ const LoginPage = () => {
               ))}
             </ul>
 
-            <footer className="loginBrandFooter">
-              © {new Date().getFullYear()} {appConfig.appName} — built for school
-              administrators.
-            </footer>
+            <footer className="loginBrandFooter">{appConfig.footerText}</footer>
           </div>
         </section>
 
@@ -148,17 +170,22 @@ const LoginPage = () => {
                   <label className="loginFormLabel" htmlFor="login-email">
                     Email address
                   </label>
-                  <input
-                    id="login-email"
-                    className={`loginFormInput${errors.email ? ' loginFormInputError' : ''}`}
-                    type="email"
-                    name="email"
-                    autoComplete="email"
-                    placeholder="you@school.edu"
-                    value={form.email}
-                    onChange={(e) => updateField('email', e.target.value)}
-                    disabled={isLoading}
-                  />
+                  <div className="loginFormInputWrap">
+                    <span className="loginFormInputIcon">
+                      <UserInputIcon />
+                    </span>
+                    <input
+                      id="login-email"
+                      className={`loginFormInput${errors.email ? ' loginFormInputError' : ''}`}
+                      type="email"
+                      name="email"
+                      autoComplete="email"
+                      placeholder="you@school.edu"
+                      value={form.email}
+                      onChange={(e) => updateField('email', e.target.value)}
+                      disabled={isLoading}
+                    />
+                  </div>
                   {errors.email && (
                     <p className="loginFormError" role="alert">
                       {errors.email}
@@ -175,17 +202,22 @@ const LoginPage = () => {
                       Forgot password?
                     </a>
                   </div>
-                  <input
-                    id="login-password"
-                    className={`loginFormInput${errors.password ? ' loginFormInputError' : ''}`}
-                    type="password"
-                    name="password"
-                    autoComplete="current-password"
-                    placeholder="••••••••"
-                    value={form.password}
-                    onChange={(e) => updateField('password', e.target.value)}
-                    disabled={isLoading}
-                  />
+                  <div className="loginFormInputWrap">
+                    <span className="loginFormInputIcon">
+                      <LockInputIcon />
+                    </span>
+                    <input
+                      id="login-password"
+                      className={`loginFormInput${errors.password ? ' loginFormInputError' : ''}`}
+                      type="password"
+                      name="password"
+                      autoComplete="current-password"
+                      placeholder="••••••••"
+                      value={form.password}
+                      onChange={(e) => updateField('password', e.target.value)}
+                      disabled={isLoading}
+                    />
+                  </div>
                   {errors.password && (
                     <p className="loginFormError" role="alert">
                       {errors.password}
@@ -216,14 +248,14 @@ const LoginPage = () => {
                   Encrypted, secure login
                 </p>
               </form>
-            </div>
 
-            <p className="loginFormFooter">
-              Need help?{' '}
-              <a className="loginFormLink" href="#support">
-                Contact support
-              </a>
-            </p>
+              <p className="loginFormFooter">
+                Need help?{' '}
+                <a className="loginFormFooterLink" href="#support">
+                  Contact support
+                </a>
+              </p>
+            </div>
           </div>
         </section>
       </div>
