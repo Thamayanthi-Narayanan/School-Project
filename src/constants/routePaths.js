@@ -11,4 +11,5 @@ export const routePaths = {
   payments: '/payments',
   settings: '/settings',
   notifications: '/notifications',
+  transferCertificate: '/transfer-certificate',
 };

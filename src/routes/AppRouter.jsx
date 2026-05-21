@@ -12,6 +12,7 @@ import InvoicesPage from '../pages/invoices/js/invoicesPage';
 import PaymentsPage from '../pages/payments/js/paymentsPage';
 import SettingsPage from '../pages/settings/js/settingsPage';
 import NotificationsPage from '../pages/notifications/js/notificationsPage';
+import TransferCertificatePage from '../pages/transferCertificate/js/transferCertificatePage';
 
 const AppRouter = () => {
   return (
@@ -30,6 +31,7 @@ const AppRouter = () => {
           <Route path={routePaths.payments} element={<PaymentsPage />} />
           <Route path={routePaths.settings} element={<SettingsPage />} />
           <Route path={routePaths.notifications} element={<NotificationsPage />} />
+          <Route path={routePaths.transferCertificate} element={<TransferCertificatePage />} />
         </Route>
       </Routes>
     </BrowserRouter>
