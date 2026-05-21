@@ -10,4 +10,5 @@ export const routePaths = {
   invoices: '/invoices',
   payments: '/payments',
   settings: '/settings',
+  notifications: '/notifications',
 };

@@ -74,6 +74,13 @@
   --theme-success: #16a34a;
   --theme-success-muted: #64748b;
 
+  /* Notifications */
+  --theme-notif-accent: #002d62;
+  --theme-notif-icon-bg: #ebf2ff;
+  --theme-notif-mark-bg: #ebf2ff;
+  --theme-notif-mark-bg-hover: #dbe7ff;
+  --theme-notif-mark-border: #c7d7f5;
+
   /* Radius */
   --theme-radius-sm: 8px;
   --theme-radius-md: 12px;

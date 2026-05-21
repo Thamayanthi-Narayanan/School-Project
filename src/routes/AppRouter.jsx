@@ -11,6 +11,7 @@ import ScholarshipsPage from '../pages/scholarships/js/scholarshipsPage';
 import InvoicesPage from '../pages/invoices/js/invoicesPage';
 import PaymentsPage from '../pages/payments/js/paymentsPage';
 import SettingsPage from '../pages/settings/js/settingsPage';
+import NotificationsPage from '../pages/notifications/js/notificationsPage';
 
 const AppRouter = () => {
   return (
@@ -28,6 +29,7 @@ const AppRouter = () => {
           <Route path={routePaths.invoices} element={<InvoicesPage />} />
           <Route path={routePaths.payments} element={<PaymentsPage />} />
           <Route path={routePaths.settings} element={<SettingsPage />} />
+          <Route path={routePaths.notifications} element={<NotificationsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

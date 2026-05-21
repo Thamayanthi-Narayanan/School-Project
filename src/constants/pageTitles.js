@@ -10,4 +10,5 @@ export const pageTitles = {
   [routePaths.invoices]: 'Invoices',
   [routePaths.payments]: 'Payments',
   [routePaths.settings]: 'Settings',
+  [routePaths.notifications]: 'Notifications',
 };

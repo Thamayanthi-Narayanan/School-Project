@@ -75,6 +75,22 @@ export const DashboardIcons = {
       <path d="M18 16H6l-1-2v-5a7 7 0 0 1 14 0v5l-1 2zM10 20a2 2 0 0 0 4 0" />
     </svg>
   ),
+  bellNotification: (size = 18) => (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+      <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+    </svg>
+  ),
   settings: (size = 18) => (
     <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
       <circle cx="12" cy="12" r="3" />
@@ -211,6 +227,22 @@ export const DashboardIcons = {
   check: (size = 16) => (
     <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
       <path d="M5 12l4 4 10-10" />
+    </svg>
+  ),
+  checksDouble: (size = 16) => (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4 12.5l4 4" />
+      <path d="M10 11l4 4 9-9" />
     </svg>
   ),
   xClose: (size = 16) => (
