@@ -75,6 +75,14 @@
   --theme-success-muted: #64748b;
   --theme-danger: #dc2626;
 
+  /* Report cards */
+  --theme-report-icon-blue-bg: #dbeafe;
+  --theme-report-icon-blue-text: #2563eb;
+  --theme-report-icon-green-bg: #dcfce7;
+  --theme-report-icon-green-text: #16a34a;
+  --theme-report-icon-amber-bg: #fef3c7;
+  --theme-report-icon-amber-text: #d97706;
+
   /* Notifications */
   --theme-notif-accent: #002d62;
   --theme-notif-icon-bg: #ebf2ff;

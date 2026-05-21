@@ -112,10 +112,26 @@
   background: var(--theme-bg-page);
 }
 
+.dashboardNavbarIconBtnNotify {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.dashboardNavbarIconBtnNotify:hover {
+  transform: scale(1.04);
+}
+
 .dashboardNavbarNotifyDot {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 0;
+  right: 0;
   width: 7px;
   height: 7px;
   border-radius: 50%;

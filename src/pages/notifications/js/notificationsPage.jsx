@@ -2,6 +2,7 @@ import '../../../components/reusable/css/crmReusable.css';
 import '../css/notificationsPage.css';
 import { notificationsPageMock } from '../../../data/mocks/notifications/notificationsPage.mock';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
+import NotificationBellIcon from '../../../components/common/js/notificationBellIcon';
 import { PageHeader } from '../../../components/reusable/js/index';
 
 const NotificationsPage = () => {
@@ -23,9 +24,7 @@ const NotificationsPage = () => {
               key={item.id}
               className={`notificationsItem${index < items.length - 1 ? '' : ' notificationsItemLast'}`}
             >
-              <span className="notificationsIconWrap" aria-hidden="true">
-                {DashboardIcons.bellNotification(18)}
-              </span>
+              <NotificationBellIcon size="md" />
               <div className="notificationsContent">
                 <p className="notificationsTitle">{item.title}</p>
                 <p className="notificationsDesc">{item.description}</p>

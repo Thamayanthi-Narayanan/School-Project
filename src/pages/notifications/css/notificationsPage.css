@@ -73,22 +73,6 @@
   border-bottom: none;
 }
 
-.notificationsIconWrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background: var(--theme-notif-icon-bg);
-  color: var(--theme-notif-accent);
-}
-
-.notificationsIconWrap svg {
-  display: block;
-}
-
 .notificationsContent {
   flex: 1;
   min-width: 0;

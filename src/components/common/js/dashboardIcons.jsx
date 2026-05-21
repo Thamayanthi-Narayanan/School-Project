@@ -53,6 +53,18 @@ export const DashboardIcons = {
       <path d="M14 3v5h5M9 13h6M9 17h6" />
     </svg>
   ),
+  fileSpreadsheet: (size = 16) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-6-5z" />
+      <path d="M14 3v5h5M8 13h2M8 17h2M12 13h4M12 17h2" />
+    </svg>
+  ),
+  playRun: (size = 16) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M12 4v12M8 12l4 4 4-4" />
+      <path d="M4 20h16" />
+    </svg>
+  ),
   award: (size = 18) => (
     <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
       <circle cx="12" cy="9" r="4" />

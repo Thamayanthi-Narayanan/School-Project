@@ -13,4 +13,5 @@ export const routePaths = {
   notifications: '/notifications',
   transferCertificate: '/transfer-certificate',
   feeStructure: '/fee-structure',
+  reports: '/reports',
 };

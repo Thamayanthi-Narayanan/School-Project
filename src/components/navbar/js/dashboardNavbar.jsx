@@ -3,6 +3,7 @@ import '../css/dashboardNavbar.css';
 import { navbarMock } from '../../../data/mocks/navbar/navbar.mock';
 import { pageTitles } from '../../../constants/pageTitles';
 import { DashboardIcons } from '../../common/js/dashboardIcons';
+import NotificationBellIcon from '../../common/js/notificationBellIcon';
 
 const DashboardNavbar = () => {
   const { pathname } = useLocation();
@@ -40,8 +41,8 @@ const DashboardNavbar = () => {
         <button type="button" className="dashboardNavbarIconBtn" aria-label="Help">
           {DashboardIcons.help(18)}
         </button>
-        <button type="button" className="dashboardNavbarIconBtn dashboardNavbarIconBtnNotify" aria-label="Notifications">
-          {DashboardIcons.bell(18)}
+        <button type="button" className="dashboardNavbarIconBtnNotify" aria-label="Notifications">
+          <NotificationBellIcon size="sm" />
           <span className="dashboardNavbarNotifyDot" />
         </button>
         <button type="button" className="dashboardNavbarQuickAdd">

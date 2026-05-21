@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import '../css/sidebar.css';
 import { sidebarMock } from '../../../data/mocks/sidebar/sidebar.mock';
 import { renderNavIcon, DashboardIcons } from '../../common/js/dashboardIcons';
+import NotificationBellIcon from '../../common/js/notificationBellIcon';
 
 const Sidebar = () => {
   const { pathname } = useLocation();
@@ -31,7 +32,13 @@ const Sidebar = () => {
                       to={item.path}
                       className={`sidebarLink${isActive(item.path) ? ' sidebarLinkActive' : ''}`}
                     >
-                      <span className="sidebarLinkIcon">{renderNavIcon(item.icon)}</span>
+                      <span className="sidebarLinkIcon">
+                        {item.id === 'notifications' ? (
+                          <NotificationBellIcon size="sm" variant="plain" />
+                        ) : (
+                          renderNavIcon(item.icon)
+                        )}
+                      </span>
                       <span className="sidebarLinkLabel">{item.label}</span>
                       {item.badge && <span className="sidebarBadge">{item.badge}</span>}
                     </Link>
