@@ -192,6 +192,28 @@ export const DashboardIcons = {
       <path d="M16 3v4M8 3v4M3 11h18" />
     </svg>
   ),
+  save: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M19 21H5a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h11l4 4v13a1 1 0 0 1-1 1z" />
+      <path d="M17 21v-8H7v8M7 3v5h8" />
+    </svg>
+  ),
+  chevronLeft: (size = 16) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M15 18l-6-6 6-6" />
+    </svg>
+  ),
+  chevronRight: (size = 16) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M9 18l6-6-6-6" />
+    </svg>
+  ),
+  uploadCloud: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M12 16V4M8 8l4-4 4 4" />
+      <path d="M4 18a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4" />
+    </svg>
+  ),
 };
 
 export const renderNavIcon = (iconName, size = 18) => {

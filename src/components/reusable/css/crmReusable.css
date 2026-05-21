@@ -96,6 +96,12 @@
   transform: translateY(0);
 }
 
+.crmBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .crmBtnPrimary {
   padding: 0.5rem 1rem;
   border: none;
@@ -567,20 +573,32 @@
 
 .crmFormInputWrap {
   position: relative;
-  display: flex;
-  align-items: center;
+  display: block;
+  width: 100%;
 }
 
 .crmFormInputWithIcon {
-  padding-right: 2.5rem;
+  padding-right: 2.25rem;
 }
 
 .crmFormInputIcon {
   position: absolute;
+  top: 50%;
   right: 0.75rem;
+  transform: translateY(-50%);
   display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
   color: var(--theme-text-muted);
   pointer-events: none;
+}
+
+.crmFormInputIcon svg {
+  width: 1rem;
+  height: 1rem;
+  display: block;
 }
 
 .crmFormSelectWrap {
@@ -606,6 +624,73 @@
   display: flex;
   color: var(--theme-text-muted);
   pointer-events: none;
+}
+
+.crmFormTextarea {
+  width: 100%;
+  min-height: 5.5rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-sm);
+  background: var(--theme-bg-input);
+  font-size: 0.875rem;
+  color: var(--theme-text-primary);
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+}
+
+.crmFormTextarea::placeholder {
+  color: var(--theme-text-muted);
+}
+
+.crmFormTextarea:focus {
+  outline: none;
+  border-color: var(--theme-border-focus);
+  box-shadow: 0 0 0 3px var(--theme-primary-focus-ring);
+}
+
+.crmFormFieldFull {
+  grid-column: 1 / -1;
+}
+
+/* Tips panel (admission wizard — matches form card height via parent grid) */
+.crmFormTipsPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--theme-shadow-sm);
+  box-sizing: border-box;
+}
+
+.crmFormTipsTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin-bottom: 0.875rem;
+}
+
+.crmFormTipsList {
+  list-style: disc;
+  padding-left: 1.125rem;
+  margin: 0;
+}
+
+.crmFormTipsList li {
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.crmFormTipsList li:last-child {
+  margin-bottom: 0;
 }
 
 .crmModalFooter {

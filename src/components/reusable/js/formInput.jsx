@@ -24,7 +24,7 @@ const FormInput = ({
         autoFocus={autoFocus}
       />
       <span className="crmFormInputIcon" aria-hidden="true">
-        <IconComponent size={18} />
+        <IconComponent size={16} />
       </span>
     </span>
   ) : (

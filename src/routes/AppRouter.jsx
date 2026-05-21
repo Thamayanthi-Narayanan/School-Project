@@ -5,6 +5,7 @@ import DashboardLayout from '../layouts/dashboardLayout/js/dashboardLayout';
 import DashboardPage from '../pages/dashboard/js/dashboardPage';
 import StudentsPage from '../pages/students/js/studentsPage';
 import StaffPage from '../pages/staff/js/staffPage';
+import AdmissionPage from '../pages/admission/js/admissionPage';
 
 const AppRouter = () => {
   return (
@@ -16,6 +17,7 @@ const AppRouter = () => {
           <Route path={routePaths.dashboard} element={<DashboardPage />} />
           <Route path={routePaths.students} element={<StudentsPage />} />
           <Route path={routePaths.staff} element={<StaffPage />} />
+          <Route path={routePaths.admission} element={<AdmissionPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

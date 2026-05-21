@@ -4,6 +4,8 @@ export { default as FormSearchBar } from './formSearchBar';
 export { default as FilterToolbar } from './filterToolbar';
 export { default as FormSelect } from './formSelect';
 export { default as FormInput } from './formInput';
+export { default as FormTextarea } from './formTextarea';
+export { default as FormTipsPanel } from './formTipsPanel';
 export { default as EntityFormModal } from './entityFormModal';
 export { default as PersonCell } from './personCell';
 export { default as TableRowActions } from './tableRowActions';

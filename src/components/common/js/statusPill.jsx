@@ -3,6 +3,7 @@ import '../css/statusPill.css';
 const workflowStatusMap = {
   Success: 'statusPillSuccess',
   Approved: 'statusPillSuccess',
+  Uploaded: 'statusPillSuccess',
   Pending: 'statusPillPending',
   Review: 'statusPillReview',
   Rejected: 'statusPillRejected',

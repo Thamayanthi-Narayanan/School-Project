@@ -50,6 +50,7 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
   - `login/loginPage.mock.js` — login copy and stats
   - `students/studentsPage.mock.js` — students list, filters, add-student modal fields
   - `staff/staffPage.mock.js` — staff list, search, add-staff modal fields
+  - `admission/admissionPage.mock.js` — admission wizard steps, forms, tips
 - Export shared entries from `src/data/mocks/index.js`
 - Add a new mock file when creating each new screen or layout section
 
@@ -64,7 +65,9 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
 | `FormSearchBar` | Search inputs |
 | `FilterToolbar` | Search + dropdown filters + export (Students) |
 | `StaffSearchCard` | Single full-width search card (Staff) |
-| `FormInput` / `FormSelect` | Form fields inside modals |
+| `FormInput` / `FormSelect` / `FormTextarea` | Form fields (modals + admission wizard) |
+| `FormTipsPanel` | Side tips card (admission wizard — match form card height) |
+| `AdmissionFormFields` | Maps mock `fields[]` to reusable form inputs (`pages/admission/js/`) |
 | `EntityFormModal` | Add/Edit modals — pass `modalData` with `fields[]` from mock |
 | `DataTableCard` | White table container + optional footer |
 | `PersonCell` | Avatar + name + optional subtext |
@@ -94,6 +97,16 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
 ## UI
 
 SaaS CRM dashboard: sidebar, navbar, cards, tables, forms. Professional, minimal, soft shadows, rounded corners, responsive media queries. Consistent spacing across modules (Dashboard, Students, Teachers, Attendance, Fees, Timetable, Exams, Results, Notifications, Parent Portal, Settings).
+
+## Screenshot fidelity (mandatory)
+
+When the user shares a **screenshot** or says **“exact same UI”**, **“like in screenshot”**, or similar:
+
+1. **Match the screenshot first** — layout, spacing, typography, colors, borders, shadows, step order, button labels, placeholders, and section structure must match the reference image as closely as possible.
+2. **Do not simplify** — if the screenshot has a stepper, tips panel, dual-column form, or specific header actions, implement all of them even if similar pages omit them.
+3. **Reuse existing components** (`reusable/`, `DashboardIcons`, theme tokens) where they fit; add page-specific CSS only for layout not covered by reusables.
+4. **Mock all copy** in `src/data/mocks/<page>/` — no hardcoded labels in JSX.
+5. **Confirm route + sidebar** — wire `routePaths`, `pageTitles`, and sidebar path so the page is reachable and navbar breadcrumb is correct.
 
 ## Priority
 
