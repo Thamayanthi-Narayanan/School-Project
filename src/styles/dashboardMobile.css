@@ -1,0 +1,211 @@
+/**
+ * Dashboard pages — below 769px (max-width: 768px)
+ * Matches mobile UI screenshots: header actions inline, forms, tables, filters.
+ */
+
+@media (max-width: 768px) {
+  /* —— Page headers: title left, action buttons right —— */
+  .crmPageHeader,
+  .admissionPageHeader {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .crmPageHeader > div:first-child,
+  .admissionPageHeader > div:first-child {
+    flex: 1 1 8rem;
+    min-width: 0;
+  }
+
+  .crmPageTitle {
+    font-size: 1.375rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .crmPageSubtitle {
+    font-size: 0.875rem;
+  }
+
+  .crmPageActions {
+    width: auto;
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    align-self: flex-start;
+  }
+
+  .crmPageActions .crmBtn {
+    flex: 0 1 auto;
+    width: auto;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+
+  .invoicesPage .crmPageActions {
+    flex-wrap: wrap;
+    max-width: 100%;
+    justify-content: flex-end;
+  }
+
+  /* Page header dividers */
+  .paymentsPageHeader,
+  .notificationsPageHeader,
+  .reportsPageHeader,
+  .scholarshipsPageHeader,
+  .settingsPageHeader,
+  .transferCertificatePageHeader,
+  .feeStructurePageHeader {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  /* —— Filter toolbar (Students): single scrollable row —— */
+  .crmFilterToolbar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.5rem;
+    padding: 0.625rem 0.75rem;
+    margin-bottom: 0.875rem;
+    scrollbar-width: thin;
+  }
+
+  .crmFilterToolbar .crmSearchBar {
+    flex: 1 1 9rem;
+    min-width: 7.5rem;
+    height: 2.375rem;
+  }
+
+  .crmFilterSelects {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0;
+    gap: 0.375rem;
+  }
+
+  .crmFilterToolbar .crmSelect {
+    min-width: 6.25rem;
+    height: 2.375rem;
+    font-size: 0.8125rem;
+  }
+
+  .crmFilterToolbarRight {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    flex-shrink: 0;
+    margin-left: 0;
+  }
+
+  .crmFilterToolbar .crmFilterExportBtn {
+    flex-shrink: 0;
+    width: 2.375rem;
+    height: 2.375rem;
+  }
+
+  /* —— Staff search card —— */
+  .crmSearchCard {
+    padding: 0.625rem 0.75rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .crmSearchCard .crmSearchBar {
+    height: 2.375rem;
+    border-radius: var(--theme-radius-pill);
+  }
+
+  /* —— Staff: vertical action icons —— */
+  .staffPage .crmRowActions {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .staffPage .crmActionBtn {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  /* —— Tables: horizontal scroll, compact —— */
+  .crmTableWrap {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .crmTable th,
+  .crmTable td {
+    padding: 0.625rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .crmPhoneCell {
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+
+  .crmTableFooter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.625rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .crmPagination {
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .crmPagination .crmBtn {
+    flex: 1;
+  }
+
+  /* —— Form fields (shared) —— */
+  .crmFormField {
+    gap: 0.5rem;
+  }
+
+  .crmFormLabel {
+    font-size: 0.8125rem;
+  }
+
+  .crmFormInput,
+  .crmFormSelect,
+  .crmFormTextarea,
+  .crmSelect {
+    font-size: 0.875rem;
+  }
+
+  .crmFormTextarea {
+    min-height: 5rem;
+  }
+
+  /* —— Dashboard home —— */
+  .dashboardPage {
+    padding: 1rem;
+  }
+
+  .dashboardPageHeader {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .dashboardPageActions {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  .dashboardPageActions .dashboardBtnOutline,
+  .dashboardPageActions .dashboardBtnPrimary {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+}

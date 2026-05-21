@@ -37,7 +37,7 @@ export const settingsPageMock = {
         { id: 'confirmPassword', label: 'Confirm new password', type: 'password', placeholder: '' },
       ],
       primaryActionLabel: 'Update password',
-      actionAlign: 'center',
+      actionAlign: 'end',
     },
     notifications: {
       cardTitle: 'Notification preferences',

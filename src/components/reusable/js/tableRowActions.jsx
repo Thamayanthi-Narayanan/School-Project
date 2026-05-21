@@ -1,7 +1,7 @@
 import '../css/crmReusable.css';
 import { DashboardIcons } from '../../common/js/dashboardIcons';
 
-const TableRowActions = ({ entityName }) => (
+const TableRowActions = ({ entityName, showDelete = true }) => (
   <div className="crmRowActions">
     <button
       type="button"
@@ -17,13 +17,15 @@ const TableRowActions = ({ entityName }) => (
     >
       {DashboardIcons.edit(16)}
     </button>
-    <button
-      type="button"
-      className="crmActionBtn crmActionBtnDanger"
-      aria-label={`Delete ${entityName}`}
-    >
-      {DashboardIcons.trash(16)}
-    </button>
+    {showDelete && (
+      <button
+        type="button"
+        className="crmActionBtn crmActionBtnDanger"
+        aria-label={`Delete ${entityName}`}
+      >
+        {DashboardIcons.trash(16)}
+      </button>
+    )}
   </div>
 );
 

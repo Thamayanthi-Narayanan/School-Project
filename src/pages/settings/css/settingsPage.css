@@ -9,12 +9,14 @@
 /* Tabs */
 .settingsTabs {
   display: inline-flex;
+  flex-wrap: wrap;
   padding: 0.25rem;
   margin-bottom: 1.25rem;
   background: var(--theme-bg-page);
   border: 1px solid var(--theme-border);
   border-radius: var(--theme-radius-md);
   gap: 0.25rem;
+  max-width: 100%;
 }
 
 .settingsTab {
@@ -27,6 +29,7 @@
   color: var(--theme-text-secondary);
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
 }
 
 .settingsTab:hover:not(.settingsTabActive) {
@@ -42,6 +45,7 @@
 
 /* Settings card */
 .settingsCard {
+  width: 100%;
   max-width: 720px;
   background: var(--theme-bg-card);
   border: 1px solid var(--theme-border);
@@ -64,8 +68,16 @@
   margin-bottom: 1.5rem;
 }
 
+.settingsFormGrid .crmFormFieldFull {
+  grid-column: 1 / -1;
+}
+
 .settingsFormGridStacked {
   grid-template-columns: 1fr;
+  max-width: 100%;
+}
+
+.settingsFormGridStacked .crmFormField {
   max-width: 100%;
 }
 
@@ -98,7 +110,7 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.125rem;
-  background: var(--theme-bg-card);
+  background: var(--theme-bg-page);
   border: 1px solid var(--theme-border);
   border-radius: var(--theme-radius-md);
 }
@@ -146,25 +158,55 @@
   animation-delay: 0.08s;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .settingsTabs {
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
+    gap: 0.25rem;
   }
 
   .settingsTab {
-    flex: 1 1 auto;
-    min-width: calc(50% - 0.25rem);
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-
-  .settingsFormGrid {
-    grid-template-columns: 1fr;
+    flex: 0 1 auto;
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
   }
 
   .settingsCard {
     max-width: none;
+    padding: 1.25rem;
+  }
+
+  /* Profile & School: 2-column form on mobile per screenshots */
+  .settingsFormGrid:not(.settingsFormGridStacked) {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.875rem 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .settingsFormGridStacked {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .settingsCardActions {
+    justify-content: flex-end;
+  }
+
+  .settingsCardActions .crmBtn,
+  .settingsCardActionsEnd .crmBtn,
+  .settingsCardActionsCenter .crmBtn {
+    width: auto;
+    max-width: none;
+    padding: 0.5rem 1.25rem;
+  }
+
+  .settingsNotifItem {
+    padding: 0.875rem 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .settingsFormGrid:not(.settingsFormGridStacked) {
+    grid-template-columns: 1fr;
   }
 }

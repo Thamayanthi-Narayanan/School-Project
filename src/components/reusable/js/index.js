@@ -8,6 +8,8 @@ export { default as FormTextarea } from './formTextarea';
 export { default as FormTipsPanel } from './formTipsPanel';
 export { default as EntityFormModal } from './entityFormModal';
 export { default as PersonCell } from './personCell';
+export { default as PhoneCell } from './phoneCell';
+export { default as TableDateCell } from './tableDateCell';
 export { default as TableRowActions } from './tableRowActions';
 export { default as DataTableCard } from './dataTableCard';
 export { default as StaffSearchCard } from './staffSearchCard';

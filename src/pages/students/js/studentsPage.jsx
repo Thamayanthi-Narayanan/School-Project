@@ -8,6 +8,7 @@ import {
   FilterToolbar,
   DataTableCard,
   PersonCell,
+  PhoneCell,
   TableRowActions,
   EntityFormModal,
   useModal,
@@ -57,7 +58,7 @@ const StudentsPage = () => {
   ];
 
   return (
-    <div className="crmListPage">
+    <div className="crmListPage studentsPage">
       <PageHeader title={title} subtitle={subtitle}>
         <CrmButton variant="outline">
           {DashboardIcons.upload(16)}
@@ -130,12 +131,14 @@ const StudentsPage = () => {
                 </td>
                 <td>{student.className}</td>
                 <td>{student.parent}</td>
-                <td className="crmTablePhone">{student.phone}</td>
+                <td className="crmTablePhone">
+                  <PhoneCell phone={student.phone} />
+                </td>
                 <td>
                   <StatusPill status={student.feeStatus} type="fee" />
                 </td>
                 <td>
-                  <TableRowActions entityName={student.name} />
+                  <TableRowActions entityName={student.name} showDelete={false} />
                 </td>
               </tr>
             ))}

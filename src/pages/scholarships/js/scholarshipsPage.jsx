@@ -2,7 +2,7 @@ import '../../../components/reusable/css/crmReusable.css';
 import '../css/scholarshipsPage.css';
 import { scholarshipsPageMock } from '../../../data/mocks/scholarships/scholarshipsPage.mock';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
-import { PageHeader, CrmButton } from '../../../components/reusable/js/index';
+import { PageHeader, CrmButton, TableDateCell } from '../../../components/reusable/js/index';
 import StatusPill from '../../../components/common/js/statusPill';
 
 const ScholarshipsPage = () => {
@@ -16,7 +16,7 @@ const ScholarshipsPage = () => {
 
   return (
     <div className="crmListPage scholarshipsPage">
-      <PageHeader title={title} subtitle={subtitle}>
+      <PageHeader title={title} subtitle={subtitle} className="scholarshipsPageHeader">
         <CrmButton variant="primary">
           {DashboardIcons.plus(16)}
           {actions.newSchemeLabel}
@@ -56,7 +56,9 @@ const ScholarshipsPage = () => {
                   <td className="crmTableStrong">{row.student}</td>
                   <td>{row.scheme}</td>
                   <td>{row.discount}</td>
-                  <td className="scholarshipsTableDate">{row.date}</td>
+                  <td className="scholarshipsTableDate">
+                    <TableDateCell date={row.date} />
+                  </td>
                   <td>
                     <StatusPill status={row.status} type="scholarship" />
                   </td>
@@ -67,7 +69,10 @@ const ScholarshipsPage = () => {
                           {DashboardIcons.check(14)}
                           {actions.approveLabel}
                         </button>
-                        <button type="button" className="scholarshipsActionBtn scholarshipsActionBtnReject">
+                        <button
+                          type="button"
+                          className="scholarshipsActionBtn scholarshipsActionBtnReject scholarshipsActionBtnRejectDesktop"
+                        >
                           {DashboardIcons.xClose(14)}
                           {actions.rejectLabel}
                         </button>

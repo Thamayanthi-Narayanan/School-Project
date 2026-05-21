@@ -7,6 +7,7 @@ import {
   StaffSearchCard,
   DataTableCard,
   PersonCell,
+  PhoneCell,
   TableRowActions,
   EntityFormModal,
   useModal,
@@ -26,7 +27,7 @@ const StaffPage = () => {
   const { isOpen, openModal, closeModal } = useModal();
 
   return (
-    <div className="crmListPage">
+    <div className="crmListPage staffPage">
       <PageHeader title={title} subtitle={subtitle}>
         <CrmButton variant="primary" onClick={openModal}>
           {DashboardIcons.plus(16)}
@@ -62,7 +63,9 @@ const StaffPage = () => {
                 </td>
                 <td>{member.role}</td>
                 <td>{member.department}</td>
-                <td className="crmTablePhone">{member.phone}</td>
+                <td className="crmTablePhone">
+                  <PhoneCell phone={member.phone} />
+                </td>
                 <td className="crmTableSalary">{member.salary}</td>
                 <td>
                   <TableRowActions entityName={member.name} />

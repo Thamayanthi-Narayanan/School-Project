@@ -223,11 +223,23 @@
   min-width: 200px;
 }
 
+.crmFilterToolbarRight {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
 .crmFilterSelects {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+}
+
+.crmFilterExportBtn {
+  flex-shrink: 0;
 }
 
 /* Form select */
@@ -344,9 +356,35 @@
   white-space: nowrap;
 }
 
-.crmTablePhone {
-  white-space: nowrap;
+.crmPhoneCell {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.4;
+  font-size: 0.8125rem;
   color: var(--theme-text-secondary);
+  vertical-align: middle;
+}
+
+.crmPhoneCellLine {
+  display: block;
+}
+
+.crmTablePhone {
+  vertical-align: middle;
+}
+
+.crmTableDateCell {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.35;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  vertical-align: middle;
+}
+
+.crmTableDateLine {
+  display: block;
 }
 
 .crmTableSalary {
@@ -700,41 +738,9 @@
   gap: 0.625rem;
 }
 
-@media (max-width: 1024px) {
-  .crmFilterToolbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .crmFilterSelects {
-    width: 100%;
-  }
-
-  .crmSelectWrap {
-    flex: 1;
-  }
-
-  .crmSelect {
-    width: 100%;
-    min-width: 0;
-  }
-}
-
 @media (max-width: 768px) {
   .crmListPage {
     padding: 1rem;
-  }
-
-  .crmPageHeader {
-    flex-direction: column;
-  }
-
-  .crmPageActions {
-    width: 100%;
-  }
-
-  .crmPageActions .crmBtn {
-    flex: 1;
   }
 }
 

@@ -1,3 +1,11 @@
+/* Page header */
+.scholarshipsPage .scholarshipsPageHeader {
+  width: 100%;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
 /* Scheme cards */
 .scholarshipsSchemes {
   display: grid;
@@ -36,11 +44,12 @@
   font-weight: 700;
   color: var(--theme-text-primary);
   line-height: 1.3;
+  padding-right: 0.25rem;
 }
 
 .scholarshipsSchemeBadge {
   flex-shrink: 0;
-  padding: 0.2rem 0.5rem;
+  padding: 0.25rem 0.5rem;
   font-size: 0.6875rem;
   font-weight: 600;
   color: var(--theme-primary);
@@ -59,6 +68,7 @@
 
 .scholarshipsSchemeEdit {
   align-self: flex-start;
+  margin-top: auto;
   padding: 0;
   border: none;
   background: none;
@@ -91,6 +101,13 @@
 
 .scholarshipsTableWrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scholarshipsTable th {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--theme-text-muted);
 }
 
 .scholarshipsTable tbody tr.scholarshipsTableRowAlt {
@@ -98,8 +115,7 @@
 }
 
 .scholarshipsTableDate {
-  white-space: nowrap;
-  color: var(--theme-text-secondary);
+  vertical-align: middle;
 }
 
 .scholarshipsTable th:last-child,
@@ -123,18 +139,18 @@
 .scholarshipsActionBtn {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.35rem 0.75rem;
+  gap: 0.35rem;
+  padding: 0.4rem 0.875rem;
   border-radius: var(--theme-radius-md);
   font-size: 0.8125rem;
   font-weight: 600;
-  background: var(--theme-bg-card);
   cursor: pointer;
   transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .scholarshipsActionBtnApprove {
   border: 1px solid #86efac;
+  background: var(--theme-bg-card);
   color: #15803d;
 }
 
@@ -144,6 +160,7 @@
 
 .scholarshipsActionBtnReject {
   border: 1px solid #fca5a5;
+  background: var(--theme-bg-card);
   color: #b91c1c;
 }
 
@@ -176,6 +193,54 @@
 }
 
 @media (max-width: 768px) {
+  .scholarshipsSchemes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .scholarshipsSchemeCard {
+    min-height: 8.5rem;
+    padding: 1rem;
+  }
+
+  .scholarshipsSchemeTitle {
+    font-size: 0.875rem;
+  }
+
+  .scholarshipsSchemeDesc {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .scholarshipsTableCard {
+    padding: 1rem 1.125rem 1.25rem;
+  }
+
+  .scholarshipsTable th,
+  .scholarshipsTable td {
+    padding: 0.625rem 0.375rem;
+    font-size: 0.75rem;
+  }
+
+  .scholarshipsRowActions {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.375rem;
+  }
+
+  .scholarshipsActionBtn {
+    padding: 0.35rem 0.625rem;
+    font-size: 0.75rem;
+  }
+
+  /* Mobile screenshot: Approve only in action column */
+  .scholarshipsActionBtnRejectDesktop {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
   .scholarshipsSchemes {
     grid-template-columns: 1fr;
   }

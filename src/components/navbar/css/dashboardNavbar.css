@@ -210,8 +210,74 @@
   color: var(--theme-text-secondary);
 }
 
+.dashboardNavbarMenuBtn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--theme-radius-sm);
+  background: transparent;
+  color: var(--theme-text-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+
+.dashboardNavbarMenuBtn:hover {
+  background: var(--theme-bg-page);
+}
+
 @media (max-width: 1200px) {
   .dashboardNavbarProfileText {
     display: none;
+  }
+}
+
+/* Mobile — below 769px */
+@media (max-width: 768px) {
+  .dashboardNavbar {
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .dashboardNavbarMenuBtn {
+    display: flex;
+  }
+
+  .dashboardNavbarBreadcrumb {
+    display: none;
+  }
+
+  .dashboardNavbarSearch {
+    display: none;
+  }
+
+  .dashboardNavbarActions {
+    margin-left: auto;
+    gap: 0.5rem;
+  }
+
+  .dashboardNavbarQuickAdd {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8125rem;
+  }
+
+  .dashboardNavbarProfileWrap {
+    padding: 0.2rem 0.5rem 0.2rem 0.2rem;
+  }
+
+  .dashboardNavbarProfileText {
+    display: flex;
+  }
+
+  .dashboardNavbarProfileName {
+    font-size: 0.8125rem;
+  }
+
+  .dashboardNavbarProfileRole {
+    font-size: 0.6875rem;
   }
 }

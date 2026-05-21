@@ -298,21 +298,54 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .feeStructureConfigCard {
+    padding: 1.25rem;
+    overflow-x: auto;
+  }
+
   .feeStructureConfigGrid {
+    grid-template-columns: repeat(4, minmax(5.5rem, 1fr));
+    gap: 0.75rem;
+    min-width: min(100%, 22rem);
+  }
+
+  .feeStructureCategoriesCard {
+    padding: 1.25rem;
+  }
+
+  .feeStructureTableWrap {
+    margin: 0;
+  }
+
+  .feeStructureCellInput {
+    min-width: 3.5rem;
+    max-width: 5rem;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .feeStructureCategoryInput {
+    min-width: 6rem;
+    max-width: 8rem;
+  }
+
+  .feeStructureBottomRow {
     grid-template-columns: 1fr;
   }
 
-  .feeStructurePage .crmPageHeader {
-    flex-direction: column;
-    align-items: stretch;
+  .feeStructurePayableCard {
+    max-width: none;
+    justify-self: stretch;
   }
 
-  .feeStructurePage .crmPageActions {
-    width: 100%;
+  .feeStructureScholarshipGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
-  .feeStructurePage .crmPageActions .crmBtn {
-    width: 100%;
+  .feeStructureAddCategoryBtn {
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.75rem;
   }
 }

@@ -102,14 +102,22 @@
   padding-top: 0.125rem;
 }
 
-@media (max-width: 640px) {
-  .notificationsItem {
-    flex-wrap: wrap;
-    gap: 0.75rem;
+@media (max-width: 768px) {
+  .notificationsMarkAllBtn {
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.875rem;
   }
 
-  .notificationsTime {
-    width: 100%;
-    padding-left: 3.5rem;
+  .notificationsItem {
+    padding: 1rem 1.125rem;
+    gap: 0.875rem;
+  }
+
+  .notificationsTitle {
+    font-size: 0.875rem;
+  }
+
+  .notificationsDesc {
+    font-size: 0.75rem;
   }
 }

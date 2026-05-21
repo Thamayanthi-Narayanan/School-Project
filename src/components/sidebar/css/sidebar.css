@@ -154,3 +154,22 @@
 .sidebarLogout {
   color: var(--theme-text-secondary);
 }
+
+/* Mobile drawer — below 769px */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 150;
+    height: 100vh;
+    height: 100dvh;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: var(--theme-shadow-modal);
+  }
+
+  .sidebar.sidebarOpen {
+    transform: translateX(0);
+  }
+}

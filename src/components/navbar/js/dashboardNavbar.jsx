@@ -5,7 +5,7 @@ import { pageTitles } from '../../../constants/pageTitles';
 import { DashboardIcons } from '../../common/js/dashboardIcons';
 import NotificationBellIcon from '../../common/js/notificationBellIcon';
 
-const DashboardNavbar = () => {
+const DashboardNavbar = ({ onMenuClick }) => {
   const { pathname } = useLocation();
   const {
     schoolName,
@@ -20,6 +20,14 @@ const DashboardNavbar = () => {
 
   return (
     <header className="dashboardNavbar">
+      <button
+        type="button"
+        className="dashboardNavbarMenuBtn"
+        aria-label="Open menu"
+        onClick={onMenuClick}
+      >
+        {DashboardIcons.menu(20)}
+      </button>
       <div className="dashboardNavbarBreadcrumb">
         <span className="dashboardNavbarSchool">{schoolName}</span>
         <span className="dashboardNavbarSep">/</span>

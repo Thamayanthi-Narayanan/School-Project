@@ -4,14 +4,18 @@ import { sidebarMock } from '../../../data/mocks/sidebar/sidebar.mock';
 import { renderNavIcon, DashboardIcons } from '../../common/js/dashboardIcons';
 import NotificationBellIcon from '../../common/js/notificationBellIcon';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen = false, onNavigate }) => {
   const { pathname } = useLocation();
   const { brand, sections, footer } = sidebarMock;
 
   const isActive = (path) => pathname === path;
 
+  const handleNavClick = () => {
+    if (onNavigate) onNavigate();
+  };
+
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar${isOpen ? ' sidebarOpen' : ''}`}>
       <div className="sidebarBrand">
         <span className="sidebarBrandIcon">{DashboardIcons.graduationCap(20)}</span>
         <div className="sidebarBrandText">
@@ -31,6 +35,7 @@ const Sidebar = () => {
                     <Link
                       to={item.path}
                       className={`sidebarLink${isActive(item.path) ? ' sidebarLinkActive' : ''}`}
+                      onClick={handleNavClick}
                     >
                       <span className="sidebarLinkIcon">
                         {item.id === 'notifications' ? (
@@ -51,7 +56,7 @@ const Sidebar = () => {
       </div>
 
       <div className="sidebarFooter">
-        <Link to={footer.logoutPath} className="sidebarLink sidebarLogout">
+        <Link to={footer.logoutPath} className="sidebarLink sidebarLogout" onClick={handleNavClick}>
           <span className="sidebarLinkIcon">{renderNavIcon('logOut')}</span>
           <span className="sidebarLinkLabel">{footer.logoutLabel}</span>
         </Link>

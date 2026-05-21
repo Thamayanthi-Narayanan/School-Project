@@ -124,7 +124,48 @@
   }
 }
 
+/* Mobile — below 769px */
 @media (max-width: 768px) {
+  .reportsFilterRow {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .reportsFilterCard {
+    padding: 0.875rem 1rem;
+  }
+
+  .reportsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .reportsCard {
+    padding: 1.25rem;
+    min-height: 10.5rem;
+  }
+
+  .reportsCardActions {
+    flex-wrap: nowrap;
+    gap: 0.375rem;
+  }
+
+  .reportsExportBtn {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .reportsRunBtn {
+    margin-left: auto;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-size: 0.8125rem;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
   .reportsFilterRow {
     grid-template-columns: 1fr;
   }
@@ -133,18 +174,16 @@
     grid-template-columns: 1fr;
   }
 
+  .reportsCardActions {
+    flex-wrap: wrap;
+  }
+
   .reportsRunBtn {
     margin-left: 0;
     width: 100%;
   }
 
-  .reportsCardActions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .reportsExportBtn,
-  .reportsRunBtn {
-    width: 100%;
+  .reportsExportBtn {
+    flex: 1;
   }
 }

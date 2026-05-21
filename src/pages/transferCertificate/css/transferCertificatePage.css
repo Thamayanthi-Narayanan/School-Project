@@ -206,7 +206,44 @@
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .transferCertificateIssueCard,
+  .transferCertificatePreviewCard {
+    padding: 1.25rem;
+  }
+
+  .transferCertificateDateGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.875rem;
+  }
+
+  .transferCertificateGenerateBtn {
+    width: 100%;
+  }
+
+  .transferCertificatePreviewHeader {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .transferCertificatePreviewActions {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  .transferCertificatePreviewActions .crmBtn {
+    flex: 0 1 auto;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .transferCertificateDocument {
+    padding: 1rem 1.125rem;
+  }
+}
+
+@media (max-width: 400px) {
   .transferCertificateDateGrid {
     grid-template-columns: 1fr;
   }

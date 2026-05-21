@@ -222,12 +222,14 @@
 }
 
 @media (max-width: 768px) {
-  .invoiceDocument {
-    padding: 1.25rem 1.5rem;
+  .invoicesPage .invoiceDocument {
+    padding: 1.25rem 1rem;
+    max-width: none;
   }
 
   .invoiceDocumentHeader {
     flex-direction: column;
+    gap: 1rem;
   }
 
   .invoiceMetaBlock {
@@ -236,6 +238,7 @@
 
   .invoiceDetailsRow {
     grid-template-columns: 1fr;
+    gap: 1.25rem;
   }
 
   .invoiceDetailBlockRight {
@@ -244,5 +247,9 @@
 
   .invoiceSummary {
     max-width: none;
+  }
+
+  .invoiceLineTable {
+    font-size: 0.75rem;
   }
 }
