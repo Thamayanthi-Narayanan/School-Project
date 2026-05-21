@@ -12,3 +12,4 @@ export { paymentsPageMock } from './payments/paymentsPage.mock';
 export { settingsPageMock } from './settings/settingsPage.mock';
 export { notificationsPageMock } from './notifications/notificationsPage.mock';
 export { transferCertificatePageMock } from './transferCertificate/transferCertificatePage.mock';
+export { feeStructurePageMock } from './feeStructure/feeStructurePage.mock';

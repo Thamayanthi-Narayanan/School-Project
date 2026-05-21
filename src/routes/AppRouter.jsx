@@ -13,6 +13,7 @@ import PaymentsPage from '../pages/payments/js/paymentsPage';
 import SettingsPage from '../pages/settings/js/settingsPage';
 import NotificationsPage from '../pages/notifications/js/notificationsPage';
 import TransferCertificatePage from '../pages/transferCertificate/js/transferCertificatePage';
+import FeeStructurePage from '../pages/feeStructure/js/feeStructurePage';
 
 const AppRouter = () => {
   return (
@@ -32,6 +33,7 @@ const AppRouter = () => {
           <Route path={routePaths.settings} element={<SettingsPage />} />
           <Route path={routePaths.notifications} element={<NotificationsPage />} />
           <Route path={routePaths.transferCertificate} element={<TransferCertificatePage />} />
+          <Route path={routePaths.feeStructure} element={<FeeStructurePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

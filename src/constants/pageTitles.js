@@ -12,4 +12,5 @@ export const pageTitles = {
   [routePaths.settings]: 'Settings',
   [routePaths.notifications]: 'Notifications',
   [routePaths.transferCertificate]: 'Transfer Certificate',
+  [routePaths.feeStructure]: 'Fee Structure',
 };

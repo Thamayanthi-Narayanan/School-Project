@@ -58,6 +58,7 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
   - `settings/settingsPage.mock.js` — profile, school, security, notification tabs
   - `notifications/notificationsPage.mock.js` — alerts list, mark all read action
   - `transferCertificate/transferCertificatePage.mock.js` — issue TC form, TC preview document
+  - `feeStructure/feeStructurePage.mock.js` — class config, fee categories table, payable summary
 - Export shared entries from `src/data/mocks/index.js`
 - Add a new mock file when creating each new screen or layout section
 

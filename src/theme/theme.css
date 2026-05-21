@@ -73,6 +73,7 @@
   /* Status */
   --theme-success: #16a34a;
   --theme-success-muted: #64748b;
+  --theme-danger: #dc2626;
 
   /* Notifications */
   --theme-notif-accent: #002d62;
