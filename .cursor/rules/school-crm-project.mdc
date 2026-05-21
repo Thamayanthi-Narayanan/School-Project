@@ -51,6 +51,7 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
   - `students/studentsPage.mock.js` — students list, filters, add-student modal fields
   - `staff/staffPage.mock.js` — staff list, search, add-staff modal fields
   - `admission/admissionPage.mock.js` — admission wizard steps, forms, tips
+  - `attendance/attendancePage.mock.js` — attendance calendar, tabs, monthly summary
 - Export shared entries from `src/data/mocks/index.js`
 - Add a new mock file when creating each new screen or layout section
 

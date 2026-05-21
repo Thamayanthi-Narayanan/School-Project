@@ -5,4 +5,5 @@ export const routePaths = {
   students: '/students',
   staff: '/staff',
   admission: '/admission',
+  attendance: '/attendance',
 };

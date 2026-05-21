@@ -6,6 +6,7 @@ import DashboardPage from '../pages/dashboard/js/dashboardPage';
 import StudentsPage from '../pages/students/js/studentsPage';
 import StaffPage from '../pages/staff/js/staffPage';
 import AdmissionPage from '../pages/admission/js/admissionPage';
+import AttendancePage from '../pages/attendance/js/attendancePage';
 
 const AppRouter = () => {
   return (
@@ -18,6 +19,7 @@ const AppRouter = () => {
           <Route path={routePaths.students} element={<StudentsPage />} />
           <Route path={routePaths.staff} element={<StaffPage />} />
           <Route path={routePaths.admission} element={<AdmissionPage />} />
+          <Route path={routePaths.attendance} element={<AttendancePage />} />
         </Route>
       </Routes>
     </BrowserRouter>

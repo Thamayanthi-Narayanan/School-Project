@@ -1,0 +1,265 @@
+.attendancePage .crmPageHeader {
+  margin-bottom: 1rem;
+}
+
+/* Tabs */
+.attendanceTabs {
+  display: inline-flex;
+  padding: 0.25rem;
+  margin-bottom: 1.25rem;
+  background: var(--theme-bg-page);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  gap: 0.25rem;
+}
+
+.attendanceTab {
+  padding: 0.5rem 1.25rem;
+  border: none;
+  border-radius: var(--theme-radius-sm);
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-secondary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.attendanceTab:hover:not(.attendanceTabActive) {
+  color: var(--theme-text-primary);
+}
+
+.attendanceTabActive {
+  background: var(--theme-bg-card);
+  color: var(--theme-text-primary);
+  font-weight: 600;
+  box-shadow: var(--theme-shadow-sm);
+}
+
+/* Calendar card */
+.attendanceCalendarCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--theme-shadow-sm);
+  margin-bottom: 1.25rem;
+}
+
+.attendanceCalendarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.attendanceCalendarTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.attendanceCalendarNav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.attendanceDaysGrid {
+  display: grid;
+  grid-template-columns: repeat(15, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.attendanceDayCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0.35rem 0.25rem;
+  border-radius: var(--theme-radius-sm);
+  border: 1px solid transparent;
+  text-align: center;
+  transition: transform 0.15s ease;
+}
+
+.attendanceDayCell:hover {
+  transform: translateY(-1px);
+}
+
+.attendanceDayMonth {
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1.2;
+  opacity: 0.85;
+}
+
+.attendanceDayNum {
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.attendanceDayCellPresent {
+  background: var(--theme-attendance-present-bg);
+  color: var(--theme-attendance-present-text);
+  border-color: var(--theme-attendance-present-border);
+}
+
+.attendanceDayCellAbsent {
+  background: var(--theme-attendance-absent-bg);
+  color: var(--theme-attendance-absent-text);
+  border-color: var(--theme-attendance-absent-border);
+}
+
+.attendanceDayCellLate {
+  background: var(--theme-attendance-late-bg);
+  color: var(--theme-attendance-late-text);
+  border-color: var(--theme-attendance-late-border);
+}
+
+.attendanceDayCellHoliday {
+  background: var(--theme-attendance-holiday-bg);
+  color: var(--theme-attendance-holiday-text);
+  border-color: var(--theme-attendance-holiday-border);
+}
+
+/* Legend */
+.attendanceLegend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+.attendanceLegendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+.attendanceLegendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.attendanceLegendDotPresent {
+  background: var(--theme-attendance-present-text);
+}
+
+.attendanceLegendDotAbsent {
+  background: var(--theme-attendance-absent-text);
+}
+
+.attendanceLegendDotLate {
+  background: var(--theme-attendance-late-dot);
+}
+
+.attendanceLegendDotHoliday {
+  background: var(--theme-attendance-holiday-text);
+}
+
+/* Monthly summary */
+.attendanceSummaryCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.attendanceSummaryTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin-bottom: 1rem;
+}
+
+.attendanceSummaryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.attendanceSummaryStat {
+  padding: 1rem 1.25rem;
+  background: var(--theme-bg-page);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+}
+
+.attendanceSummaryLabel {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  margin-bottom: 0.35rem;
+}
+
+.attendanceSummaryValue {
+  display: block;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.attendanceSectionDelay1 {
+  animation-delay: 0.08s;
+}
+
+.attendanceSectionDelay2 {
+  animation-delay: 0.14s;
+}
+
+@media (max-width: 1200px) {
+  .attendanceDaysGrid {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .attendanceDaysGrid {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .attendanceSummaryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .attendanceTabs {
+    width: 100%;
+  }
+
+  .attendanceTab {
+    flex: 1;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .attendanceSummaryGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .attendanceDaysGrid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .attendanceDayCell,
+  .attendanceTab {
+    transition: none;
+  }
+
+  .attendanceDayCell:hover {
+    transform: none;
+  }
+}

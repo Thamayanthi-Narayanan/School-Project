@@ -5,3 +5,4 @@ export { loginPageMock } from './login/loginPage.mock';
 export { studentsPageMock } from './students/studentsPage.mock';
 export { staffPageMock } from './staff/staffPage.mock';
 export { admissionPageMock } from './admission/admissionPage.mock';
+export { attendancePageMock } from './attendance/attendancePage.mock';

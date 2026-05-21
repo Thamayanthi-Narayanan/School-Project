@@ -31,6 +31,21 @@
   --theme-overlay-backdrop: rgba(15, 23, 42, 0.32);
   --theme-overlay-blur: 12px;
 
+  /* Attendance status */
+  --theme-attendance-present-bg: #dcfce7;
+  --theme-attendance-present-text: #15803d;
+  --theme-attendance-present-border: #86efac;
+  --theme-attendance-absent-bg: #fee2e2;
+  --theme-attendance-absent-text: #b91c1c;
+  --theme-attendance-absent-border: #fca5a5;
+  --theme-attendance-late-bg: #fffbeb;
+  --theme-attendance-late-text: #d97706;
+  --theme-attendance-late-border: #fde68a;
+  --theme-attendance-late-dot: #fbbf24;
+  --theme-attendance-holiday-bg: #f1f5f9;
+  --theme-attendance-holiday-text: #64748b;
+  --theme-attendance-holiday-border: #e2e8f0;
+
   /* Dashboard layout */
   --dashboard-header-height: 64px;
 
