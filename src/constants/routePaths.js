@@ -6,4 +6,5 @@ export const routePaths = {
   staff: '/staff',
   admission: '/admission',
   attendance: '/attendance',
+  scholarships: '/scholarships',
 };

@@ -6,3 +6,4 @@ export { studentsPageMock } from './students/studentsPage.mock';
 export { staffPageMock } from './staff/staffPage.mock';
 export { admissionPageMock } from './admission/admissionPage.mock';
 export { attendancePageMock } from './attendance/attendancePage.mock';
+export { scholarshipsPageMock } from './scholarships/scholarshipsPage.mock';

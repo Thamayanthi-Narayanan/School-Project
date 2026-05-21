@@ -7,6 +7,7 @@ import StudentsPage from '../pages/students/js/studentsPage';
 import StaffPage from '../pages/staff/js/staffPage';
 import AdmissionPage from '../pages/admission/js/admissionPage';
 import AttendancePage from '../pages/attendance/js/attendancePage';
+import ScholarshipsPage from '../pages/scholarships/js/scholarshipsPage';
 
 /**
  * Route config reference. Actual routing is in AppRouter.jsx
@@ -23,6 +24,7 @@ export const appRoutes = [
       { path: routePaths.staff, element: <StaffPage /> },
       { path: routePaths.admission, element: <AdmissionPage /> },
       { path: routePaths.attendance, element: <AttendancePage /> },
+      { path: routePaths.scholarships, element: <ScholarshipsPage /> },
     ],
   },
 ];

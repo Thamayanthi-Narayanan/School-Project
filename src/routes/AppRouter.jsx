@@ -7,6 +7,7 @@ import StudentsPage from '../pages/students/js/studentsPage';
 import StaffPage from '../pages/staff/js/staffPage';
 import AdmissionPage from '../pages/admission/js/admissionPage';
 import AttendancePage from '../pages/attendance/js/attendancePage';
+import ScholarshipsPage from '../pages/scholarships/js/scholarshipsPage';
 
 const AppRouter = () => {
   return (
@@ -20,6 +21,7 @@ const AppRouter = () => {
           <Route path={routePaths.staff} element={<StaffPage />} />
           <Route path={routePaths.admission} element={<AdmissionPage />} />
           <Route path={routePaths.attendance} element={<AttendancePage />} />
+          <Route path={routePaths.scholarships} element={<ScholarshipsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

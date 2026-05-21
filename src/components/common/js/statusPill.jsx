@@ -15,8 +15,18 @@ const feeStatusMap = {
   Partial: 'statusPillReview',
 };
 
+const scholarshipStatusMap = {
+  Pending: 'statusPillReview',
+  Approved: 'statusPillSuccess',
+  Rejected: 'statusPillRejected',
+};
+
 const StatusPill = ({ status, type = 'workflow' }) => {
-  const map = type === 'fee' ? feeStatusMap : workflowStatusMap;
+  const map = type === 'fee'
+    ? feeStatusMap
+    : type === 'scholarship'
+      ? scholarshipStatusMap
+      : workflowStatusMap;
   const className = map[status] || 'statusPillPending';
   return (
     <span className={`statusPill ${className}`}>
