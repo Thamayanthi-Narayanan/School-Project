@@ -5,12 +5,57 @@ import '../css/settingsPage.css';
 import { settingsPageMock } from '../../../data/mocks/settings/settingsPage.mock';
 import { PageHeader, CrmButton, FormInput } from '../../../components/reusable/js/index';
 import { useChangePasswordForm } from '../hooks/useChangePasswordForm';
+import { useSettingsProfile } from '../hooks/useSettingsProfile';
 
 const resolveTab = (tabParam, panels, fallback) => {
   if (tabParam && panels[tabParam]) {
     return tabParam;
   }
   return fallback;
+};
+
+const ProfilePanel = ({ panel }) => {
+  const { profile, isLoading, error, refetch } = useSettingsProfile(true);
+
+  return (
+    <>
+      {panel.description && (
+        <p className="settingsCardDescription">{panel.description}</p>
+      )}
+
+      {error && (
+        <div className="settingsProfileErrorWrap">
+          <p className="settingsAlert settingsAlertError" role="alert">
+            {error}
+          </p>
+          <CrmButton variant="secondary" type="button" onClick={refetch}>
+            {panel.retryLabel}
+          </CrmButton>
+        </div>
+      )}
+
+      {isLoading && !error && (
+        <p className="settingsProfileLoading" role="status">
+          {panel.loadingLabel}
+        </p>
+      )}
+
+      <div
+        className={`settingsFormGrid${isLoading ? ' settingsFormGridLoading' : ''}`}
+        aria-busy={isLoading}
+      >
+        {panel.fields.map((field) => (
+          <FormInput
+            key={field.id}
+            label={field.label}
+            type={field.type || 'text'}
+            value={profile[field.id] ?? ''}
+            disabled
+          />
+        ))}
+      </div>
+    </>
+  );
 };
 
 const SecurityPanel = ({ panel }) => {
@@ -87,6 +132,7 @@ const SettingsPage = () => {
   });
 
   const panel = panels[activeTab];
+  const isProfile = activeTab === 'profile';
   const isNotifications = activeTab === 'notifications';
   const isSecurity = activeTab === 'security';
 
@@ -139,6 +185,8 @@ const SettingsPage = () => {
           </ul>
         ) : isSecurity ? (
           <SecurityPanel panel={panel} />
+        ) : isProfile ? (
+          <ProfilePanel panel={panel} />
         ) : (
           <>
             <div className="settingsFormGrid">

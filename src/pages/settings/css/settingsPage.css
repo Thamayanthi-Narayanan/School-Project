@@ -82,6 +82,30 @@
   border: 1px solid #fecaca;
 }
 
+.settingsProfileLoading {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+.settingsProfileErrorWrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.settingsProfileErrorWrap .settingsAlert {
+  margin: 0;
+  flex: 1 1 12rem;
+}
+
+.settingsFormGridLoading {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
 .settingsFormGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;

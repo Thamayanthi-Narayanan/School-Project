@@ -38,7 +38,8 @@ export const listUsers = async () => {
 
 /**
  * GET /api/v1/auth/users/{id}
- * Requires Bearer token; ADMIN or PRINCIPAL only.
+ * Returns one non-deleted user. Requires Bearer token; ADMIN or PRINCIPAL only.
+ * Used for user edit/view and Settings → Profile (logged-in user's id).
  */
 export const getUserById = async (id) => {
   const { data } = await apiClient.get(`/auth/users/${id}`);

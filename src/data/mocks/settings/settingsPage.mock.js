@@ -11,13 +11,17 @@ export const settingsPageMock = {
   panels: {
     profile: {
       cardTitle: 'Profile',
+      description: 'Your account details from the school directory.',
+      loadingLabel: 'Loading profile…',
+      retryLabel: 'Try again',
       fields: [
-        { id: 'fullName', label: 'Full name', defaultValue: 'Kavita Menon' },
-        { id: 'role', label: 'Role', defaultValue: 'Principal' },
-        { id: 'email', label: 'Email', defaultValue: 'kavita@greenfield.edu' },
-        { id: 'phone', label: 'Phone', defaultValue: '+91 98765 11111' },
+        { id: 'fullName', label: 'Full name' },
+        { id: 'username', label: 'Username' },
+        { id: 'role', label: 'Role' },
+        { id: 'email', label: 'Email', type: 'email' },
+        { id: 'phone', label: 'Phone', type: 'tel' },
+        { id: 'status', label: 'Status' },
       ],
-      primaryActionLabel: 'Save changes',
     },
     school: {
       cardTitle: 'School information',
@@ -68,6 +72,13 @@ export const settingsPageMock = {
         { id: 'weeklySummary', label: 'Weekly summary email', enabled: false },
       ],
     },
+  },
+  profileErrors: {
+    loadFailed: 'Could not load profile. Please try again.',
+    notFound: 'User not found or has been removed.',
+    accessDenied: 'Access denied. Your role cannot load profile details.',
+    authFailed: 'Your session has expired. Please sign in again.',
+    missingSession: 'Could not determine your account. Please sign in again.',
   },
   securityErrors: {
     currentPasswordRequired: 'Current password is required.',
