@@ -7,6 +7,138 @@
   flex-wrap: wrap;
 }
 
+.admissionPageSetupOnly {
+  min-height: 50vh;
+}
+
+/* Class & year setup modal */
+.admissionSetupOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 350;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--theme-overlay-backdrop);
+  animation: admissionSetupOverlayIn 0.22s ease both;
+}
+
+@keyframes admissionSetupOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.admissionSetupModal {
+  width: 100%;
+  max-width: 26rem;
+  padding: 1.5rem;
+  overflow: visible;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-modal);
+  animation: admissionSetupModalIn 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes admissionSetupModalIn {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.admissionSetupHeader {
+  margin-bottom: 1.25rem;
+}
+
+.admissionSetupTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.admissionSetupSubtitle {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--theme-text-secondary);
+}
+
+.admissionSetupFields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  overflow: visible;
+}
+
+.admissionSetupFields .crmScrollSelectMenu {
+  max-height: 9.5rem;
+}
+
+.admissionSetupFooter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.admissionSetupSummary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--theme-radius-md);
+}
+
+.admissionSetupSummaryLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--theme-text-secondary);
+}
+
+.admissionSetupSummaryValue {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--theme-primary);
+}
+
+.admissionFormSections {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admissionFormSectionTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.admissionFormSectionHint {
+  margin: -0.35rem 0 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--theme-text-secondary);
+}
+
 /* Stepper */
 .admissionStepper {
   margin-bottom: 1.25rem;
@@ -132,7 +264,105 @@
 
 /* Academic Info — uses shared admissionFormGrid via AdmissionFormFields */
 
-/* Documents step */
+/* Documents step — profile photo upload */
+.admissionPhotoUpload {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.admissionPhotoInputHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.admissionPhotoDropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border: 2px dashed var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-bg-page);
+}
+
+.admissionPhotoDropzoneIcon {
+  display: flex;
+  color: var(--theme-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.admissionPhotoDropzoneTitle {
+  margin: 0 0 0.35rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.admissionPhotoDropzoneHint {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+.admissionPhotoBrowseBtn {
+  margin-top: 0.25rem;
+}
+
+.admissionPhotoPreview {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 1rem;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-bg-page);
+}
+
+.admissionPhotoPreviewImg {
+  width: 6.5rem;
+  height: 6.5rem;
+  object-fit: cover;
+  border-radius: var(--theme-radius-md);
+  border: 1px solid var(--theme-border);
+  flex-shrink: 0;
+}
+
+.admissionPhotoPreviewMeta {
+  flex: 1;
+  min-width: 0;
+}
+
+.admissionPhotoFileName {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-primary);
+  word-break: break-all;
+}
+
+.admissionPhotoPreviewActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admissionPhotoError {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #b91c1c;
+}
+
+/* Legacy documents layout */
 .admissionDocuments {
   display: flex;
   flex-direction: column;
@@ -208,27 +438,54 @@
   margin-bottom: 1.25rem;
 }
 
-.admissionReviewSummary {
-  padding: 1.25rem;
+.admissionReviewBlocks {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admissionReviewBlock {
+  padding: 1rem 1.125rem;
   background: var(--theme-bg-page);
   border: 1px solid var(--theme-border);
   border-radius: var(--theme-radius-md);
 }
 
-.admissionReviewRow {
-  font-size: 0.9375rem;
-  color: var(--theme-text-primary);
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
+.admissionReviewBlockTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--theme-text-secondary);
 }
 
-.admissionReviewRow:last-child {
-  margin-bottom: 0;
+.admissionReviewList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1.25rem;
+  margin: 0;
 }
 
-.admissionReviewLabel {
+.admissionReviewItem {
+  margin: 0;
+}
+
+.admissionReviewItem dt {
+  font-size: 0.6875rem;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--theme-text-muted);
+  margin-bottom: 0.15rem;
+}
+
+.admissionReviewItem dd {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
   color: var(--theme-text-primary);
+  word-break: break-word;
 }
 
 .admissionFormFooter {
@@ -302,6 +559,16 @@
     grid-template-columns: 1fr;
   }
 
+  .admissionPhotoPreview {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .admissionPhotoPreviewActions {
+    justify-content: center;
+  }
+
   .admissionFormFooter {
     padding-top: 1.25rem;
   }
@@ -314,6 +581,10 @@
 
 @media (max-width: 400px) {
   .admissionFormGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .admissionReviewList {
     grid-template-columns: 1fr;
   }
 }

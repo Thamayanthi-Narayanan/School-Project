@@ -1,13 +1,46 @@
-import AdmissionFormFields from './admissionFormFields';
+import AdmissionStudentStep from './admissionStudentStep';
+import AdmissionParentsStep from './admissionParentsStep';
 import AdmissionDocumentsStep from './admissionDocumentsStep';
 import AdmissionReviewStep from './admissionReviewStep';
 
-const AdmissionStepContent = ({ stepId, stepForm }) => {
+const AdmissionStepContent = ({
+  stepId,
+  stepForm,
+  form,
+  onStudentChange,
+  onParentsChange,
+  photoError,
+  onPhotoSelect,
+  onPhotoClear,
+}) => {
+  if (stepId === 'studentDetails') {
+    return (
+      <AdmissionStudentStep
+        student={form.student}
+        fields={stepForm.fields}
+        onChange={onStudentChange}
+      />
+    );
+  }
+
+  if (stepId === 'parentDetails') {
+    return (
+      <AdmissionParentsStep
+        parents={form.parents}
+        fields={stepForm.fields}
+        onChange={onParentsChange}
+      />
+    );
+  }
+
   if (stepId === 'documents') {
     return (
       <AdmissionDocumentsStep
-        upload={stepForm.upload}
-        files={stepForm.files}
+        documents={form.documents}
+        fields={stepForm.fields}
+        photoError={photoError}
+        onPhotoSelect={onPhotoSelect}
+        onPhotoClear={onPhotoClear}
       />
     );
   }
@@ -16,12 +49,13 @@ const AdmissionStepContent = ({ stepId, stepForm }) => {
     return (
       <AdmissionReviewStep
         subtitle={stepForm.subtitle}
-        summary={stepForm.summary}
+        form={form}
+        labels={stepForm.labels}
       />
     );
   }
 
-  return <AdmissionFormFields fields={stepForm.fields} />;
+  return null;
 };
 
 export default AdmissionStepContent;
