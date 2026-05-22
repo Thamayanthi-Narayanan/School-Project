@@ -214,6 +214,26 @@
   grid-template-columns: 1fr;
 }
 
+.userCreationAlert {
+  margin: 0 0 1rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  border-radius: var(--theme-radius-sm);
+}
+
+.userCreationAlertError {
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.userCreationAlertSuccess {
+  color: #15803d;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+
 .userCreationEmptyState {
   margin: 0.75rem 0 0;
   padding: 1rem;

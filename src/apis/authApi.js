@@ -17,3 +17,12 @@ export const logout = async () => {
   const { data } = await apiClient.post('/auth/logout');
   return data;
 };
+
+/**
+ * POST /api/v1/auth/users
+ * Requires Bearer token; ADMIN or PRINCIPAL only.
+ */
+export const createUser = async (payload) => {
+  const { data } = await apiClient.post('/auth/users', payload);
+  return data;
+};

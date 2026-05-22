@@ -1,13 +1,24 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import { createUser } from '../../../apis/authApi';
 import { userCreationPanelMock } from '../../../data/mocks/userCreation/userCreationPanel.mock';
+import { getAuthUser } from '../../../services/authSession';
+import { parseApiError } from '../../../utils/apiError';
+import {
+  buildCreateUserPayload,
+  getAssignableRoleOptions,
+  mapApiUserToLocal,
+  validateCreateUserForm,
+} from '../../../utils/createUser';
 
 const { fields, errors: errorCopy, users: initialUsers } = userCreationPanelMock;
+
+const ROLE_PLACEHOLDER = 'Select role';
 
 const emptyForm = {
   userName: '',
   userEmail: '',
   userPhone: '',
-  userRole: fields.userRole.options[0],
+  userRole: ROLE_PLACEHOLDER,
   password: '',
   confirmPassword: '',
 };
@@ -31,17 +42,8 @@ const validateAccountFields = (form, nextErrors, requireRole = true) => {
   else if (!isValidEmail(trimmedEmail)) nextErrors.userEmail = errorCopy.emailInvalid;
   if (!trimmedPhone) nextErrors.userPhone = errorCopy.phoneRequired;
   else if (!isValidPhone(trimmedPhone)) nextErrors.userPhone = errorCopy.phoneInvalid;
-  if (requireRole && form.userRole === fields.userRole.options[0]) {
+  if (requireRole && (form.userRole === ROLE_PLACEHOLDER || !form.userRole)) {
     nextErrors.userRole = errorCopy.roleRequired;
-  }
-};
-
-const validatePasswordFields = (form, nextErrors) => {
-  if (!form.password) nextErrors.password = errorCopy.passwordRequired;
-  else if (form.password.length < 8) nextErrors.password = errorCopy.passwordMin;
-  if (!form.confirmPassword) nextErrors.confirmPassword = errorCopy.confirmPasswordRequired;
-  else if (form.password !== form.confirmPassword) {
-    nextErrors.confirmPassword = errorCopy.passwordMismatch;
   }
 };
 
@@ -52,6 +54,14 @@ export const useUserCreationForm = () => {
   const [form, setForm] = useState(emptyForm);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const callerRole = getAuthUser()?.role ?? 'PRINCIPAL';
+
+  const createRoleOptions = useMemo(
+    () => getAssignableRoleOptions(callerRole),
+    [callerRole],
+  );
 
   const selectedUser = users.find((user) => user.id === selectedUserId) ?? null;
 
@@ -65,22 +75,26 @@ export const useUserCreationForm = () => {
     setSelectedUserId('');
     setForm(emptyForm);
     setErrors({});
+    setSuccessMessage('');
     setIsSubmitting(false);
   }, []);
 
   const updateField = useCallback((name, value) => {
     setForm((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => {
-      if (!prev[name]) return prev;
+      if (!prev[name] && !prev.general) return prev;
       const next = { ...prev };
       delete next[name];
+      delete next.general;
       return next;
     });
+    setSuccessMessage('');
   }, []);
 
   const handleSectionChange = useCallback((sectionId) => {
     setActiveSection(sectionId);
     setErrors({});
+    setSuccessMessage('');
     setSelectedUserId('');
     setForm(emptyForm);
   }, []);
@@ -109,14 +123,6 @@ export const useUserCreationForm = () => {
     }
   }, [users]);
 
-  const validateCreate = useCallback(() => {
-    const nextErrors = {};
-    validateAccountFields(form, nextErrors);
-    validatePasswordFields(form, nextErrors);
-    setErrors(nextErrors);
-    return Object.keys(nextErrors).length === 0;
-  }, [form]);
-
   const validateEdit = useCallback(() => {
     const nextErrors = {};
     if (!selectedUserId) nextErrors.selectedUser = errorCopy.userRequired;
@@ -133,26 +139,41 @@ export const useUserCreationForm = () => {
   }, [selectedUserId]);
 
   const handleCreateSubmit = useCallback(async () => {
-    if (!validateCreate()) return false;
+    const nextErrors = validateCreateUserForm(form, errorCopy);
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) return false;
 
     setIsSubmitting(true);
+    setSuccessMessage('');
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 400));
-      const newUser = {
-        id: `user-${Date.now()}`,
-        userName: form.userName.trim(),
-        userEmail: form.userEmail.trim(),
-        userPhone: form.userPhone.trim(),
-        userRole: form.userRole,
-      };
+      const payload = buildCreateUserPayload(form);
+      const response = await createUser(payload);
+
+      if (!response?.success || !response?.data) {
+        setErrors({
+          general: response?.message || errorCopy.createFailed,
+        });
+        return false;
+      }
+
+      const newUser = mapApiUserToLocal(response.data);
       setUsers((prev) => [...prev, newUser]);
       setForm(emptyForm);
       setErrors({});
+      setSuccessMessage(response.message || errorCopy.createSuccess);
       return true;
+    } catch (error) {
+      const { general, fieldErrors } = parseApiError(error, 'createUser');
+      setErrors({
+        ...fieldErrors,
+        ...(general ? { general } : {}),
+      });
+      return false;
     } finally {
       setIsSubmitting(false);
     }
-  }, [form, validateCreate]);
+  }, [form]);
 
   const handleEditSubmit = useCallback(async () => {
     if (!validateEdit()) return false;
@@ -202,7 +223,9 @@ export const useUserCreationForm = () => {
     form,
     errors,
     isSubmitting,
+    successMessage,
     userOptions,
+    createRoleOptions,
     resetForm,
     updateField,
     handleSectionChange,

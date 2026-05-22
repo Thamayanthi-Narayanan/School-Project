@@ -1,5 +1,18 @@
-const normalizeFieldKey = (key) => {
+const normalizeFieldKey = (key, context = 'login') => {
   if (!key) return null;
+
+  if (context === 'createUser') {
+    const map = {
+      username: 'userName',
+      fullName: 'userName',
+      email: 'userEmail',
+      phone: 'userPhone',
+      role: 'userRole',
+      password: 'password',
+    };
+    return map[key] ?? null;
+  }
+
   if (key === 'email' || key === 'phone') return 'email';
   if (key === 'password') return 'password';
   return key;
@@ -23,7 +36,22 @@ const collectMessages = (errors) => {
   return [];
 };
 
-export const parseApiError = (error) => {
+const mapMessageToFields = (message, context) => {
+  if (context !== 'createUser') return null;
+
+  const msg = String(message);
+  const lower = msg.toLowerCase();
+
+  if (lower.includes('username')) return { userName: msg };
+  if (lower.includes('email')) return { userEmail: msg };
+  if (lower.includes('phone')) return { userPhone: msg };
+  if (lower.includes('role') || lower.includes('assign')) return { userRole: msg };
+  if (lower.includes('password')) return { password: msg };
+
+  return null;
+};
+
+export const parseApiError = (error, context = 'login') => {
   const data = error?.response?.data;
   const status = error?.response?.status;
   const fieldErrors = {};
@@ -34,11 +62,20 @@ export const parseApiError = (error) => {
 
     if (data.errors && typeof data.errors === 'object' && !Array.isArray(data.errors)) {
       Object.entries(data.errors).forEach(([key, value]) => {
-        const field = normalizeFieldKey(key);
+        const field = normalizeFieldKey(key, context);
         const message = Array.isArray(value) ? value[0] : value;
 
-        if (field === 'email' || field === 'password') {
+        if (field) {
           fieldErrors[field] = String(message);
+        }
+      });
+    }
+
+    if (messages.length > 0) {
+      messages.forEach((msg) => {
+        const mapped = mapMessageToFields(msg, context);
+        if (mapped) {
+          Object.assign(fieldErrors, mapped);
         }
       });
     }
@@ -57,14 +94,23 @@ export const parseApiError = (error) => {
       }
     }
 
-    if (data.message && !general && Object.keys(fieldErrors).length === 0) {
-      general = data.message;
+    if (data.message) {
+      if (status === 403 || (context === 'createUser' && !Object.keys(fieldErrors).length)) {
+        general = data.message;
+      } else if (!general && Object.keys(fieldErrors).length === 0) {
+        general = data.message;
+      }
     }
   }
 
   if (!general && Object.keys(fieldErrors).length === 0) {
     if (status === 401) {
-      general = 'Authentication failed. Check your email or phone and password.';
+      general =
+        context === 'createUser'
+          ? 'Authentication failed. Please sign in again.'
+          : 'Authentication failed. Check your email or phone and password.';
+    } else if (status === 403) {
+      general = 'You do not have permission to perform this action.';
     } else if (error?.message === 'Network Error') {
       general = 'Unable to reach the server. Check your connection and try again.';
     } else {

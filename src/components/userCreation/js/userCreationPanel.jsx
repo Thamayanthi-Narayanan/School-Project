@@ -14,7 +14,14 @@ const sectionIconMap = {
   trash: DashboardIcons.trash,
 };
 
-const AccountFields = ({ fields, form, errors, updateField, autoFocus = false }) => (
+const AccountFields = ({
+  fields,
+  form,
+  errors,
+  updateField,
+  roleOptions,
+  autoFocus = false,
+}) => (
   <div className="userCreationPanelGrid">
     <FormInput
       label={fields.userName.label}
@@ -42,7 +49,7 @@ const AccountFields = ({ fields, form, errors, updateField, autoFocus = false })
     />
     <FormSelect
       label={fields.userRole.label}
-      options={fields.userRole.options}
+      options={roleOptions}
       value={form.userRole}
       onChange={(e) => updateField('userRole', e.target.value)}
       error={errors.userRole}
@@ -96,7 +103,9 @@ const UserCreationPanel = ({ isOpen, onClose }) => {
     form,
     errors,
     isSubmitting,
+    successMessage,
     userOptions,
+    createRoleOptions,
     resetForm,
     updateField,
     handleSectionChange,
@@ -147,8 +156,7 @@ const UserCreationPanel = ({ isOpen, onClose }) => {
     event.preventDefault();
 
     if (activeSection === 'create') {
-      const success = await handleCreateSubmit();
-      if (success) onClose();
+      await handleCreateSubmit();
       return;
     }
 
@@ -184,6 +192,7 @@ const UserCreationPanel = ({ isOpen, onClose }) => {
               form={form}
               errors={errors}
               updateField={updateField}
+              roleOptions={createRoleOptions}
               autoFocus
             />
           </section>
@@ -232,7 +241,13 @@ const UserCreationPanel = ({ isOpen, onClose }) => {
           <h3 className="userCreationPanelSectionTitle">{edit.accountSectionTitle}</h3>
           {renderUserPicker()}
           {selectedUser ? (
-            <AccountFields fields={fields} form={form} errors={errors} updateField={updateField} />
+            <AccountFields
+              fields={fields}
+              form={form}
+              errors={errors}
+              updateField={updateField}
+              roleOptions={fields.userRole.options}
+            />
           ) : (
             <p className="userCreationEmptyState">{view.emptyMessage}</p>
           )}
@@ -281,7 +296,7 @@ const UserCreationPanel = ({ isOpen, onClose }) => {
           disabled={isSubmitting || (isDelete && !selectedUser)}
           className={isDelete ? 'userCreationDeleteBtn' : ''}
         >
-          {copy.submitLabel}
+          {isSubmitting && activeSection === 'create' ? 'Creating…' : copy.submitLabel}
         </CrmButton>
       </footer>
     );
@@ -346,7 +361,19 @@ const UserCreationPanel = ({ isOpen, onClose }) => {
           </nav>
 
           <form className="userCreationPanelForm" onSubmit={handleSubmit} noValidate>
-            <div className="userCreationPanelBody">{renderSectionContent()}</div>
+            <div className="userCreationPanelBody">
+              {errors.general && (
+                <p className="userCreationAlert userCreationAlertError" role="alert">
+                  {errors.general}
+                </p>
+              )}
+              {successMessage && (
+                <p className="userCreationAlert userCreationAlertSuccess" role="status">
+                  {successMessage}
+                </p>
+              )}
+              {renderSectionContent()}
+            </div>
             {renderFooter()}
           </form>
         </div>
