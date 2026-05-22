@@ -1,12 +1,14 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import '../css/sidebar.css';
 import { sidebarMock } from '../../../data/mocks/sidebar/sidebar.mock';
 import { renderNavIcon, DashboardIcons } from '../../common/js/dashboardIcons';
 import NotificationBellIcon from '../../common/js/notificationBellIcon';
 import { useUserCreationPanel } from '../../../layouts/dashboardLayout/context/userCreationPanelContext';
+import { performLogout } from '../../../services/authLogout';
 
 const Sidebar = ({ isOpen = false, onNavigate }) => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { brand, sections, footer } = sidebarMock;
   const { openUserCreation } = useUserCreationPanel();
 
@@ -87,7 +89,16 @@ const Sidebar = ({ isOpen = false, onNavigate }) => {
       </div>
 
       <div className="sidebarFooter">
-        <Link to={footer.logoutPath} className="sidebarLink sidebarLogout" onClick={handleNavClick}>
+        <Link
+          to={footer.logoutPath}
+          className="sidebarLink sidebarLogout"
+          onClick={async (event) => {
+            event.preventDefault();
+            await performLogout();
+            handleNavClick();
+            navigate(footer.logoutPath);
+          }}
+        >
           <span className="sidebarLinkIcon">{renderNavIcon('logOut')}</span>
           <span className="sidebarLinkLabel">{footer.logoutLabel}</span>
         </Link>

@@ -3,6 +3,7 @@ import '../css/loginPage.css';
 import { useLoginForm } from '../hooks/useLoginForm';
 import { loginPageMock } from '../../../data/mocks/login/loginPage.mock';
 import { appConfig } from '../../../constants/appConfig';
+import { getRememberedLogin } from '../../../services/authSession';
 import loginHeroImage from '../../../assets/images/loginHero.png';
 
 const GraduationCapIcon = () => (
@@ -111,7 +112,7 @@ const LoginPage = () => {
   const { form, errors, isLoading, updateField, handleSubmit } = useLoginForm();
 
   useEffect(() => {
-    const remembered = localStorage.getItem('rememberEmail');
+    const remembered = getRememberedLogin();
     if (remembered) {
       updateField('email', remembered);
       updateField('rememberMe', true);
@@ -167,6 +168,12 @@ const LoginPage = () => {
               </header>
 
               <form className="loginForm" onSubmit={handleSubmit} noValidate>
+                {errors.general && (
+                  <p className="loginFormError loginFormErrorBanner" role="alert">
+                    {errors.general}
+                  </p>
+                )}
+
                 <div className="loginFormField">
                   <label className="loginFormLabel" htmlFor="login-email">
                     {loginPageMock.emailOrPhoneLabel}

@@ -383,6 +383,15 @@
   color: #ef4444;
 }
 
+.loginFormErrorBanner {
+  margin: 0;
+  padding: 0.625rem 0.75rem;
+  line-height: 1.4;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--theme-radius-sm);
+}
+
 .loginFormLink {
   font-size: 0.875rem;
   font-weight: 500;
