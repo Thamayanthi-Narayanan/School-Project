@@ -13,6 +13,8 @@ const feeStatusMap = {
   Paid: 'statusPillSuccess',
   Pending: 'statusPillFeePending',
   Partial: 'statusPillReview',
+  Overdue: 'statusPillFeePending',
+  Exempted: 'statusPillPending',
 };
 
 const scholarshipStatusMap = {

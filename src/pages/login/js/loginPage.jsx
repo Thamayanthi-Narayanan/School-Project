@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import { useLocation } from 'react-router-dom';
 import '../css/loginPage.css';
 import { useLoginForm } from '../hooks/useLoginForm';
@@ -110,6 +111,7 @@ const brandStats = [
 ];
 
 const LoginPage = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const location = useLocation();
   const successMessage = location.state?.message;
   const { form, errors, isLoading, updateField, handleSubmit } = useLoginForm();
@@ -219,14 +221,14 @@ const LoginPage = () => {
                       Forgot password?
                     </a>
                   </div>
-                  <div className="loginFormInputWrap">
+                  <div className="loginFormInputWrap loginFormInputWrapPassword">
                     <span className="loginFormInputIcon">
                       <LockInputIcon />
                     </span>
                     <input
                       id="login-password"
-                      className={`loginFormInput${errors.password ? ' loginFormInputError' : ''}`}
-                      type="password"
+                      className={`loginFormInput loginFormInputWithToggle${errors.password ? ' loginFormInputError' : ''}`}
+                      type={passwordVisible ? 'text' : 'password'}
                       name="password"
                       autoComplete="current-password"
                       placeholder="••••••••"
@@ -234,6 +236,15 @@ const LoginPage = () => {
                       onChange={(e) => updateField('password', e.target.value)}
                       disabled={isLoading}
                     />
+                    <button
+                      type="button"
+                      className="loginFormPasswordToggle"
+                      onClick={() => setPasswordVisible((visible) => !visible)}
+                      aria-label={passwordVisible ? 'Hide password' : 'Show password'}
+                      disabled={isLoading}
+                    >
+                      {passwordVisible ? DashboardIcons.eyeOff(16) : DashboardIcons.eye(16)}
+                    </button>
                   </div>
                   {errors.password && (
                     <p className="loginFormError" role="alert">

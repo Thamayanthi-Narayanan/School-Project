@@ -40,7 +40,6 @@ const DashboardPage = () => {
     activityFeed,
     recentAdmissions,
     scholarshipApprovals,
-    quickActions,
     workspace,
   } = dashboardPageMock;
 
@@ -64,11 +63,19 @@ const DashboardPage = () => {
           </div>
         </div>
         <div className="dashboardWelcomeActions">
-          <button type="button" className="dashboardBtnOutline">
+          <button
+            type="button"
+            className="dashboardBtnOutline"
+            onClick={() => navigate(routePaths.admission)}
+          >
             {DashboardIcons.plus(16)}
             New Admission
           </button>
-          <button type="button" className="dashboardBtnPrimary">
+          <button
+            type="button"
+            className="dashboardBtnPrimary"
+            onClick={() => navigate(routePaths.payments)}
+          >
             {DashboardIcons.wallet(16)}
             Collect Fee
           </button>
@@ -258,26 +265,6 @@ const DashboardPage = () => {
               <span className="dashboardWorkspaceCardIcon">{renderNavIcon(action.icon, 22)}</span>
               <span className="dashboardWorkspaceCardLabel">{action.label}</span>
               <span className="dashboardWorkspaceCardSub">{action.subtext}</span>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      <section className="dashboardQuickSection dashboardSectionAnimate dashboardSectionDelay6">
-        <header className="dashboardQuickHeader">
-          <div className="dashboardQuickTitleRow">
-            {DashboardIcons.sparkles(18)}
-            <h2 className="dashboardQuickTitle">Quick Actions</h2>
-          </div>
-          <p className="dashboardQuickSub">Common tasks at your fingertips</p>
-        </header>
-        <div className="dashboardQuickGrid">
-          {quickActions.map((action) => (
-            <button key={action.id} type="button" className="dashboardQuickCard dashboardQuickCardAnimate">
-              <span className="dashboardQuickCardArrow">{DashboardIcons.arrowUpRight(16)}</span>
-              <span className="dashboardQuickCardIcon">{renderNavIcon(action.icon, 22)}</span>
-              <span className="dashboardQuickCardLabel">{action.label}</span>
-              <span className="dashboardQuickCardSub">{action.subtext}</span>
             </button>
           ))}
         </div>

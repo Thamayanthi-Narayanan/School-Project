@@ -652,6 +652,41 @@
   display: block;
 }
 
+.crmFormPasswordToggle {
+  position: absolute;
+  top: 50%;
+  right: 0.75rem;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  border-radius: var(--theme-radius-sm);
+  background: transparent;
+  color: var(--theme-text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.crmFormPasswordToggle:hover:not(:disabled) {
+  color: var(--theme-text-primary);
+  background: rgba(148, 163, 184, 0.12);
+}
+
+.crmFormPasswordToggle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.crmFormPasswordToggle svg {
+  width: 1rem;
+  height: 1rem;
+  display: block;
+}
+
 .crmFormSelectWrap {
   position: relative;
   display: flex;

@@ -17,8 +17,6 @@ export const sidebarMock = {
       items: [
         { id: 'students', label: 'Students', path: '/students', icon: 'users', badge: '1.2k' },
         { id: 'admission', label: 'Admission', path: '/admission', icon: 'userPlus', badge: '5' },
-        { id: 'staff', label: 'Staff', path: '/staff', icon: 'briefcase' },
-        { id: 'attendance', label: 'Attendance', path: '/attendance', icon: 'calendarCheck' },
       ],
     },
     {
@@ -27,7 +25,6 @@ export const sidebarMock = {
       items: [
         { id: 'feeStructure', label: 'Fee Structure', path: '/fee-structure', icon: 'receipt' },
         { id: 'payments', label: 'Payments', path: '/payments', icon: 'wallet' },
-        { id: 'invoices', label: 'Invoices', path: '/invoices', icon: 'fileText' },
         { id: 'scholarships', label: 'Scholarships', path: '/scholarships', icon: 'award', badge: '3' },
       ],
     },
@@ -36,7 +33,6 @@ export const sidebarMock = {
       label: 'WORKSPACE',
       items: [
         { id: 'userCreation', label: 'User Creation', path: '/user-creation', icon: 'userPlus' },
-        { id: 'transferCertificate', label: 'Transfer Certificate', path: '/transfer-certificate', icon: 'fileOutput' },
         { id: 'reports', label: 'Reports', path: '/reports', icon: 'barChart' },
         { id: 'notifications', label: 'Notifications', path: '/notifications', icon: 'bell' },
         { id: 'settings', label: 'Settings', path: '/settings', icon: 'settings' },

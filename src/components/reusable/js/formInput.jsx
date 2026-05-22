@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import '../css/crmReusable.css';
 import { DashboardIcons } from '../../common/js/dashboardIcons';
 
@@ -18,14 +19,17 @@ const FormInput = ({
   autoFocus = false,
   className = '',
 }) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const IconComponent = icon ? iconMap[icon] : null;
+  const isPassword = type === 'password';
   const isControlled = value !== undefined;
-  const inputClassName = `crmFormInput${IconComponent ? ' crmFormInputWithIcon' : ''}${
-    error ? ' crmFormInputError' : ''
-  }`;
+  const inputType = isPassword && passwordVisible ? 'text' : type;
+  const inputClassName = `crmFormInput${
+    IconComponent || isPassword ? ' crmFormInputWithIcon' : ''
+  }${error ? ' crmFormInputError' : ''}`;
 
   const sharedInputProps = {
-    type,
+    type: inputType,
     className: inputClassName,
     placeholder,
     autoFocus,
@@ -35,12 +39,28 @@ const FormInput = ({
       : { defaultValue }),
   };
 
-  const inputEl = IconComponent ? (
+  const passwordToggle = isPassword ? (
+    <button
+      type="button"
+      className="crmFormPasswordToggle"
+      onClick={() => setPasswordVisible((visible) => !visible)}
+      aria-label={passwordVisible ? 'Hide password' : 'Show password'}
+      disabled={disabled}
+      tabIndex={0}
+    >
+      {passwordVisible ? DashboardIcons.eyeOff(16) : DashboardIcons.eye(16)}
+    </button>
+  ) : null;
+
+  const inputEl = IconComponent || isPassword ? (
     <span className="crmFormInputWrap">
       <input {...sharedInputProps} />
-      <span className="crmFormInputIcon" aria-hidden="true">
-        <IconComponent size={16} />
-      </span>
+      {IconComponent ? (
+        <span className="crmFormInputIcon" aria-hidden="true">
+          <IconComponent size={16} />
+        </span>
+      ) : null}
+      {passwordToggle}
     </span>
   ) : (
     <input {...sharedInputProps} />

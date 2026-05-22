@@ -17,6 +17,8 @@ export const admissionPageMock = {
     academicYearLabel: 'Academic year',
     academicYearPlaceholder: 'Select academic year',
     confirmLabel: 'Confirm & continue',
+    cancelLabel: 'Cancel',
+    closeLabel: 'Close',
   },
   steps: [
     { id: 'studentDetails', label: 'Student Details' },

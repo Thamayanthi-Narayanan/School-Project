@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import '../css/admissionPage.css';
+import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import { CrmButton, FormScrollSelect } from '../../../components/reusable/js/index';
 import {
   ADMISSION_CLASSES,
@@ -14,7 +16,21 @@ const AdmissionSetupModal = ({
   onClassChange,
   onAcademicYearChange,
   onConfirm,
+  onClose,
 }) => {
+  useEffect(() => {
+    if (!isOpen) return undefined;
+
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') {
+        onClose?.();
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const classPlaceholder = copy.classPlaceholder;
@@ -31,8 +47,18 @@ const AdmissionSetupModal = ({
     label: item.label,
   }));
 
+  const handleOverlayClick = (event) => {
+    if (event.target === event.currentTarget) {
+      onClose?.();
+    }
+  };
+
   return createPortal(
-    <div className="admissionSetupOverlay" role="presentation">
+    <div
+      className="admissionSetupOverlay"
+      role="presentation"
+      onClick={handleOverlayClick}
+    >
       <div
         className="admissionSetupModal"
         role="dialog"
@@ -41,10 +67,20 @@ const AdmissionSetupModal = ({
         onClick={(event) => event.stopPropagation()}
       >
         <header className="admissionSetupHeader">
-          <h2 id="admissionSetupTitle" className="admissionSetupTitle">
-            {copy.title}
-          </h2>
-          <p className="admissionSetupSubtitle">{copy.subtitle}</p>
+          <div className="admissionSetupHeaderText">
+            <h2 id="admissionSetupTitle" className="admissionSetupTitle">
+              {copy.title}
+            </h2>
+            <p className="admissionSetupSubtitle">{copy.subtitle}</p>
+          </div>
+          <button
+            type="button"
+            className="admissionSetupClose"
+            aria-label={copy.closeLabel}
+            onClick={onClose}
+          >
+            {DashboardIcons.xClose(20)}
+          </button>
         </header>
 
         <div className="admissionSetupFields">
@@ -65,6 +101,9 @@ const AdmissionSetupModal = ({
         </div>
 
         <footer className="admissionSetupFooter">
+          <CrmButton variant="outline" type="button" onClick={onClose}>
+            {copy.cancelLabel}
+          </CrmButton>
           <CrmButton
             variant="primary"
             type="button"

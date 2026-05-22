@@ -1,4 +1,5 @@
 import '../../../components/reusable/css/crmReusable.css';
+import '../css/studentsPage.css';
 import { studentsPageMock } from '../../../data/mocks/students/studentsPage.mock';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import StatusPill from '../../../components/common/js/statusPill';
@@ -12,8 +13,8 @@ import {
   TableRowActions,
   EntityFormModal,
   useModal,
-  useListPagination,
 } from '../../../components/reusable/js/index';
+import { useStudentsList } from '../hooks/useStudentsList';
 
 const StudentsPage = () => {
   const {
@@ -21,20 +22,23 @@ const StudentsPage = () => {
     subtitle,
     actions,
     filters,
-    students,
     pagination,
     addStudentModal,
+    list,
   } = studentsPageMock;
 
   const { isOpen, openModal, closeModal } = useModal();
   const {
-    paginatedItems,
+    students,
+    isLoading,
+    error,
     showingText,
     isPreviousDisabled,
     isNextDisabled,
     goToPrevious,
     goToNext,
-  } = useListPagination(students, pagination.pageSize, 'students');
+    refetch,
+  } = useStudentsList(pagination.pageSize);
 
   const filterSelects = [
     {
@@ -78,6 +82,17 @@ const StudentsPage = () => {
         exportAriaLabel="Export students"
       />
 
+      {error && (
+        <div className="studentsListAlert">
+          <p className="studentsListAlertText" role="alert">
+            {error}
+          </p>
+          <CrmButton variant="secondary" type="button" onClick={refetch}>
+            Try again
+          </CrmButton>
+        </div>
+      )}
+
       <DataTableCard
         footer={(
           <footer className="crmTableFooter">
@@ -85,14 +100,14 @@ const StudentsPage = () => {
             <div className="crmPagination">
               <CrmButton
                 variant="pagination"
-                disabled={isPreviousDisabled}
+                disabled={isPreviousDisabled || isLoading}
                 onClick={goToPrevious}
               >
                 {pagination.previousLabel}
               </CrmButton>
               <CrmButton
                 variant="pagination"
-                disabled={isNextDisabled}
+                disabled={isNextDisabled || isLoading}
                 onClick={goToNext}
               >
                 {pagination.nextLabel}
@@ -105,27 +120,40 @@ const StudentsPage = () => {
           <thead>
             <tr>
               <th>ID</th>
-              <th>STUDENT</th>
+              <th>STUDENT NAME</th>
               <th>CLASS</th>
-              <th>PARENT</th>
-              <th>PHONE</th>
+              <th>PARENT NAME</th>
+              <th>PHONE NUMBER</th>
               <th>FEE STATUS</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
           <tbody>
-            {paginatedItems.map((student, index) => (
+            {isLoading && !error && (
+              <tr>
+                <td colSpan={7} className="studentsListState">
+                  {list.loadingMessage}
+                </td>
+              </tr>
+            )}
+            {!isLoading && !error && students.length === 0 && (
+              <tr>
+                <td colSpan={7} className="studentsListState">
+                  {list.emptyMessage}
+                </td>
+              </tr>
+            )}
+            {!isLoading && !error && students.map((student, index) => (
               <tr
                 key={student.id}
                 className="crmTableRow"
                 style={{ animationDelay: `${0.04 * index}s` }}
               >
-                <td className="crmTableId">{student.id}</td>
+                <td className="crmTableId">{student.displayId}</td>
                 <td>
                   <PersonCell
                     initials={student.initials}
                     name={student.name}
-                    subtext={student.roll}
                     tone="blue"
                   />
                 </td>

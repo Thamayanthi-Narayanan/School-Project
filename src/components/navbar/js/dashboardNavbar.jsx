@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { routePaths } from '../../../constants/routePaths';
 import '../css/dashboardNavbar.css';
 import { navbarMock } from '../../../data/mocks/navbar/navbar.mock';
 import { pageTitles } from '../../../constants/pageTitles';
@@ -7,6 +8,7 @@ import { DashboardIcons } from '../../common/js/dashboardIcons';
 import NotificationBellIcon from '../../common/js/notificationBellIcon';
 const DashboardNavbar = ({ onMenuClick, onLogout }) => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const {
     schoolName,
     pageTitle: defaultPageTitle,
@@ -88,7 +90,11 @@ const DashboardNavbar = ({ onMenuClick, onLogout }) => {
           <NotificationBellIcon size="sm" />
           <span className="dashboardNavbarNotifyDot" />
         </button>
-        <button type="button" className="dashboardNavbarQuickAdd">
+        <button
+          type="button"
+          className="dashboardNavbarQuickAdd"
+          onClick={() => navigate(routePaths.admission)}
+        >
           {DashboardIcons.plus(16)}
           {quickAddLabel}
         </button>

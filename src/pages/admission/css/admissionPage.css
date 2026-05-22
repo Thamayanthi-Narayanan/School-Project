@@ -59,7 +59,38 @@
 }
 
 .admissionSetupHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
   margin-bottom: 1.25rem;
+}
+
+.admissionSetupHeaderText {
+  flex: 1;
+  min-width: 0;
+}
+
+.admissionSetupClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-bg-card);
+  color: var(--theme-text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+}
+
+.admissionSetupClose:hover {
+  color: var(--theme-text-primary);
+  border-color: var(--theme-primary-light-border);
+  background: var(--theme-bg-page);
 }
 
 .admissionSetupTitle {
@@ -90,7 +121,9 @@
 
 .admissionSetupFooter {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 0.625rem;
 }
 
 .admissionSetupSummary {
