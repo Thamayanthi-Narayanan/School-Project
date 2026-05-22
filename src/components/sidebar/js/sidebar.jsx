@@ -1,13 +1,10 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../css/sidebar.css';
 import { sidebarMock } from '../../../data/mocks/sidebar/sidebar.mock';
 import { renderNavIcon, DashboardIcons } from '../../common/js/dashboardIcons';
 import NotificationBellIcon from '../../common/js/notificationBellIcon';
-import { performLogout } from '../../../services/authLogout';
-
-const Sidebar = ({ isOpen = false, onNavigate }) => {
+const Sidebar = ({ isOpen = false, onNavigate, onLogout }) => {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const { brand, sections, footer } = sidebarMock;
 
   const isActive = (path) => pathname === path;
@@ -75,9 +72,11 @@ const Sidebar = ({ isOpen = false, onNavigate }) => {
           className="sidebarLink sidebarLogout"
           onClick={async (event) => {
             event.preventDefault();
-            await performLogout();
+            if (onLogout) {
+              await onLogout({ onNavigate: handleNavClick });
+              return;
+            }
             handleNavClick();
-            navigate(footer.logoutPath);
           }}
         >
           <span className="sidebarLinkIcon">{renderNavIcon('logOut')}</span>

@@ -392,6 +392,17 @@
   border-radius: var(--theme-radius-sm);
 }
 
+.loginFormSuccessBanner {
+  margin: 0;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: #15803d;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--theme-radius-sm);
+}
+
 .loginFormLink {
   font-size: 0.875rem;
   font-weight: 500;

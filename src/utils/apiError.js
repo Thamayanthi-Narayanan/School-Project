@@ -14,6 +14,16 @@ const normalizeFieldKey = (key, context = 'login') => {
     return map[key] ?? null;
   }
 
+  if (context === 'changePassword') {
+    const map = {
+      currentPassword: 'currentPassword',
+      newPassword: 'newPassword',
+      confirmNewPassword: 'confirmNewPassword',
+      confirmPassword: 'confirmNewPassword',
+    };
+    return map[key] ?? null;
+  }
+
   if (key === 'email' || key === 'phone') return 'email';
   if (key === 'password') return 'password';
   return key;
@@ -38,10 +48,19 @@ const collectMessages = (errors) => {
 };
 
 const mapMessageToFields = (message, context) => {
-  if (context !== 'createUser') return null;
-
   const msg = String(message);
   const lower = msg.toLowerCase();
+
+  if (context === 'changePassword') {
+    if (lower.includes('current password')) return { currentPassword: msg };
+    if (lower.includes('confirm') || lower.includes('confirmation')) {
+      return { confirmNewPassword: msg };
+    }
+    if (lower.includes('new password')) return { newPassword: msg };
+    return null;
+  }
+
+  if (context !== 'createUser') return null;
 
   if (lower.includes('username')) return { userName: msg };
   if (lower.includes('email')) return { userEmail: msg };
@@ -97,7 +116,14 @@ export const parseApiError = (error, context = 'login') => {
     }
 
     if (data.message) {
-      if (status === 403 || (context === 'createUser' && !Object.keys(fieldErrors).length)) {
+      const isWrongCurrentPassword =
+        context === 'changePassword'
+        && status === 401
+        && data.message.toLowerCase().includes('current password');
+
+      if (isWrongCurrentPassword) {
+        fieldErrors.currentPassword = data.message;
+      } else if (status === 403 || (context === 'createUser' && !Object.keys(fieldErrors).length)) {
         general = data.message;
       } else if (!general && Object.keys(fieldErrors).length === 0) {
         general = data.message;
@@ -110,12 +136,14 @@ export const parseApiError = (error, context = 'login') => {
       general =
         context === 'createUser'
           ? 'Authentication failed. Please sign in again.'
-          : 'Authentication failed. Check your email or phone and password.';
+          : context === 'changePassword'
+            ? 'Authentication failed. Please sign in again.'
+            : 'Authentication failed. Check your email or phone and password.';
     } else if (status === 403) {
       general = 'You do not have permission to perform this action.';
     } else if (status === 404) {
       general =
-        context === 'createUser'
+        context === 'createUser' || context === 'changePassword'
           ? 'User not found.'
           : 'The requested resource was not found.';
     } else if (error?.message === 'Network Error') {

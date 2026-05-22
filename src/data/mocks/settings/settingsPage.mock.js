@@ -31,13 +31,33 @@ export const settingsPageMock = {
     },
     security: {
       cardTitle: 'Change password',
+      description:
+        'Enter your current password, then choose a new one. You will be signed out and must log in again with the new password.',
       fields: [
-        { id: 'currentPassword', label: 'Current password', type: 'password', placeholder: '' },
-        { id: 'newPassword', label: 'New password', type: 'password', placeholder: '' },
-        { id: 'confirmPassword', label: 'Confirm new password', type: 'password', placeholder: '' },
+        {
+          id: 'currentPassword',
+          label: 'Current password',
+          type: 'password',
+          placeholder: 'Enter current password',
+        },
+        {
+          id: 'newPassword',
+          label: 'New password',
+          type: 'password',
+          placeholder: 'At least 8 characters',
+        },
+        {
+          id: 'confirmNewPassword',
+          label: 'Confirm new password',
+          type: 'password',
+          placeholder: 'Re-enter new password',
+        },
       ],
       primaryActionLabel: 'Update password',
+      submittingLabel: 'Updating…',
       actionAlign: 'end',
+      successRedirectMessage:
+        'Password changed successfully. Please sign in with your new password.',
     },
     notifications: {
       cardTitle: 'Notification preferences',
@@ -48,5 +68,15 @@ export const settingsPageMock = {
         { id: 'weeklySummary', label: 'Weekly summary email', enabled: false },
       ],
     },
+  },
+  securityErrors: {
+    currentPasswordRequired: 'Current password is required.',
+    newPasswordRequired: 'New password is required.',
+    confirmNewPasswordRequired: 'Please confirm your new password.',
+    passwordMin: 'Password must be at least 8 characters.',
+    passwordMax: 'Password must be at most 255 characters.',
+    passwordMismatch: 'New password and confirmation do not match.',
+    sameAsCurrent: 'New password must be different from your current password.',
+    changeFailed: 'Could not update password. Please try again.',
   },
 };

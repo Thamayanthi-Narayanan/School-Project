@@ -4,12 +4,60 @@ import '../../../components/reusable/css/crmReusable.css';
 import '../css/settingsPage.css';
 import { settingsPageMock } from '../../../data/mocks/settings/settingsPage.mock';
 import { PageHeader, CrmButton, FormInput } from '../../../components/reusable/js/index';
+import { useChangePasswordForm } from '../hooks/useChangePasswordForm';
 
 const resolveTab = (tabParam, panels, fallback) => {
   if (tabParam && panels[tabParam]) {
     return tabParam;
   }
   return fallback;
+};
+
+const SecurityPanel = ({ panel }) => {
+  const { form, errors, isSubmitting, updateField, resetForm, handleSubmit } =
+    useChangePasswordForm();
+
+  useEffect(() => () => resetForm(), [resetForm]);
+
+  const handleSubmitForm = async (event) => {
+    event.preventDefault();
+    await handleSubmit();
+  };
+
+  return (
+    <form onSubmit={handleSubmitForm} noValidate>
+      {panel.description && (
+        <p className="settingsCardDescription">{panel.description}</p>
+      )}
+
+      {errors.general && (
+        <p className="settingsAlert settingsAlertError" role="alert">
+          {errors.general}
+        </p>
+      )}
+
+      <div className="settingsFormGrid settingsFormGridStacked">
+        {panel.fields.map((field, index) => (
+          <FormInput
+            key={field.id}
+            label={field.label}
+            type={field.type || 'text'}
+            placeholder={field.placeholder}
+            value={form[field.id]}
+            onChange={(e) => updateField(field.id, e.target.value)}
+            error={errors[field.id]}
+            autoFocus={index === 0}
+          />
+        ))}
+      </div>
+
+      <div className="settingsCardActions settingsCardActionsEnd">
+        <CrmButton variant="primary" type="submit" disabled={isSubmitting}>
+          {isSubmitting ? panel.submittingLabel : panel.primaryActionLabel}
+        </CrmButton>
+      </div>
+    </form>
+  );
 };
 
 const SettingsPage = () => {
@@ -29,6 +77,7 @@ const SettingsPage = () => {
     const nextTab = resolveTab(searchParams.get('tab'), panels, defaultTab);
     setActiveTab(nextTab);
   }, [searchParams, panels, defaultTab]);
+
   const [notificationState, setNotificationState] = useState(() => {
     const initial = {};
     panels.notifications.items.forEach((item) => {
@@ -39,7 +88,7 @@ const SettingsPage = () => {
 
   const panel = panels[activeTab];
   const isNotifications = activeTab === 'notifications';
-  const actionAlign = panel.actionAlign === 'center' ? 'settingsCardActionsCenter' : 'settingsCardActionsEnd';
+  const isSecurity = activeTab === 'security';
 
   const toggleNotification = (id) => {
     setNotificationState((prev) => ({
@@ -88,13 +137,11 @@ const SettingsPage = () => {
               );
             })}
           </ul>
+        ) : isSecurity ? (
+          <SecurityPanel panel={panel} />
         ) : (
           <>
-            <div
-              className={`settingsFormGrid${
-                activeTab === 'security' ? ' settingsFormGridStacked' : ''
-              }`}
-            >
+            <div className="settingsFormGrid">
               {panel.fields.map((field) => (
                 <FormInput
                   key={field.id}
@@ -105,7 +152,7 @@ const SettingsPage = () => {
                 />
               ))}
             </div>
-            <div className={`settingsCardActions ${actionAlign}`}>
+            <div className="settingsCardActions settingsCardActionsEnd">
               <CrmButton variant="primary">{panel.primaryActionLabel}</CrmButton>
             </div>
           </>

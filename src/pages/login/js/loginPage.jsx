@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../css/loginPage.css';
 import { useLoginForm } from '../hooks/useLoginForm';
 import { loginPageMock } from '../../../data/mocks/login/loginPage.mock';
@@ -109,6 +110,8 @@ const brandStats = [
 ];
 
 const LoginPage = () => {
+  const location = useLocation();
+  const successMessage = location.state?.message;
   const { form, errors, isLoading, updateField, handleSubmit } = useLoginForm();
 
   useEffect(() => {
@@ -168,6 +171,11 @@ const LoginPage = () => {
               </header>
 
               <form className="loginForm" onSubmit={handleSubmit} noValidate>
+                {successMessage && (
+                  <p className="loginFormSuccessBanner" role="status">
+                    {successMessage}
+                  </p>
+                )}
                 {errors.general && (
                   <p className="loginFormError loginFormErrorBanner" role="alert">
                     {errors.general}

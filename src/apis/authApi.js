@@ -62,3 +62,12 @@ export const deleteUser = async (id) => {
   const { data } = await apiClient.delete(`/auth/users/${id}`);
   return data;
 };
+
+/**
+ * POST /api/v1/auth/change-password
+ * Requires Bearer token. Any authenticated role.
+ */
+export const changePassword = async (payload) => {
+  const { data } = await apiClient.post('/auth/change-password', payload);
+  return data;
+};

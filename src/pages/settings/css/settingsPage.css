@@ -61,6 +61,27 @@
   margin-bottom: 1.25rem;
 }
 
+.settingsCardDescription {
+  margin: -0.5rem 0 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--theme-text-secondary);
+}
+
+.settingsAlert {
+  margin: 0 0 1rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  border-radius: var(--theme-radius-sm);
+}
+
+.settingsAlertError {
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
 .settingsFormGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;

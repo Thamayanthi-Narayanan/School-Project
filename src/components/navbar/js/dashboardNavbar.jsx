@@ -1,15 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../css/dashboardNavbar.css';
 import { navbarMock } from '../../../data/mocks/navbar/navbar.mock';
 import { pageTitles } from '../../../constants/pageTitles';
 import { DashboardIcons } from '../../common/js/dashboardIcons';
 import NotificationBellIcon from '../../common/js/notificationBellIcon';
-import { performLogout } from '../../../services/authLogout';
-
-const DashboardNavbar = ({ onMenuClick }) => {
+const DashboardNavbar = ({ onMenuClick, onLogout }) => {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const {
     schoolName,
     pageTitle: defaultPageTitle,
@@ -152,8 +149,9 @@ const DashboardNavbar = ({ onMenuClick }) => {
                 onClick={async (event) => {
                   event.preventDefault();
                   setProfileOpen(false);
-                  await performLogout();
-                  navigate(profileMenu.signOutPath);
+                  if (onLogout) {
+                    await onLogout();
+                  }
                 }}
               >
                 {profileMenu.signOutLabel}

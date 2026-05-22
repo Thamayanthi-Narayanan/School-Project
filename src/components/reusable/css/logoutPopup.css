@@ -1,0 +1,129 @@
+.logoutPopupOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: var(--theme-overlay-backdrop);
+  animation: logoutPopupOverlayIn 0.2s ease both;
+}
+
+@keyframes logoutPopupOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.logoutPopup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 11.5rem;
+  padding: 1.125rem 1rem 1rem;
+  text-align: center;
+  background: var(--theme-bg-card);
+  border-radius: var(--theme-radius-md);
+  box-shadow: var(--theme-shadow-modal);
+  animation: logoutPopupIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes logoutPopupIn {
+  from {
+    opacity: 0;
+    transform: scale(0.88) translateY(0.35rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.logoutPopupIconWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 0.625rem;
+}
+
+.logoutPopupIconRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #e0e7ff;
+  animation: logoutPopupRingPulse 1s ease-out 0.1s both;
+}
+
+@keyframes logoutPopupRingPulse {
+  from {
+    transform: scale(0.65);
+    opacity: 0.45;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.logoutPopupIcon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.125rem;
+  height: 2.125rem;
+  border-radius: 50%;
+  color: #fff;
+  background: var(--theme-primary, #4f46e5);
+  animation: logoutPopupIconPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+}
+
+@keyframes logoutPopupIconPop {
+  from {
+    transform: scale(0);
+  }
+
+  60% {
+    transform: scale(1.08);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.logoutPopupTitle {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--theme-text-primary);
+}
+
+.logoutPopupMessage {
+  margin: 0.25rem 0 0;
+  font-size: 0.6875rem;
+  line-height: 1.35;
+  color: var(--theme-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoutPopupOverlay,
+  .logoutPopup,
+  .logoutPopupIconRing,
+  .logoutPopupIcon {
+    animation: none;
+  }
+}
