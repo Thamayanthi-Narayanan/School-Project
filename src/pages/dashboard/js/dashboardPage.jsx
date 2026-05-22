@@ -2,6 +2,7 @@ import '../css/dashboardPage.css';
 import { dashboardPageMock } from '../../../data/mocks/dashboard/dashboardPage.mock';
 import { DashboardIcons, renderNavIcon } from '../../../components/common/js/dashboardIcons';
 import StatusPill from '../../../components/common/js/statusPill';
+import { useUserCreationPanel } from '../../../layouts/dashboardLayout/context/userCreationPanelContext';
 
 const Sparkline = ({ tone = 'green' }) => (
   <div className={`dashboardSparkline dashboardSparkline${tone.charAt(0).toUpperCase() + tone.slice(1)}`} aria-hidden="true">
@@ -39,7 +40,16 @@ const DashboardPage = () => {
     recentAdmissions,
     scholarshipApprovals,
     quickActions,
+    workspace,
   } = dashboardPageMock;
+
+  const { openUserCreation } = useUserCreationPanel();
+
+  const handleWorkspaceAction = (action) => {
+    if (action === 'userCreation') {
+      openUserCreation();
+    }
+  };
 
   return (
     <div className="dashboardPage">
@@ -229,7 +239,30 @@ const DashboardPage = () => {
         </article>
       </section>
 
-      <section className="dashboardQuickSection dashboardSectionAnimate dashboardSectionDelay5">
+      <section className="dashboardWorkspaceSection dashboardSectionAnimate dashboardSectionDelay5">
+        <header className="dashboardWorkspaceHeader">
+          <p className="dashboardWorkspaceEyebrow">{workspace.sectionLabel}</p>
+          <h2 className="dashboardWorkspaceTitle">{workspace.title}</h2>
+          <p className="dashboardWorkspaceSub">{workspace.subtitle}</p>
+        </header>
+        <div className="dashboardWorkspaceGrid">
+          {workspace.actions.map((action) => (
+            <button
+              key={action.id}
+              type="button"
+              className="dashboardWorkspaceCard dashboardQuickCardAnimate"
+              onClick={() => handleWorkspaceAction(action.action)}
+            >
+              <span className="dashboardWorkspaceCardArrow">{DashboardIcons.arrowUpRight(16)}</span>
+              <span className="dashboardWorkspaceCardIcon">{renderNavIcon(action.icon, 22)}</span>
+              <span className="dashboardWorkspaceCardLabel">{action.label}</span>
+              <span className="dashboardWorkspaceCardSub">{action.subtext}</span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      <section className="dashboardQuickSection dashboardSectionAnimate dashboardSectionDelay6">
         <header className="dashboardQuickHeader">
           <div className="dashboardQuickTitleRow">
             {DashboardIcons.sparkles(18)}

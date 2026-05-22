@@ -14,3 +14,4 @@ export { notificationsPageMock } from './notifications/notificationsPage.mock';
 export { transferCertificatePageMock } from './transferCertificate/transferCertificatePage.mock';
 export { feeStructurePageMock } from './feeStructure/feeStructurePage.mock';
 export { reportsPageMock } from './reports/reportsPage.mock';
+export { userCreationPanelMock } from './userCreation/userCreationPanel.mock';

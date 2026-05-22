@@ -60,6 +60,7 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
   - `transferCertificate/transferCertificatePage.mock.js` — issue TC form, TC preview document
   - `feeStructure/feeStructurePage.mock.js` — class config, fee categories table, payable summary
   - `reports/reportsPage.mock.js` — report filters, export cards grid
+  - `userCreation/userCreationPanel.mock.js` — user management panel sections, users list, form copy
 - Export shared entries from `src/data/mocks/index.js`
 - Add a new mock file when creating each new screen or layout section
 
@@ -106,6 +107,24 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
 ## UI
 
 SaaS CRM dashboard: sidebar, navbar, cards, tables, forms. Professional, minimal, soft shadows, rounded corners, responsive media queries. Consistent spacing across modules (Dashboard, Students, Teachers, Attendance, Fees, Timetable, Exams, Results, Notifications, Parent Portal, Settings).
+
+## Responsive layout (mandatory — preserve when changing UI)
+
+**Do not break existing responsive behavior.** Any new or updated screen, panel, modal, or layout must work on **mobile**, **tablet**, and **desktop** using the project breakpoints below.
+
+| Breakpoint | Range | Behavior |
+|------------|-------|----------|
+| **Mobile** | `max-width: 768px` (below 769px) | Hamburger + drawer sidebar (`useSidebarDrawer`, `dashboardLayout`). Page tweaks in `src/styles/dashboardMobile.css`. Single-column forms, stacked buttons, horizontal scroll for tables/filters where needed. |
+| **Tablet** | `769px` – `1024px` | Sidebar visible; reduced padding; 2-column forms where appropriate; panels may be narrower (`min(36rem, 100vw)`). |
+| **Desktop** | `min-width: 1025px` | Full sidebar + navbar search; multi-column grids and side-by-side cards as designed. |
+
+**Rules when editing CSS or layout:**
+
+1. Add page-specific responsive rules in the page CSS file **and** shared mobile rules in `dashboardMobile.css` when the change applies to many dashboard pages.
+2. Use `min-width: 0`, `max-width: 100%`, and `box-sizing: border-box` on flex/grid children to prevent horizontal clipping.
+3. Slide-over panels (e.g. user creation): desktop = right drawer; mobile = bottom sheet (`max-width: 768px`); nav tabs scroll horizontally on mobile, vertical on tablet/desktop.
+4. Test mentally at ~375px (phone), ~768px (boundary), and ~1280px (desktop) before claiming done.
+5. Do **not** remove or override `dashboardMobile.css` rules unless replacing them with equivalent behavior.
 
 ## Screenshot fidelity (mandatory)
 

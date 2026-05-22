@@ -3,15 +3,24 @@ import '../css/sidebar.css';
 import { sidebarMock } from '../../../data/mocks/sidebar/sidebar.mock';
 import { renderNavIcon, DashboardIcons } from '../../common/js/dashboardIcons';
 import NotificationBellIcon from '../../common/js/notificationBellIcon';
+import { useUserCreationPanel } from '../../../layouts/dashboardLayout/context/userCreationPanelContext';
 
 const Sidebar = ({ isOpen = false, onNavigate }) => {
   const { pathname } = useLocation();
   const { brand, sections, footer } = sidebarMock;
+  const { openUserCreation } = useUserCreationPanel();
 
   const isActive = (path) => pathname === path;
 
   const handleNavClick = () => {
     if (onNavigate) onNavigate();
+  };
+
+  const handleItemClick = (item) => {
+    if (item.action === 'userCreation') {
+      openUserCreation();
+    }
+    handleNavClick();
   };
 
   return (
@@ -30,13 +39,13 @@ const Sidebar = ({ isOpen = false, onNavigate }) => {
             <div key={section.id} className="sidebarSection">
               <p className="sidebarSectionLabel">{section.label}</p>
               <ul className="sidebarMenu">
-                {section.items.map((item) => (
-                  <li key={item.id}>
-                    <Link
-                      to={item.path}
-                      className={`sidebarLink${isActive(item.path) ? ' sidebarLinkActive' : ''}`}
-                      onClick={handleNavClick}
-                    >
+                {section.items.map((item) => {
+                  const linkClassName = `sidebarLink${
+                    item.path && isActive(item.path) ? ' sidebarLinkActive' : ''
+                  }`;
+
+                  const linkContent = (
+                    <>
                       <span className="sidebarLinkIcon">
                         {item.id === 'notifications' ? (
                           <NotificationBellIcon size="sm" variant="plain" />
@@ -46,9 +55,31 @@ const Sidebar = ({ isOpen = false, onNavigate }) => {
                       </span>
                       <span className="sidebarLinkLabel">{item.label}</span>
                       {item.badge && <span className="sidebarBadge">{item.badge}</span>}
-                    </Link>
-                  </li>
-                ))}
+                    </>
+                  );
+
+                  return (
+                    <li key={item.id}>
+                      {item.action ? (
+                        <button
+                          type="button"
+                          className={linkClassName}
+                          onClick={() => handleItemClick(item)}
+                        >
+                          {linkContent}
+                        </button>
+                      ) : (
+                        <Link
+                          to={item.path}
+                          className={linkClassName}
+                          onClick={handleNavClick}
+                        >
+                          {linkContent}
+                        </Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

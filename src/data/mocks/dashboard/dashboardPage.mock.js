@@ -167,4 +167,18 @@ export const dashboardPageMock = {
     { id: 'createInvoice', label: 'Create Invoice', subtext: 'Generate billing doc', icon: 'fileText' },
     { id: 'issueTc', label: 'Issue TC', subtext: 'Transfer certificate', icon: 'award' },
   ],
+  workspace: {
+    sectionLabel: 'WORKSPACE',
+    title: 'Workspace tools',
+    subtitle: 'Administrative actions for your school team',
+    actions: [
+      {
+        id: 'userCreation',
+        label: 'User Creation',
+        subtext: 'Add admin, clerk or principal',
+        icon: 'userPlus',
+        action: 'userCreation',
+      },
+    ],
+  },
 };

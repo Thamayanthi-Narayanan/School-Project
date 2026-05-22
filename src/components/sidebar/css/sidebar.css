@@ -92,13 +92,21 @@
   display: flex;
   align-items: center;
   gap: 0.625rem;
+  width: 100%;
   padding: 0.625rem 0.75rem;
+  border: none;
   border-radius: var(--theme-radius-sm);
+  background: transparent;
   color: var(--theme-text-label);
   font-size: 0.875rem;
   font-weight: 500;
+  font-family: inherit;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
   position: relative;
+  box-sizing: border-box;
 }
 
 .sidebarLink:hover {

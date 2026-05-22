@@ -1,5 +1,7 @@
 export const loginPageMock = {
   brandName: 'SRI AYYAN VIDYASHRAM HR.SEC.SCHOOL',
+  emailOrPhoneLabel: 'Email / phone number',
+  emailOrPhonePlaceholder: 'you@school.edu or +91 98765 43210',
   footerText: '© Infinite vision — built for school administrators',
   headline: 'Run your school. Simply.',
   subtitle:

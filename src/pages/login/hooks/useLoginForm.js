@@ -8,6 +8,24 @@ const initialForm = {
   rememberMe: true,
 };
 
+const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+const isValidPhone = (value) => {
+  const digits = value.replace(/\D/g, '');
+
+  if (digits.length === 10) {
+    return /^[6-9]\d{9}$/.test(digits);
+  }
+
+  if (digits.length === 12 && digits.startsWith('91')) {
+    return /^91[6-9]\d{9}$/.test(digits);
+  }
+
+  return false;
+};
+
+const isValidEmailOrPhone = (value) => isValidEmail(value) || isValidPhone(value);
+
 export const useLoginForm = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
@@ -29,9 +47,9 @@ export const useLoginForm = () => {
     const trimmedEmail = form.email.trim();
 
     if (!trimmedEmail) {
-      nextErrors.email = 'Email address is required.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
-      nextErrors.email = 'Enter a valid email address.';
+      nextErrors.email = 'Email or phone number is required.';
+    } else if (!isValidEmailOrPhone(trimmedEmail)) {
+      nextErrors.email = 'Enter a valid email address or phone number.';
     }
 
     if (!form.password) {

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import '../css/loginPage.css';
 import { useLoginForm } from '../hooks/useLoginForm';
+import { loginPageMock } from '../../../data/mocks/login/loginPage.mock';
 import { appConfig } from '../../../constants/appConfig';
 import loginHeroImage from '../../../assets/images/loginHero.png';
 
@@ -168,7 +169,7 @@ const LoginPage = () => {
               <form className="loginForm" onSubmit={handleSubmit} noValidate>
                 <div className="loginFormField">
                   <label className="loginFormLabel" htmlFor="login-email">
-                    Email address
+                    {loginPageMock.emailOrPhoneLabel}
                   </label>
                   <div className="loginFormInputWrap">
                     <span className="loginFormInputIcon">
@@ -177,10 +178,11 @@ const LoginPage = () => {
                     <input
                       id="login-email"
                       className={`loginFormInput${errors.email ? ' loginFormInputError' : ''}`}
-                      type="email"
+                      type="text"
                       name="email"
-                      autoComplete="email"
-                      placeholder="you@school.edu"
+                      autoComplete="username"
+                      inputMode="text"
+                      placeholder={loginPageMock.emailOrPhonePlaceholder}
                       value={form.email}
                       onChange={(e) => updateField('email', e.target.value)}
                       disabled={isLoading}
