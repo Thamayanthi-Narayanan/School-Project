@@ -6,6 +6,7 @@ import { CrmButton, FormTipsPanel } from '../../../components/reusable/js/index'
 import AdmissionStepper from './admissionStepper';
 import AdmissionStepContent from './admissionStepContent';
 import AdmissionSetupModal from './admissionSetupModal';
+import AdmissionSuccessPopup from './admissionSuccessPopup';
 import useAdmissionWizard from '../hooks/useAdmissionWizard';
 import useAdmissionForm from '../hooks/useAdmissionForm';
 
@@ -25,15 +26,20 @@ const AdmissionPage = () => {
     setupConfirmed,
     setupClassId,
     setupAcademicYearId,
+    profilePhotoError,
+    errors,
+    isSubmitting,
+    successResult,
+    successCopy,
     setSetupClassId,
     setSetupAcademicYearId,
     updateStudentField,
     updateParentsField,
-    profilePhotoError,
     setProfilePhoto,
     confirmSetup,
     resetSetup,
-    getPayload,
+    submitAdmission,
+    dismissSuccess,
   } = useAdmissionForm();
 
   const {
@@ -48,9 +54,8 @@ const AdmissionPage = () => {
   const activeStep = steps[currentStep];
   const activeForm = stepForms[activeStep.id];
 
-  const handleSubmit = () => {
-    getPayload();
-    // API integration: POST admission payload when endpoint is ready
+  const handleSubmit = async () => {
+    await submitAdmission();
   };
 
   if (!setupConfirmed) {
@@ -78,6 +83,12 @@ const AdmissionPage = () => {
 
   return (
     <div className="crmListPage admissionPage">
+      <AdmissionSuccessPopup
+        result={successResult}
+        copy={successCopy}
+        onDismiss={dismissSuccess}
+      />
+
       <header className="admissionPageHeader crmSectionAnimate">
         <div>
           <h1 className="crmPageTitle">{title}</h1>
@@ -87,12 +98,17 @@ const AdmissionPage = () => {
           <CrmButton variant="outline" type="button" onClick={resetSetup}>
             {actions.changeClassLabel}
           </CrmButton>
-          <CrmButton variant="outline">
+          <CrmButton variant="outline" type="button" disabled={isSubmitting}>
             {DashboardIcons.save(16)}
             {actions.saveDraftLabel}
           </CrmButton>
-          <CrmButton variant="primary" onClick={isLastStep ? handleSubmit : undefined}>
-            {actions.submitLabel}
+          <CrmButton
+            variant="primary"
+            type="button"
+            disabled={isSubmitting}
+            onClick={isLastStep ? handleSubmit : undefined}
+          >
+            {isSubmitting ? actions.submittingLabel : actions.submitLabel}
           </CrmButton>
         </div>
       </header>
@@ -107,10 +123,18 @@ const AdmissionPage = () => {
         <div className="admissionFormCard">
           <div className="admissionFormBody">
             <h2 className="admissionFormTitle">{activeForm.sectionTitle}</h2>
+
+            {errors.general && (
+              <p className="admissionAlert admissionAlertError" role="alert">
+                {errors.general}
+              </p>
+            )}
+
             <AdmissionStepContent
               stepId={activeStep.id}
               stepForm={activeForm}
               form={form}
+              errors={errors}
               onStudentChange={updateStudentField}
               onParentsChange={updateParentsField}
               photoError={profilePhotoError}
@@ -123,18 +147,28 @@ const AdmissionPage = () => {
             <CrmButton
               variant="outline"
               onClick={goToPrevious}
-              disabled={isFirstStep}
+              disabled={isFirstStep || isSubmitting}
               className="admissionBtnBack"
             >
               {DashboardIcons.chevronLeft(16)}
               {actions.backLabel}
             </CrmButton>
             {isLastStep ? (
-              <CrmButton variant="primary" className="admissionBtnContinue" onClick={handleSubmit}>
-                {actions.submitLabel}
+              <CrmButton
+                variant="primary"
+                className="admissionBtnContinue"
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? actions.submittingLabel : actions.submitLabel}
               </CrmButton>
             ) : (
-              <CrmButton variant="primary" onClick={goToNext} className="admissionBtnContinue">
+              <CrmButton
+                variant="primary"
+                onClick={goToNext}
+                className="admissionBtnContinue"
+                disabled={isSubmitting}
+              >
                 {actions.continueLabel}
                 {DashboardIcons.chevronRight(16)}
               </CrmButton>

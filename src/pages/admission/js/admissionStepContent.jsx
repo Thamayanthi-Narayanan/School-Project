@@ -7,6 +7,7 @@ const AdmissionStepContent = ({
   stepId,
   stepForm,
   form,
+  errors = {},
   onStudentChange,
   onParentsChange,
   photoError,
@@ -18,6 +19,7 @@ const AdmissionStepContent = ({
       <AdmissionStudentStep
         student={form.student}
         fields={stepForm.fields}
+        errors={errors}
         onChange={onStudentChange}
       />
     );
@@ -28,6 +30,7 @@ const AdmissionStepContent = ({
       <AdmissionParentsStep
         parents={form.parents}
         fields={stepForm.fields}
+        errors={errors}
         onChange={onParentsChange}
       />
     );

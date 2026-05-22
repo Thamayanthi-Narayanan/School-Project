@@ -1,3 +1,8 @@
+import { isValidEmail } from './loginIdentifier';
+
+/** Until class_master IDs are wired, API always receives classId 1. */
+export const TEMP_API_CLASS_ID = 1;
+
 export const PROFILE_PHOTO_MAX_BYTES = 1024 * 1024;
 export const PROFILE_PHOTO_ACCEPT = 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp';
 
@@ -66,18 +71,18 @@ export const ADMISSION_ACADEMIC_YEARS = buildAdmissionAcademicYears();
 
 export const GENDER_OPTIONS = ['MALE', 'FEMALE', 'OTHER'];
 export const BLOOD_GROUP_OPTIONS = [
-  'O_POSITIVE',
-  'O_NEGATIVE',
   'A_POSITIVE',
   'A_NEGATIVE',
   'B_POSITIVE',
   'B_NEGATIVE',
+  'O_POSITIVE',
+  'O_NEGATIVE',
   'AB_POSITIVE',
   'AB_NEGATIVE',
 ];
-export const RELIGION_OPTIONS = ['HINDU', 'MUSLIM', 'CHRISTIAN', 'SIKH', 'BUDDHIST', 'JAIN', 'OTHER'];
-export const COMMUNITY_OPTIONS = ['OC', 'BC', 'MBC', 'SC', 'ST', 'OTHER'];
-export const STATUS_OPTIONS = ['ACTIVE', 'INACTIVE'];
+export const RELIGION_OPTIONS = ['HINDU', 'MUSLIM', 'CHRISTIAN', 'OTHERS'];
+export const COMMUNITY_OPTIONS = ['OC', 'BC', 'BC_MUSLIM', 'MBC', 'DNC', 'SC', 'ST'];
+export const STATUS_OPTIONS = ['ACTIVE', 'INACTIVE', 'DISCONTINUED', 'GRADUATED'];
 export const PRIMARY_CONTACT_OPTIONS = ['FATHER', 'MOTHER', 'GUARDIAN'];
 
 export const validateProfilePhoto = (file) => {
@@ -160,45 +165,152 @@ const toNullableString = (value) => {
   return trimmed === '' ? null : trimmed;
 };
 
-export const buildAdmissionPayload = (form) => ({
-  student: {
-    admissionNo: form.student.admissionNo.trim(),
-    aadharNumber: form.student.aadharNumber.trim(),
-    emisNumber: form.student.emisNumber.trim(),
-    rationCardNumber: form.student.rationCardNumber.trim(),
-    firstName: form.student.firstName.trim(),
-    lastName: form.student.lastName.trim(),
-    dateOfBirth: form.student.dateOfBirth,
-    gender: form.student.gender,
-    nationality: form.student.nationality.trim(),
-    address: form.student.address.trim(),
-    classId: Number(form.student.classId),
-    academicYearId: Number(form.student.academicYearId),
-    bloodGroup: form.student.bloodGroup,
-    religion: form.student.religion,
-    community: form.student.community,
-    annualIncome: toNumberOrNull(form.student.annualIncome),
-    status: form.student.status,
-  },
-  parents: {
-    fatherName: form.parents.fatherName.trim(),
-    fatherPhone: form.parents.fatherPhone.trim(),
-    fatherEmail: form.parents.fatherEmail.trim(),
-    fatherOccupation: form.parents.fatherOccupation.trim(),
-    fatherAnnualIncome: toNumberOrNull(form.parents.fatherAnnualIncome),
-    motherName: form.parents.motherName.trim(),
-    motherPhone: form.parents.motherPhone.trim(),
-    motherEmail: form.parents.motherEmail.trim(),
-    motherOccupation: form.parents.motherOccupation.trim(),
-    motherAnnualIncome: toNumberOrNull(form.parents.motherAnnualIncome),
-    guardianName: toNullableString(form.parents.guardianName),
-    guardianPhone: toNullableString(form.parents.guardianPhone),
-    guardianEmail: toNullableString(form.parents.guardianEmail),
-    guardianOccupation: toNullableString(form.parents.guardianOccupation),
-    guardianRelationship: toNullableString(form.parents.guardianRelationship),
-    primaryContact: form.parents.primaryContact,
-  },
-  documents: {
-    profilePhotoUrl: form.documents.profilePhotoUrl.trim(),
-  },
-});
+const trimOrOmit = (value) => {
+  const trimmed = String(value ?? '').trim();
+  return trimmed === '' ? undefined : trimmed;
+};
+
+export const validateAdmissionForm = (form, errorCopy) => {
+  const errors = {};
+  const { student, parents } = form;
+
+  if (!student.admissionNo.trim()) {
+    errors.admissionNo = errorCopy.admissionNoRequired;
+  } else if (student.admissionNo.trim().length > 20) {
+    errors.admissionNo = errorCopy.admissionNoMax;
+  }
+
+  if (!student.firstName.trim()) {
+    errors.firstName = errorCopy.firstNameRequired;
+  } else if (student.firstName.trim().length > 50) {
+    errors.firstName = errorCopy.firstNameMax;
+  }
+
+  if (student.lastName.trim().length > 50) {
+    errors.lastName = errorCopy.lastNameMax;
+  }
+
+  const aadhar = student.aadharNumber.trim();
+  if (aadhar && !/^\d{12}$/.test(aadhar)) {
+    errors.aadharNumber = errorCopy.aadharInvalid;
+  }
+
+  if (!student.academicYearId) {
+    errors.academicYearId = errorCopy.academicYearRequired;
+  }
+
+  if (parents.fatherEmail.trim() && !isValidEmail(parents.fatherEmail.trim())) {
+    errors.fatherEmail = errorCopy.emailInvalid;
+  }
+
+  if (parents.motherEmail.trim() && !isValidEmail(parents.motherEmail.trim())) {
+    errors.motherEmail = errorCopy.emailInvalid;
+  }
+
+  if (parents.guardianEmail.trim() && !isValidEmail(parents.guardianEmail.trim())) {
+    errors.guardianEmail = errorCopy.emailInvalid;
+  }
+
+  if (parents.primaryContact === 'GUARDIAN' && !parents.guardianName.trim()) {
+    errors.guardianName = errorCopy.guardianNameRequired;
+  }
+
+  const hasParentContact =
+    parents.fatherName.trim()
+    || parents.motherName.trim()
+    || parents.guardianName.trim()
+    || parents.fatherPhone.trim()
+    || parents.motherPhone.trim();
+
+  if (!hasParentContact) {
+    errors.general = errorCopy.parentContactRequired;
+  }
+
+  return errors;
+};
+
+export const buildAdmissionPayload = (form) => {
+  const { student, parents, documents } = form;
+
+  const studentPayload = {
+    admissionNo: student.admissionNo.trim(),
+    firstName: student.firstName.trim(),
+    classId: TEMP_API_CLASS_ID,
+    academicYearId: Number(student.academicYearId),
+  };
+
+  const lastName = trimOrOmit(student.lastName);
+  if (lastName) studentPayload.lastName = lastName;
+
+  const aadharNumber = trimOrOmit(student.aadharNumber);
+  if (aadharNumber) studentPayload.aadharNumber = aadharNumber;
+
+  const emisNumber = trimOrOmit(student.emisNumber);
+  if (emisNumber) studentPayload.emisNumber = emisNumber;
+
+  const rationCardNumber = trimOrOmit(student.rationCardNumber);
+  if (rationCardNumber) studentPayload.rationCardNumber = rationCardNumber;
+
+  if (student.dateOfBirth) studentPayload.dateOfBirth = student.dateOfBirth;
+  if (student.gender) studentPayload.gender = student.gender;
+
+  const nationality = trimOrOmit(student.nationality);
+  if (nationality) studentPayload.nationality = nationality;
+
+  const address = trimOrOmit(student.address);
+  if (address) studentPayload.address = address;
+
+  if (student.bloodGroup) studentPayload.bloodGroup = student.bloodGroup;
+  if (student.religion) studentPayload.religion = student.religion;
+  if (student.community) studentPayload.community = student.community;
+
+  const annualIncome = toNumberOrNull(student.annualIncome);
+  if (annualIncome != null) studentPayload.annualIncome = annualIncome;
+
+  if (student.status) studentPayload.status = student.status;
+
+  const parentsPayload = {
+    primaryContact: parents.primaryContact,
+    fatherName: trimOrOmit(parents.fatherName),
+    fatherPhone: trimOrOmit(parents.fatherPhone),
+    fatherEmail: trimOrOmit(parents.fatherEmail),
+    fatherOccupation: trimOrOmit(parents.fatherOccupation),
+    motherName: trimOrOmit(parents.motherName),
+    motherPhone: trimOrOmit(parents.motherPhone),
+    motherEmail: trimOrOmit(parents.motherEmail),
+    motherOccupation: trimOrOmit(parents.motherOccupation),
+    guardianName: toNullableString(parents.guardianName),
+    guardianPhone: toNullableString(parents.guardianPhone),
+    guardianEmail: toNullableString(parents.guardianEmail),
+    guardianOccupation: toNullableString(parents.guardianOccupation),
+    guardianRelationship: toNullableString(parents.guardianRelationship),
+  };
+
+  const fatherAnnualIncome = toNumberOrNull(parents.fatherAnnualIncome);
+  if (fatherAnnualIncome != null) parentsPayload.fatherAnnualIncome = fatherAnnualIncome;
+
+  const motherAnnualIncome = toNumberOrNull(parents.motherAnnualIncome);
+  if (motherAnnualIncome != null) parentsPayload.motherAnnualIncome = motherAnnualIncome;
+
+  const payload = {
+    student: studentPayload,
+    parents: parentsPayload,
+  };
+
+  const photoUrl = documents.profilePhotoUrl.trim();
+  const documentsPayload = {};
+
+  if (photoUrl && !photoUrl.startsWith('blob:')) {
+    documentsPayload.profilePhotoUrl = photoUrl;
+  }
+
+  if (aadharNumber && /^\d{12}$/.test(aadharNumber)) {
+    documentsPayload.aadharNo = aadharNumber;
+  }
+
+  if (Object.keys(documentsPayload).length > 0) {
+    payload.documents = documentsPayload;
+  }
+
+  return payload;
+};

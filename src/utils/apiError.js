@@ -24,6 +24,48 @@ const normalizeFieldKey = (key, context = 'login') => {
     return map[key] ?? null;
   }
 
+  if (context === 'admission') {
+    const map = {
+      admissionNo: 'admissionNo',
+      aadharNumber: 'aadharNumber',
+      emisNumber: 'emisNumber',
+      rationCardNumber: 'rationCardNumber',
+      firstName: 'firstName',
+      lastName: 'lastName',
+      dateOfBirth: 'dateOfBirth',
+      gender: 'gender',
+      nationality: 'nationality',
+      address: 'address',
+      classId: 'classId',
+      academicYearId: 'academicYearId',
+      bloodGroup: 'bloodGroup',
+      religion: 'religion',
+      community: 'community',
+      annualIncome: 'annualIncome',
+      status: 'status',
+      fatherName: 'fatherName',
+      fatherPhone: 'fatherPhone',
+      fatherEmail: 'fatherEmail',
+      fatherOccupation: 'fatherOccupation',
+      fatherAnnualIncome: 'fatherAnnualIncome',
+      motherName: 'motherName',
+      motherPhone: 'motherPhone',
+      motherEmail: 'motherEmail',
+      motherOccupation: 'motherOccupation',
+      motherAnnualIncome: 'motherAnnualIncome',
+      guardianName: 'guardianName',
+      guardianPhone: 'guardianPhone',
+      guardianEmail: 'guardianEmail',
+      guardianOccupation: 'guardianOccupation',
+      guardianRelationship: 'guardianRelationship',
+      primaryContact: 'primaryContact',
+      profilePhotoUrl: 'profilePhotoUrl',
+      aadharNo: 'aadharNumber',
+    };
+    const normalizedKey = key.includes('.') ? key.split('.').pop() : key;
+    return map[normalizedKey] ?? null;
+  }
+
   if (key === 'email' || key === 'phone') return 'email';
   if (key === 'password') return 'password';
   return key;
@@ -57,6 +99,21 @@ const mapMessageToFields = (message, context) => {
       return { confirmNewPassword: msg };
     }
     if (lower.includes('new password')) return { newPassword: msg };
+    return null;
+  }
+
+  if (context === 'admission') {
+    if (lower.includes('admission')) return { admissionNo: msg };
+    if (lower.includes('aadhaar') || lower.includes('aadhar')) return { aadharNumber: msg };
+    if (lower.includes('class')) return { classId: msg };
+    if (lower.includes('academic year') || lower.includes('academicyear')) {
+      return { academicYearId: msg };
+    }
+    if (lower.includes('father') && lower.includes('email')) return { fatherEmail: msg };
+    if (lower.includes('mother') && lower.includes('email')) return { motherEmail: msg };
+    if (lower.includes('guardian')) return { guardianName: msg };
+    if (lower.includes('email')) return { fatherEmail: msg };
+    if (lower.includes('first name') || lower.includes('firstname')) return { firstName: msg };
     return null;
   }
 
@@ -123,7 +180,10 @@ export const parseApiError = (error, context = 'login') => {
 
       if (isWrongCurrentPassword) {
         fieldErrors.currentPassword = data.message;
-      } else if (status === 403 || (context === 'createUser' && !Object.keys(fieldErrors).length)) {
+      } else if (
+        status === 403
+        || ((context === 'createUser' || context === 'admission') && !Object.keys(fieldErrors).length)
+      ) {
         general = data.message;
       } else if (!general && Object.keys(fieldErrors).length === 0) {
         general = data.message;
@@ -134,7 +194,7 @@ export const parseApiError = (error, context = 'login') => {
   if (!general && Object.keys(fieldErrors).length === 0) {
     if (status === 401) {
       general =
-        context === 'createUser'
+        context === 'createUser' || context === 'admission'
           ? 'Authentication failed. Please sign in again.'
           : context === 'changePassword'
             ? 'Authentication failed. Please sign in again.'

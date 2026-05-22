@@ -1,7 +1,7 @@
 import { FormInput, FormSelect } from '../../../components/reusable/js/index';
 import { PRIMARY_CONTACT_OPTIONS } from '../../../utils/admissionForm';
 
-const AdmissionParentsStep = ({ parents, fields, onChange }) => (
+const AdmissionParentsStep = ({ parents, fields, errors = {}, onChange }) => (
   <div className="admissionFormSections">
     <section className="admissionFormSection">
       <h3 className="admissionFormSectionTitle">{fields.fatherTitle}</h3>
@@ -11,6 +11,7 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.fatherName.placeholder}
           value={parents.fatherName}
           onChange={(e) => onChange('fatherName', e.target.value)}
+          error={errors.fatherName}
         />
         <FormInput
           label={fields.fatherPhone.label}
@@ -18,6 +19,7 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.fatherPhone.placeholder}
           value={parents.fatherPhone}
           onChange={(e) => onChange('fatherPhone', e.target.value)}
+          error={errors.fatherPhone}
         />
         <FormInput
           label={fields.fatherEmail.label}
@@ -25,12 +27,14 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.fatherEmail.placeholder}
           value={parents.fatherEmail}
           onChange={(e) => onChange('fatherEmail', e.target.value)}
+          error={errors.fatherEmail}
         />
         <FormInput
           label={fields.fatherOccupation.label}
           placeholder={fields.fatherOccupation.placeholder}
           value={parents.fatherOccupation}
           onChange={(e) => onChange('fatherOccupation', e.target.value)}
+          error={errors.fatherOccupation}
         />
         <FormInput
           label={fields.fatherAnnualIncome.label}
@@ -38,6 +42,7 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.fatherAnnualIncome.placeholder}
           value={parents.fatherAnnualIncome}
           onChange={(e) => onChange('fatherAnnualIncome', e.target.value)}
+          error={errors.fatherAnnualIncome}
           className="crmFormFieldFull"
         />
       </div>
@@ -51,6 +56,7 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.motherName.placeholder}
           value={parents.motherName}
           onChange={(e) => onChange('motherName', e.target.value)}
+          error={errors.motherName}
         />
         <FormInput
           label={fields.motherPhone.label}
@@ -58,6 +64,7 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.motherPhone.placeholder}
           value={parents.motherPhone}
           onChange={(e) => onChange('motherPhone', e.target.value)}
+          error={errors.motherPhone}
         />
         <FormInput
           label={fields.motherEmail.label}
@@ -65,12 +72,14 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.motherEmail.placeholder}
           value={parents.motherEmail}
           onChange={(e) => onChange('motherEmail', e.target.value)}
+          error={errors.motherEmail}
         />
         <FormInput
           label={fields.motherOccupation.label}
           placeholder={fields.motherOccupation.placeholder}
           value={parents.motherOccupation}
           onChange={(e) => onChange('motherOccupation', e.target.value)}
+          error={errors.motherOccupation}
         />
         <FormInput
           label={fields.motherAnnualIncome.label}
@@ -78,6 +87,7 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.motherAnnualIncome.placeholder}
           value={parents.motherAnnualIncome}
           onChange={(e) => onChange('motherAnnualIncome', e.target.value)}
+          error={errors.motherAnnualIncome}
           className="crmFormFieldFull"
         />
       </div>
@@ -92,6 +102,7 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.guardianName.placeholder}
           value={parents.guardianName}
           onChange={(e) => onChange('guardianName', e.target.value)}
+          error={errors.guardianName}
         />
         <FormInput
           label={fields.guardianPhone.label}
@@ -99,6 +110,7 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.guardianPhone.placeholder}
           value={parents.guardianPhone}
           onChange={(e) => onChange('guardianPhone', e.target.value)}
+          error={errors.guardianPhone}
         />
         <FormInput
           label={fields.guardianEmail.label}
@@ -106,18 +118,21 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           placeholder={fields.guardianEmail.placeholder}
           value={parents.guardianEmail}
           onChange={(e) => onChange('guardianEmail', e.target.value)}
+          error={errors.guardianEmail}
         />
         <FormInput
           label={fields.guardianOccupation.label}
           placeholder={fields.guardianOccupation.placeholder}
           value={parents.guardianOccupation}
           onChange={(e) => onChange('guardianOccupation', e.target.value)}
+          error={errors.guardianOccupation}
         />
         <FormInput
           label={fields.guardianRelationship.label}
           placeholder={fields.guardianRelationship.placeholder}
           value={parents.guardianRelationship}
           onChange={(e) => onChange('guardianRelationship', e.target.value)}
+          error={errors.guardianRelationship}
           className="crmFormFieldFull"
         />
       </div>
@@ -131,6 +146,7 @@ const AdmissionParentsStep = ({ parents, fields, onChange }) => (
           options={PRIMARY_CONTACT_OPTIONS}
           value={parents.primaryContact}
           onChange={(e) => onChange('primaryContact', e.target.value)}
+          error={errors.primaryContact}
           className="crmFormFieldFull"
         />
       </div>

@@ -4,6 +4,7 @@ export const admissionPageMock = {
   actions: {
     saveDraftLabel: 'Save Draft',
     submitLabel: 'Submit Application',
+    submittingLabel: 'Submitting…',
     backLabel: 'Back',
     continueLabel: 'Continue',
     changeClassLabel: 'Change class / year',
@@ -127,12 +128,32 @@ export const admissionPageMock = {
       },
     },
   },
+  errors: {
+    admissionNoRequired: 'Admission number is required.',
+    admissionNoMax: 'Admission number must be at most 20 characters.',
+    firstNameRequired: 'First name is required.',
+    firstNameMax: 'First name must be at most 50 characters.',
+    lastNameMax: 'Last name must be at most 50 characters.',
+    aadharInvalid: 'Aadhaar must be exactly 12 digits.',
+    academicYearRequired: 'Academic year is required.',
+    emailInvalid: 'Enter a valid email address.',
+    guardianNameRequired: 'Guardian name is required when primary contact is Guardian.',
+    parentContactRequired: 'Enter at least one parent or guardian contact.',
+    submitFailed: 'Could not submit admission. Please try again.',
+    conflict: 'Admission number or Aadhaar already exists.',
+  },
+  successPopup: {
+    title: 'Student admitted',
+    message: 'Student admitted successfully',
+    dismissLabel: 'Done',
+  },
   tips: {
     title: 'Tips',
     items: [
       'Confirm class and academic year before entering student details.',
-      'Aadhaar and EMIS numbers must match official records.',
-      'Guardian fields are optional and stored as null when left empty.',
+      'Aadhaar must be 12 digits if provided; it is copied to document records.',
+      'Profile photo preview is local until file upload to storage is added.',
+      'Class shown in the form is saved; API currently uses class ID 1 until class master is linked.',
     ],
   },
 };

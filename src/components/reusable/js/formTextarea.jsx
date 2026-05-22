@@ -7,6 +7,7 @@ const FormTextarea = ({
   value,
   onChange,
   disabled = false,
+  error,
   className = '',
 }) => {
   const isControlled = value !== undefined;
@@ -15,7 +16,7 @@ const FormTextarea = ({
     <label className={`crmFormField ${className}`.trim()}>
       <span className="crmFormLabel">{label}</span>
       <textarea
-        className="crmFormTextarea"
+        className={`crmFormTextarea${error ? ' crmFormInputError' : ''}`}
         placeholder={placeholder}
         rows={rows}
         disabled={disabled}
@@ -23,6 +24,11 @@ const FormTextarea = ({
           ? { value, onChange }
           : {})}
       />
+      {error ? (
+        <p className="crmFormError" role="alert">
+          {error}
+        </p>
+      ) : null}
     </label>
   );
 };
