@@ -16,6 +16,14 @@ export default defineConfig(({ mode }) => {
           target: proxyTarget,
           changeOrigin: true,
           secure: false,
+          configure: (proxy) => {
+            proxy.on('proxyReq', (proxyReq) => {
+              // Vite's `headers: {}` option does not reliably attach to outbound
+              // requests. ngrok ERR_NGROK_6024 (HTML on GET) needs these on proxyReq.
+              proxyReq.setHeader('ngrok-skip-browser-warning', '69420')
+              proxyReq.setHeader('User-Agent', 'SchoolCRM-Vite-Proxy/1.0')
+            })
+          },
         },
       },
     },

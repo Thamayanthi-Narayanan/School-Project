@@ -2,6 +2,7 @@ import { normalizePhoneForApi, isValidEmail } from './loginIdentifier';
 
 const NAME_MIN_LENGTH = 3;
 const NAME_MAX_LENGTH = 50;
+const UPDATE_NAME_MAX_LENGTH = 150;
 const EMAIL_MAX_LENGTH = 255;
 const PHONE_MIN_LENGTH = 10;
 const PHONE_MAX_LENGTH = 20;
@@ -15,9 +16,22 @@ const ASSIGNABLE_ROLES = {
   PRINCIPAL: ['CORRESPONDENT'],
 };
 
+export const USER_STATUS_OPTIONS = ['ACTIVE', 'INACTIVE', 'ONLINE', 'OFFLINE'];
+
 export const getAssignableRoleOptions = (callerRole) => {
   const roles = ASSIGNABLE_ROLES[callerRole] ?? ASSIGNABLE_ROLES.PRINCIPAL;
   return [ROLE_SELECT_PLACEHOLDER, ...roles];
+};
+
+export const getEditRoleOptions = (callerRole, currentRole) => {
+  const assignable = ASSIGNABLE_ROLES[callerRole] ?? ASSIGNABLE_ROLES.PRINCIPAL;
+  const options = [...assignable];
+
+  if (currentRole && !options.includes(currentRole)) {
+    options.unshift(currentRole);
+  }
+
+  return options;
 };
 
 export const buildCreateUserPayload = (form) => {
@@ -42,6 +56,9 @@ export const mapApiUserToLocal = (apiUser) => ({
   userRole: apiUser.role,
   status: apiUser.status,
 });
+
+export const mapApiUsersListToLocal = (apiUsers) =>
+  (Array.isArray(apiUsers) ? apiUsers : []).map(mapApiUserToLocal);
 
 export const validateCreateUserForm = (form, errorCopy) => {
   const errors = {};
@@ -90,6 +107,83 @@ export const validateCreateUserForm = (form, errorCopy) => {
     errors.confirmPassword = errorCopy.confirmPasswordRequired;
   } else if (form.password !== form.confirmPassword) {
     errors.confirmPassword = errorCopy.passwordMismatch;
+  }
+
+  return errors;
+};
+
+export const buildUpdateUserPayload = (form) => {
+  const payload = {};
+  const name = form.userName.trim();
+  const email = form.userEmail.trim();
+  const phone = form.userPhone.trim();
+
+  if (name) payload.fullName = name;
+  if (email) payload.email = email.toLowerCase();
+  if (phone) payload.phone = normalizePhoneForApi(phone);
+  if (form.userRole && form.userRole !== ROLE_SELECT_PLACEHOLDER) {
+    payload.role = form.userRole;
+  }
+  if (form.userStatus) payload.status = form.userStatus;
+
+  return payload;
+};
+
+const hasUpdateChanges = (form, original) => {
+  if (!original) return true;
+
+  return (
+    form.userName.trim() !== (original.userName || '').trim()
+    || form.userEmail.trim().toLowerCase() !== (original.userEmail || '').trim().toLowerCase()
+    || normalizePhoneForApi(form.userPhone) !== normalizePhoneForApi(original.userPhone || '')
+    || form.userRole !== original.userRole
+    || form.userStatus !== original.status
+  );
+};
+
+export const validateUpdateUserForm = (form, original, errorCopy) => {
+  const errors = {};
+  const name = form.userName.trim();
+  const email = form.userEmail.trim();
+  const phone = form.userPhone.trim();
+
+  if (!name) {
+    errors.userName = errorCopy.userNameRequired;
+  } else if (name.length < NAME_MIN_LENGTH) {
+    errors.userName = errorCopy.userNameMin;
+  } else if (name.length > UPDATE_NAME_MAX_LENGTH) {
+    errors.userName = errorCopy.userNameMaxUpdate;
+  }
+
+  if (!email) {
+    errors.userEmail = errorCopy.emailRequired;
+  } else if (!isValidEmail(email)) {
+    errors.userEmail = errorCopy.emailInvalid;
+  } else if (email.length > EMAIL_MAX_LENGTH) {
+    errors.userEmail = errorCopy.emailMax;
+  }
+
+  if (!phone) {
+    errors.userPhone = errorCopy.phoneRequired;
+  } else {
+    const normalized = normalizePhoneForApi(phone);
+    if (normalized.length < PHONE_MIN_LENGTH || normalized.length > PHONE_MAX_LENGTH) {
+      errors.userPhone = errorCopy.phoneInvalid;
+    }
+  }
+
+  if (!form.userRole || form.userRole === ROLE_SELECT_PLACEHOLDER) {
+    errors.userRole = errorCopy.roleRequired;
+  }
+
+  if (!form.userStatus) {
+    errors.userStatus = errorCopy.statusRequired;
+  } else if (!USER_STATUS_OPTIONS.includes(form.userStatus)) {
+    errors.userStatus = errorCopy.statusInvalid;
+  }
+
+  if (Object.keys(errors).length === 0 && !hasUpdateChanges(form, original)) {
+    errors.general = errorCopy.noChanges;
   }
 
   return errors;

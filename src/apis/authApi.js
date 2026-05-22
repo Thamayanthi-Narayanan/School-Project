@@ -26,3 +26,39 @@ export const createUser = async (payload) => {
   const { data } = await apiClient.post('/auth/users', payload);
   return data;
 };
+
+/**
+ * GET /api/v1/auth/users
+ * Requires Bearer token; ADMIN or PRINCIPAL only.
+ */
+export const listUsers = async () => {
+  const { data } = await apiClient.get('/auth/users');
+  return data;
+};
+
+/**
+ * GET /api/v1/auth/users/{id}
+ * Requires Bearer token; ADMIN or PRINCIPAL only.
+ */
+export const getUserById = async (id) => {
+  const { data } = await apiClient.get(`/auth/users/${id}`);
+  return data;
+};
+
+/**
+ * PUT /api/v1/auth/users/{id}
+ * Requires Bearer token; ADMIN or PRINCIPAL only.
+ */
+export const updateUser = async (id, payload) => {
+  const { data } = await apiClient.put(`/auth/users/${id}`, payload);
+  return data;
+};
+
+/**
+ * DELETE /api/v1/auth/users/{id}
+ * Soft-deletes user. Requires Bearer token; ADMIN or PRINCIPAL only.
+ */
+export const deleteUser = async (id) => {
+  const { data } = await apiClient.delete(`/auth/users/${id}`);
+  return data;
+};

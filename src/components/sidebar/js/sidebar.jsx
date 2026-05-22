@@ -3,26 +3,17 @@ import '../css/sidebar.css';
 import { sidebarMock } from '../../../data/mocks/sidebar/sidebar.mock';
 import { renderNavIcon, DashboardIcons } from '../../common/js/dashboardIcons';
 import NotificationBellIcon from '../../common/js/notificationBellIcon';
-import { useUserCreationPanel } from '../../../layouts/dashboardLayout/context/userCreationPanelContext';
 import { performLogout } from '../../../services/authLogout';
 
 const Sidebar = ({ isOpen = false, onNavigate }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const { brand, sections, footer } = sidebarMock;
-  const { openUserCreation } = useUserCreationPanel();
 
   const isActive = (path) => pathname === path;
 
   const handleNavClick = () => {
     if (onNavigate) onNavigate();
-  };
-
-  const handleItemClick = (item) => {
-    if (item.action === 'userCreation') {
-      openUserCreation();
-    }
-    handleNavClick();
   };
 
   return (
@@ -62,23 +53,13 @@ const Sidebar = ({ isOpen = false, onNavigate }) => {
 
                   return (
                     <li key={item.id}>
-                      {item.action ? (
-                        <button
-                          type="button"
-                          className={linkClassName}
-                          onClick={() => handleItemClick(item)}
-                        >
-                          {linkContent}
-                        </button>
-                      ) : (
-                        <Link
-                          to={item.path}
-                          className={linkClassName}
-                          onClick={handleNavClick}
-                        >
-                          {linkContent}
-                        </Link>
-                      )}
+                      <Link
+                        to={item.path}
+                        className={linkClassName}
+                        onClick={handleNavClick}
+                      >
+                        {linkContent}
+                      </Link>
                     </li>
                   );
                 })}

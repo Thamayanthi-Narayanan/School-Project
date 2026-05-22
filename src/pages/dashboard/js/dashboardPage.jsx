@@ -2,7 +2,8 @@ import '../css/dashboardPage.css';
 import { dashboardPageMock } from '../../../data/mocks/dashboard/dashboardPage.mock';
 import { DashboardIcons, renderNavIcon } from '../../../components/common/js/dashboardIcons';
 import StatusPill from '../../../components/common/js/statusPill';
-import { useUserCreationPanel } from '../../../layouts/dashboardLayout/context/userCreationPanelContext';
+import { useNavigate } from 'react-router-dom';
+import { routePaths } from '../../../constants/routePaths';
 
 const Sparkline = ({ tone = 'green' }) => (
   <div className={`dashboardSparkline dashboardSparkline${tone.charAt(0).toUpperCase() + tone.slice(1)}`} aria-hidden="true">
@@ -43,11 +44,11 @@ const DashboardPage = () => {
     workspace,
   } = dashboardPageMock;
 
-  const { openUserCreation } = useUserCreationPanel();
+  const navigate = useNavigate();
 
   const handleWorkspaceAction = (action) => {
     if (action === 'userCreation') {
-      openUserCreation();
+      navigate(routePaths.userCreation);
     }
   };
 

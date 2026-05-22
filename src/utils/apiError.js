@@ -8,6 +8,7 @@ const normalizeFieldKey = (key, context = 'login') => {
       email: 'userEmail',
       phone: 'userPhone',
       role: 'userRole',
+      status: 'userStatus',
       password: 'password',
     };
     return map[key] ?? null;
@@ -46,6 +47,7 @@ const mapMessageToFields = (message, context) => {
   if (lower.includes('email')) return { userEmail: msg };
   if (lower.includes('phone')) return { userPhone: msg };
   if (lower.includes('role') || lower.includes('assign')) return { userRole: msg };
+  if (lower.includes('status')) return { userStatus: msg };
   if (lower.includes('password')) return { password: msg };
 
   return null;
@@ -111,6 +113,11 @@ export const parseApiError = (error, context = 'login') => {
           : 'Authentication failed. Check your email or phone and password.';
     } else if (status === 403) {
       general = 'You do not have permission to perform this action.';
+    } else if (status === 404) {
+      general =
+        context === 'createUser'
+          ? 'User not found.'
+          : 'The requested resource was not found.';
     } else if (error?.message === 'Network Error') {
       general = 'Unable to reach the server. Check your connection and try again.';
     } else {

@@ -234,6 +234,243 @@
   border: 1px solid #bbf7d0;
 }
 
+.userCreationPanelWide {
+  width: min(52rem, 100vw);
+}
+
+.userCreationPanelSectionView {
+  margin-top: 0;
+}
+
+.userCreationViewWrap {
+  min-width: 0;
+}
+
+.userCreationViewWrap .crmSearchCard {
+  margin-bottom: 0.875rem;
+}
+
+.userCreationTableCard {
+  margin-bottom: 0;
+}
+
+.userCreationTableCard.crmSectionAnimate {
+  animation: none;
+}
+
+.userCreationTable th,
+.userCreationTable td {
+  padding: 0.75rem 1rem;
+}
+
+.userCreationTableEmail {
+  max-width: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--theme-text-secondary);
+  font-size: 0.8125rem;
+}
+
+.userCreationTableRowExpanded td {
+  border-bottom: none;
+  background: rgba(37, 99, 235, 0.04);
+}
+
+.userCreationTableEmpty {
+  text-align: center;
+  padding: 1.5rem 1rem !important;
+  color: var(--theme-text-secondary);
+  font-size: 0.8125rem;
+}
+
+.userCreationDetailRow td {
+  padding: 0 1rem 1rem !important;
+  background: rgba(37, 99, 235, 0.04);
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.userCreationDetailRow .userCreationDetailCard {
+  margin: 0;
+  animation: userCreationDetailIn 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes userCreationDetailIn {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.userCreationDetailLoading {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  background: var(--theme-bg-card);
+  border: 1px dashed var(--theme-border);
+  border-radius: var(--theme-radius-md);
+}
+
+.userCreatedPopupOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--theme-overlay-backdrop);
+  animation: userCreatedPopupOverlayIn 0.25s ease both;
+}
+
+@keyframes userCreatedPopupOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.userCreatedPopup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 22rem;
+  padding: 1.75rem 1.5rem 1.5rem;
+  text-align: center;
+  background: var(--theme-bg-card);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-modal);
+  animation: userCreatedPopupIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes userCreatedPopupIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(0.5rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.userCreatedPopupIconWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1rem;
+}
+
+.userCreatedPopupIconRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #dcfce7;
+  animation: userCreatedPopupRingPulse 1.2s ease-out 0.15s both;
+}
+
+@keyframes userCreatedPopupRingPulse {
+  from {
+    transform: scale(0.6);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.userCreatedPopupIcon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #16a34a;
+  color: #fff;
+  animation: userCreatedPopupIconPop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+@keyframes userCreatedPopupIconPop {
+  from {
+    transform: scale(0);
+  }
+
+  60% {
+    transform: scale(1.12);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.userCreatedPopupTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.userCreatedPopupMessage {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  line-height: 1.45;
+}
+
+.userCreatedPopupUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 1.25rem;
+  padding: 0.875rem 1rem;
+  background: var(--theme-bg-page);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+}
+
+.userCreatedPopupUserName {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.userCreatedPopup .crmBtn {
+  width: 100%;
+}
+
+.userCreationLoadingState {
+  margin: 0.75rem 0 0;
+  padding: 1rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  text-align: center;
+  background: var(--theme-bg-page);
+  border: 1px dashed var(--theme-border);
+  border-radius: var(--theme-radius-md);
+}
+
 .userCreationEmptyState {
   margin: 0.75rem 0 0;
   padding: 1rem;
@@ -284,7 +521,8 @@
   word-break: break-word;
 }
 
-.userCreationRoleBadge {
+.userCreationRoleBadge,
+.userCreationStatusBadge {
   display: inline-block;
   padding: 0.2rem 0.5rem;
   font-size: 0.75rem;
@@ -292,6 +530,11 @@
   color: var(--theme-primary);
   background: var(--theme-primary-light);
   border-radius: var(--theme-radius-pill);
+}
+
+.userCreationStatusBadge {
+  color: #15803d;
+  background: #dcfce7;
 }
 
 .userCreationWarningCard {
@@ -356,6 +599,10 @@
 @media (max-width: 1024px) {
   .userCreationPanel {
     width: min(36rem, 100vw);
+  }
+
+  .userCreationPanelWide {
+    width: min(48rem, 100vw);
   }
 }
 
@@ -424,7 +671,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .userCreationOverlay,
-  .userCreationPanel {
+  .userCreationPanel,
+  .userCreationDetailRow .userCreationDetailCard,
+  .userCreatedPopupOverlay,
+  .userCreatedPopup,
+  .userCreatedPopupIconRing,
+  .userCreatedPopupIcon {
     animation: none;
   }
 }
