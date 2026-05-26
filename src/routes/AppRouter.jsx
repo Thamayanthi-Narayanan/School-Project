@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { routePaths } from '../constants/routePaths';
 import LoginPage from '../pages/login/js/loginPage';
+import OtpPage from '../pages/login/js/otpPage';
+import FirstLoginChangePasswordPage from '../pages/login/js/firstLoginChangePasswordPage';
 import DashboardLayout from '../layouts/dashboardLayout/js/dashboardLayout';
 import DashboardPage from '../pages/dashboard/js/dashboardPage';
 import StudentsPage from '../pages/students/js/studentsPage';
@@ -23,6 +25,11 @@ const AppRouter = () => {
       <Routes>
         <Route path={routePaths.root} element={<Navigate to={routePaths.login} replace />} />
         <Route path={routePaths.login} element={<LoginPage />} />
+        <Route path={routePaths.loginOtp} element={<OtpPage />} />
+        <Route
+          path={routePaths.firstLoginChangePassword}
+          element={<FirstLoginChangePasswordPage />}
+        />
         <Route element={<DashboardLayout />}>
           <Route path={routePaths.dashboard} element={<DashboardPage />} />
           <Route path={routePaths.students} element={<StudentsPage />} />

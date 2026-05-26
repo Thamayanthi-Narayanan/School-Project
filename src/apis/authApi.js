@@ -10,6 +10,33 @@ export const login = async (payload) => {
 };
 
 /**
+ * POST /api/v1/auth/login/send-otp
+ * Public — first-login OTP for users pending verification.
+ */
+export const sendLoginOtp = async (payload) => {
+  const { data } = await apiClient.post('/auth/login/send-otp', payload);
+  return data;
+};
+
+/**
+ * POST /api/v1/auth/login/resend-otp
+ * Public — 30s cooldown enforced server-side.
+ */
+export const resendLoginOtp = async (payload) => {
+  const { data } = await apiClient.post('/auth/login/resend-otp', payload);
+  return data;
+};
+
+/**
+ * POST /api/v1/auth/login/verify-otp
+ * Public — verifies OTP and returns login token payload.
+ */
+export const verifyLoginOtp = async (payload) => {
+  const { data } = await apiClient.post('/auth/login/verify-otp', payload);
+  return data;
+};
+
+/**
  * POST /api/v1/auth/logout
  * Requires Authorization: Bearer {token}
  */

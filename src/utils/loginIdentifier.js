@@ -32,6 +32,28 @@ export const isValidEmailOrPhone = (value) => {
   return isValidPhone(trimmed);
 };
 
+export const buildIdentifierOnlyPayload = (identifier) => {
+  const trimmed = identifier.trim();
+
+  if (isValidEmail(trimmed)) {
+    return { email: trimmed };
+  }
+
+  return { phone: normalizePhoneForApi(trimmed) };
+};
+
+export const validateOtp = (otp) => {
+  if (!otp) {
+    return 'OTP is required.';
+  }
+
+  if (!/^\d{6}$/.test(otp)) {
+    return 'OTP must be exactly 6 digits.';
+  }
+
+  return null;
+};
+
 export const buildLoginPayload = (identifier, password) => {
   const trimmed = identifier.trim();
 

@@ -1,6 +1,8 @@
 export const routePaths = {
   root: '/',
   login: '/login',
+  loginOtp: '/login/verify-otp',
+  firstLoginChangePassword: '/first-login/change-password',
   dashboard: '/dashboard',
   students: '/students',
   staff: '/staff',

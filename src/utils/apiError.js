@@ -14,6 +14,12 @@ const normalizeFieldKey = (key, context = 'login') => {
     return map[key] ?? null;
   }
 
+  if (context === 'otp') {
+    if (key === 'otp') return 'otp';
+    if (key === 'email' || key === 'phone') return 'general';
+    return null;
+  }
+
   if (context === 'changePassword') {
     const map = {
       currentPassword: 'currentPassword',
@@ -92,6 +98,15 @@ const collectMessages = (errors) => {
 const mapMessageToFields = (message, context) => {
   const msg = String(message);
   const lower = msg.toLowerCase();
+
+  if (context === 'otp') {
+    if (lower.includes('invalid otp') || (lower.includes('otp') && lower.includes('invalid'))) {
+      return { otp: msg };
+    }
+    if (lower.includes('expired')) return { general: msg };
+    if (lower.includes('wait') && lower.includes('30')) return { general: msg };
+    return null;
+  }
 
   if (context === 'changePassword') {
     if (lower.includes('current password')) return { currentPassword: msg };

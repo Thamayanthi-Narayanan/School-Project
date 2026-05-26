@@ -6,8 +6,12 @@ import {
   setAuthSession,
   setRememberedLogin,
   clearRememberedLogin,
+  setPendingOtpIdentifier,
+  setOtpLoginNotice,
+  requiresOtpVerification,
 } from '../../../services/authSession';
 import { buildLoginPayload, validateLoginForm } from '../../../utils/loginIdentifier';
+import { extractAuthSessionFromResponse } from '../../../utils/authResponse';
 import { parseApiError } from '../../../utils/apiError';
 
 const initialForm = {
@@ -51,16 +55,44 @@ export const useLoginForm = () => {
         const payload = buildLoginPayload(form.email, form.password);
         const response = await login(payload);
 
-        if (!response?.success || !response?.data?.token) {
+        if (!response?.success) {
           setErrors({
             general: response?.message || 'Login failed. Please try again.',
           });
           return;
         }
 
-        const { token, expiresIn, user } = response.data;
+        if (requiresOtpVerification(response)) {
+          const identifier = form.email.trim();
+          const otpSentMessage =
+            response.message || 'OTP sent successfully. Check your email or phone.';
 
-        setAuthSession({ token, user, expiresIn });
+          setPendingOtpIdentifier(identifier);
+          setOtpLoginNotice(otpSentMessage);
+
+          if (form.rememberMe) {
+            setRememberedLogin(identifier);
+          } else {
+            clearRememberedLogin();
+          }
+
+          navigate(routePaths.loginOtp, {
+            replace: true,
+            state: { otpSentMessage },
+          });
+          return;
+        }
+
+        const session = extractAuthSessionFromResponse(response);
+
+        if (!session) {
+          setErrors({
+            general: response?.message || 'Login failed. Please try again.',
+          });
+          return;
+        }
+
+        setAuthSession(session);
 
         if (form.rememberMe) {
           setRememberedLogin(form.email.trim());
