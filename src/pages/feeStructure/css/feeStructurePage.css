@@ -1,0 +1,351 @@
+.feeStructurePage .feeStructurePageHeader {
+  width: 100%;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.feeStructurePage .crmPageActions {
+  flex-shrink: 0;
+}
+
+/* Config card */
+.feeStructureConfigCard,
+.feeStructureCategoriesCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.feeStructureConfigGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+/* Fee categories */
+.feeStructureCategoriesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.feeStructureCategoriesTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin: 0;
+}
+
+.feeStructureAddCategoryBtn {
+  flex-shrink: 0;
+}
+
+.feeStructureTableWrap {
+  overflow-x: auto;
+  margin: 0 -0.25rem;
+  padding: 0 0.25rem;
+}
+
+.feeStructureTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.feeStructureTable th {
+  padding: 0 0.5rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-align: left;
+  color: var(--theme-text-muted);
+  white-space: nowrap;
+}
+
+.feeStructureTable th:not(:first-child):not(:last-child) {
+  text-align: center;
+}
+
+.feeStructureTableActionHead {
+  width: 2.5rem;
+}
+
+.feeStructureTable td {
+  padding: 0.5rem;
+  vertical-align: middle;
+  border-top: 1px solid var(--theme-border);
+}
+
+.feeStructureTable td:not(:first-child):not(:last-child):not(.feeStructureRowTotal) {
+  text-align: center;
+}
+
+.feeStructureCellInput {
+  width: 100%;
+  min-width: 4.5rem;
+  max-width: 6.5rem;
+  margin: 0 auto;
+  display: block;
+  padding: 0.5rem 0.625rem;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-sm);
+  background: var(--theme-bg-input);
+  font-size: 0.8125rem;
+  color: var(--theme-text-primary);
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.feeStructureCategoryInput {
+  max-width: none;
+  min-width: 8rem;
+  margin: 0;
+}
+
+.feeStructureCellInput:focus {
+  outline: none;
+  border-color: var(--theme-border-focus);
+  box-shadow: 0 0 0 3px var(--theme-primary-focus-ring);
+}
+
+.feeStructureRowTotal {
+  font-weight: 700;
+  color: var(--theme-primary);
+  white-space: nowrap;
+  text-align: right;
+  padding-right: 0.75rem;
+}
+
+.feeStructureTableActionCell {
+  text-align: right;
+  width: 2.5rem;
+}
+
+.feeStructureDeleteBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  border: none;
+  background: none;
+  color: var(--theme-danger);
+  cursor: pointer;
+  border-radius: var(--theme-radius-sm);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.feeStructureDeleteBtn:hover {
+  background: rgba(220, 38, 38, 0.08);
+}
+
+/* Totals row */
+.feeStructureTotalsRow {
+  background: var(--theme-bg-page);
+}
+
+.feeStructureTotalsRow td {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+  border-top: 1px solid var(--theme-border);
+}
+
+.feeStructureTotalsLabel {
+  font-weight: 700;
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+.feeStructureTotalsRow td:not(:first-child):not(.feeStructureGrandTotal) {
+  text-align: center;
+}
+
+.feeStructureGrandTotal {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--theme-primary);
+  text-align: right;
+  padding-right: 0.75rem;
+}
+
+/* Bottom cards */
+.feeStructureBottomRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.75fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.feeStructureScholarshipCard,
+.feeStructurePayableCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  padding: 1.5rem;
+}
+
+.feeStructurePayableCard {
+  background: var(--theme-primary-light);
+  border-color: var(--theme-primary-light-border);
+  max-width: 22rem;
+  justify-self: end;
+  width: 100%;
+}
+
+.feeStructureBottomCardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin: 0 0 1.25rem;
+}
+
+.feeStructureScholarshipGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+.feeStructureScholarshipGrid .crmFormField {
+  gap: 0.75rem;
+}
+
+.feeStructurePayableList {
+  margin: 0;
+}
+
+.feeStructurePayableRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.feeStructurePayableRow dt {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-secondary);
+}
+
+.feeStructurePayableRow dd {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.feeStructurePayableDiscount {
+  color: var(--theme-text-secondary);
+}
+
+.feeStructurePayableRowHighlight {
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--theme-primary-light-border);
+}
+
+.feeStructurePayableRowHighlight dt {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.feeStructurePayableRowHighlight .feeStructurePayableAmount {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--theme-primary);
+  letter-spacing: -0.02em;
+}
+
+.feeStructurePayableAmount {
+  font-weight: 700;
+  color: var(--theme-primary);
+}
+
+.feeStructureSectionDelay1 {
+  animation-delay: 0.08s;
+}
+
+.feeStructureSectionDelay2 {
+  animation-delay: 0.14s;
+}
+
+@media (max-width: 1100px) {
+  .feeStructureConfigGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feeStructureScholarshipGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .feeStructureBottomRow {
+    grid-template-columns: 1fr;
+  }
+
+  .feeStructurePayableCard {
+    max-width: none;
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  .feeStructureConfigCard {
+    padding: 1.25rem;
+    overflow-x: auto;
+  }
+
+  .feeStructureConfigGrid {
+    grid-template-columns: repeat(4, minmax(5.5rem, 1fr));
+    gap: 0.75rem;
+    min-width: min(100%, 22rem);
+  }
+
+  .feeStructureCategoriesCard {
+    padding: 1.25rem;
+  }
+
+  .feeStructureTableWrap {
+    margin: 0;
+  }
+
+  .feeStructureCellInput {
+    min-width: 3.5rem;
+    max-width: 5rem;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .feeStructureCategoryInput {
+    min-width: 6rem;
+    max-width: 8rem;
+  }
+
+  .feeStructureBottomRow {
+    grid-template-columns: 1fr;
+  }
+
+  .feeStructurePayableCard {
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .feeStructureScholarshipGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .feeStructureAddCategoryBtn {
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.75rem;
+  }
+}

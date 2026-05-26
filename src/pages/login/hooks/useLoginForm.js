@@ -1,4 +1,14 @@
 import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { routePaths } from '../../../constants/routePaths';
+import { login } from '../../../apis/authApi';
+import {
+  setAuthSession,
+  setRememberedLogin,
+  clearRememberedLogin,
+} from '../../../services/authSession';
+import { buildLoginPayload, validateLoginForm } from '../../../utils/loginIdentifier';
+import { parseApiError } from '../../../utils/apiError';
 
 const initialForm = {
   email: '',
@@ -7,6 +17,7 @@ const initialForm = {
 };
 
 export const useLoginForm = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -14,27 +25,16 @@ export const useLoginForm = () => {
   const updateField = useCallback((name, value) => {
     setForm((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => {
-      if (!prev[name]) return prev;
+      if (!prev[name] && !prev.general) return prev;
       const next = { ...prev };
       delete next[name];
+      delete next.general;
       return next;
     });
   }, []);
 
   const validate = useCallback(() => {
-    const nextErrors = {};
-    const trimmedEmail = form.email.trim();
-
-    if (!trimmedEmail) {
-      nextErrors.email = 'Email address is required.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
-      nextErrors.email = 'Enter a valid email address.';
-    }
-
-    if (!form.password) {
-      nextErrors.password = 'Password is required.';
-    }
-
+    const nextErrors = validateLoginForm(form.email, form.password);
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   }, [form.email, form.password]);
@@ -45,19 +45,41 @@ export const useLoginForm = () => {
       if (!validate()) return;
 
       setIsLoading(true);
+      setErrors({});
+
       try {
-        if (form.rememberMe) {
-          localStorage.setItem('rememberEmail', form.email.trim());
-        } else {
-          localStorage.removeItem('rememberEmail');
+        const payload = buildLoginPayload(form.email, form.password);
+        const response = await login(payload);
+
+        if (!response?.success || !response?.data?.token) {
+          setErrors({
+            general: response?.message || 'Login failed. Please try again.',
+          });
+          return;
         }
-        // API integration: authApi.login(form) when backend is ready
-        await new Promise((resolve) => setTimeout(resolve, 600));
+
+        const { token, expiresIn, user } = response.data;
+
+        setAuthSession({ token, user, expiresIn });
+
+        if (form.rememberMe) {
+          setRememberedLogin(form.email.trim());
+        } else {
+          clearRememberedLogin();
+        }
+
+        navigate(routePaths.dashboard, { replace: true });
+      } catch (error) {
+        const { general, fieldErrors } = parseApiError(error);
+        setErrors({
+          ...fieldErrors,
+          ...(general ? { general } : {}),
+        });
       } finally {
         setIsLoading(false);
       }
     },
-    [form, validate]
+    [form, validate, navigate],
   );
 
   return {

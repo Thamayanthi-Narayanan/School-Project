@@ -1,0 +1,17 @@
+export { sidebarMock } from './sidebar/sidebar.mock';
+export { navbarMock } from './navbar/navbar.mock';
+export { dashboardPageMock } from './dashboard/dashboardPage.mock';
+export { loginPageMock } from './login/loginPage.mock';
+export { studentsPageMock } from './students/studentsPage.mock';
+export { staffPageMock } from './staff/staffPage.mock';
+export { admissionPageMock } from './admission/admissionPage.mock';
+export { attendancePageMock } from './attendance/attendancePage.mock';
+export { scholarshipsPageMock } from './scholarships/scholarshipsPage.mock';
+export { invoicesPageMock } from './invoices/invoicesPage.mock';
+export { paymentsPageMock } from './payments/paymentsPage.mock';
+export { settingsPageMock } from './settings/settingsPage.mock';
+export { notificationsPageMock } from './notifications/notificationsPage.mock';
+export { transferCertificatePageMock } from './transferCertificate/transferCertificatePage.mock';
+export { feeStructurePageMock } from './feeStructure/feeStructurePage.mock';
+export { reportsPageMock } from './reports/reportsPage.mock';
+export { userCreationPanelMock } from './userCreation/userCreationPanel.mock';

@@ -26,7 +26,7 @@ src/
   assets/{images,icons,fonts}
   theme/          → theme.css (CSS variables), themeColors.js (JS constants)
   apis/
-  components/{sidebar,navbar,dashboardCards,common}/ → each: js/, css/, hooks/
+  components/{sidebar,navbar,dashboardCards,common,reusable}/ → each: js/, css/, hooks/
   pages/ layouts/ routes/ hooks/ context/ utils/ constants/ services/ data/ styles/
   App.jsx  main.jsx
 ```
@@ -40,6 +40,74 @@ src/
 
 Component folders: `js/` (components), `css/` (styles), `hooks/` (component-specific hooks).
 
+## Mock data
+
+- All mock/static UI data lives in `src/data/mocks/`
+- One folder per area — never hardcode labels, rows, or nav in components:
+  - `sidebar/sidebar.mock.js` — brand, menu sections, logout
+  - `navbar/navbar.mock.js` — breadcrumbs, search, user profile
+  - `dashboard/dashboardPage.mock.js` — dashboard cards, tables, feeds
+  - `login/loginPage.mock.js` — login copy and stats
+  - `students/studentsPage.mock.js` — students list, filters, add-student modal fields
+  - `staff/staffPage.mock.js` — staff list, search, add-staff modal fields
+  - `admission/admissionPage.mock.js` — admission wizard steps, forms, tips
+  - `attendance/attendancePage.mock.js` — attendance calendar, tabs, monthly summary
+  - `scholarships/scholarshipsPage.mock.js` — scheme cards, pending requests table
+  - `invoices/invoicesPage.mock.js` — invoice document, line items, summary
+  - `payments/paymentsPage.mock.js` — collect fee form, receipt preview, recent payments
+  - `settings/settingsPage.mock.js` — profile, school, security, notification tabs
+  - `notifications/notificationsPage.mock.js` — alerts list, mark all read action
+  - `transferCertificate/transferCertificatePage.mock.js` — issue TC form, TC preview document
+  - `feeStructure/feeStructurePage.mock.js` — class config, fee categories table, payable summary
+  - `reports/reportsPage.mock.js` — report filters, export cards grid
+  - `userCreation/userCreationPanel.mock.js` — user management panel sections, users list, form copy
+- Export shared entries from `src/data/mocks/index.js`
+- Add a new mock file when creating each new screen or layout section
+
+## Reusable UI (`src/components/reusable/`)
+
+**Always reuse** these for list pages (Students, Staff, and similar CRUD screens). Import from `components/reusable/js/index.js` and `components/reusable/css/crmReusable.css`.
+
+| Component | Use for |
+|-----------|---------|
+| `CrmButton` | `primary`, `outline`, `pagination`, `icon` variants |
+| `PageHeader` | Page title, subtitle, action buttons slot |
+| `FormSearchBar` | Search inputs |
+| `FilterToolbar` | Search + dropdown filters + export (Students) |
+| `StaffSearchCard` | Single full-width search card (Staff) |
+| `FormInput` / `FormSelect` / `FormTextarea` | Form fields (modals + admission wizard) |
+| `FormTipsPanel` | Side tips card (admission wizard — match form card height) |
+| `AdmissionFormFields` | Maps mock `fields[]` to reusable form inputs (`pages/admission/js/`) |
+| `EntityFormModal` | Add/Edit modals — pass `modalData` with `fields[]` from mock |
+| `DataTableCard` | White table container + optional footer |
+| `PersonCell` | Avatar + name + optional subtext |
+| `TableRowActions` | View (eye), Edit, Delete — uses `DashboardIcons` |
+| `useModal` | Open/close modal, body scroll lock, Escape key |
+| `useListPagination` | Paginated lists (pass `entityLabel`, e.g. `'students'`) |
+
+- **Icons:** always use `DashboardIcons` from `components/common/js/dashboardIcons.jsx` — never duplicate SVGs
+- **Modal fields:** define as array in mock: `{ id, type: 'text'|'select'|'tel', label, placeholder?, icon?, options? }`
+- New list pages: compose reusables + page mock; do not copy button/form/modal CSS into page files
+
+## Sidebar layout
+
+- **Fixed (no scroll):** Scholaris brand + `SCHOOL ERP · V2.4` header, Logout footer
+- **Scrollable only:** navigation list between header and footer (`.sidebarNavScroll`)
+- Do not include Upgrade to Pro card
+- Do not show count badges on nav items (e.g. `1.2k`, `5`, `3`) unless the user explicitly asks for live counts from an API
+
+## Smooth scroll and hidden scrollbars (mandatory)
+
+- Global styles live in `src/styles/scrollSmooth.css` (imported from `main.jsx` after `global.css`)
+- **Every overflow scroll container** in the app must use hidden scrollbars + smooth scrolling:
+  - `scroll-behavior: smooth`
+  - `-webkit-overflow-scrolling: touch`
+  - `scrollbar-width: none` and `-ms-overflow-style: none`
+  - `::-webkit-scrollbar { display: none; width: 0; height: 0; }`
+- When adding a new horizontally or vertically scrollable region (table wrap, filter row, panel body, dropdown menu, main content area), **add its class to `scrollSmooth.css`** — do not leave visible scrollbars on mobile or desktop
+- Do not use `scrollbar-width: thin` or default visible scrollbars on responsive layouts
+- Respect `prefers-reduced-motion: reduce` for `html` smooth scroll (already in `scrollSmooth.css`)
+
 ## Development
 
 - Reusable components; logic in hooks/services, not UI
@@ -52,6 +120,34 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
 ## UI
 
 SaaS CRM dashboard: sidebar, navbar, cards, tables, forms. Professional, minimal, soft shadows, rounded corners, responsive media queries. Consistent spacing across modules (Dashboard, Students, Teachers, Attendance, Fees, Timetable, Exams, Results, Notifications, Parent Portal, Settings).
+
+## Responsive layout (mandatory — preserve when changing UI)
+
+**Do not break existing responsive behavior.** Any new or updated screen, panel, modal, or layout must work on **mobile**, **tablet**, and **desktop** using the project breakpoints below.
+
+| Breakpoint | Range | Behavior |
+|------------|-------|----------|
+| **Mobile** | `max-width: 768px` (below 769px) | Hamburger + drawer sidebar (`useSidebarDrawer`, `dashboardLayout`). Page tweaks in `src/styles/dashboardMobile.css`. Single-column forms, stacked buttons, horizontal scroll for tables/filters where needed. |
+| **Tablet** | `769px` – `1024px` | Sidebar visible; reduced padding; 2-column forms where appropriate; panels may be narrower (`min(36rem, 100vw)`). |
+| **Desktop** | `min-width: 1025px` | Full sidebar + navbar search; multi-column grids and side-by-side cards as designed. |
+
+**Rules when editing CSS or layout:**
+
+1. Add page-specific responsive rules in the page CSS file **and** shared mobile rules in `dashboardMobile.css` when the change applies to many dashboard pages. Register any new scrollable selectors in `scrollSmooth.css`.
+2. Use `min-width: 0`, `max-width: 100%`, and `box-sizing: border-box` on flex/grid children to prevent horizontal clipping.
+3. Slide-over panels (e.g. user creation): desktop = right drawer; mobile = bottom sheet (`max-width: 768px`); nav tabs scroll horizontally on mobile, vertical on tablet/desktop.
+4. Test mentally at ~375px (phone), ~768px (boundary), and ~1280px (desktop) before claiming done.
+5. Do **not** remove or override `dashboardMobile.css` rules unless replacing them with equivalent behavior.
+
+## Screenshot fidelity (mandatory)
+
+When the user shares a **screenshot** or says **“exact same UI”**, **“like in screenshot”**, or similar:
+
+1. **Match the screenshot first** — layout, spacing, typography, colors, borders, shadows, step order, button labels, placeholders, and section structure must match the reference image as closely as possible.
+2. **Do not simplify** — if the screenshot has a stepper, tips panel, dual-column form, or specific header actions, implement all of them even if similar pages omit them.
+3. **Reuse existing components** (`reusable/`, `DashboardIcons`, theme tokens) where they fit; add page-specific CSS only for layout not covered by reusables.
+4. **Mock all copy** in `src/data/mocks/<page>/` — no hardcoded labels in JSX.
+5. **Confirm route + sidebar** — wire `routePaths`, `pageTitles`, and sidebar path so the page is reachable and navbar breadcrumb is correct.
 
 ## Priority
 
