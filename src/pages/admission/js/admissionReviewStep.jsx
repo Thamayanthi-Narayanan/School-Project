@@ -1,8 +1,10 @@
 import '../css/admissionPage.css';
+import { useMasterDataContext } from '../../../context/masterDataContext';
 import {
   getClassLabel,
   getAcademicYearLabel,
 } from '../../../utils/admissionForm';
+import { getMasterDataLabel, MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
 const formatIncome = (value) => {
   if (value === '' || value == null) return '—';
@@ -24,8 +26,15 @@ const ReviewBlock = ({ title, rows }) => (
 );
 
 const AdmissionReviewStep = ({ subtitle, form, labels }) => {
+  const { data: masterData } = useMasterDataContext();
   const { student, parents, documents } = form;
   const studentName = [student.firstName, student.lastName].filter(Boolean).join(' ');
+
+  const labelOrRaw = (key, value) => {
+    if (value == null || value === '') return '';
+    const label = getMasterDataLabel(masterData, key, value);
+    return label || String(value);
+  };
 
   return (
     <div className="admissionReview">
@@ -41,18 +50,17 @@ const AdmissionReviewStep = ({ subtitle, form, labels }) => {
             { label: labels.rationCardNumber, value: student.rationCardNumber },
             { label: labels.studentName, value: studentName },
             { label: labels.dateOfBirth, value: student.dateOfBirth },
-            { label: labels.gender, value: student.gender },
+            { label: labels.gender, value: labelOrRaw(MASTER_DATA_KEYS.gender, student.gender) },
             { label: labels.nationality, value: student.nationality },
             { label: labels.address, value: student.address },
             {
               label: labels.classAndYear,
-              value: `${getClassLabel(student.classId)} · ${getAcademicYearLabel(student.academicYearId)}`,
+              value: `${getClassLabel(student.classId, masterData)} · ${getAcademicYearLabel(student.academicYearId, masterData)}`,
             },
-            { label: labels.bloodGroup, value: student.bloodGroup },
-            { label: labels.religion, value: student.religion },
-            { label: labels.community, value: student.community },
+            { label: labels.bloodGroup, value: labelOrRaw(MASTER_DATA_KEYS.bloodGroup, student.bloodGroup) },
+            { label: labels.religion, value: labelOrRaw(MASTER_DATA_KEYS.religion, student.religion) },
+            { label: labels.community, value: labelOrRaw(MASTER_DATA_KEYS.community, student.community) },
             { label: labels.annualIncome, value: formatIncome(student.annualIncome) },
-            { label: labels.status, value: student.status },
           ]}
         />
 
@@ -74,7 +82,10 @@ const AdmissionReviewStep = ({ subtitle, form, labels }) => {
             { label: labels.guardianEmail, value: parents.guardianEmail },
             { label: labels.guardianOccupation, value: parents.guardianOccupation },
             { label: labels.guardianRelationship, value: parents.guardianRelationship },
-            { label: labels.primaryContact, value: parents.primaryContact },
+            {
+              label: labels.primaryContact,
+              value: labelOrRaw(MASTER_DATA_KEYS.primaryContact, parents.primaryContact),
+            },
           ]}
         />
 

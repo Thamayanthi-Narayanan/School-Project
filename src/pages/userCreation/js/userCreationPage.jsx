@@ -18,7 +18,6 @@ import {
   getAvatarToneForUser,
   getUserInitials,
 } from '../../../utils/userDisplay';
-import { USER_STATUS_OPTIONS } from '../../../utils/createUser';
 import { useUserCreationForm } from '../../../components/userCreation/hooks/useUserCreationForm';
 
 const sectionIconMap = {
@@ -40,6 +39,7 @@ const AccountFields = ({
   errors,
   updateField,
   roleOptions,
+  isRoleSelectDisabled = false,
   autoFocus = false,
 }) => (
   <div className="userCreationPanelGrid">
@@ -73,6 +73,7 @@ const AccountFields = ({
       value={form.userRole}
       onChange={(e) => updateField('userRole', e.target.value)}
       error={errors.userRole}
+      disabled={isRoleSelectDisabled}
     />
   </div>
 );
@@ -200,6 +201,7 @@ const UserEditModal = ({
   errors,
   updateField,
   roleOptions,
+  isRoleSelectDisabled = false,
   copy,
   isLoading,
   isSubmitting,
@@ -308,13 +310,15 @@ const UserEditModal = ({
                   value={form.userRole}
                   onChange={(e) => updateField('userRole', e.target.value)}
                   error={errors.userRole}
+                  disabled={isRoleSelectDisabled || isSubmitting}
                 />
                 <FormSelect
                   label={fields.userStatus.label}
-                  options={USER_STATUS_OPTIONS}
+                  options={userStatusOptions}
                   value={form.userStatus}
                   onChange={(e) => updateField('userStatus', e.target.value)}
                   error={errors.userStatus}
+                  disabled={isLoadingUserStatus || isSubmitting}
                 />
               </div>
             </section>
@@ -455,6 +459,11 @@ const UserCreationPage = () => {
     deleteSuccessPopup,
     createRoleOptions,
     editRoleOptions,
+    userStatusOptions,
+    isLoadingRoles,
+    isLoadingUserStatus,
+    roleOptionsError,
+    refetchRoles,
     updateField,
     handleSectionChange,
     dismissCreatedUserPopup,
@@ -510,6 +519,14 @@ const UserCreationPage = () => {
               {errors.general}
             </p>
           )}
+          {roleOptionsError && (
+            <div className="userCreationAlert userCreationAlertError userCreationRolesError">
+              <p role="alert">{roleOptionsError}</p>
+              <CrmButton variant="outline" type="button" onClick={refetchRoles}>
+                Try again
+              </CrmButton>
+            </div>
+          )}
 
           {activeSection === 'create' ? (
             <form onSubmit={handleCreateFormSubmit} noValidate>
@@ -521,6 +538,7 @@ const UserCreationPage = () => {
                   errors={errors}
                   updateField={updateField}
                   roleOptions={createRoleOptions}
+                  isRoleSelectDisabled={isLoadingRoles || Boolean(roleOptionsError) || createRoleOptions.length <= 1}
                   autoFocus
                 />
               </section>
@@ -549,7 +567,7 @@ const UserCreationPage = () => {
                 <CrmButton
                   variant="primary"
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isLoadingRoles || Boolean(roleOptionsError)}
                 >
                   {isSubmitting ? 'Creating…' : create.submitLabel}
                 </CrmButton>
@@ -587,6 +605,7 @@ const UserCreationPage = () => {
         errors={errors}
         updateField={updateField}
         roleOptions={editRoleOptions}
+        isRoleSelectDisabled={isLoadingRoles || Boolean(roleOptionsError)}
         copy={edit}
         isLoading={isLoadingEditUser}
         isSubmitting={isSubmitting}

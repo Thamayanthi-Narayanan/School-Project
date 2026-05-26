@@ -75,7 +75,7 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
 | `FormSearchBar` | Search inputs |
 | `FilterToolbar` | Search + dropdown filters + export (Students) |
 | `StaffSearchCard` | Single full-width search card (Staff) |
-| `FormInput` / `FormSelect` / `FormTextarea` | Form fields (modals + admission wizard) |
+| `FormInput` / `FormSelect` / `FormScrollSelect` / `FormTextarea` | Form fields; **`FormSelect` = custom scroll dropdown everywhere** (same as admission Academic year — portal menu, hidden scrollbar, `max-height: 8rem` — see `master-data-dropdowns.mdc`) |
 | `FormTipsPanel` | Side tips card (admission wizard — match form card height) |
 | `AdmissionFormFields` | Maps mock `fields[]` to reusable form inputs (`pages/admission/js/`) |
 | `EntityFormModal` | Add/Edit modals — pass `modalData` with `fields[]` from mock |
@@ -105,6 +105,7 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
   - `scrollbar-width: none` and `-ms-overflow-style: none`
   - `::-webkit-scrollbar { display: none; width: 0; height: 0; }`
 - When adding a new horizontally or vertically scrollable region (table wrap, filter row, panel body, dropdown menu, main content area), **add its class to `scrollSmooth.css`** — do not leave visible scrollbars on mobile or desktop
+- **All dropdowns** use `FormSelect` / `FormScrollSelect` (custom portal menu, `max-height: 8rem`, hidden scrollbar) — never native `<select>`; see `master-data-dropdowns.mdc`
 - Do not use `scrollbar-width: thin` or default visible scrollbars on responsive layouts
 - Respect `prefers-reduced-motion: reduce` for `html` smooth scroll (already in `scrollSmooth.css`)
 
@@ -113,6 +114,7 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
 - Reusable components; logic in hooks/services, not UI
 - async/await for APIs; loading/error/success states
 - API URLs via env vars; modules in `apis/` (e.g. `authApi.js`)
+- **Dropdown options:** use `GET /api/v1/master-data` only — see `.cursor/rules/master-data-dropdowns.mdc` (`masterDataApi.js`, `useMasterData`, `masterDataOptions.js`). Do not hardcode select options when a master-data key exists; integrate keys incrementally as API docs are shared.
 - Tables: pagination, search, filter, responsive scroll, empty/loading states
 - Forms: validation, friendly errors, disable submit while loading
 - Preserve existing behavior; minimal scope changes; no unnecessary files or renames

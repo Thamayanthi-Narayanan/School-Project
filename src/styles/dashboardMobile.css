@@ -88,7 +88,7 @@
     gap: 0.375rem;
   }
 
-  .crmFilterToolbar .crmSelect {
+  .crmFilterToolbar .crmScrollSelectTrigger {
     min-width: 6.25rem;
     height: 2.375rem;
     font-size: 0.8125rem;
@@ -169,9 +169,8 @@
   }
 
   .crmFormInput,
-  .crmFormSelect,
-  .crmFormTextarea,
-  .crmSelect {
+  .crmScrollSelectTrigger,
+  .crmFormTextarea {
     font-size: 0.875rem;
   }
 

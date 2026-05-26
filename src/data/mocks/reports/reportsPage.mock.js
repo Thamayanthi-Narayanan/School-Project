@@ -2,12 +2,9 @@ export const reportsPageMock = {
   title: 'Reports',
   subtitle: 'Generate and export key school reports.',
   filters: {
-    academicYearOptions: ['2025-26', '2024-25', '2023-24'],
-    defaultAcademicYear: '2025-26',
-    classOptions: ['All classes', 'Class 10', 'Class 9', 'Class 12'],
+    allClassesLabel: 'All classes',
     defaultClass: 'All classes',
-    monthOptions: ['May 2026', 'April 2026', 'March 2026', 'February 2026'],
-    defaultMonth: 'May 2026',
+    loadingLabel: 'Loading…',
   },
   actions: {
     excelLabel: 'Excel',

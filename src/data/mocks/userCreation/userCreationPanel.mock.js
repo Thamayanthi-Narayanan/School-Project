@@ -17,7 +17,7 @@ export const userCreationPanelMock = {
     userPhone: { label: 'Phone Number', placeholder: '+91 98765 43210' },
     userRole: {
       label: 'User role',
-      options: ['Select role', 'ADMIN', 'PRINCIPAL', 'CORRESPONDENT'],
+      placeholder: 'Select role',
     },
     username: { label: 'Username' },
     userStatus: { label: 'Status' },
@@ -102,6 +102,8 @@ export const userCreationPanelMock = {
     confirmPasswordRequired: 'Confirm password is required.',
     passwordMismatch: 'Password and confirm password do not match.',
     roleRequired: 'Select a user role.',
+    loadRolesFailed: 'Could not load role options. Please try again.',
+    loadingRoles: 'Loading roles…',
     userRequired: 'Select a user.',
   },
 };

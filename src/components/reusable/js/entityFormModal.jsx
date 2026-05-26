@@ -4,7 +4,7 @@ import FormInput from './formInput';
 import FormSelect from './formSelect';
 import CrmButton from './crmButton';
 
-const EntityFormModal = ({ isOpen, onClose, modalData }) => {
+const EntityFormModal = ({ isOpen, onClose, modalData, fieldOptionsMap = {} }) => {
   if (!isOpen || !modalData) return null;
 
   const { title, subtitle, cancelLabel, saveLabel, fields } = modalData;
@@ -20,12 +20,14 @@ const EntityFormModal = ({ isOpen, onClose, modalData }) => {
 
   const renderField = (field, index) => {
     if (field.type === 'select') {
+      const options = fieldOptionsMap[field.id] ?? field.options ?? [];
       return (
         <FormSelect
           key={field.id}
           label={field.label}
-          options={field.options}
-          defaultValue={field.defaultValue ?? field.options[0]}
+          options={options}
+          defaultValue={field.defaultValue ?? options[0]?.value}
+          disabled={field.disabled || options.length === 0}
         />
       );
     }

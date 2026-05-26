@@ -107,6 +107,20 @@
   color: var(--theme-text-secondary);
 }
 
+.admissionSetupModalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  overflow: visible;
+}
+
+.admissionSetupModal .crmModalFooter {
+  margin-top: 0.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--theme-border);
+}
+
 .admissionSetupFields {
   display: flex;
   flex-direction: column;
@@ -116,7 +130,7 @@
 }
 
 .admissionSetupFields .crmScrollSelectMenu {
-  max-height: 9.5rem;
+  max-height: 8rem;
 }
 
 .admissionSetupFooter {

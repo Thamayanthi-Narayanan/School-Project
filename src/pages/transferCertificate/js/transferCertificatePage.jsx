@@ -9,9 +9,16 @@ import {
   FormSelect,
   FormTextarea,
 } from '../../../components/reusable/js/index';
+import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
+import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
 const TransferCertificatePage = () => {
   const { title, subtitle, issueForm, preview } = transferCertificatePageMock;
+
+  const { options: studentOptions, isLoading: studentsLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.user,
+    { useIdAsValue: true, loadingLabel: issueForm.loadingLabel },
+  );
 
   return (
     <div className="crmListPage transferCertificatePage">
@@ -23,9 +30,10 @@ const TransferCertificatePage = () => {
 
           <FormSelect
             label={issueForm.studentLabel}
-            options={issueForm.studentOptions}
-            defaultValue={issueForm.defaultStudent}
+            options={studentOptions}
+            defaultValue={studentOptions[0]?.value}
             className="crmFormFieldFull"
+            disabled={studentsLoading}
           />
 
           <div className="transferCertificateDateGrid">
@@ -43,10 +51,9 @@ const TransferCertificatePage = () => {
             />
           </div>
 
-          <FormSelect
+          <FormInput
             label={issueForm.reasonLabel}
-            options={issueForm.reasonOptions}
-            defaultValue={issueForm.defaultReason}
+            placeholder={issueForm.reasonPlaceholder}
             className="crmFormFieldFull"
           />
 
@@ -59,6 +66,7 @@ const TransferCertificatePage = () => {
 
           <div className="transferCertificateIssueActions">
             <CrmButton variant="primary" className="transferCertificateGenerateBtn">
+              {DashboardIcons.fileText(16)}
               {issueForm.generateLabel}
             </CrmButton>
           </div>
@@ -72,7 +80,7 @@ const TransferCertificatePage = () => {
                 {DashboardIcons.printer(16)}
                 {preview.printLabel}
               </CrmButton>
-              <CrmButton variant="primary">
+              <CrmButton variant="outline">
                 {DashboardIcons.download(16)}
                 {preview.downloadPdfLabel}
               </CrmButton>
@@ -82,9 +90,9 @@ const TransferCertificatePage = () => {
           <div className="transferCertificateDocument">
             <header className="transferCertificateDocHeader">
               <span className="transferCertificateDocLogo" aria-hidden="true">
-                {DashboardIcons.graduationCap(22)}
+                {DashboardIcons.graduationCap(18)}
               </span>
-              <div className="transferCertificateDocSchool">
+              <div>
                 <p className="transferCertificateDocSchoolName">{preview.school.name}</p>
                 <p className="transferCertificateDocSchoolLine">{preview.school.address}</p>
                 <p className="transferCertificateDocSchoolLine">{preview.school.affiliation}</p>

@@ -25,6 +25,7 @@ const FilterToolbar = ({
                 options={select.options}
                 defaultValue={select.defaultValue}
                 variant="filter"
+                disabled={select.disabled}
               />
             ))}
           </div>

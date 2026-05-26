@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import '../../../components/reusable/css/crmReusable.css';
 import { staffPageMock } from '../../../data/mocks/staff/staffPage.mock';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
@@ -12,6 +13,8 @@ import {
   EntityFormModal,
   useModal,
 } from '../../../components/reusable/js/index';
+import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
+import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
 const StaffPage = () => {
   const {
@@ -25,6 +28,25 @@ const StaffPage = () => {
   } = staffPageMock;
 
   const { isOpen, openModal, closeModal } = useModal();
+
+  const { options: roleOptions, isLoading: roleLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.role,
+    {
+      includeEmpty: true,
+      placeholder: addStaffModal.rolePlaceholder,
+      loadingLabel: addStaffModal.loadingLabel,
+    },
+  );
+
+  const addStaffModalData = useMemo(
+    () => ({
+      ...addStaffModal,
+      fields: addStaffModal.fields.map((field) =>
+        (field.type === 'select' ? { ...field, options: undefined } : field),
+      ),
+    }),
+    [addStaffModal],
+  );
 
   return (
     <div className="crmListPage staffPage">
@@ -79,7 +101,10 @@ const StaffPage = () => {
       <EntityFormModal
         isOpen={isOpen}
         onClose={closeModal}
-        modalData={addStaffModal}
+        modalData={addStaffModalData}
+        fieldOptionsMap={{
+          role: roleOptions,
+        }}
       />
     </div>
   );

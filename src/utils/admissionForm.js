@@ -1,4 +1,5 @@
 import { isValidEmail } from './loginIdentifier';
+import { getMasterDataLabelById, MASTER_DATA_KEYS } from './masterDataOptions';
 
 /** Until class_master IDs are wired, API always receives classId 1. */
 export const TEMP_API_CLASS_ID = 1;
@@ -69,22 +70,6 @@ export const buildAdmissionAcademicYears = () => {
 
 export const ADMISSION_ACADEMIC_YEARS = buildAdmissionAcademicYears();
 
-export const GENDER_OPTIONS = ['MALE', 'FEMALE', 'OTHER'];
-export const BLOOD_GROUP_OPTIONS = [
-  'A_POSITIVE',
-  'A_NEGATIVE',
-  'B_POSITIVE',
-  'B_NEGATIVE',
-  'O_POSITIVE',
-  'O_NEGATIVE',
-  'AB_POSITIVE',
-  'AB_NEGATIVE',
-];
-export const RELIGION_OPTIONS = ['HINDU', 'MUSLIM', 'CHRISTIAN', 'OTHERS'];
-export const COMMUNITY_OPTIONS = ['OC', 'BC', 'BC_MUSLIM', 'MBC', 'DNC', 'SC', 'ST'];
-export const STATUS_OPTIONS = ['ACTIVE', 'INACTIVE', 'DISCONTINUED', 'GRADUATED'];
-export const PRIMARY_CONTACT_OPTIONS = ['FATHER', 'MOTHER', 'GUARDIAN'];
-
 export const validateProfilePhoto = (file) => {
   if (!file) return null;
 
@@ -121,7 +106,6 @@ export const createInitialAdmissionForm = () => ({
     religion: '',
     community: '',
     annualIncome: '',
-    status: 'ACTIVE',
   },
   parents: {
     fatherName: '',
@@ -147,12 +131,18 @@ export const createInitialAdmissionForm = () => ({
   },
 });
 
-export const getClassLabel = (classId) =>
-  ADMISSION_CLASSES.find((item) => String(item.id) === String(classId))?.label ?? '';
+export const getClassLabel = (classId, masterData) => {
+  const fromApi = getMasterDataLabelById(masterData, MASTER_DATA_KEYS.class, classId);
+  if (fromApi) return fromApi;
+  return ADMISSION_CLASSES.find((item) => String(item.id) === String(classId))?.label ?? '';
+};
 
-export const getAcademicYearLabel = (academicYearId) =>
-  ADMISSION_ACADEMIC_YEARS.find((item) => String(item.id) === String(academicYearId))?.label
-  ?? '';
+export const getAcademicYearLabel = (academicYearId, masterData) => {
+  const fromApi = getMasterDataLabelById(masterData, MASTER_DATA_KEYS.academicYear, academicYearId);
+  if (fromApi) return fromApi;
+  return ADMISSION_ACADEMIC_YEARS.find((item) => String(item.id) === String(academicYearId))?.label
+    ?? '';
+};
 
 const toNumberOrNull = (value) => {
   if (value === '' || value == null) return null;
@@ -267,7 +257,7 @@ export const buildAdmissionPayload = (form) => {
   const annualIncome = toNumberOrNull(student.annualIncome);
   if (annualIncome != null) studentPayload.annualIncome = annualIncome;
 
-  if (student.status) studentPayload.status = student.status;
+  studentPayload.status = 'ACTIVE';
 
   const parentsPayload = {
     primaryContact: parents.primaryContact,

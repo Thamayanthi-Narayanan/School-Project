@@ -1,0 +1,74 @@
+---
+description: Master Data API — single source for all dropdown/select options
+alwaysApply: true
+---
+
+# Master Data — Dropdown Options
+
+All **dropdown / select options** in the School CRM dashboard must come from **`GET /api/v1/master-data`** (Bearer auth). Do not hardcode option arrays in page mocks or utils.
+
+## Endpoint
+
+| Property | Value |
+|----------|--------|
+| URL | `GET /api/v1/master-data` |
+| Response | `{ success, message, data: { role: [...], gender: [...], ... } }` |
+| Item shape | `{ id, label, value }` |
+
+## Infrastructure
+
+| File | Role |
+|------|------|
+| `src/apis/masterDataApi.js` | `getMasterData()` |
+| `src/context/masterDataContext.jsx` | `MasterDataProvider` on dashboard layout — one fetch, shared app-wide |
+| `src/hooks/useMasterDataSelect.js` | `useMasterDataSelect(key, { placeholder, prepend, useIdAsValue, ... })` |
+| `src/utils/masterDataOptions.js` | `MASTER_DATA_KEYS`, `getMasterDataOptions`, `getMasterDataIdOptions`, `buildSelectOptions` |
+
+Use **`useIdAsValue: true`** when the form stores numeric FK ids (class, academicYear, user). Use **value** field for enums (gender, role, status codes).
+
+## `data` keys (API)
+
+`role`, `userStatus`, `gender`, `bloodGroup`, `religion`, `community`, `medium`, `studentStatus`, `feesPaymentStatus`, `primaryContact`, `documentVerificationStatus`, `schemeType`, `discountType`, `applicableTo`, `termType`, `feeBillingTerm`, `paymentMode`, `ledgerStatus`, `invoiceStatus`, `paymentRecordStatus`, `feeCategory`, `academicYear`, `section`, `class`, `classReference`, `feeHead`, `user`
+
+## Screen mapping (integrated)
+
+| Screen | Master-data keys |
+|--------|------------------|
+| User Creation | `role`, `userStatus` |
+| Admission setup | `class`, `academicYear` (id) |
+| Admission student | `gender`, `bloodGroup`, `religion`, `community` |
+| Admission parents | `primaryContact` |
+| Students filters | `class`, `section`, `academicYear` (+ “All” prepend from mock label only) |
+| Fee Structure config | `class`, `academicYear`, `feeBillingTerm` |
+| Fee Structure scholarship preview | `discountType`, `schemeType` |
+| Create fee head modal | `feeCategory` (+ Yes/No for mandatory/refundable/active — boolean UI, not master data) |
+| Payments collect | `user`, `feeBillingTerm`, `paymentMode` (tiles) |
+| Reports filters | `academicYear`, `class`, `termType` (period/month) |
+| Transfer Certificate | `user` (student); reason = text input (no API key yet) |
+| Staff add modal | `role`; department = text input |
+
+## Dropdown UI — one style app-wide (mandatory)
+
+**Every dropdown** in the dashboard uses **`FormSelect`** / **`FormScrollSelect`** — the same custom control as admission **Academic year** (not native `<select>`).
+
+Implementation: `src/components/reusable/js/formScrollSelect.jsx` (`formSelect.jsx` re-exports it).
+
+| Requirement | Implementation |
+|-------------|----------------|
+| Trigger | Rounded field + chevron; blue focus ring when open |
+| Menu | White panel, rounded, shadow; opens in a **portal** (`document.body`) so lists are not clipped |
+| Active item | Light blue background + primary blue text (`.crmScrollSelectOptionActive`) |
+| Scrollable list | `overflow-y: auto` on `.crmScrollSelectMenu` |
+| Hidden scrollbar | `.crmScrollSelectMenu` in `src/styles/scrollSmooth.css` |
+| Smooth scroll | `scroll-behavior: smooth` via `scrollSmooth.css` |
+| Compact height | `max-height: 8rem` (~4–5 items); option padding `0.375rem 0.5rem` |
+| `onChange` | Synthetic event: `onChange={(e) => setX(e.target.value)}` |
+
+Do **not** add native `<select>`, MUI Select, or custom one-off dropdowns. Use `variant="filter"` for toolbar filters (no label).
+
+## Rules
+
+1. Mocks: labels, placeholders, validation copy only — **no `options: [...]`** for master-data fields.
+2. Loading: disable dropdown while `useMasterDataSelect` / context `isLoading`.
+3. Add new keys to `MASTER_DATA_KEYS` when API docs add fields.
+4. New scrollable dropdown panels: ensure selector is in `scrollSmooth.css`.

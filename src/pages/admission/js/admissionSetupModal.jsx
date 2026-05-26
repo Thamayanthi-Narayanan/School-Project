@@ -1,12 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import '../css/admissionPage.css';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import { CrmButton, FormScrollSelect } from '../../../components/reusable/js/index';
+import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
 import {
-  ADMISSION_CLASSES,
   ADMISSION_ACADEMIC_YEARS,
+  ADMISSION_CLASSES,
 } from '../../../utils/admissionForm';
+import { buildRoleLoadingOptions, MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
 const AdmissionSetupModal = ({
   isOpen,
@@ -18,6 +20,43 @@ const AdmissionSetupModal = ({
   onConfirm,
   onClose,
 }) => {
+  const classPlaceholder = copy.classPlaceholder;
+  const yearPlaceholder = copy.academicYearPlaceholder;
+
+  const { options: apiClassOptions, isLoading: classLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.class,
+    { includeEmpty: true, placeholder: classPlaceholder, useIdAsValue: true },
+  );
+
+  const { options: apiYearOptions, isLoading: yearLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.academicYear,
+    { includeEmpty: true, placeholder: yearPlaceholder, useIdAsValue: true },
+  );
+
+  const classOptions = useMemo(() => {
+    if (classLoading) return buildRoleLoadingOptions();
+    if (apiClassOptions.length > 1) return apiClassOptions;
+    return [
+      { label: classPlaceholder, value: '' },
+      ...ADMISSION_CLASSES.map((item) => ({
+        value: String(item.id),
+        label: item.label,
+      })),
+    ];
+  }, [apiClassOptions, classLoading, classPlaceholder]);
+
+  const yearOptions = useMemo(() => {
+    if (yearLoading) return buildRoleLoadingOptions();
+    if (apiYearOptions.length > 1) return apiYearOptions;
+    return [
+      { label: yearPlaceholder, value: '' },
+      ...ADMISSION_ACADEMIC_YEARS.map((item) => ({
+        value: String(item.id),
+        label: item.label,
+      })),
+    ];
+  }, [apiYearOptions, yearLoading, yearPlaceholder]);
+
   useEffect(() => {
     if (!isOpen) return undefined;
 
@@ -33,82 +72,58 @@ const AdmissionSetupModal = ({
 
   if (!isOpen) return null;
 
-  const classPlaceholder = copy.classPlaceholder;
-  const yearPlaceholder = copy.academicYearPlaceholder;
   const canConfirm = classId !== '' && academicYearId !== '';
 
-  const classOptions = ADMISSION_CLASSES.map((item) => ({
-    value: String(item.id),
-    label: item.label,
-  }));
-
-  const yearOptions = ADMISSION_ACADEMIC_YEARS.map((item) => ({
-    value: String(item.id),
-    label: item.label,
-  }));
-
   const handleOverlayClick = (event) => {
-    if (event.target === event.currentTarget) {
-      onClose?.();
-    }
+    if (event.target === event.currentTarget) onClose?.();
   };
 
   return createPortal(
     <div
-      className="admissionSetupOverlay"
+      className="crmModalOverlay admissionSetupOverlay"
       role="presentation"
       onClick={handleOverlayClick}
     >
       <div
-        className="admissionSetupModal"
+        className="crmModal admissionSetupModal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="admissionSetupTitle"
         onClick={(event) => event.stopPropagation()}
       >
-        <header className="admissionSetupHeader">
-          <div className="admissionSetupHeaderText">
-            <h2 id="admissionSetupTitle" className="admissionSetupTitle">
-              {copy.title}
-            </h2>
-            <p className="admissionSetupSubtitle">{copy.subtitle}</p>
-          </div>
-          <button
-            type="button"
-            className="admissionSetupClose"
-            aria-label={copy.closeLabel}
-            onClick={onClose}
-          >
-            {DashboardIcons.xClose(20)}
-          </button>
+        <header className="crmModalHeader">
+          <h2 id="admissionSetupTitle" className="crmModalTitle">{copy.title}</h2>
+          <p className="crmModalSubtitle">{copy.subtitle}</p>
         </header>
 
-        <div className="admissionSetupFields">
-          <FormScrollSelect
-            label={copy.classLabel}
-            placeholder={classPlaceholder}
-            options={classOptions}
-            value={classId}
-            onChange={onClassChange}
-          />
+        <div className="admissionSetupModalBody">
           <FormScrollSelect
             label={copy.academicYearLabel}
             placeholder={yearPlaceholder}
             options={yearOptions}
             value={academicYearId}
-            onChange={onAcademicYearChange}
+            onChange={(e) => onAcademicYearChange(e.target.value)}
+            disabled={yearLoading}
+          />
+          <FormScrollSelect
+            label={copy.classLabel}
+            placeholder={classPlaceholder}
+            options={classOptions}
+            value={classId}
+            onChange={(e) => onClassChange(e.target.value)}
+            disabled={classLoading}
           />
         </div>
 
-        <footer className="admissionSetupFooter">
+        <footer className="crmModalFooter">
           <CrmButton variant="outline" type="button" onClick={onClose}>
             {copy.cancelLabel}
           </CrmButton>
           <CrmButton
             variant="primary"
             type="button"
-            disabled={!canConfirm}
             onClick={onConfirm}
+            disabled={!canConfirm || classLoading || yearLoading}
           >
             {copy.confirmLabel}
           </CrmButton>

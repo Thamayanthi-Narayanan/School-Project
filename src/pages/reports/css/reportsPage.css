@@ -21,11 +21,11 @@
   gap: 1rem;
 }
 
-.reportsFilterRow .crmSelectWrap {
+.reportsFilterRow .crmScrollSelect {
   width: 100%;
 }
 
-.reportsFilterRow .crmSelect {
+.reportsFilterRow .crmScrollSelectTrigger {
   width: 100%;
 }
 

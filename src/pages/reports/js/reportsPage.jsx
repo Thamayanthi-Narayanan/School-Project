@@ -3,6 +3,8 @@ import '../css/reportsPage.css';
 import { reportsPageMock } from '../../../data/mocks/reports/reportsPage.mock';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import { PageHeader, CrmButton, FormSelect } from '../../../components/reusable/js/index';
+import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
+import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
 const iconVariantClassMap = {
   blue: 'reportsCardIconBlue',
@@ -13,6 +15,22 @@ const iconVariantClassMap = {
 const ReportsPage = () => {
   const { title, subtitle, filters, actions, reports } = reportsPageMock;
 
+  const { options: academicYearOptions, isLoading: yearLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.academicYear,
+    { loadingLabel: filters.loadingLabel },
+  );
+  const { options: classOptions, isLoading: classLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.class,
+    {
+      prepend: [{ label: filters.allClassesLabel, value: filters.allClassesLabel }],
+      loadingLabel: filters.loadingLabel,
+    },
+  );
+  const { options: monthOptions, isLoading: monthLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.termType,
+    { loadingLabel: filters.loadingLabel },
+  );
+
   return (
     <div className="crmListPage reportsPage">
       <PageHeader title={title} subtitle={subtitle} className="reportsPageHeader" />
@@ -20,22 +38,25 @@ const ReportsPage = () => {
       <section className="reportsFilterCard crmSectionAnimate">
         <div className="reportsFilterRow">
           <FormSelect
-            options={filters.academicYearOptions}
-            defaultValue={filters.defaultAcademicYear}
+            options={academicYearOptions}
+            defaultValue={academicYearOptions[0]?.value}
             ariaLabel="Academic Year"
             variant="filter"
+            disabled={yearLoading}
           />
           <FormSelect
-            options={filters.classOptions}
+            options={classOptions}
             defaultValue={filters.defaultClass}
             ariaLabel="Class"
             variant="filter"
+            disabled={classLoading}
           />
           <FormSelect
-            options={filters.monthOptions}
-            defaultValue={filters.defaultMonth}
+            options={monthOptions}
+            defaultValue={monthOptions[0]?.value}
             ariaLabel="Month"
             variant="filter"
+            disabled={monthLoading}
           />
         </div>
       </section>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import '../../../components/reusable/css/crmReusable.css';
 import '../css/paymentsPage.css';
 import { paymentsPageMock } from '../../../data/mocks/payments/paymentsPage.mock';
@@ -10,6 +10,8 @@ import {
   FormSelect,
 } from '../../../components/reusable/js/index';
 import StatusPill from '../../../components/common/js/statusPill';
+import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
+import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
 const PaymentsPage = () => {
   const {
@@ -20,10 +22,33 @@ const PaymentsPage = () => {
     recentPayments,
   } = paymentsPageMock;
 
-  const [paymentMethod, setPaymentMethod] = useState(collectForm.defaultPaymentMethod);
+  const { options: studentOptions, isLoading: studentsLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.user,
+    { useIdAsValue: true, loadingLabel: collectForm.loadingLabel },
+  );
+  const { options: installmentOptions, isLoading: installmentLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.feeBillingTerm,
+    { loadingLabel: collectForm.loadingLabel },
+  );
+  const { options: paymentModeOptions, isLoading: modesLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.paymentMode,
+    { loadingLabel: collectForm.loadingLabel },
+  );
+
+  const paymentMethods = useMemo(
+    () => paymentModeOptions.map((mode) => ({
+      id: mode.value,
+      label: mode.label,
+    })),
+    [paymentModeOptions],
+  );
+
+  const [paymentMethod, setPaymentMethod] = useState('');
+
+  const effectiveMethod = paymentMethod || paymentMethods[0]?.id || '';
 
   const selectedMethodLabel =
-    collectForm.paymentMethods.find((m) => m.id === paymentMethod)?.label ?? 'UPI';
+    paymentMethods.find((m) => m.id === effectiveMethod)?.label ?? '—';
 
   return (
     <div className="crmListPage paymentsPage">
@@ -36,13 +61,15 @@ const PaymentsPage = () => {
           <div className="paymentsFormGrid">
             <FormSelect
               label={collectForm.studentLabel}
-              options={collectForm.studentOptions}
-              defaultValue={collectForm.defaultStudent}
+              options={studentOptions}
+              defaultValue={studentOptions[0]?.value}
+              disabled={studentsLoading}
             />
             <FormSelect
               label={collectForm.installmentLabel}
-              options={collectForm.installmentOptions}
-              defaultValue={collectForm.defaultInstallment}
+              options={installmentOptions}
+              defaultValue={installmentOptions[0]?.value}
+              disabled={installmentLoading}
             />
             <FormInput
               label={collectForm.amountLabel}
@@ -60,39 +87,43 @@ const PaymentsPage = () => {
           <fieldset className="paymentsMethodFieldset">
             <legend className="crmFormLabel">{collectForm.paymentMethodLabel}</legend>
             <div className="paymentsMethodTiles" role="radiogroup" aria-label={collectForm.paymentMethodLabel}>
-              {collectForm.paymentMethods.map((method) => {
-                const isSelected = paymentMethod === method.id;
-                return (
-                  <label
-                    key={method.id}
-                    className={`paymentsMethodTile${isSelected ? ' paymentsMethodTileSelected' : ''}`}
-                  >
-                    <input
-                      type="radio"
-                      name="paymentMethod"
-                      value={method.id}
-                      checked={isSelected}
-                      onChange={() => setPaymentMethod(method.id)}
-                      className="paymentsMethodInput"
-                    />
-                    <span className="paymentsMethodRadio" aria-hidden="true" />
-                    <span className="paymentsMethodLabel">{method.label}</span>
-                  </label>
-                );
-              })}
+              {modesLoading ? (
+                <p className="paymentsMethodLoading">{collectForm.loadingLabel}</p>
+              ) : (
+                paymentMethods.map((method) => {
+                  const isSelected = effectiveMethod === method.id;
+                  return (
+                    <label
+                      key={method.id}
+                      className={`paymentsMethodTile${isSelected ? ' paymentsMethodTileSelected' : ''}`}
+                    >
+                      <input
+                        type="radio"
+                        name="paymentMethod"
+                        value={method.id}
+                        checked={isSelected}
+                        onChange={() => setPaymentMethod(method.id)}
+                        className="paymentsMethodInput"
+                      />
+                      <span className="paymentsMethodRadio" aria-hidden="true" />
+                      <span className="paymentsMethodLabel">{method.label}</span>
+                    </label>
+                  );
+                })
+              )}
             </div>
           </fieldset>
 
           <FormInput
             label={collectForm.remarksLabel}
             placeholder={collectForm.remarksPlaceholder}
-            className="paymentsRemarksField"
+            className="crmFormFieldFull"
           />
 
-          <div className="paymentsFormActions">
+          <div className="paymentsCollectActions">
             <CrmButton variant="outline">{collectForm.actions.saveDraftLabel}</CrmButton>
-            <CrmButton variant="primary" className="paymentsCollectBtn">
-              {DashboardIcons.dollarSign(16)}
+            <CrmButton variant="primary">
+              {DashboardIcons.receipt(16)}
               {collectForm.actions.collectLabel}
             </CrmButton>
           </div>
@@ -101,13 +132,13 @@ const PaymentsPage = () => {
         <article className="paymentsReceiptCard">
           <div className="paymentsReceiptHeader">
             <h2 className="paymentsCardTitle">{receiptPreview.cardTitle}</h2>
-            <div className="paymentsReceiptIconActions">
-              <button type="button" className="paymentsReceiptIconBtn" aria-label={receiptPreview.printAriaLabel}>
+            <div className="paymentsReceiptTools">
+              <CrmButton variant="icon" ariaLabel={receiptPreview.printAriaLabel}>
                 {DashboardIcons.printer(18)}
-              </button>
-              <button type="button" className="paymentsReceiptIconBtn" aria-label={receiptPreview.downloadAriaLabel}>
+              </CrmButton>
+              <CrmButton variant="icon" ariaLabel={receiptPreview.downloadAriaLabel}>
                 {DashboardIcons.download(18)}
-              </button>
+              </CrmButton>
             </div>
           </div>
 
@@ -120,54 +151,57 @@ const PaymentsPage = () => {
             ))}
           </dl>
 
-          <div className="paymentsReceiptBreakdown">
+          <ul className="paymentsReceiptBreakdown">
             {receiptPreview.breakdown.map((line) => (
-              <div key={line.label} className="paymentsReceiptBreakdownRow">
+              <li key={line.label} className="paymentsReceiptBreakdownRow">
                 <span>{line.label}</span>
                 <span>{line.value}</span>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <div className="paymentsReceiptTotal">
             <span>{receiptPreview.totalLabel}</span>
-            <span className="paymentsReceiptTotalValue">{receiptPreview.totalValue}</span>
+            <strong>{receiptPreview.totalValue}</strong>
           </div>
 
           <p className="paymentsReceiptFooter">{receiptPreview.footerNote}</p>
         </article>
       </section>
 
-      <section className="paymentsTableCard crmSectionAnimate paymentsSectionDelay1">
-        <h2 className="paymentsTableTitle">{recentPayments.sectionTitle}</h2>
+      <section className="paymentsRecentSection crmSectionAnimate paymentsSectionDelay1">
+        <h2 className="paymentsRecentTitle">{recentPayments.sectionTitle}</h2>
         <div className="paymentsTableWrap">
           <table className="crmTable paymentsTable">
             <thead>
               <tr>
                 {recentPayments.columns.map((col) => (
-                  <th key={col || 'action'}>{col}</th>
+                  <th key={col}>{col}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {recentPayments.rows.map((row, index) => (
-                <tr key={row.id} className={index % 2 === 1 ? 'paymentsTableRowAlt' : ''}>
+                <tr
+                  key={row.id}
+                  className="crmTableRow"
+                  style={{ animationDelay: `${0.04 * index}s` }}
+                >
                   <td className="crmTableId">{row.receipt}</td>
                   <td>
-                    <span className="crmTableStrong">{row.studentName}</span>
-                    <span className="paymentsStudentSub">{row.studentClass}</span>
+                    <span className="paymentsStudentName">{row.studentName}</span>
+                    <span className="paymentsStudentClass">{row.studentClass}</span>
                   </td>
-                  <td>{row.amount}</td>
+                  <td className="crmTableAmount">{row.amount}</td>
                   <td>{row.method}</td>
-                  <td className="paymentsTableDate">{row.date}</td>
+                  <td>{row.date}</td>
                   <td>
                     <StatusPill status={row.status} />
                   </td>
-                  <td className="paymentsTableActionCell">
-                    <button type="button" className="paymentsReceiptLink">
-                      {DashboardIcons.download(14)}
-                      {recentPayments.receiptActionLabel}
-                    </button>
+                  <td>
+                    <CrmButton variant="icon" ariaLabel={`View receipt ${row.receipt}`}>
+                      {DashboardIcons.eye(16)}
+                    </CrmButton>
                   </td>
                 </tr>
               ))}

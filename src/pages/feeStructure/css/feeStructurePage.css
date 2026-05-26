@@ -20,6 +20,10 @@
   margin-bottom: 1.25rem;
 }
 
+.feeStructureConfigCard {
+  overflow: visible;
+}
+
 .feeStructureConfigGrid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -45,6 +49,105 @@
 
 .feeStructureAddCategoryBtn {
   flex-shrink: 0;
+}
+
+.feeStructureCreateSuccess {
+  margin: 0 0 0.875rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid rgba(22, 163, 74, 0.24);
+  border-radius: var(--theme-radius-sm);
+  background: rgba(22, 163, 74, 0.08);
+  color: var(--theme-success);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.feeStructureListError {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: var(--theme-radius-sm);
+  background: rgba(220, 38, 38, 0.06);
+}
+
+.feeStructureListError p {
+  margin: 0;
+  flex: 1;
+  min-width: 12rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--theme-danger);
+}
+
+.feeStructureListState {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--theme-text-muted);
+  font-size: 0.875rem;
+}
+
+.feeHeadDeleteModal {
+  max-width: 28rem;
+}
+
+.feeHeadDeleteModalHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.feeHeadDeleteModalIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--theme-radius-md);
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--theme-danger);
+}
+
+.feeHeadDeleteModalHint {
+  margin: 0 0 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--theme-text-muted);
+}
+
+.feeHeadDeleteConfirmBtn {
+  background: var(--theme-danger);
+  border-color: var(--theme-danger);
+}
+
+.feeHeadDeleteConfirmBtn:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.feeQuartersEditGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.feeQuartersEditTotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 0.875rem;
+  border-radius: var(--theme-radius-sm);
+  background: var(--theme-bg-page);
+  font-size: 0.8125rem;
+  color: var(--theme-text-muted);
+}
+
+.feeQuartersEditTotal strong {
+  font-size: 0.9375rem;
+  color: var(--theme-primary);
 }
 
 .feeStructureTableWrap {
@@ -74,7 +177,7 @@
 }
 
 .feeStructureTableActionHead {
-  width: 2.5rem;
+  width: 5.5rem;
 }
 
 .feeStructureTable td {
@@ -125,24 +228,29 @@
 
 .feeStructureTableActionCell {
   text-align: right;
-  width: 2.5rem;
+  width: 5.5rem;
 }
 
-.feeStructureDeleteBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.35rem;
-  border: none;
-  background: none;
-  color: var(--theme-danger);
-  cursor: pointer;
-  border-radius: var(--theme-radius-sm);
-  transition: background 0.15s ease, color 0.15s ease;
+.feeStructureTableActionCell .crmRowActions {
+  justify-content: flex-end;
 }
 
-.feeStructureDeleteBtn:hover {
-  background: rgba(220, 38, 38, 0.08);
+.feeStructureCellText {
+  display: block;
+  min-width: 4.5rem;
+  max-width: 6.5rem;
+  margin: 0 auto;
+  padding: 0.5rem 0.625rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-primary);
+  text-align: center;
+}
+
+.feeStructureCategoryText {
+  max-width: none;
+  min-width: 8rem;
+  margin: 0;
+  text-align: left;
 }
 
 /* Totals row */
@@ -279,6 +387,25 @@
   animation-delay: 0.14s;
 }
 
+.feeHeadModal {
+  max-width: 760px;
+}
+
+.feeHeadModalGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.feeHeadModalError {
+  margin: 0 0 1rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid rgba(220, 38, 38, 0.24);
+  border-radius: var(--theme-radius-sm);
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--theme-danger);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
 @media (max-width: 1100px) {
   .feeStructureConfigGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -347,5 +474,9 @@
   .feeStructureAddCategoryBtn {
     font-size: 0.8125rem;
     padding: 0.5rem 0.75rem;
+  }
+
+  .feeHeadModalGrid {
+    grid-template-columns: 1fr;
   }
 }

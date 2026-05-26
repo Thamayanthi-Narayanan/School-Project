@@ -94,12 +94,14 @@ export const staffPageMock = {
   addStaffModal: {
     title: 'Add new staff',
     subtitle: 'Create a staff profile. You can complete details later.',
+    rolePlaceholder: 'Select role',
+    loadingLabel: 'Loading…',
     cancelLabel: 'Cancel',
     saveLabel: 'Save staff',
     fields: [
       { id: 'fullName', type: 'text', label: 'Full name', placeholder: 'Mrs. Kavita Menon' },
-      { id: 'role', type: 'select', label: 'Role', options: ['Select role', 'Principal', 'Math Teacher', 'Science Teacher', 'Accountant', 'English Teacher'] },
-      { id: 'department', type: 'select', label: 'Department', options: ['Select department', 'Administration', 'Academics', 'Finance'] },
+      { id: 'role', type: 'select', label: 'Role' },
+      { id: 'department', type: 'text', label: 'Department', placeholder: 'e.g. Academics' },
       { id: 'phone', type: 'tel', label: 'Phone', placeholder: '+91', inputType: 'tel' },
       { id: 'salary', type: 'text', label: 'Salary', placeholder: '₹85,000' },
       { id: 'joinDate', type: 'text', label: 'Join date', placeholder: 'dd - mm - yyyy', icon: 'calendar' },

@@ -9,30 +9,9 @@ const PHONE_MAX_LENGTH = 20;
 const PASSWORD_MIN_LENGTH = 8;
 const PASSWORD_MAX_LENGTH = 255;
 
-const ROLE_SELECT_PLACEHOLDER = 'Select role';
+export const ROLE_SELECT_PLACEHOLDER = 'Select role';
 
-const ASSIGNABLE_ROLES = {
-  ADMIN: ['ADMIN', 'PRINCIPAL', 'CORRESPONDENT'],
-  PRINCIPAL: ['CORRESPONDENT'],
-};
-
-export const USER_STATUS_OPTIONS = ['ACTIVE', 'INACTIVE', 'ONLINE', 'OFFLINE'];
-
-export const getAssignableRoleOptions = (callerRole) => {
-  const roles = ASSIGNABLE_ROLES[callerRole] ?? ASSIGNABLE_ROLES.PRINCIPAL;
-  return [ROLE_SELECT_PLACEHOLDER, ...roles];
-};
-
-export const getEditRoleOptions = (callerRole, currentRole) => {
-  const assignable = ASSIGNABLE_ROLES[callerRole] ?? ASSIGNABLE_ROLES.PRINCIPAL;
-  const options = [...assignable];
-
-  if (currentRole && !options.includes(currentRole)) {
-    options.unshift(currentRole);
-  }
-
-  return options;
-};
+export const USER_STATUS_OPTIONS = [];
 
 export const buildCreateUserPayload = (form) => {
   const name = form.userName.trim();
@@ -178,7 +157,7 @@ export const validateUpdateUserForm = (form, original, errorCopy) => {
 
   if (!form.userStatus) {
     errors.userStatus = errorCopy.statusRequired;
-  } else if (!USER_STATUS_OPTIONS.includes(form.userStatus)) {
+  } else if (!form.userStatus.trim()) {
     errors.userStatus = errorCopy.statusInvalid;
   }
 

@@ -47,7 +47,6 @@ export const admissionPageMock = {
         religion: { label: 'Religion' },
         community: { label: 'Community' },
         annualIncome: { label: 'Annual income (₹)', placeholder: '350000' },
-        status: { label: 'Status' },
       },
     },
     parentDetails: {
@@ -109,7 +108,6 @@ export const admissionPageMock = {
         religion: 'Religion',
         community: 'Community',
         annualIncome: 'Annual income',
-        status: 'Status',
         fatherName: 'Father name',
         fatherPhone: 'Father phone',
         fatherEmail: 'Father email',

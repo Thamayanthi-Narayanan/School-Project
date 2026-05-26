@@ -1,22 +1,26 @@
 import { useCallback, useMemo, useState } from 'react';
 import { createUser, deleteUser, getUserById, listUsers, updateUser } from '../../../apis/authApi';
 import { userCreationPanelMock } from '../../../data/mocks/userCreation/userCreationPanel.mock';
-import { getAuthUser } from '../../../services/authSession';
 import { parseApiError } from '../../../utils/apiError';
+import { useMasterDataContext } from '../../../context/masterDataContext';
+import { buildRoleLoadingOptions, MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 import {
   buildCreateUserPayload,
   buildUpdateUserPayload,
-  getAssignableRoleOptions,
-  getEditRoleOptions,
   mapApiUserToLocal,
   mapApiUsersListToLocal,
+  ROLE_SELECT_PLACEHOLDER,
   validateCreateUserForm,
   validateUpdateUserForm,
 } from '../../../utils/createUser';
+import {
+  buildCreateRoleSelectOptions,
+  buildEditRoleSelectOptions,
+} from '../../../utils/roleSelectOptions';
 
 const { fields, errors: errorCopy } = userCreationPanelMock;
 
-const ROLE_PLACEHOLDER = 'Select role';
+const ROLE_PLACEHOLDER = fields.userRole.placeholder || ROLE_SELECT_PLACEHOLDER;
 
 const emptyForm = {
   userName: '',
@@ -71,17 +75,48 @@ export const useUserCreationForm = () => {
   const [deletingUserId, setDeletingUserId] = useState(null);
   const [deleteSuccessPopup, setDeleteSuccessPopup] = useState(null);
 
-  const callerRole = getAuthUser()?.role ?? 'PRINCIPAL';
+  const {
+    data: masterData,
+    isLoading: isLoadingMasterData,
+    error: masterDataError,
+    refetch: refetchMasterData,
+    getRawOptions,
+  } = useMasterDataContext();
 
-  const createRoleOptions = useMemo(
-    () => getAssignableRoleOptions(callerRole),
-    [callerRole],
-  );
+  const isLoadingRoles = isLoadingMasterData;
+  const rolesLoadError = masterDataError;
+  const refetchRoles = refetchMasterData;
 
-  const editRoleOptions = useMemo(
-    () => getEditRoleOptions(callerRole, editingUserSnapshot?.userRole),
-    [callerRole, editingUserSnapshot?.userRole],
-  );
+  const createRoleOptions = useMemo(() => {
+    if (isLoadingRoles) {
+      return buildRoleLoadingOptions(errorCopy.loadingRoles);
+    }
+    return buildCreateRoleSelectOptions(
+      getRawOptions(MASTER_DATA_KEYS.role),
+      ROLE_PLACEHOLDER,
+    );
+  }, [getRawOptions, isLoadingRoles, errorCopy.loadingRoles]);
+
+  const editRoleOptions = useMemo(() => {
+    if (isLoadingRoles) {
+      return buildRoleLoadingOptions(errorCopy.loadingRoles);
+    }
+    return buildEditRoleSelectOptions(
+      getRawOptions(MASTER_DATA_KEYS.role),
+      editingUserSnapshot?.userRole,
+    );
+  }, [editingUserSnapshot?.userRole, getRawOptions, isLoadingRoles, errorCopy.loadingRoles]);
+
+  const userStatusOptions = useMemo(() => {
+    if (isLoadingMasterData) {
+      return buildRoleLoadingOptions(errorCopy.loadingRoles);
+    }
+    return getRawOptions(MASTER_DATA_KEYS.userStatus);
+  }, [getRawOptions, isLoadingMasterData, errorCopy.loadingRoles]);
+
+  const isLoadingUserStatus = isLoadingMasterData;
+
+  const roleOptionsError = rolesLoadError ? errorCopy.loadRolesFailed : null;
 
   const selectedUser = users.find((user) => String(user.id) === String(selectedUserId)) ?? null;
 
@@ -451,6 +486,11 @@ export const useUserCreationForm = () => {
     userOptions,
     createRoleOptions,
     editRoleOptions,
+    userStatusOptions,
+    isLoadingRoles,
+    isLoadingUserStatus,
+    roleOptionsError,
+    refetchRoles,
     resetForm,
     updateField,
     handleSectionChange,

@@ -1,7 +1,14 @@
 import { FormInput, FormSelect } from '../../../components/reusable/js/index';
-import { PRIMARY_CONTACT_OPTIONS } from '../../../utils/admissionForm';
+import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
+import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
-const AdmissionParentsStep = ({ parents, fields, errors = {}, onChange }) => (
+const AdmissionParentsStep = ({ parents, fields, errors = {}, onChange }) => {
+  const { options: primaryContactOptions, isLoading: contactLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.primaryContact,
+    { loadingLabel: 'Loading…' },
+  );
+
+  return (
   <div className="admissionFormSections">
     <section className="admissionFormSection">
       <h3 className="admissionFormSectionTitle">{fields.fatherTitle}</h3>
@@ -143,15 +150,17 @@ const AdmissionParentsStep = ({ parents, fields, errors = {}, onChange }) => (
       <div className="admissionFormGrid">
         <FormSelect
           label={fields.primaryContact.label}
-          options={PRIMARY_CONTACT_OPTIONS}
+          options={primaryContactOptions}
           value={parents.primaryContact}
           onChange={(e) => onChange('primaryContact', e.target.value)}
           error={errors.primaryContact}
           className="crmFormFieldFull"
+          disabled={contactLoading}
         />
       </div>
     </section>
   </div>
-);
+  );
+};
 
 export default AdmissionParentsStep;

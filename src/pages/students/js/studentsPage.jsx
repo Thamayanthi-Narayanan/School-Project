@@ -13,7 +13,9 @@ import {
   TableRowActions,
 } from '../../../components/reusable/js/index';
 import { useStudentsList } from '../hooks/useStudentsList';
+import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
 import { downloadStudentsImportTemplate } from '../../../utils/studentsImportTemplate';
+import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
 const StudentsPage = () => {
   const {
@@ -37,24 +39,53 @@ const StudentsPage = () => {
     refetch,
   } = useStudentsList(pagination.pageSize);
 
+  const { options: classOptions, isLoading: classLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.class,
+    {
+      prepend: [{ label: filters.allClassesLabel, value: filters.allClassesLabel }],
+      useIdAsValue: false,
+      loadingLabel: filters.loadingLabel,
+    },
+  );
+
+  const { options: sectionOptions, isLoading: sectionLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.section,
+    {
+      prepend: [{ label: filters.allSectionsLabel, value: filters.allSectionsLabel }],
+      loadingLabel: filters.loadingLabel,
+    },
+  );
+
+  const { options: yearOptions, isLoading: yearLoading } = useMasterDataSelect(
+    MASTER_DATA_KEYS.academicYear,
+    {
+      prepend: [{ label: filters.defaultYear, value: filters.defaultYear }],
+      useIdAsValue: false,
+      loadingLabel: filters.loadingLabel,
+    },
+  );
+
   const filterSelects = [
     {
       id: 'class',
       ariaLabel: 'Filter by class',
-      options: filters.classOptions,
+      options: classOptions,
       defaultValue: filters.defaultClass,
+      disabled: classLoading,
     },
     {
       id: 'section',
       ariaLabel: 'Filter by section',
-      options: filters.sectionOptions,
+      options: sectionOptions,
       defaultValue: filters.defaultSection,
+      disabled: sectionLoading,
     },
     {
       id: 'year',
       ariaLabel: 'Filter by academic year',
-      options: filters.yearOptions,
+      options: yearOptions,
       defaultValue: filters.defaultYear,
+      disabled: yearLoading,
     },
   ];
 
