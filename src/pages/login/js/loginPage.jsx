@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
-import { useLocation } from 'react-router-dom';
+import { routePaths } from '../../../constants/routePaths';
 import '../css/loginPage.css';
 import { useLoginForm } from '../hooks/useLoginForm';
 import { loginPageMock } from '../../../data/mocks/login/loginPage.mock';
@@ -217,9 +218,9 @@ const LoginPage = () => {
                     <label className="loginFormLabel" htmlFor="login-password">
                       Password
                     </label>
-                    <a className="loginFormLink" href="#forgot-password">
+                    <Link className="loginFormLink" to={routePaths.forgotPassword}>
                       Forgot password?
-                    </a>
+                    </Link>
                   </div>
                   <div className="loginFormInputWrap loginFormInputWrapPassword">
                     <span className="loginFormInputIcon">

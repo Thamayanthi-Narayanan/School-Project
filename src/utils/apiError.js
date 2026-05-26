@@ -20,6 +20,16 @@ const normalizeFieldKey = (key, context = 'login') => {
     return null;
   }
 
+  if (context === 'resetPassword') {
+    const map = {
+      newPassword: 'newPassword',
+      confirmNewPassword: 'confirmNewPassword',
+      confirmPassword: 'confirmNewPassword',
+      resetToken: 'general',
+    };
+    return map[key] ?? null;
+  }
+
   if (context === 'changePassword') {
     const map = {
       currentPassword: 'currentPassword',
@@ -105,6 +115,15 @@ const mapMessageToFields = (message, context) => {
     }
     if (lower.includes('expired')) return { general: msg };
     if (lower.includes('wait') && lower.includes('30')) return { general: msg };
+    return null;
+  }
+
+  if (context === 'resetPassword') {
+    if (lower.includes('reset token') || lower.includes('expired')) return { general: msg };
+    if (lower.includes('confirm') || lower.includes('confirmation')) {
+      return { confirmNewPassword: msg };
+    }
+    if (lower.includes('new password') || lower.includes('password')) return { newPassword: msg };
     return null;
   }
 

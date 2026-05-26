@@ -99,3 +99,30 @@ export const changePassword = async (payload) => {
   const { data } = await apiClient.post('/auth/change-password', payload);
   return data;
 };
+
+/**
+ * POST /api/v1/auth/forgot-password
+ * Sends reset OTP. Public; generic success message always.
+ */
+export const forgotPassword = async (payload) => {
+  const { data } = await apiClient.post('/auth/forgot-password', payload);
+  return data;
+};
+
+/**
+ * POST /api/v1/auth/verify-otp
+ * Forgot-password flow — returns resetToken (not login token).
+ */
+export const verifyForgotPasswordOtp = async (payload) => {
+  const { data } = await apiClient.post('/auth/verify-otp', payload);
+  return data;
+};
+
+/**
+ * POST /api/v1/auth/reset-password
+ * Sets new password using resetToken from verify-otp.
+ */
+export const resetPassword = async (payload) => {
+  const { data } = await apiClient.post('/auth/reset-password', payload);
+  return data;
+};

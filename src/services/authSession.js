@@ -6,6 +6,9 @@ import {
   PENDING_OTP_IDENTIFIER_KEY,
   FIRST_LOGIN_PASSWORD_STEP_KEY,
   OTP_LOGIN_NOTICE_KEY,
+  PENDING_RESET_IDENTIFIER_KEY,
+  FORGOT_PASSWORD_NOTICE_KEY,
+  PASSWORD_RESET_TOKEN_KEY,
 } from '../constants/authStorage';
 
 export const setAuthSession = ({ token, user, expiresIn }) => {
@@ -82,6 +85,47 @@ export const getOtpLoginNotice = () => sessionStorage.getItem(OTP_LOGIN_NOTICE_K
 
 export const clearOtpLoginNotice = () => {
   sessionStorage.removeItem(OTP_LOGIN_NOTICE_KEY);
+};
+
+export const setPendingResetIdentifier = (identifier) => {
+  sessionStorage.setItem(PENDING_RESET_IDENTIFIER_KEY, identifier.trim());
+};
+
+export const getPendingResetIdentifier = () =>
+  sessionStorage.getItem(PENDING_RESET_IDENTIFIER_KEY);
+
+export const clearPendingResetIdentifier = () => {
+  sessionStorage.removeItem(PENDING_RESET_IDENTIFIER_KEY);
+};
+
+export const setForgotPasswordNotice = (message) => {
+  if (message) {
+    sessionStorage.setItem(FORGOT_PASSWORD_NOTICE_KEY, message);
+  }
+};
+
+export const getForgotPasswordNotice = () =>
+  sessionStorage.getItem(FORGOT_PASSWORD_NOTICE_KEY);
+
+export const clearForgotPasswordNotice = () => {
+  sessionStorage.removeItem(FORGOT_PASSWORD_NOTICE_KEY);
+};
+
+export const setPasswordResetToken = (token) => {
+  sessionStorage.setItem(PASSWORD_RESET_TOKEN_KEY, token);
+};
+
+export const getPasswordResetToken = () =>
+  sessionStorage.getItem(PASSWORD_RESET_TOKEN_KEY);
+
+export const clearPasswordResetToken = () => {
+  sessionStorage.removeItem(PASSWORD_RESET_TOKEN_KEY);
+};
+
+export const clearForgotPasswordFlow = () => {
+  clearPendingResetIdentifier();
+  clearForgotPasswordNotice();
+  clearPasswordResetToken();
 };
 
 export const requiresOtpVerification = (responseOrData) => {

@@ -3,6 +3,9 @@ import { routePaths } from '../constants/routePaths';
 import LoginPage from '../pages/login/js/loginPage';
 import OtpPage from '../pages/login/js/otpPage';
 import FirstLoginChangePasswordPage from '../pages/login/js/firstLoginChangePasswordPage';
+import ForgotPasswordPage from '../pages/login/js/forgotPasswordPage';
+import ForgotPasswordOtpPage from '../pages/login/js/forgotPasswordOtpPage';
+import ResetPasswordPage from '../pages/login/js/resetPasswordPage';
 import DashboardLayout from '../layouts/dashboardLayout/js/dashboardLayout';
 import DashboardPage from '../pages/dashboard/js/dashboardPage';
 import StudentsPage from '../pages/students/js/studentsPage';
@@ -30,6 +33,9 @@ const AppRouter = () => {
           path={routePaths.firstLoginChangePassword}
           element={<FirstLoginChangePasswordPage />}
         />
+        <Route path={routePaths.forgotPassword} element={<ForgotPasswordPage />} />
+        <Route path={routePaths.forgotPasswordOtp} element={<ForgotPasswordOtpPage />} />
+        <Route path={routePaths.resetPassword} element={<ResetPasswordPage />} />
         <Route element={<DashboardLayout />}>
           <Route path={routePaths.dashboard} element={<DashboardPage />} />
           <Route path={routePaths.students} element={<StudentsPage />} />

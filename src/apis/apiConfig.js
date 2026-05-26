@@ -20,9 +20,15 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     const authUrl = error.config?.url || '';
-    const isAuthRoute = authUrl.includes('/auth/login') || authUrl.includes('/auth/logout');
+    const isLoginVerifyOtp = authUrl.includes('/auth/login/verify-otp');
+    const isPublicAuthRoute =
+      authUrl.includes('/auth/login')
+      || authUrl.includes('/auth/logout')
+      || authUrl.includes('/auth/forgot-password')
+      || authUrl.includes('/auth/reset-password')
+      || (authUrl.includes('/auth/verify-otp') && !isLoginVerifyOtp);
 
-    if (error?.response?.status === 401 && !isAuthRoute) {
+    if (error?.response?.status === 401 && !isPublicAuthRoute) {
       localStorage.removeItem('authToken');
       localStorage.removeItem('authUser');
       localStorage.removeItem('authExpiresIn');

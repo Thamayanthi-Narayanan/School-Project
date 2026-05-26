@@ -49,3 +49,25 @@ export const extractAuthSessionFromResponse = (response) => {
 
   return null;
 };
+
+/**
+ * Forgot-password verify-otp — returns resetToken in data.
+ */
+export const extractResetTokenFromResponse = (response) => {
+  if (!response?.success) return null;
+
+  const payload = response.data ?? response;
+  if (!payload || typeof payload !== 'object') return null;
+
+  const resetToken =
+    payload.resetToken
+    ?? payload.reset_token
+    ?? payload.token;
+
+  if (!resetToken) return null;
+
+  return {
+    resetToken: String(resetToken),
+    expiresIn: payload.expiresIn ?? payload.expires_in ?? null,
+  };
+};
