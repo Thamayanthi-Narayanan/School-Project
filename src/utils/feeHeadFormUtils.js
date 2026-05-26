@@ -8,9 +8,7 @@ export const initialFeeHeadForm = {
   feeHeadCode: '',
   feeHeadName: '',
   description: '',
-  feeCategory: '',
   mandatory: 'No',
-  refundable: 'No',
   active: YES,
   displayOrder: '',
 };
@@ -19,9 +17,7 @@ export const feeHeadFromApiToForm = (head) => ({
   feeHeadCode: head?.feeHeadCode ?? '',
   feeHeadName: head?.feeHeadName ?? head?.name ?? '',
   description: head?.description ?? '',
-  feeCategory: head?.feeCategory ?? '',
   mandatory: toYesNo(head?.mandatory),
-  refundable: toYesNo(head?.refundable),
   active: head?.active === false ? 'No' : YES,
   displayOrder: head?.displayOrder != null ? String(head.displayOrder) : '',
 });
@@ -30,7 +26,6 @@ export const validateFeeHeadFormFields = (form, validationCopy, { requireCore = 
   const errors = {};
   const code = form.feeHeadCode.trim().toUpperCase();
   const name = form.feeHeadName.trim();
-  const category = form.feeCategory.trim();
   const order = form.displayOrder.trim();
 
   if (requireCore || code) {
@@ -51,10 +46,6 @@ export const validateFeeHeadFormFields = (form, validationCopy, { requireCore = 
     }
   }
 
-  if (category.length > 50) {
-    errors.feeCategory = validationCopy.categoryMax;
-  }
-
   if (order && !/^-?\d+$/.test(order)) {
     errors.displayOrder = validationCopy.displayOrderInt;
   }
@@ -68,9 +59,8 @@ export const buildCreateFeeHeadPayload = (form) => {
     feeHeadCode: form.feeHeadCode.trim().toUpperCase(),
     feeHeadName: form.feeHeadName.trim(),
     ...(form.description.trim() ? { description: form.description.trim() } : {}),
-    ...(form.feeCategory.trim() ? { feeCategory: form.feeCategory.trim() } : {}),
     mandatory: toBoolean(form.mandatory),
-    refundable: toBoolean(form.refundable),
+    refundable: false,
     active: toBoolean(form.active),
     ...(trimmedOrder ? { displayOrder: Number.parseInt(trimmedOrder, 10) } : {}),
   };
@@ -81,7 +71,6 @@ export const buildUpdateFeeHeadPayload = (form, original) => {
   const code = form.feeHeadCode.trim().toUpperCase();
   const name = form.feeHeadName.trim();
   const description = form.description.trim();
-  const category = form.feeCategory.trim();
   const order = form.displayOrder.trim();
   const originalOrder = original?.displayOrder != null ? String(original.displayOrder) : '';
 
@@ -92,16 +81,8 @@ export const buildUpdateFeeHeadPayload = (form, original) => {
     payload.description = description;
   }
 
-  if (category !== (original?.feeCategory ?? '')) {
-    payload.feeCategory = category;
-  }
-
   if (toBoolean(form.mandatory) !== Boolean(original?.mandatory)) {
     payload.mandatory = toBoolean(form.mandatory);
-  }
-
-  if (toBoolean(form.refundable) !== Boolean(original?.refundable)) {
-    payload.refundable = toBoolean(form.refundable);
   }
 
   if (toBoolean(form.active) !== (original?.active !== false)) {

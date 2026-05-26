@@ -8,47 +8,56 @@ import {
   CrmButton,
   FormInput,
   FormSelect,
-  TableRowActions,
   useModal,
 } from '../../../components/reusable/js/index';
-import { formatInrAmount } from '../../../utils/feeStructureAmounts';
+import FeeHeadFormFields from './feeHeadFormFields';
 import FeeHeadFormModal from './feeHeadFormModal';
+import FeeCategoriesViewTable from './feeCategoriesViewTable';
 import EditFeeQuartersModal from './editFeeQuartersModal';
 import DeleteFeeHeadModal from './deleteFeeHeadModal';
+import ClearFeeAmountsModal from './clearFeeAmountsModal';
 import { useCreateFeeHeadForm } from '../hooks/useCreateFeeHeadForm';
+import { useEditFeeHeadForm } from '../hooks/useEditFeeHeadForm';
 import { useEditFeeQuartersForm } from '../hooks/useEditFeeQuartersForm';
 import { useFeeStructureCategories } from '../hooks/useFeeStructureCategories';
 import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
 import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
-const formatQuarterCell = (value) => {
-  const trimmed = String(value ?? '').trim();
-  return trimmed === '' ? '—' : trimmed;
+const sectionIconMap = {
+  plus: DashboardIcons.plus,
+  eye: DashboardIcons.eye,
 };
+
+const emptyQuarters = { q1: '', q2: '', q3: '', q4: '' };
 
 const FeeStructurePage = () => {
   const {
     title,
     subtitle,
+    sections,
+    defaultSection,
     actions,
     createFeeHead,
+    editFeeHead,
     editFeeQuarters,
     deleteFeeHead,
+    clearFeeAmounts,
     config,
     categories,
-    scholarshipPreview,
-    finalPayable,
   } = feeStructurePageMock;
-  const { isOpen: isCreateOpen, openModal: openCreateModal, closeModal: closeCreateModal } = useModal();
+
+  const [activeSection, setActiveSection] = useState(defaultSection);
   const { isOpen: isEditOpen, openModal: openEditModal, closeModal: closeEditModal } = useModal();
+  const { isOpen: isHeadEditOpen, openModal: openHeadEditModal, closeModal: closeHeadEditModal } = useModal();
   const [editTarget, setEditTarget] = useState(null);
+  const [headEditTarget, setHeadEditTarget] = useState(null);
+  const [clearAmountsTarget, setClearAmountsTarget] = useState(null);
 
   const {
     rows,
     isLoading,
     loadError,
     columnTotals,
-    grossTotalAmount,
     getRowTotalDisplay,
     updateRowQuarters,
     refetchFeeHeads,
@@ -73,6 +82,17 @@ const FeeStructurePage = () => {
   } = useCreateFeeHeadForm(createFeeHead, refetchFeeHeads);
 
   const {
+    form: headEditForm,
+    errors: headEditErrors,
+    isSubmitting: isHeadUpdating,
+    successMessage: headUpdateSuccessMessage,
+    updateField: updateHeadEditField,
+    handleSubmit: handleHeadEditSubmit,
+    reset: resetHeadEdit,
+    setSuccessMessage: setHeadUpdateSuccessMessage,
+  } = useEditFeeHeadForm(editFeeHead, headEditTarget, refetchFeeHeads);
+
+  const {
     form: editForm,
     errors: editErrors,
     isSubmitting: isUpdating,
@@ -84,20 +104,26 @@ const FeeStructurePage = () => {
     previewTotal: editPreviewTotal,
   } = useEditFeeQuartersForm(editFeeQuarters, editTarget, updateRowQuarters);
 
-  const bannerMessage = createSuccessMessage || updateSuccessMessage || deleteSuccessMessage;
+  const bannerMessage =
+    createSuccessMessage
+    || headUpdateSuccessMessage
+    || updateSuccessMessage
+    || deleteSuccessMessage;
 
-  const grossTotalDisplay = grossTotalAmount != null
-    ? formatInrAmount(grossTotalAmount)
-    : finalPayable.grossTotalValue;
-
-  const handleOpenCreateModal = () => {
-    resetCreate();
-    setCreateSuccessMessage('');
-    openCreateModal();
+  const handleSectionChange = (sectionId) => {
+    setActiveSection(sectionId);
+    if (sectionId === 'create') {
+      resetCreate();
+      setCreateSuccessMessage('');
+    }
   };
 
-  const handleCloseCreateModal = () => {
-    closeCreateModal();
+  const handleCreateFormSubmit = async (event) => {
+    event.preventDefault();
+    const isSuccess = await handleCreateSubmit();
+    if (isSuccess) {
+      setActiveSection('view');
+    }
   };
 
   const handleOpenEditModal = (row) => {
@@ -110,6 +136,32 @@ const FeeStructurePage = () => {
   const handleCloseEditModal = () => {
     closeEditModal();
     setEditTarget(null);
+  };
+
+  const handleOpenHeadEditModal = (row) => {
+    setHeadEditTarget(row);
+    resetHeadEdit();
+    setHeadUpdateSuccessMessage('');
+    openHeadEditModal();
+  };
+
+  const handleCloseHeadEditModal = () => {
+    closeHeadEditModal();
+    setHeadEditTarget(null);
+  };
+
+  const handleOpenClearAmounts = (row) => {
+    setClearAmountsTarget(row);
+  };
+
+  const handleCloseClearAmounts = () => {
+    setClearAmountsTarget(null);
+  };
+
+  const handleConfirmClearAmounts = () => {
+    if (!clearAmountsTarget?.id) return;
+    updateRowQuarters(clearAmountsTarget.id, emptyQuarters);
+    setClearAmountsTarget(null);
   };
 
   const { quarterAria } = categories;
@@ -126,21 +178,13 @@ const FeeStructurePage = () => {
     MASTER_DATA_KEYS.feeBillingTerm,
     { loadingLabel: config.loadingLabel },
   );
-  const { options: discountTypeOptions, isLoading: discountLoading } = useMasterDataSelect(
-    MASTER_DATA_KEYS.discountType,
-    { loadingLabel: config.loadingLabel },
-  );
-  const { options: schemeOptions, isLoading: schemeLoading } = useMasterDataSelect(
-    MASTER_DATA_KEYS.schemeType,
-    { loadingLabel: config.loadingLabel },
-  );
 
   return (
     <div className="crmListPage feeStructurePage">
       <PageHeader title={title} subtitle={subtitle} className="feeStructurePageHeader">
         <CrmButton variant="primary">
           {DashboardIcons.save(16)}
-          {actions.saveStructureLabel}
+          {actions.saveLabel}
         </CrmButton>
       </PageHeader>
 
@@ -172,159 +216,110 @@ const FeeStructurePage = () => {
         </div>
       </section>
 
-      <section className="feeStructureCategoriesCard crmSectionAnimate feeStructureSectionDelay1">
-        <div className="feeStructureCategoriesHeader">
-          <h2 className="feeStructureCategoriesTitle">{categories.sectionTitle}</h2>
-          <CrmButton
-            variant="outline"
-            className="feeStructureAddCategoryBtn"
-            onClick={handleOpenCreateModal}
-          >
-            {DashboardIcons.plus(16)}
-            {actions.addCategoryLabel}
-          </CrmButton>
+      <div className="feeStructurePageCard crmSectionAnimate feeStructureSectionDelay1">
+        <nav className="feeStructurePageTabs" aria-label="Fee head sections">
+          {sections.map((section) => {
+            const Icon = sectionIconMap[section.icon];
+            const isActive = activeSection === section.id;
+
+            return (
+              <button
+                key={section.id}
+                type="button"
+                className={`feeStructurePageTab${isActive ? ' feeStructurePageTabActive' : ''}`}
+                onClick={() => handleSectionChange(section.id)}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                <span className="feeStructurePageTabIcon" aria-hidden="true">
+                  {Icon(14)}
+                </span>
+                {section.shortLabel}
+              </button>
+            );
+          })}
+        </nav>
+
+        <div className="feeStructurePageBody">
+          {bannerMessage ? (
+            <p className="feeStructureCreateSuccess" role="status">
+              {bannerMessage}
+            </p>
+          ) : null}
+
+          {activeSection === 'create' ? (
+            <>
+              <form className="feeHeadInlineForm" onSubmit={handleCreateFormSubmit} noValidate>
+                <section className="feeStructurePanelSection">
+                  <h2 className="feeStructurePanelSectionTitle">{createFeeHead.sectionTitle}</h2>
+                  <p className="feeStructurePanelSectionHint">{createFeeHead.sectionHint}</p>
+                  {createErrors.general ? (
+                    <p className="feeHeadModalError" role="alert">{createErrors.general}</p>
+                  ) : null}
+                  <FeeHeadFormFields
+                    fields={createFeeHead.fields}
+                    form={createForm}
+                    errors={createErrors}
+                    isSubmitting={isCreating}
+                    onChange={updateCreateField}
+                    variant="inline"
+                  />
+                </section>
+                <footer className="feeStructurePageFormFooter">
+                  <CrmButton variant="primary" type="submit" disabled={isCreating}>
+                    {isCreating ? createFeeHead.submittingLabel : createFeeHead.submitLabel}
+                  </CrmButton>
+                </footer>
+              </form>
+              <section className="feeStructureViewSection feeStructureViewSectionBelowForm">
+                <h2 className="feeStructureCategoriesTitle">{categories.sectionTitle}</h2>
+                <FeeCategoriesViewTable
+                  variant="create"
+                  categories={categories}
+                  rows={rows}
+                  isLoading={isLoading}
+                  loadError={loadError}
+                  columnTotals={columnTotals}
+                  getRowTotalDisplay={getRowTotalDisplay}
+                  quarterAria={quarterAria}
+                  onRetry={refetchFeeHeads}
+                  onEditHead={handleOpenHeadEditModal}
+                  onDeleteHead={openDeleteConfirm}
+                />
+              </section>
+            </>
+          ) : (
+            <section className="feeStructureViewSection">
+              <h2 className="feeStructureCategoriesTitle">{categories.sectionTitle}</h2>
+              <FeeCategoriesViewTable
+                variant="view"
+                categories={categories}
+                rows={rows}
+                isLoading={isLoading}
+                loadError={loadError}
+                columnTotals={columnTotals}
+                getRowTotalDisplay={getRowTotalDisplay}
+                quarterAria={quarterAria}
+                onRetry={refetchFeeHeads}
+                onEditHead={handleOpenHeadEditModal}
+                onDeleteHead={openDeleteConfirm}
+                onEditAmounts={handleOpenEditModal}
+              />
+            </section>
+          )}
         </div>
-        {bannerMessage ? (
-          <p className="feeStructureCreateSuccess" role="status">
-            {bannerMessage}
-          </p>
-        ) : null}
-        {loadError ? (
-          <div className="feeStructureListError" role="alert">
-            <p>{loadError}</p>
-            <CrmButton variant="outline" onClick={refetchFeeHeads} disabled={isLoading}>
-              {categories.list.retryLabel}
-            </CrmButton>
-          </div>
-        ) : null}
-
-        <div className="feeStructureTableWrap">
-          <table className="feeStructureTable">
-            <thead>
-              <tr>
-                {categories.columns.map((col) => (
-                  <th key={col}>{col}</th>
-                ))}
-                <th className="feeStructureTableActionHead" aria-label="Actions" />
-              </tr>
-            </thead>
-            <tbody>
-              {isLoading && !loadError ? (
-                <tr>
-                  <td colSpan={categories.columns.length + 1} className="feeStructureListState">
-                    {categories.list.loadingMessage}
-                  </td>
-                </tr>
-              ) : null}
-              {!isLoading && !loadError && rows.length === 0 ? (
-                <tr>
-                  <td colSpan={categories.columns.length + 1} className="feeStructureListState">
-                    {categories.list.emptyMessage}
-                  </td>
-                </tr>
-              ) : null}
-              {!isLoading && !loadError && rows.map((row) => (
-                <tr key={row.id}>
-                  <td>
-                    <span className="feeStructureCellText feeStructureCategoryText">{row.name}</span>
-                  </td>
-                  <td>
-                    <span className="feeStructureCellText">{formatQuarterCell(row.q1)}</span>
-                  </td>
-                  <td>
-                    <span className="feeStructureCellText">{formatQuarterCell(row.q2)}</span>
-                  </td>
-                  <td>
-                    <span className="feeStructureCellText">{formatQuarterCell(row.q3)}</span>
-                  </td>
-                  <td>
-                    <span
-                      className="feeStructureCellText"
-                      aria-label={`${row.name} ${quarterAria.q4}`}
-                    >
-                      {formatQuarterCell(row.q4)}
-                    </span>
-                  </td>
-                  <td className="feeStructureRowTotal">{getRowTotalDisplay(row)}</td>
-                  <td className="feeStructureTableActionCell">
-                    <TableRowActions
-                      entityName={row.name}
-                      showView={false}
-                      onEdit={() => handleOpenEditModal(row)}
-                      onDelete={() => openDeleteConfirm(row)}
-                    />
-                  </td>
-                </tr>
-              ))}
-              {!isLoading && !loadError && rows.length > 0 ? (
-              <tr className="feeStructureTotalsRow">
-                <td className="feeStructureTotalsLabel">{categories.totalsRow.label}</td>
-                <td>{columnTotals.q1}</td>
-                <td>{columnTotals.q2}</td>
-                <td>{columnTotals.q3}</td>
-                <td>{columnTotals.q4}</td>
-                <td className="feeStructureGrandTotal">{columnTotals.grandTotal}</td>
-                <td />
-              </tr>
-              ) : null}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section className="feeStructureBottomRow crmSectionAnimate feeStructureSectionDelay2">
-        <article className="feeStructureScholarshipCard">
-          <h2 className="feeStructureBottomCardTitle">{scholarshipPreview.cardTitle}</h2>
-          <div className="feeStructureScholarshipGrid">
-            <FormSelect
-              label={scholarshipPreview.discountTypeLabel}
-              options={discountTypeOptions}
-              defaultValue={discountTypeOptions[0]?.value}
-              disabled={discountLoading}
-            />
-            <FormInput
-              label={scholarshipPreview.discountPercentLabel}
-              type="text"
-              defaultValue={scholarshipPreview.defaultDiscountPercent}
-            />
-            <FormSelect
-              label={scholarshipPreview.schemeLabel}
-              options={schemeOptions}
-              defaultValue={schemeOptions[0]?.value}
-              disabled={schemeLoading}
-            />
-          </div>
-        </article>
-
-        <article className="feeStructurePayableCard">
-          <h2 className="feeStructureBottomCardTitle">{finalPayable.cardTitle}</h2>
-          <dl className="feeStructurePayableList">
-            <div className="feeStructurePayableRow">
-              <dt>{finalPayable.grossTotalLabel}</dt>
-              <dd>{grossTotalDisplay ?? finalPayable.grossTotalValue}</dd>
-            </div>
-            <div className="feeStructurePayableRow">
-              <dt>{finalPayable.discountLabel}</dt>
-              <dd className="feeStructurePayableDiscount">{finalPayable.discountValue}</dd>
-            </div>
-            <div className="feeStructurePayableRow feeStructurePayableRowHighlight">
-              <dt>{finalPayable.payableLabel}</dt>
-              <dd className="feeStructurePayableAmount">{finalPayable.payableValue}</dd>
-            </div>
-          </dl>
-        </article>
-      </section>
+      </div>
 
       <FeeHeadFormModal
-        isOpen={isCreateOpen}
-        copy={createFeeHead}
-        form={createForm}
-        errors={createErrors}
-        isSubmitting={isCreating}
-        titleId="feeHeadCreateTitle"
-        onClose={handleCloseCreateModal}
-        onChange={updateCreateField}
-        onSubmit={handleCreateSubmit}
+        isOpen={isHeadEditOpen}
+        copy={editFeeHead}
+        form={headEditForm}
+        errors={headEditErrors}
+        isSubmitting={isHeadUpdating}
+        titleId="feeHeadEditTitle"
+        entityName={headEditTarget?.name}
+        onClose={handleCloseHeadEditModal}
+        onChange={updateHeadEditField}
+        onSubmit={handleHeadEditSubmit}
       />
 
       <EditFeeQuartersModal
@@ -348,6 +343,14 @@ const FeeStructurePage = () => {
         errorMessage={deleteError}
         onClose={closeDeleteConfirm}
         onConfirm={confirmDelete}
+      />
+
+      <ClearFeeAmountsModal
+        isOpen={Boolean(clearAmountsTarget)}
+        copy={clearFeeAmounts}
+        categoryName={clearAmountsTarget?.name}
+        onClose={handleCloseClearAmounts}
+        onConfirm={handleConfirmClearAmounts}
       />
     </div>
   );

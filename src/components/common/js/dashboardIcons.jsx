@@ -220,6 +220,33 @@ export const DashboardIcons = {
       <path d="M4 7h16M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M10 11v6M14 11v6M6 7l1 14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-14" />
     </svg>
   ),
+  feeStructureAmounts: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <rect x="4" y="5" width="16" height="14" rx="2" />
+      <path d="M8 9h8M8 13h5" />
+      <path d="M15 15l3 3" />
+      <path d="M16 12l2 2" />
+    </svg>
+  ),
+  feeStructureClear: (size = 18) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M12 3v4M7 7l-3 3M17 7l3 3" />
+      <path d="M5 14c1.5 3 3.5 5 7 5s5.5-2 7-5" />
+      <path d="M9 18h6" />
+    </svg>
+  ),
+  feeHeadEdit: (size = 16) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <path d="M12 3l2.2 4.5L19 8.5l-3.5 3.4.8 4.9L12 14.8 7.7 16.8l.8-4.9L5 8.5l4.8-1L12 3z" />
+      <path d="M4 20h16" />
+    </svg>
+  ),
+  feeHeadDelete: (size = 16) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M8 12h8" />
+    </svg>
+  ),
   chevronDown: (size = 16) => (
     <svg width={size} height={size} viewBox="0 0 24 24" {...iconProps} aria-hidden="true">
       <path d="M6 9l6 6 6-6" />

@@ -39,8 +39,7 @@ Use **`useIdAsValue: true`** when the form stores numeric FK ids (class, academi
 | Admission student | `gender`, `bloodGroup`, `religion`, `community` |
 | Admission parents | `primaryContact` |
 | Students filters | `class`, `section`, `academicYear` (+ “All” prepend from mock label only) |
-| Fee Structure config | `class`, `academicYear`, `feeBillingTerm` |
-| Fee Structure scholarship preview | `discountType`, `schemeType` |
+| Fee Head config | `class`, `academicYear`, `feeBillingTerm` |
 | Create fee head modal | `feeCategory` (+ Yes/No for mandatory/refundable/active — boolean UI, not master data) |
 | Payments collect | `user`, `feeBillingTerm`, `paymentMode` (tiles) |
 | Reports filters | `academicYear`, `class`, `termType` (period/month) |

@@ -9,11 +9,16 @@ const FeeHeadFormModal = ({
   errors,
   isSubmitting,
   titleId,
+  entityName,
   onClose,
   onChange,
   onSubmit,
 }) => {
   if (!isOpen) return null;
+
+  const subtitle = copy.subtitle?.includes('{name}')
+    ? copy.subtitle.replace('{name}', entityName || copy.fallbackName || '')
+    : copy.subtitle;
 
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) onClose();
@@ -27,10 +32,10 @@ const FeeHeadFormModal = ({
 
   return createPortal(
     <div className="crmModalOverlay" role="presentation" onClick={handleOverlayClick}>
-      <div className="crmModal feeHeadModal" role="dialog" aria-modal="true" aria-labelledby={titleId}>
+      <div className="crmModal feeHeadModal feeHeadModalCompact" role="dialog" aria-modal="true" aria-labelledby={titleId}>
         <header className="crmModalHeader">
           <h2 id={titleId} className="crmModalTitle">{copy.title}</h2>
-          <p className="crmModalSubtitle">{copy.subtitle}</p>
+          <p className="crmModalSubtitle">{subtitle}</p>
         </header>
 
         <form onSubmit={handleSubmit} noValidate>

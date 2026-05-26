@@ -7,20 +7,8 @@ const feeHeadFormFields = {
     label: 'Fee type name',
     placeholder: 'Transport Fee',
   },
-  description: {
-    label: 'Description',
-    placeholder: 'Optional description',
-  },
-  feeCategory: {
-    label: 'Fee category',
-    placeholder: 'TRANSPORT',
-  },
   mandatory: {
     label: 'Mandatory',
-    options: ['Yes', 'No'],
-  },
-  refundable: {
-    label: 'Refundable',
     options: ['Yes', 'No'],
   },
   active: {
@@ -31,6 +19,10 @@ const feeHeadFormFields = {
     label: 'Display order',
     placeholder: '2',
   },
+  description: {
+    label: 'Description',
+    placeholder: 'Optional description',
+  },
 };
 
 const feeHeadFormValidation = {
@@ -39,32 +31,55 @@ const feeHeadFormValidation = {
   codeMax: 'Fee type code must be at most 30 characters.',
   nameRequired: 'Fee type name is required.',
   nameMax: 'Fee type name must be at most 100 characters.',
-  categoryMax: 'Fee category must be at most 50 characters.',
   displayOrderInt: 'Display order must be an integer.',
 };
 
 export const feeStructurePageMock = {
-  title: 'Fee Structure',
-  subtitle: 'Configure class-wise fees, installments and scholarship discounts.',
+  title: 'Fee Head',
+  subtitle: 'Manage fee head master records, class, academic year, and installment amounts.',
+  sections: [
+    { id: 'view', label: 'View fee heads', shortLabel: 'View', icon: 'eye' },
+    { id: 'create', label: 'Create fee head', shortLabel: 'Create', icon: 'plus' },
+  ],
+  defaultSection: 'view',
   actions: {
-    saveStructureLabel: 'Save Structure',
-    addCategoryLabel: 'Add category',
+    saveLabel: 'Save',
+  },
+  clearFeeAmounts: {
+    title: 'Clear fee amounts',
+    subtitle: 'Remove all Q1, Q2, Q3, and Annual amounts for "{name}"?',
+    fallbackName: 'this category',
+    hint: 'This only clears amounts on this screen. The fee head record is not deleted.',
+    cancelLabel: 'Cancel',
+    confirmLabel: 'Clear amounts',
   },
   deleteFeeHead: {
     title: 'Delete fee head',
-    subtitle: 'Remove "{name}" from this fee structure? This cannot be undone from this screen.',
+    subtitle: 'Deactivate fee head "{name}"? It will no longer be available for new configurations.',
     fallbackName: 'this fee head',
     hint: 'The fee head will be deactivated in the system (soft delete).',
     cancelLabel: 'Cancel',
-    confirmLabel: 'Delete',
+    confirmLabel: 'Delete head',
     deletingLabel: 'Deleting…',
     deleteSuccess: 'Fee head deleted successfully.',
     deleteFailed: 'Could not delete fee head. Please try again.',
   },
-  createFeeHead: {
-    title: 'Create fee head',
-    subtitle: 'Add a fee head master record used while building fee structures.',
+  editFeeHead: {
+    title: 'Edit fee head',
+    subtitle: 'Update the fee head master record for "{name}".',
+    fallbackName: 'this fee head',
     cancelLabel: 'Cancel',
+    submitLabel: 'Save changes',
+    submittingLabel: 'Saving…',
+    updateSuccess: 'Fee head updated successfully.',
+    updateFailed: 'Could not update fee head. Please try again.',
+    noChanges: 'Change at least one field before saving.',
+    fields: feeHeadFormFields,
+    validation: feeHeadFormValidation,
+  },
+  createFeeHead: {
+    sectionTitle: 'Create fee head',
+    sectionHint: 'Add a fee head master record used when configuring class installment amounts.',
     submitLabel: 'Create fee head',
     submittingLabel: 'Creating…',
     createSuccess: 'Fee head created successfully.',
@@ -101,8 +116,13 @@ export const feeStructurePageMock = {
     defaultLateFee: '50',
   },
   categories: {
-    sectionTitle: 'Fee categories',
+    sectionTitle: 'Fee heads',
     columns: ['CATEGORY', 'Q1', 'Q2', 'Q3', 'ANNUAL', 'TOTAL'],
+    createColumns: ['CATEGORY'],
+    actionHeadings: {
+      edit: 'EDIT',
+      delete: 'DELETE',
+    },
     quarterAria: {
       q1: 'Q1',
       q2: 'Q2',
@@ -111,7 +131,7 @@ export const feeStructurePageMock = {
     },
     list: {
       loadingMessage: 'Loading fee heads…',
-      emptyMessage: 'No fee heads yet. Use Add category to create one.',
+      emptyMessage: 'No fee heads yet. Switch to Create to add a fee head.',
       loadFailed: 'Could not load fee heads. Please try again.',
       accessDenied: 'You do not have permission to view fee heads.',
       authFailed: 'Please sign in again to view fee heads.',
@@ -120,21 +140,5 @@ export const feeStructurePageMock = {
     totalsRow: {
       label: 'Totals',
     },
-  },
-  scholarshipPreview: {
-    cardTitle: 'Scholarship discount preview',
-    discountTypeLabel: 'Discount type',
-    discountPercentLabel: 'Discount %',
-    defaultDiscountPercent: '10',
-    schemeLabel: 'Scheme',
-  },
-  finalPayable: {
-    cardTitle: 'Final payable',
-    grossTotalLabel: 'Gross total',
-    grossTotalValue: '₹81,200',
-    discountLabel: 'Discount',
-    discountValue: '– ₹8,120',
-    payableLabel: 'Payable',
-    payableValue: '₹73,080',
   },
 };

@@ -17,7 +17,9 @@ export const routePaths = {
   settings: '/settings',
   notifications: '/notifications',
   transferCertificate: '/transfer-certificate',
-  feeStructure: '/fee-structure',
+  feeStructure: '/fee-head',
+  /** @deprecated Use feeStructure — kept for bookmarks and old links */
+  feeStructureLegacy: '/fee-structure',
   reports: '/reports',
   userCreation: '/user-creation',
 };

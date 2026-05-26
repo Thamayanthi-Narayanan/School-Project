@@ -48,6 +48,10 @@ const AppRouter = () => {
           <Route path={routePaths.settings} element={<SettingsPage />} />
           <Route path={routePaths.notifications} element={<NotificationsPage />} />
           <Route path={routePaths.transferCertificate} element={<TransferCertificatePage />} />
+          <Route
+            path={routePaths.feeStructureLegacy}
+            element={<Navigate to={routePaths.feeStructure} replace />}
+          />
           <Route path={routePaths.feeStructure} element={<FeeStructurePage />} />
           <Route path={routePaths.reports} element={<ReportsPage />} />
           <Route path={routePaths.userCreation} element={<UserCreationPage />} />
