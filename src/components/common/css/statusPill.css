@@ -1,0 +1,42 @@
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--theme-radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusPillDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.statusPillSuccess {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.statusPillPending {
+  background: #fef9c3;
+  color: #a16207;
+}
+
+.statusPillFeePending {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.statusPillReview {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.statusPillRejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}

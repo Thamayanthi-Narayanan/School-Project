@@ -1,0 +1,49 @@
+export const sidebarMock = {
+  brand: {
+    name: 'Scholaris',
+    tagline: 'SCHOOL ERP · V2.4',
+  },
+  sections: [
+    {
+      id: 'overview',
+      label: 'OVERVIEW',
+      items: [
+        { id: 'dashboard', label: 'Dashboard', path: '/dashboard', icon: 'grid' },
+      ],
+    },
+    {
+      id: 'people',
+      label: 'PEOPLE',
+      items: [
+        { id: 'students', label: 'Students', path: '/students', icon: 'users', badge: '1.2k' },
+        { id: 'admission', label: 'Admission', path: '/admission', icon: 'userPlus', badge: '5' },
+        { id: 'staff', label: 'Staff', path: '/staff', icon: 'briefcase' },
+        { id: 'attendance', label: 'Attendance', path: '/attendance', icon: 'calendarCheck' },
+      ],
+    },
+    {
+      id: 'finance',
+      label: 'FINANCE',
+      items: [
+        { id: 'feeStructure', label: 'Fee Structure', path: '/fee-structure', icon: 'receipt' },
+        { id: 'payments', label: 'Payments', path: '/payments', icon: 'wallet' },
+        { id: 'invoices', label: 'Invoices', path: '/invoices', icon: 'fileText' },
+        { id: 'scholarships', label: 'Scholarships', path: '/scholarships', icon: 'award', badge: '3' },
+      ],
+    },
+    {
+      id: 'workspace',
+      label: 'WORKSPACE',
+      items: [
+        { id: 'transferCertificate', label: 'Transfer Certificate', path: '/transfer-certificate', icon: 'fileOutput' },
+        { id: 'reports', label: 'Reports', path: '/reports', icon: 'barChart' },
+        { id: 'notifications', label: 'Notifications', path: '/notifications', icon: 'bell' },
+        { id: 'settings', label: 'Settings', path: '/settings', icon: 'settings' },
+      ],
+    },
+  ],
+  footer: {
+    logoutLabel: 'Logout',
+    logoutPath: '/login',
+  },
+};

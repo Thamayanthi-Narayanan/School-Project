@@ -1,0 +1,325 @@
+.admissionPageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* Stepper */
+.admissionStepper {
+  margin-bottom: 1.25rem;
+}
+
+.admissionStepperTrack {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: var(--theme-bg-page);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+}
+
+.admissionStepperItemWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.admissionStepperItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  border: none;
+  border-radius: var(--theme-radius-pill);
+  background: transparent;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--theme-text-secondary);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+}
+
+.admissionStepperItem:hover:not(.admissionStepperItemActive) {
+  background: var(--theme-bg-card);
+  color: var(--theme-text-primary);
+}
+
+.admissionStepperItemActive {
+  background: var(--theme-primary);
+  color: var(--theme-text-inverse);
+  font-weight: 600;
+}
+
+.admissionStepperItemCompleted {
+  background: #dcfce7;
+  color: #15803d;
+  font-weight: 600;
+}
+
+.admissionStepperCheck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admissionStepperCheck svg {
+  width: 14px;
+  height: 14px;
+}
+
+.admissionStepperNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.admissionStepperItemActive .admissionStepperNum {
+  color: var(--theme-text-inverse);
+}
+
+.admissionStepperSep {
+  display: flex;
+  color: var(--theme-text-muted);
+  margin: 0 0.125rem;
+}
+
+/* Form + tips layout — equal height columns */
+.admissionContent {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.admissionFormCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.admissionFormBody {
+  flex: 1;
+}
+
+.admissionFormTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.admissionFormGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+  margin-bottom: 0;
+}
+
+/* Academic Info — uses shared admissionFormGrid via AdmissionFormFields */
+
+/* Documents step */
+.admissionDocuments {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.admissionUploadZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  border: 2px dashed var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-bg-page);
+}
+
+.admissionUploadIcon {
+  display: flex;
+  color: var(--theme-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.admissionUploadTitle {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+  margin-bottom: 0.35rem;
+}
+
+.admissionUploadSubtext {
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  margin-bottom: 1rem;
+}
+
+.admissionBrowseBtn {
+  margin-top: 0.25rem;
+}
+
+.admissionFilesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.admissionFileItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-bg-page);
+}
+
+.admissionFileName {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-primary);
+}
+
+/* Review step */
+.admissionReviewSubtitle {
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+  line-height: 1.45;
+  margin-bottom: 1.25rem;
+}
+
+.admissionReviewSummary {
+  padding: 1.25rem;
+  background: var(--theme-bg-page);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+}
+
+.admissionReviewRow {
+  font-size: 0.9375rem;
+  color: var(--theme-text-primary);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.admissionReviewRow:last-child {
+  margin-bottom: 0;
+}
+
+.admissionReviewLabel {
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.admissionFormFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+.admissionBtnBack:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.admissionBtnContinue {
+  margin-left: auto;
+}
+
+.admissionSectionDelay1 {
+  animation-delay: 0.08s;
+}
+
+.admissionSectionDelay2 {
+  animation-delay: 0.14s;
+}
+
+@media (max-width: 1024px) {
+  .admissionContent {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .admissionStepper {
+    margin-bottom: 1rem;
+  }
+
+  .admissionStepperTrack {
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    padding: 0.5rem;
+  }
+
+  .admissionStepperSep {
+    display: none;
+  }
+
+  .admissionStepperItemWrap {
+    flex-wrap: wrap;
+  }
+
+  .admissionFormCard {
+    padding: 1.25rem;
+  }
+
+  /* Keep 2-column fields per mobile design */
+  .admissionFormGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.875rem 0.75rem;
+  }
+
+  .admissionFormGrid .crmFormFieldFull {
+    grid-column: 1 / -1;
+  }
+
+  .admissionFilesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .admissionFormFooter {
+    padding-top: 1.25rem;
+  }
+
+  .admissionFormFooter .crmBtn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .admissionFormGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admissionStepperItem {
+    transition: none;
+  }
+}

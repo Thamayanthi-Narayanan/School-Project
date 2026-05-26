@@ -1,4 +1,6 @@
 import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { routePaths } from '../../../constants/routePaths';
 
 const initialForm = {
   email: '',
@@ -7,6 +9,7 @@ const initialForm = {
 };
 
 export const useLoginForm = () => {
+  const navigate = useNavigate();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -53,11 +56,12 @@ export const useLoginForm = () => {
         }
         // API integration: authApi.login(form) when backend is ready
         await new Promise((resolve) => setTimeout(resolve, 600));
+        navigate(routePaths.dashboard, { replace: true });
       } finally {
         setIsLoading(false);
       }
     },
-    [form, validate]
+    [form, validate, navigate]
   );
 
   return {

@@ -1,3 +1,4 @@
 export const appConfig = {
-  appName: 'Scholaris',
+  appName: 'SRI AYYAN VIDYASHRAM HR.SEC.SCHOOL',
+  footerText: '© Infinite vision — built for school administrators',
 };
