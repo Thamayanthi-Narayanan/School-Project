@@ -58,7 +58,8 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
   - `settings/settingsPage.mock.js` — profile, school, security, notification tabs
   - `notifications/notificationsPage.mock.js` — alerts list, mark all read action
   - `transferCertificate/transferCertificatePage.mock.js` — issue TC form, TC preview document
-  - `feeStructure/feeStructurePage.mock.js` — fee head page: class config, fee heads table
+  - `feeStructure/feeStructurePage.mock.js` — fee head page: view/create tabs, fee heads table
+  - `feeStructureConfig/feeStructureConfigPage.mock.js` — fee structure page: class config, editable categories table
   - `reports/reportsPage.mock.js` — report filters, export cards grid
   - `userCreation/userCreationPanel.mock.js` — user management panel sections, users list, form copy
 - Export shared entries from `src/data/mocks/index.js`

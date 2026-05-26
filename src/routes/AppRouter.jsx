@@ -18,7 +18,8 @@ import PaymentsPage from '../pages/payments/js/paymentsPage';
 import SettingsPage from '../pages/settings/js/settingsPage';
 import NotificationsPage from '../pages/notifications/js/notificationsPage';
 import TransferCertificatePage from '../pages/transferCertificate/js/transferCertificatePage';
-import FeeStructurePage from '../pages/feeStructure/js/feeStructurePage';
+import FeeHeadPage from '../pages/feeStructure/js/feeHeadPage';
+import FeeStructureConfigPage from '../pages/feeStructureConfig/js/feeStructureConfigPage';
 import ReportsPage from '../pages/reports/js/reportsPage';
 import UserCreationPage from '../pages/userCreation/js/userCreationPage';
 
@@ -48,11 +49,8 @@ const AppRouter = () => {
           <Route path={routePaths.settings} element={<SettingsPage />} />
           <Route path={routePaths.notifications} element={<NotificationsPage />} />
           <Route path={routePaths.transferCertificate} element={<TransferCertificatePage />} />
-          <Route
-            path={routePaths.feeStructureLegacy}
-            element={<Navigate to={routePaths.feeStructure} replace />}
-          />
-          <Route path={routePaths.feeStructure} element={<FeeStructurePage />} />
+          <Route path={routePaths.feeHead} element={<FeeHeadPage />} />
+          <Route path={routePaths.feeStructure} element={<FeeStructureConfigPage />} />
           <Route path={routePaths.reports} element={<ReportsPage />} />
           <Route path={routePaths.userCreation} element={<UserCreationPage />} />
         </Route>

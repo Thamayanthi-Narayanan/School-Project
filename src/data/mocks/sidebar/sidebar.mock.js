@@ -23,7 +23,8 @@ export const sidebarMock = {
       id: 'finance',
       label: 'FINANCE',
       items: [
-        { id: 'feeStructure', label: 'Fee Head', path: '/fee-head', icon: 'receipt' },
+        { id: 'feeStructure', label: 'Fee Structure', path: '/fee-structure', icon: 'receipt' },
+        { id: 'feeHead', label: 'Fee Head', path: '/fee-head', icon: 'fileDollar' },
         { id: 'payments', label: 'Payments', path: '/payments', icon: 'wallet' },
         { id: 'scholarships', label: 'Scholarships', path: '/scholarships', icon: 'award' },
       ],

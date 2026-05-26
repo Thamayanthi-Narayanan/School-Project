@@ -60,6 +60,32 @@ export const useFeeStructureCategories = (categoriesCopy, deleteCopy) => {
     );
   }, []);
 
+  const updateRow = useCallback((rowId, patch) => {
+    setRows((prev) =>
+      prev.map((row) => (row.id === rowId ? { ...row, ...patch } : row)),
+    );
+  }, []);
+
+  const addRow = useCallback(() => {
+    setRows((prev) => [
+      ...prev,
+      {
+        id: `local-${Date.now()}`,
+        name: '',
+        code: '',
+        q1: '',
+        q2: '',
+        q3: '',
+        q4: '',
+        isLocal: true,
+      },
+    ]);
+  }, []);
+
+  const removeRowLocal = useCallback((rowId) => {
+    setRows((prev) => prev.filter((row) => row.id !== rowId));
+  }, []);
+
   const openDeleteConfirm = useCallback((row) => {
     setDeleteError('');
     setDeleteTarget(row);
@@ -133,6 +159,9 @@ export const useFeeStructureCategories = (categoriesCopy, deleteCopy) => {
     grossTotalAmount,
     getRowTotalDisplay,
     updateRowQuarters,
+    updateRow,
+    addRow,
+    removeRowLocal,
     refetchFeeHeads: fetchFeeHeads,
     deleteTarget,
     isDeleting,

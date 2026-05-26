@@ -30,7 +30,7 @@ const sectionIconMap = {
 
 const emptyQuarters = { q1: '', q2: '', q3: '', q4: '' };
 
-const FeeStructurePage = () => {
+const FeeHeadPage = () => {
   const {
     title,
     subtitle,
@@ -356,4 +356,4 @@ const FeeStructurePage = () => {
   );
 };
 
-export default FeeStructurePage;
+export default FeeHeadPage;

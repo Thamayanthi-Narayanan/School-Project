@@ -59,7 +59,8 @@
   .scholarshipsPageHeader,
   .settingsPageHeader,
   .transferCertificatePageHeader,
-  .feeStructurePageHeader {
+  .feeStructurePageHeader,
+  .feeStructureConfigPage .feeStructurePageHeader {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;
