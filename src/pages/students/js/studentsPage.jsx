@@ -11,10 +11,9 @@ import {
   PersonCell,
   PhoneCell,
   TableRowActions,
-  EntityFormModal,
-  useModal,
 } from '../../../components/reusable/js/index';
 import { useStudentsList } from '../hooks/useStudentsList';
+import { downloadStudentsImportTemplate } from '../../../utils/studentsImportTemplate';
 
 const StudentsPage = () => {
   const {
@@ -23,11 +22,9 @@ const StudentsPage = () => {
     actions,
     filters,
     pagination,
-    addStudentModal,
     list,
   } = studentsPageMock;
 
-  const { isOpen, openModal, closeModal } = useModal();
   const {
     students,
     isLoading,
@@ -61,16 +58,25 @@ const StudentsPage = () => {
     },
   ];
 
+  const handleDownloadFormat = () => {
+    downloadStudentsImportTemplate(actions.templateFileName);
+  };
+
   return (
     <div className="crmListPage studentsPage">
       <PageHeader title={title} subtitle={subtitle}>
-        <CrmButton variant="outline">
+        <CrmButton variant="outline" type="button" aria-label={actions.bulkUploadAriaLabel}>
           {DashboardIcons.upload(16)}
           {actions.bulkUploadLabel}
         </CrmButton>
-        <CrmButton variant="primary" onClick={openModal}>
-          {DashboardIcons.plus(16)}
-          {actions.addStudentLabel}
+        <CrmButton
+          variant="primary"
+          type="button"
+          onClick={handleDownloadFormat}
+          aria-label={actions.downloadFormatAriaLabel}
+        >
+          {DashboardIcons.download(16)}
+          {actions.downloadFormatLabel}
         </CrmButton>
       </PageHeader>
 
@@ -173,12 +179,6 @@ const StudentsPage = () => {
           </tbody>
         </table>
       </DataTableCard>
-
-      <EntityFormModal
-        isOpen={isOpen}
-        onClose={closeModal}
-        modalData={addStudentModal}
-      />
     </div>
   );
 };

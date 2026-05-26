@@ -790,21 +790,11 @@
   padding: 0.25rem;
   list-style: none;
   overflow-y: auto;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   background: var(--theme-bg-card);
   border: 1px solid var(--theme-border);
   border-radius: var(--theme-radius-sm);
   box-shadow: var(--theme-shadow-card);
   animation: crmScrollSelectMenuIn 0.18s ease both;
-}
-
-.crmScrollSelectMenu::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
 }
 
 @keyframes crmScrollSelectMenuIn {

@@ -23,7 +23,6 @@
   overflow-y: auto;
   overflow-x: hidden;
   background: var(--theme-bg-page);
-  -webkit-overflow-scrolling: touch;
 }
 
 .dashboardSidebarBackdrop {

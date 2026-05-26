@@ -94,6 +94,19 @@ Component folders: `js/` (components), `css/` (styles), `hooks/` (component-spec
 - **Fixed (no scroll):** Scholaris brand + `SCHOOL ERP · V2.4` header, Logout footer
 - **Scrollable only:** navigation list between header and footer (`.sidebarNavScroll`)
 - Do not include Upgrade to Pro card
+- Do not show count badges on nav items (e.g. `1.2k`, `5`, `3`) unless the user explicitly asks for live counts from an API
+
+## Smooth scroll and hidden scrollbars (mandatory)
+
+- Global styles live in `src/styles/scrollSmooth.css` (imported from `main.jsx` after `global.css`)
+- **Every overflow scroll container** in the app must use hidden scrollbars + smooth scrolling:
+  - `scroll-behavior: smooth`
+  - `-webkit-overflow-scrolling: touch`
+  - `scrollbar-width: none` and `-ms-overflow-style: none`
+  - `::-webkit-scrollbar { display: none; width: 0; height: 0; }`
+- When adding a new horizontally or vertically scrollable region (table wrap, filter row, panel body, dropdown menu, main content area), **add its class to `scrollSmooth.css`** — do not leave visible scrollbars on mobile or desktop
+- Do not use `scrollbar-width: thin` or default visible scrollbars on responsive layouts
+- Respect `prefers-reduced-motion: reduce` for `html` smooth scroll (already in `scrollSmooth.css`)
 
 ## Development
 
@@ -120,7 +133,7 @@ SaaS CRM dashboard: sidebar, navbar, cards, tables, forms. Professional, minimal
 
 **Rules when editing CSS or layout:**
 
-1. Add page-specific responsive rules in the page CSS file **and** shared mobile rules in `dashboardMobile.css` when the change applies to many dashboard pages.
+1. Add page-specific responsive rules in the page CSS file **and** shared mobile rules in `dashboardMobile.css` when the change applies to many dashboard pages. Register any new scrollable selectors in `scrollSmooth.css`.
 2. Use `min-width: 0`, `max-width: 100%`, and `box-sizing: border-box` on flex/grid children to prevent horizontal clipping.
 3. Slide-over panels (e.g. user creation): desktop = right drawer; mobile = bottom sheet (`max-width: 768px`); nav tabs scroll horizontally on mobile, vertical on tablet/desktop.
 4. Test mentally at ~375px (phone), ~768px (boundary), and ~1280px (desktop) before claiming done.

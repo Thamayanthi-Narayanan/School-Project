@@ -70,11 +70,9 @@
   .crmFilterToolbar {
     flex-wrap: nowrap;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
     gap: 0.5rem;
     padding: 0.625rem 0.75rem;
     margin-bottom: 0.875rem;
-    scrollbar-width: thin;
   }
 
   .crmFilterToolbar .crmSearchBar {
@@ -131,11 +129,6 @@
   .staffPage .crmActionBtn {
     width: 1.75rem;
     height: 1.75rem;
-  }
-
-  /* —— Tables: horizontal scroll, compact —— */
-  .crmTableWrap {
-    -webkit-overflow-scrolling: touch;
   }
 
   .crmTable th,

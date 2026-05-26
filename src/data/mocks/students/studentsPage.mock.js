@@ -3,7 +3,10 @@ export const studentsPageMock = {
   subtitle: 'Manage student profiles, parents, fees and documents.',
   actions: {
     bulkUploadLabel: 'Bulk Upload',
-    addStudentLabel: 'Add Student',
+    bulkUploadAriaLabel: 'Upload students in bulk',
+    downloadFormatLabel: 'Download Format',
+    downloadFormatAriaLabel: 'Download student import template',
+    templateFileName: 'students-import-template.csv',
   },
   filters: {
     searchPlaceholder: 'Search by name or ID...',
@@ -27,19 +30,5 @@ export const studentsPageMock = {
     pageSize: 10,
     previousLabel: 'Previous',
     nextLabel: 'Next',
-  },
-  addStudentModal: {
-    title: 'Add new student',
-    subtitle: 'Create a student profile. You can complete details later.',
-    cancelLabel: 'Cancel',
-    saveLabel: 'Save student',
-    fields: [
-      { id: 'fullName', type: 'text', label: 'Full name', placeholder: 'Aarav Sharma' },
-      { id: 'dateOfBirth', type: 'text', label: 'Date of birth', placeholder: 'dd - mm - yyyy', icon: 'calendar' },
-      { id: 'className', type: 'select', label: 'Class', options: ['Select class', 'Class 10-A', 'Class 9-B', 'Class 8-C'] },
-      { id: 'section', type: 'select', label: 'Section', options: ['Select section', 'Section A', 'Section B', 'Section C'] },
-      { id: 'parentName', type: 'text', label: 'Parent name', placeholder: 'Rajesh Sharma' },
-      { id: 'parentPhone', type: 'tel', label: 'Parent phone', placeholder: '+91', inputType: 'tel' },
-    ],
   },
 };

@@ -15,8 +15,8 @@ export const sidebarMock = {
       id: 'people',
       label: 'PEOPLE',
       items: [
-        { id: 'students', label: 'Students', path: '/students', icon: 'users', badge: '1.2k' },
-        { id: 'admission', label: 'Admission', path: '/admission', icon: 'userPlus', badge: '5' },
+        { id: 'students', label: 'Students', path: '/students', icon: 'users' },
+        { id: 'admission', label: 'Admission', path: '/admission', icon: 'userPlus' },
       ],
     },
     {
@@ -25,7 +25,7 @@ export const sidebarMock = {
       items: [
         { id: 'feeStructure', label: 'Fee Structure', path: '/fee-structure', icon: 'receipt' },
         { id: 'payments', label: 'Payments', path: '/payments', icon: 'wallet' },
-        { id: 'scholarships', label: 'Scholarships', path: '/scholarships', icon: 'award', badge: '3' },
+        { id: 'scholarships', label: 'Scholarships', path: '/scholarships', icon: 'award' },
       ],
     },
     {

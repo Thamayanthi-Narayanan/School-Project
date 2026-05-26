@@ -44,7 +44,6 @@ const Sidebar = ({ isOpen = false, onNavigate, onLogout }) => {
                         )}
                       </span>
                       <span className="sidebarLinkLabel">{item.label}</span>
-                      {item.badge && <span className="sidebarBadge">{item.badge}</span>}
                     </>
                   );
 
