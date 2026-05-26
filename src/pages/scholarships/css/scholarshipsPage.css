@@ -66,9 +66,16 @@
   margin-bottom: 0.75rem;
 }
 
-.scholarshipsSchemeEdit {
-  align-self: flex-start;
+.scholarshipsSchemeCardActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   margin-top: auto;
+  padding-top: 0.25rem;
+}
+
+.scholarshipsSchemeEdit {
   padding: 0;
   border: none;
   background: none;
@@ -81,6 +88,27 @@
 
 .scholarshipsSchemeEdit:hover {
   color: var(--theme-primary-hover);
+}
+
+.scholarshipsSchemeDelete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-sm);
+  background: var(--theme-bg-card);
+  color: var(--theme-danger-text, #b91c1c);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.scholarshipsSchemeDelete:hover {
+  background: var(--theme-danger-bg, #fef2f2);
+  border-color: var(--theme-danger-border, #fecaca);
 }
 
 /* Pending requests table */
@@ -343,6 +371,45 @@
 /* Create scheme modal */
 .scholarshipSchemeFormModal {
   max-width: min(36rem, 100vw - 2rem);
+}
+
+.scholarshipSchemeDeleteModal {
+  max-width: min(28rem, 100vw - 2rem);
+}
+
+.scholarshipSchemeDeleteModalHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.scholarshipSchemeDeleteModalIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-danger-bg, #fef2f2);
+  color: var(--theme-danger-text, #b91c1c);
+}
+
+.scholarshipSchemeDeleteModalHint {
+  margin: 0 0 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--theme-text-secondary);
+}
+
+.scholarshipSchemeDeleteConfirmBtn {
+  background: var(--theme-danger-text, #b91c1c);
+  border-color: var(--theme-danger-text, #b91c1c);
+}
+
+.scholarshipSchemeDeleteConfirmBtn:hover {
+  background: #991b1b;
+  border-color: #991b1b;
 }
 
 .scholarshipSchemeModalGrid {

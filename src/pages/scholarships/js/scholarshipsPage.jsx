@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import '../../../components/reusable/css/crmReusable.css';
 import '../css/scholarshipsPage.css';
 import { scholarshipsPageMock } from '../../../data/mocks/scholarships/scholarshipsPage.mock';
@@ -11,15 +11,19 @@ import {
 } from '../../../components/reusable/js/index';
 import StatusPill from '../../../components/common/js/statusPill';
 import MeritBandsSection from './meritBandsSection';
-import ScholarshipSchemeDetailModal from './scholarshipSchemeDetailModal';
 import ScholarshipSchemeFormModal from './scholarshipSchemeFormModal';
+import DeleteScholarshipSchemeModal from './deleteScholarshipSchemeModal';
 import { useScholarshipSchemes } from '../hooks/useScholarshipSchemes';
 import { useMeritBands } from '../hooks/useMeritBands';
-import { useScholarshipSchemeDetail } from '../hooks/useScholarshipSchemeDetail';
 import { useCreateScholarshipForm } from '../hooks/useCreateScholarshipForm';
+import { useEditScholarshipForm } from '../hooks/useEditScholarshipForm';
+import { useScholarshipSchemeDelete } from '../hooks/useScholarshipSchemeDelete';
 import { useScholarshipFeeHeadOptions } from '../hooks/useScholarshipFeeHeadOptions';
 import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
 import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
+import { getScholarshipById } from '../../../apis/scholarshipsApi';
+import { parseApiError } from '../../../utils/apiError';
+import { getSchemeId } from '../../../utils/scholarshipMapper';
 import { DISCOUNT_TYPE } from '../../../utils/scholarshipSchemeFormUtils';
 
 const ScholarshipsPage = () => {
@@ -29,10 +33,16 @@ const ScholarshipsPage = () => {
     actions,
     schemes: schemesCopy,
     createScheme,
-    schemeDetail,
+    editScheme,
+    deleteScheme,
     meritBands,
     pendingRequests,
   } = scholarshipsPageMock;
+
+  const [formMode, setFormMode] = useState(null);
+  const [editLoadError, setEditLoadError] = useState(null);
+  const [isEditLoading, setIsEditLoading] = useState(false);
+  const [editingSchemeName, setEditingSchemeName] = useState('');
 
   const {
     schemes,
@@ -57,18 +67,9 @@ const ScholarshipsPage = () => {
   } = useMeritBands(meritBands);
 
   const {
-    scheme: detailScheme,
-    isLoading: detailLoading,
-    loadError: detailError,
-    openScheme,
-    closeScheme,
-    isOpen: isDetailOpen,
-  } = useScholarshipSchemeDetail(schemeDetail);
-
-  const {
-    isOpen: isCreateOpen,
-    openModal: openCreateModal,
-    closeModal: closeCreateModal,
+    isOpen: isFormOpen,
+    openModal: openFormModal,
+    closeModal: closeFormModal,
   } = useModal();
 
   const {
@@ -81,6 +82,30 @@ const ScholarshipsPage = () => {
     reset: resetCreate,
     setSuccessMessage: setCreateSuccessMessage,
   } = useCreateScholarshipForm(createScheme, refetchSchemes);
+
+  const [editTarget, setEditTarget] = useState(null);
+
+  const {
+    form: editForm,
+    errors: editErrors,
+    isSubmitting: isUpdating,
+    successMessage: updateSuccessMessage,
+    updateField: updateEditField,
+    handleSubmit: handleEditSubmit,
+    reset: resetEdit,
+    setSuccessMessage: setUpdateSuccessMessage,
+  } = useEditScholarshipForm(editScheme, editTarget, refetchSchemes);
+
+  const {
+    deleteTarget,
+    isDeleting,
+    deleteError,
+    deleteSuccessMessage,
+    openDeleteConfirm,
+    closeDeleteConfirm,
+    confirmDelete,
+    setDeleteSuccessMessage,
+  } = useScholarshipSchemeDelete(deleteScheme, refetchSchemes);
 
   const masterSelectConfig = {
     loadingLabel: createScheme.loadingLabel,
@@ -121,7 +146,7 @@ const ScholarshipsPage = () => {
     },
   );
 
-  const { options: createAcademicYearOptions, isLoading: createYearLoading } = useMasterDataSelect(
+  const { options: formAcademicYearOptions, isLoading: formYearLoading } = useMasterDataSelect(
     MASTER_DATA_KEYS.academicYear,
     {
       ...masterSelectConfig,
@@ -134,7 +159,7 @@ const ScholarshipsPage = () => {
     options: feeHeadOptions,
     isLoading: feeHeadLoading,
     refetchFeeHeads,
-  } = useScholarshipFeeHeadOptions(createScheme.feeHeads, { enabled: isCreateOpen });
+  } = useScholarshipFeeHeadOptions(createScheme.feeHeads, { enabled: isFormOpen });
 
   useEffect(() => {
     if (academicYearId || yearLoading || academicYearOptions.length === 0) return;
@@ -153,43 +178,104 @@ const ScholarshipsPage = () => {
     return withValue[0]?.value ?? '';
   };
 
+  const handleCloseFormModal = useCallback(() => {
+    closeFormModal();
+    setFormMode(null);
+    setEditTarget(null);
+    setEditLoadError(null);
+    setIsEditLoading(false);
+    setEditingSchemeName('');
+    resetCreate();
+    resetEdit();
+    setCreateSuccessMessage('');
+    setUpdateSuccessMessage('');
+  }, [
+    closeFormModal,
+    resetCreate,
+    resetEdit,
+    setCreateSuccessMessage,
+    setUpdateSuccessMessage,
+  ]);
+
   const handleOpenCreateModal = useCallback(() => {
     const defaultYear =
       academicYearId
-      || pickDefaultOption(createAcademicYearOptions)
+      || pickDefaultOption(formAcademicYearOptions)
       || '';
-    const defaultSchemeType = pickDefaultOption(schemeTypeOptions, 'MERIT');
-    const defaultDiscountType = pickDefaultOption(discountTypeOptions, DISCOUNT_TYPE.percentage);
-    const defaultApplicableTo = pickDefaultOption(applicableToOptions, 'TUITION_ONLY');
 
     resetCreate({
-      schemeType: defaultSchemeType,
-      discountType: defaultDiscountType,
-      applicableTo: defaultApplicableTo,
+      schemeType: pickDefaultOption(schemeTypeOptions, 'MERIT'),
+      discountType: pickDefaultOption(discountTypeOptions, DISCOUNT_TYPE.percentage),
+      applicableTo: pickDefaultOption(applicableToOptions, 'TUITION_ONLY'),
       academicYearId: defaultYear,
     });
+    setFormMode('create');
+    setEditTarget(null);
+    setEditLoadError(null);
     setCreateSuccessMessage('');
     refetchFeeHeads();
-    openCreateModal();
+    openFormModal();
   }, [
     academicYearId,
     applicableToOptions,
-    createAcademicYearOptions,
     discountTypeOptions,
-    openCreateModal,
+    formAcademicYearOptions,
+    openFormModal,
     refetchFeeHeads,
     resetCreate,
     schemeTypeOptions,
     setCreateSuccessMessage,
   ]);
 
-  const handleCloseCreateModal = useCallback(() => {
-    closeCreateModal();
-    resetCreate();
-    setCreateSuccessMessage('');
-  }, [closeCreateModal, resetCreate, setCreateSuccessMessage]);
+  const handleOpenEditModal = useCallback(async (scheme) => {
+    const schemeId = getSchemeId(scheme?.raw) ?? scheme?.id;
+    if (!schemeId) return;
 
-  const bannerMessage = createSuccessMessage;
+    setFormMode('edit');
+    setEditTarget(null);
+    setEditLoadError(null);
+    setEditingSchemeName(scheme.title || '');
+    setUpdateSuccessMessage('');
+    openFormModal();
+    refetchFeeHeads();
+    setIsEditLoading(true);
+
+    try {
+      const response = await getScholarshipById(schemeId);
+
+      if (!response?.success) {
+        setEditLoadError(response?.message || editScheme.loadFailed);
+        return;
+      }
+
+      setEditTarget(response.data ?? {});
+      setEditingSchemeName(response.data?.schemeName || scheme.title || '');
+    } catch (error) {
+      const { general, status } = parseApiError(error);
+      setEditLoadError(
+        status === 404
+          ? editScheme.notFound
+          : status === 403
+            ? editScheme.accessDenied
+            : status === 401
+              ? editScheme.authFailed
+              : general || editScheme.loadFailed,
+      );
+    } finally {
+      setIsEditLoading(false);
+    }
+  }, [editScheme, openFormModal, refetchFeeHeads, setUpdateSuccessMessage]);
+
+  const isCreateMode = formMode === 'create';
+  const formCopy = isCreateMode ? createScheme : editScheme;
+  const formState = isCreateMode ? createForm : editForm;
+  const formErrors = isCreateMode ? createErrors : editErrors;
+  const isFormSubmitting = isCreateMode ? isCreating : isUpdating;
+  const handleFormSubmit = isCreateMode ? handleCreateSubmit : handleEditSubmit;
+  const handleFormChange = isCreateMode ? updateCreateField : updateEditField;
+
+  const bannerMessage =
+    createSuccessMessage || updateSuccessMessage || deleteSuccessMessage;
 
   return (
     <div className="crmListPage scholarshipsPage">
@@ -232,13 +318,23 @@ const ScholarshipsPage = () => {
               <span className="scholarshipsSchemeBadge">{scheme.badge}</span>
             </div>
             <p className="scholarshipsSchemeDesc">{scheme.description}</p>
-            <button
-              type="button"
-              className="scholarshipsSchemeEdit"
-              onClick={() => openScheme(scheme)}
-            >
-              {actions.editSchemeLabel}
-            </button>
+            <div className="scholarshipsSchemeCardActions">
+              <button
+                type="button"
+                className="scholarshipsSchemeEdit"
+                onClick={() => handleOpenEditModal(scheme)}
+              >
+                {actions.editSchemeLabel}
+              </button>
+              <button
+                type="button"
+                className="scholarshipsSchemeDelete"
+                aria-label={`Delete ${scheme.title}`}
+                onClick={() => openDeleteConfirm(scheme)}
+              >
+                {DashboardIcons.trash(16)}
+              </button>
+            </div>
           </article>
         ))}
       </section>
@@ -316,33 +412,38 @@ const ScholarshipsPage = () => {
       </section>
 
       <ScholarshipSchemeFormModal
-        isOpen={isCreateOpen}
-        copy={createScheme}
-        form={createForm}
-        errors={createErrors}
-        isSubmitting={isCreating}
+        isOpen={isFormOpen}
+        copy={formCopy}
+        form={formState}
+        errors={formErrors}
+        isSubmitting={isFormSubmitting}
+        isFormLoading={!isCreateMode && isEditLoading}
+        loadError={!isCreateMode ? editLoadError : null}
+        schemeName={editingSchemeName}
+        titleId={isCreateMode ? 'scholarshipSchemeCreateTitle' : 'scholarshipSchemeEditTitle'}
         schemeTypeOptions={schemeTypeOptions}
         schemeTypeLoading={schemeTypeLoading}
         discountTypeOptions={discountTypeOptions}
         discountTypeLoading={discountTypeLoading}
         applicableToOptions={applicableToOptions}
         applicableToLoading={applicableToLoading}
-        academicYearOptions={createAcademicYearOptions}
-        academicYearLoading={createYearLoading}
+        academicYearOptions={formAcademicYearOptions}
+        academicYearLoading={formYearLoading}
         feeHeadOptions={feeHeadOptions}
         feeHeadLoading={feeHeadLoading}
-        onClose={handleCloseCreateModal}
-        onChange={updateCreateField}
-        onSubmit={handleCreateSubmit}
+        onClose={handleCloseFormModal}
+        onChange={handleFormChange}
+        onSubmit={handleFormSubmit}
       />
 
-      <ScholarshipSchemeDetailModal
-        isOpen={isDetailOpen}
-        copy={schemeDetail}
-        scheme={detailScheme}
-        isLoading={detailLoading}
-        loadError={detailError}
-        onClose={closeScheme}
+      <DeleteScholarshipSchemeModal
+        isOpen={Boolean(deleteTarget)}
+        copy={deleteScheme}
+        schemeName={deleteTarget?.title || deleteTarget?.raw?.schemeName}
+        isDeleting={isDeleting}
+        errorMessage={deleteError}
+        onClose={closeDeleteConfirm}
+        onConfirm={confirmDelete}
       />
     </div>
   );

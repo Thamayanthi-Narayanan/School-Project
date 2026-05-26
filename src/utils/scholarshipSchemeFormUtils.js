@@ -72,6 +72,24 @@ export const validateScholarshipSchemeForm = (form, validationCopy) => {
   return errors;
 };
 
+export const scholarshipFromApiToForm = (scheme) => ({
+  schemeName: scheme?.schemeName ?? '',
+  schemeType: scheme?.schemeType != null ? String(scheme.schemeType) : '',
+  discountType: scheme?.discountType != null
+    ? String(scheme.discountType)
+    : DISCOUNT_TYPE.percentage,
+  discountValue:
+    scheme?.discountValue != null && scheme.discountValue !== ''
+      ? String(scheme.discountValue)
+      : '',
+  applicableTo: scheme?.applicableTo != null
+    ? String(scheme.applicableTo)
+    : APPLICABLE_TO.tuitionOnly,
+  feeHeadId: scheme?.feeHeadId != null ? String(scheme.feeHeadId) : '',
+  academicYearId: scheme?.academicYearId != null ? String(scheme.academicYearId) : '',
+  isActive: scheme?.isActive === false ? 'No' : YES,
+});
+
 export const buildCreateScholarshipPayload = (form) => {
   const discountValue = Number.parseFloat(form.discountValue.trim().replace(/,/g, ''));
   const payload = {
@@ -91,6 +109,35 @@ export const buildCreateScholarshipPayload = (form) => {
   return payload;
 };
 
+export const buildUpdateScholarshipPayload = (form, original) => {
+  const payload = {};
+  const full = buildCreateScholarshipPayload(form);
+  const originalName = original?.schemeName ?? '';
+  const originalDiscount = Number(original?.discountValue);
+  const originalYearId = Number(original?.academicYearId);
+  const originalFeeHeadId = original?.feeHeadId != null ? Number(original.feeHeadId) : null;
+  const originalActive = original?.isActive !== false;
+
+  if (full.schemeName !== originalName) payload.schemeName = full.schemeName;
+  if (full.schemeType !== String(original?.schemeType ?? '')) payload.schemeType = full.schemeType;
+  if (full.discountType !== String(original?.discountType ?? '')) {
+    payload.discountType = full.discountType;
+  }
+  if (full.discountValue !== originalDiscount) payload.discountValue = full.discountValue;
+  if (full.applicableTo !== String(original?.applicableTo ?? '')) {
+    payload.applicableTo = full.applicableTo;
+  }
+  if (full.academicYearId !== originalYearId) payload.academicYearId = full.academicYearId;
+  if (full.isActive !== originalActive) payload.isActive = full.isActive;
+
+  if (full.applicableTo === APPLICABLE_TO.specificHead) {
+    const nextFeeHeadId = full.feeHeadId ?? null;
+    if (nextFeeHeadId !== originalFeeHeadId) payload.feeHeadId = nextFeeHeadId;
+  }
+
+  return payload;
+};
+
 export const mapApiFieldErrorsToForm = (fieldErrors = {}) => {
   const mapped = { ...fieldErrors };
   const message = String(fieldErrors.general ?? '').toLowerCase();
@@ -103,6 +150,9 @@ export const mapApiFieldErrorsToForm = (fieldErrors = {}) => {
   }
   if (!mapped.discountValue && message.includes('percentage')) {
     mapped.discountValue = fieldErrors.general;
+  }
+  if (!mapped.general && message.includes('at least one field')) {
+    mapped.general = fieldErrors.general;
   }
 
   return mapped;

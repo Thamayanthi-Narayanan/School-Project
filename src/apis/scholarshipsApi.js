@@ -28,6 +28,24 @@ export const getScholarshipById = async (schemeId) => {
 };
 
 /**
+ * PUT /api/v1/scholarships/{schemeId}
+ * Partial update; at least one field required. Roles: ADMIN, PRINCIPAL.
+ */
+export const updateScholarship = async (schemeId, payload) => {
+  const { data } = await apiClient.put(`/scholarships/${schemeId}`, payload);
+  return data;
+};
+
+/**
+ * DELETE /api/v1/scholarships/{schemeId}
+ * Soft-deletes / deactivates scheme. Roles: ADMIN, PRINCIPAL.
+ */
+export const deleteScholarship = async (schemeId) => {
+  const { data } = await apiClient.delete(`/scholarships/${schemeId}`);
+  return data;
+};
+
+/**
  * GET /api/v1/scholarships/merit-bands?academicYearId=
  * Mark-based tuition waiver bands for an academic year.
  */

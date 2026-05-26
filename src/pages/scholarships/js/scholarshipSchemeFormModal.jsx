@@ -8,6 +8,10 @@ const ScholarshipSchemeFormModal = ({
   form,
   errors,
   isSubmitting,
+  isFormLoading,
+  loadError,
+  schemeName,
+  titleId = 'scholarshipSchemeFormTitle',
   schemeTypeOptions,
   schemeTypeLoading,
   discountTypeOptions,
@@ -24,12 +28,17 @@ const ScholarshipSchemeFormModal = ({
 }) => {
   if (!isOpen) return null;
 
+  const subtitle = copy.subtitle?.includes('{name}')
+    ? copy.subtitle.replace('{name}', schemeName || copy.fallbackName || '')
+    : copy.subtitle;
+
   const handleOverlayClick = (event) => {
-    if (event.target === event.currentTarget) onClose();
+    if (event.target === event.currentTarget && !isSubmitting) onClose();
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (isFormLoading) return;
     const isSuccess = await onSubmit();
     if (isSuccess) onClose();
   };
@@ -40,20 +49,26 @@ const ScholarshipSchemeFormModal = ({
         className="crmModal scholarshipSchemeFormModal"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="scholarshipSchemeCreateTitle"
+        aria-labelledby={titleId}
       >
         <header className="crmModalHeader">
-          <h2 id="scholarshipSchemeCreateTitle" className="crmModalTitle">
+          <h2 id={titleId} className="crmModalTitle">
             {copy.title}
           </h2>
-          <p className="crmModalSubtitle">{copy.subtitle}</p>
+          <p className="crmModalSubtitle">{subtitle}</p>
         </header>
 
         <form onSubmit={handleSubmit} noValidate>
+          {loadError ? (
+            <p className="scholarshipSchemeFormError" role="alert">{loadError}</p>
+          ) : null}
           {errors.general ? (
             <p className="scholarshipSchemeFormError" role="alert">{errors.general}</p>
           ) : null}
 
+          {isFormLoading ? (
+            <p className="scholarshipsListState">{copy.loadingMessage}</p>
+          ) : (
           <ScholarshipSchemeFormFields
             fields={copy.fields}
             form={form}
@@ -71,12 +86,17 @@ const ScholarshipSchemeFormModal = ({
             feeHeadOptions={feeHeadOptions}
             feeHeadLoading={feeHeadLoading}
           />
+          )}
 
           <footer className="crmModalFooter">
             <CrmButton variant="outline" type="button" onClick={onClose} disabled={isSubmitting}>
               {copy.cancelLabel}
             </CrmButton>
-            <CrmButton variant="primary" type="submit" disabled={isSubmitting}>
+            <CrmButton
+              variant="primary"
+              type="submit"
+              disabled={isSubmitting || isFormLoading || Boolean(loadError)}
+            >
               {isSubmitting ? copy.submittingLabel : copy.submitLabel}
             </CrmButton>
           </footer>

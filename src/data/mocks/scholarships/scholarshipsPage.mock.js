@@ -27,6 +27,7 @@ export const scholarshipsPageMock = {
     createSuccess: 'Scholarship scheme created successfully.',
     createFailed: 'Could not create scholarship scheme. Please try again.',
     loadingLabel: 'Loading…',
+    loadingMessage: 'Loading…',
     fields: {
       schemeName: {
         label: 'Scheme name',
@@ -35,23 +36,10 @@ export const scholarshipsPageMock = {
       schemeType: {
         label: 'Scheme type',
         placeholder: 'Select scheme type',
-        options: [
-          { label: 'Merit', value: 'MERIT' },
-          { label: 'Means', value: 'MEANS' },
-          { label: 'Sports', value: 'SPORTS' },
-          { label: 'Sibling', value: 'SIBLING' },
-          { label: 'Government', value: 'GOVERNMENT' },
-          { label: 'EWS', value: 'EWS' },
-          { label: 'Other', value: 'OTHER' },
-        ],
       },
       discountType: {
         label: 'Discount type',
         placeholder: 'Select discount type',
-        options: [
-          { label: 'Percentage', value: 'PERCENTAGE' },
-          { label: 'Fixed amount', value: 'FIXED' },
-        ],
       },
       discountValue: {
         label: 'Discount value',
@@ -91,23 +79,83 @@ export const scholarshipsPageMock = {
       academicYearRequired: 'Academic year is required.',
     },
   },
-  schemeDetail: {
-    title: 'Scholarship scheme',
-    fallbackTitle: 'Scheme',
-    subtitle: 'Details for "{name}".',
+  editScheme: {
+    title: 'Edit scholarship scheme',
+    subtitle: 'Update scheme "{name}".',
+    fallbackName: 'this scheme',
+    cancelLabel: 'Cancel',
+    submitLabel: 'Save changes',
+    submittingLabel: 'Saving…',
     loadingMessage: 'Loading scheme details…',
     loadFailed: 'Could not load scheme details. Please try again.',
     notFound: 'Scholarship not found.',
-    accessDenied: 'You do not have permission to view this scheme.',
-    authFailed: 'Please sign in again to view scheme details.',
-    closeLabel: 'Close',
+    accessDenied: 'You do not have permission to edit this scheme.',
+    authFailed: 'Please sign in again to edit scheme details.',
+    updateSuccess: 'Scholarship scheme updated successfully.',
+    updateFailed: 'Could not update scholarship scheme. Please try again.',
+    noChanges: 'Change at least one field before saving.',
     fields: {
-      schemeCode: 'Scheme code',
-      discountType: 'Discount type',
-      discountPercent: 'Discount percent',
-      discountAmount: 'Fixed amount',
-      description: 'Eligibility',
+      schemeName: {
+        label: 'Scheme name',
+        placeholder: 'Merit Scholarship 2026',
+      },
+      schemeType: {
+        label: 'Scheme type',
+        placeholder: 'Select scheme type',
+      },
+      discountType: {
+        label: 'Discount type',
+        placeholder: 'Select discount type',
+      },
+      discountValue: {
+        label: 'Discount value',
+        placeholderPercent: 'e.g. 25',
+        placeholderFixed: 'e.g. 15000',
+      },
+      applicableTo: {
+        label: 'Applicable to',
+        placeholder: 'Select fees',
+      },
+      feeHeadId: {
+        label: 'Fee head',
+        placeholder: 'Select fee head',
+      },
+      academicYearId: {
+        label: 'Academic year',
+        placeholder: 'Select academic year',
+      },
+      isActive: {
+        label: 'Active',
+        options: ['Yes', 'No'],
+      },
     },
+    feeHeads: {
+      loadFailed: 'Could not load fee heads.',
+    },
+    validation: {
+      nameRequired: 'Scheme name is required.',
+      nameMax: 'Scheme name must be at most 150 characters.',
+      schemeTypeRequired: 'Scheme type is required.',
+      discountTypeRequired: 'Discount type is required.',
+      discountValueRequired: 'Discount value is required.',
+      discountValueInvalid: 'Enter a valid discount value (0 or greater).',
+      discountPercentMax: 'Percentage discount cannot exceed 100.',
+      applicableToRequired: 'Applicable to is required.',
+      feeHeadRequired: 'Fee head is required when applicable to is Specific fee head.',
+      academicYearRequired: 'Academic year is required.',
+    },
+  },
+  deleteScheme: {
+    title: 'Delete scholarship scheme',
+    subtitle: 'Deactivate "{name}"? It will no longer be available for new applications.',
+    fallbackName: 'this scheme',
+    hint: 'The scheme will be deactivated (soft delete). Existing records may still reference it.',
+    cancelLabel: 'Cancel',
+    confirmLabel: 'Delete scheme',
+    deletingLabel: 'Deleting…',
+    deleteSuccess: 'Scholarship deleted successfully.',
+    deleteFailed: 'Could not delete scholarship scheme. Please try again.',
+    notFound: 'Scholarship not found.',
   },
   meritBands: {
     sectionTitle: 'Merit bands',
