@@ -60,7 +60,8 @@
   .settingsPageHeader,
   .transferCertificatePageHeader,
   .feeStructurePageHeader,
-  .feeStructureConfigPage .feeStructurePageHeader {
+  .feeStructureConfigPage .feeStructurePageHeader,
+  .bulkUploadPageHeader {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-start;

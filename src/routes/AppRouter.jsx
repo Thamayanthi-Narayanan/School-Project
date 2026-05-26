@@ -22,6 +22,7 @@ import FeeHeadPage from '../pages/feeStructure/js/feeHeadPage';
 import FeeStructureConfigPage from '../pages/feeStructureConfig/js/feeStructureConfigPage';
 import ReportsPage from '../pages/reports/js/reportsPage';
 import UserCreationPage from '../pages/userCreation/js/userCreationPage';
+import BulkUploadPage from '../pages/bulkUpload/js/bulkUploadPage';
 
 const AppRouter = () => {
   return (
@@ -53,6 +54,7 @@ const AppRouter = () => {
           <Route path={routePaths.feeStructure} element={<FeeStructureConfigPage />} />
           <Route path={routePaths.reports} element={<ReportsPage />} />
           <Route path={routePaths.userCreation} element={<UserCreationPage />} />
+          <Route path={routePaths.bulkUpload} element={<BulkUploadPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

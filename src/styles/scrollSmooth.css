@@ -25,7 +25,8 @@ html {
 .feeStructureTableWrap,
 .feeStructureConfigCard,
 .paymentsTableWrap,
-.paymentsMethodTiles {
+.paymentsMethodTiles,
+.bulkUploadTableWrap {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;

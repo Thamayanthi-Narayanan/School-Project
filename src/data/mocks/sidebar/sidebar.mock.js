@@ -34,6 +34,7 @@ export const sidebarMock = {
       label: 'WORKSPACE',
       items: [
         { id: 'userCreation', label: 'User Creation', path: '/user-creation', icon: 'userPlus' },
+        { id: 'bulkUpload', label: 'Bulk Upload', path: '/bulk-upload', icon: 'upload' },
         { id: 'reports', label: 'Reports', path: '/reports', icon: 'barChart' },
         { id: 'notifications', label: 'Notifications', path: '/notifications', icon: 'bell' },
         { id: 'settings', label: 'Settings', path: '/settings', icon: 'settings' },

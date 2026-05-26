@@ -21,4 +21,5 @@ export const routePaths = {
   feeStructure: '/fee-structure',
   reports: '/reports',
   userCreation: '/user-creation',
+  bulkUpload: '/bulk-upload',
 };

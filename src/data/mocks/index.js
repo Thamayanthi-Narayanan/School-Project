@@ -16,3 +16,4 @@ export { feeStructurePageMock } from './feeStructure/feeStructurePage.mock';
 export { feeStructureConfigPageMock } from './feeStructureConfig/feeStructureConfigPage.mock';
 export { reportsPageMock } from './reports/reportsPage.mock';
 export { userCreationPanelMock } from './userCreation/userCreationPanel.mock';
+export { bulkUploadPageMock } from './bulkUpload/bulkUploadPage.mock';

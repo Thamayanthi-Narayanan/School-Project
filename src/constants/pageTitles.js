@@ -15,4 +15,6 @@ export const pageTitles = {
   [routePaths.feeHead]: 'Fee Head',
   [routePaths.feeStructure]: 'Fee Structure',
   [routePaths.reports]: 'Reports',
+  [routePaths.userCreation]: 'User Creation',
+  [routePaths.bulkUpload]: 'Bulk Upload',
 };
