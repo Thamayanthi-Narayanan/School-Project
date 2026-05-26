@@ -31,6 +31,26 @@ export const MASTER_DATA_KEYS = {
   user: 'user',
 };
 
+const resolveItemLabel = (item) =>
+  item?.label ?? item?.name ?? item?.displayName ?? item?.description ?? null;
+
+const resolveItemValue = (item) =>
+  item?.value ?? item?.code ?? item?.name ?? null;
+
+/**
+ * Resolve API key on data object (exact match, then case-insensitive).
+ */
+export const resolveMasterDataKey = (masterData, key) => {
+  if (!masterData || !key) return key;
+  if (Array.isArray(masterData[key])) return key;
+
+  const normalized = String(key).toLowerCase();
+  const match = Object.keys(masterData).find(
+    (dataKey) => dataKey.toLowerCase() === normalized,
+  );
+  return match ?? key;
+};
+
 /**
  * Map one master-data array to FormSelect-style options: { label, value }.
  */
@@ -38,11 +58,16 @@ export const mapMasterDataItemsToOptions = (items) => {
   if (!Array.isArray(items)) return [];
 
   return items
-    .filter((item) => item?.value != null && item?.label != null)
-    .map((item) => ({
-      label: String(item.label),
-      value: String(item.value),
-    }));
+    .map((item) => {
+      const label = resolveItemLabel(item);
+      const value = resolveItemValue(item);
+      if (label == null || value == null) return null;
+      return {
+        label: String(label),
+        value: String(value),
+      };
+    })
+    .filter(Boolean);
 };
 
 /** Options using `id` as the select value (class, academic year, user, etc.). */
@@ -50,22 +75,31 @@ export const mapMasterDataItemsToIdOptions = (items) => {
   if (!Array.isArray(items)) return [];
 
   return items
-    .filter((item) => item?.id != null && item?.label != null)
-    .map((item) => ({
-      label: String(item.label),
-      value: String(item.id),
-    }));
+    .map((item) => {
+      const label = resolveItemLabel(item);
+      const id = item?.id ?? item?.value;
+      if (label == null || id == null) return null;
+      return {
+        label: String(label),
+        value: String(id),
+      };
+    })
+    .filter(Boolean);
 };
 
 /**
  * @param {object|null|undefined} masterData - response.data from getMasterData
  * @param {string} key - MASTER_DATA_KEYS value
  */
-export const getMasterDataOptions = (masterData, key) =>
-  mapMasterDataItemsToOptions(masterData?.[key]);
+export const getMasterDataOptions = (masterData, key) => {
+  const resolvedKey = resolveMasterDataKey(masterData, key);
+  return mapMasterDataItemsToOptions(masterData?.[resolvedKey]);
+};
 
-export const getMasterDataIdOptions = (masterData, key) =>
-  mapMasterDataItemsToIdOptions(masterData?.[key]);
+export const getMasterDataIdOptions = (masterData, key) => {
+  const resolvedKey = resolveMasterDataKey(masterData, key);
+  return mapMasterDataItemsToIdOptions(masterData?.[resolvedKey]);
+};
 
 export const getMasterDataLabel = (masterData, key, value) => {
   if (value == null || value === '') return '';
@@ -77,10 +111,13 @@ export const getMasterDataLabel = (masterData, key, value) => {
 
 export const getMasterDataLabelById = (masterData, key, id) => {
   if (id == null || id === '') return '';
-  const items = masterData?.[key];
+  const resolvedKey = resolveMasterDataKey(masterData, key);
+  const items = masterData?.[resolvedKey];
   if (!Array.isArray(items)) return '';
-  const match = items.find((item) => String(item.id) === String(id));
-  return match?.label ?? '';
+  const match = items.find(
+    (item) => String(item.id) === String(id) || String(item.value) === String(id),
+  );
+  return resolveItemLabel(match) ?? '';
 };
 
 /**

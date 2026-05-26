@@ -41,6 +41,7 @@ Use **`useIdAsValue: true`** when the form stores numeric FK ids (class, academi
 | Students filters | `class`, `section`, `academicYear` (+ “All” prepend from mock label only) |
 | Fee Head config | `class`, `academicYear`, `feeBillingTerm` |
 | Create fee head modal | `feeCategory` (+ Yes/No for mandatory/refundable/active — boolean UI, not master data) |
+| Scholarships — New scheme modal | `schemeType`, `discountType`, `applicableTo`, `academicYear` (id) |
 | Payments collect | `user`, `feeBillingTerm`, `paymentMode` (tiles) |
 | Reports filters | `academicYear`, `class`, `termType` (period/month) |
 | Transfer Certificate | `user` (student); reason = text input (no API key yet) |

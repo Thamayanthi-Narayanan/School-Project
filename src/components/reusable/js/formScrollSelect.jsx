@@ -35,10 +35,13 @@ const FormScrollSelect = ({
   const listId = useId();
 
   const isFilter = variant === 'filter';
-  const normalizedOptions = useMemo(
-    () => options.map(normalizeSelectOption),
-    [options],
-  );
+  const normalizedOptions = useMemo(() => {
+    const mapped = options.map(normalizeSelectOption);
+    const selectable = mapped.filter(
+      (option) => option.value !== '' || !/loading/i.test(option.label),
+    );
+    return selectable.length > 0 ? selectable : mapped;
+  }, [options]);
 
   const isControlled = valueProp !== undefined;
   const value = isControlled ? String(valueProp ?? '') : internalValue;
