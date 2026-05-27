@@ -15,4 +15,9 @@ export const themeColors = {
   loginPanelGradient: 'linear-gradient(165deg, #eef4ff 0%, #f5f8fc 42%, #ffffff 100%)',
   loginCardBorder: 'rgba(37, 99, 235, 0.1)',
   success: '#16a34a',
+  notifAccent: '#002d62',
+  notifIconBg: '#ebf2ff',
+  notifMarkBg: '#ebf2ff',
+  notifMarkBgHover: '#dbe7ff',
+  notifMarkBorder: '#c7d7f5',
 };

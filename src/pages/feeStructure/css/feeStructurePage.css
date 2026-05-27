@@ -1,0 +1,809 @@
+.feeStructurePage .feeStructurePageHeader {
+  width: 100%;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.feeStructurePage .crmPageActions {
+  flex-shrink: 0;
+}
+
+/* Config card */
+.feeStructureConfigCard,
+.feeStructurePageCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  margin-bottom: 1.25rem;
+}
+
+.feeStructureConfigCard {
+  padding: 1.5rem;
+}
+
+.feeStructurePageCard {
+  overflow: hidden;
+}
+
+.feeStructurePageTabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.375rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--theme-border);
+  background: var(--theme-bg-page);
+}
+
+.feeStructurePageTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  min-width: 0;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: var(--theme-radius-sm);
+  background: transparent;
+  color: var(--theme-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.feeStructurePageTab:hover {
+  background: var(--theme-bg-card);
+  color: var(--theme-text-primary);
+}
+
+.feeStructurePageTabActive {
+  background: var(--theme-bg-card);
+  color: var(--theme-primary);
+  font-weight: 600;
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.feeStructurePageTabIcon {
+  display: flex;
+}
+
+.feeStructurePageBody {
+  padding: 1.25rem 1.5rem 1.5rem;
+  min-width: 0;
+}
+
+.feeStructurePageFormFooter {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--theme-border);
+}
+
+.feeStructurePanelSection {
+  min-width: 0;
+}
+
+.feeStructurePanelSectionTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.feeStructurePanelSectionHint {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--theme-text-secondary);
+}
+
+.feeStructureViewSection {
+  min-width: 0;
+}
+
+.feeStructureViewSection .feeStructureCategoriesTitle {
+  margin-bottom: 1rem;
+}
+
+.feeStructureViewSectionBelowForm {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--theme-border);
+}
+
+.feeStructureTableSubHead {
+  text-align: center;
+  width: 4.5rem;
+  white-space: nowrap;
+}
+
+.feeStructureCategoryCell .feeStructureCategoryMain {
+  margin-bottom: 0;
+}
+
+.feeStructureAmountCell {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.feeStructureAmountCell:hover {
+  background: rgba(37, 99, 235, 0.06);
+}
+
+.feeStructureAmountCell:focus-visible {
+  outline: 2px solid var(--theme-primary);
+  outline-offset: -2px;
+}
+
+.feeHeadInlineGrid {
+  gap: 0.75rem 1rem;
+}
+
+.feeHeadInlineGrid .crmFormField {
+  gap: 0.35rem;
+}
+
+.feeHeadInlineGrid .crmFormLabel {
+  font-size: 0.8125rem;
+}
+
+.feeHeadInlineGrid .crmScrollSelectTrigger,
+.feeHeadInlineGrid .crmFormInput,
+.feeHeadInlineGrid .crmFormTextarea {
+  min-height: 2.25rem;
+  font-size: 0.8125rem;
+}
+
+.feeHeadInlineGrid .crmFormTextarea {
+  min-height: 4.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.feeStructureConfigCard {
+  overflow: visible;
+}
+
+.feeStructureConfigGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+/* Fee categories */
+.feeStructureCategoriesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.feeStructureCategoriesTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin: 0;
+}
+
+.feeStructureAddCategoryBtn {
+  flex-shrink: 0;
+}
+
+.feeStructureCreateSuccess {
+  margin: 0 0 0.875rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid rgba(22, 163, 74, 0.24);
+  border-radius: var(--theme-radius-sm);
+  background: rgba(22, 163, 74, 0.08);
+  color: var(--theme-success);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.feeStructureListError {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: var(--theme-radius-sm);
+  background: rgba(220, 38, 38, 0.06);
+}
+
+.feeStructureListError p {
+  margin: 0;
+  flex: 1;
+  min-width: 12rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--theme-danger);
+}
+
+.feeStructureListState {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--theme-text-muted);
+  font-size: 0.875rem;
+}
+
+.feeHeadDeleteModal {
+  max-width: 28rem;
+}
+
+.feeHeadDeleteModalHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.feeHeadDeleteModalIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--theme-radius-md);
+  background: rgba(220, 38, 38, 0.1);
+  color: var(--theme-danger);
+}
+
+.feeHeadDeleteModalHint {
+  margin: 0 0 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: var(--theme-text-muted);
+}
+
+.feeHeadDeleteConfirmBtn {
+  background: var(--theme-danger);
+  border-color: var(--theme-danger);
+}
+
+.feeHeadDeleteConfirmBtn:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.feeQuartersEditGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.feeQuartersEditTotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 0.875rem;
+  border-radius: var(--theme-radius-sm);
+  background: var(--theme-bg-page);
+  font-size: 0.8125rem;
+  color: var(--theme-text-muted);
+}
+
+.feeQuartersEditTotal strong {
+  font-size: 0.9375rem;
+  color: var(--theme-primary);
+}
+
+.feeStructureTableWrap {
+  overflow-x: auto;
+  margin: 0 -0.25rem;
+  padding: 0 0.25rem;
+}
+
+.feeStructureTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.feeStructureTable th {
+  padding: 0 0.5rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-align: left;
+  color: var(--theme-text-muted);
+  white-space: nowrap;
+}
+
+.feeStructureTable th:not(:first-child):not(:last-child) {
+  text-align: center;
+}
+
+.feeStructureTableActionHead {
+  width: 6.5rem;
+  text-align: right;
+}
+
+.feeStructureTable td {
+  padding: 0.5rem;
+  vertical-align: middle;
+  border-top: 1px solid var(--theme-border);
+}
+
+.feeStructureTable td:not(:first-child):not(:last-child):not(.feeStructureRowTotal) {
+  text-align: center;
+}
+
+.feeStructureCellInput {
+  width: 100%;
+  min-width: 4.5rem;
+  max-width: 6.5rem;
+  margin: 0 auto;
+  display: block;
+  padding: 0.5rem 0.625rem;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-sm);
+  background: var(--theme-bg-input);
+  font-size: 0.8125rem;
+  color: var(--theme-text-primary);
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.feeStructureCategoryInput {
+  max-width: none;
+  min-width: 8rem;
+  margin: 0;
+}
+
+.feeStructureCellInput:focus {
+  outline: none;
+  border-color: var(--theme-border-focus);
+  box-shadow: 0 0 0 3px var(--theme-primary-focus-ring);
+}
+
+.feeStructureRowTotal {
+  font-weight: 700;
+  color: var(--theme-primary);
+  white-space: nowrap;
+  text-align: right;
+  padding-right: 0.75rem;
+}
+
+.feeStructureTableActionCell {
+  text-align: center;
+  width: 4.5rem;
+  vertical-align: middle;
+}
+
+.feeStructureTableActionCell .crmRowActions {
+  justify-content: center;
+}
+
+.feeStructureTableActionCell .crmActionBtn {
+  margin: 0 auto;
+}
+
+.feeStructureCategoryCell {
+  min-width: 10rem;
+  vertical-align: middle;
+}
+
+.feeStructureCategoryMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.feeStructureCategoryCode {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--theme-text-muted);
+}
+
+.feeHeadRowActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.feeHeadActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--theme-radius-sm);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.feeHeadActionBtnIcon {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.feeHeadActionBtnEdit {
+  border: 1px solid var(--theme-primary-light-border);
+  background: #eff6ff;
+  color: var(--theme-primary);
+}
+
+.feeHeadActionBtnEdit:hover {
+  background: #dbeafe;
+}
+
+.feeHeadActionBtnDelete {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.feeHeadActionBtnDelete:hover {
+  background: #fee2e2;
+}
+
+.feeStructureRowActions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.feeStructureActionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border-radius: var(--theme-radius-sm);
+  border: 1px solid var(--theme-border);
+  background: var(--theme-bg-card);
+  color: var(--theme-text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.feeStructureActionBtnEdit:hover {
+  border-color: var(--theme-primary-light-border);
+  background: #eff6ff;
+  color: var(--theme-primary);
+}
+
+.feeStructureActionBtnClear:hover {
+  border-color: #fcd34d;
+  background: #fffbeb;
+  color: #b45309;
+}
+
+.feeClearAmountsModal {
+  max-width: 24rem;
+}
+
+.feeClearAmountsModalHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.feeClearAmountsModalIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--theme-radius-md);
+  background: #fffbeb;
+  color: #b45309;
+  flex-shrink: 0;
+}
+
+.feeClearAmountsModalHint {
+  margin: 0 0 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--theme-text-secondary);
+}
+
+.feeClearAmountsConfirmBtn {
+  background: #d97706;
+  border-color: #d97706;
+}
+
+.feeClearAmountsConfirmBtn:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.feeHeadDescriptionField {
+  margin-top: 0.25rem;
+}
+
+.feeStructureCellText {
+  display: block;
+  min-width: 4.5rem;
+  max-width: 6.5rem;
+  margin: 0 auto;
+  padding: 0.5rem 0.625rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-primary);
+  text-align: center;
+}
+
+.feeStructureCategoryText {
+  max-width: none;
+  min-width: 8rem;
+  margin: 0;
+  text-align: left;
+}
+
+/* Totals row */
+.feeStructureTotalsRow {
+  background: var(--theme-bg-page);
+}
+
+.feeStructureTotalsRow td {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+  border-top: 1px solid var(--theme-border);
+}
+
+.feeStructureTotalsLabel {
+  font-weight: 700;
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+.feeStructureTotalsRow td:not(:first-child):not(.feeStructureGrandTotal) {
+  text-align: center;
+}
+
+.feeStructureGrandTotal {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--theme-primary);
+  text-align: right;
+  padding-right: 0.75rem;
+}
+
+/* Bottom cards */
+.feeStructureBottomRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 0.75fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.feeStructureScholarshipCard,
+.feeStructurePayableCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  padding: 1.5rem;
+}
+
+.feeStructurePayableCard {
+  background: var(--theme-primary-light);
+  border-color: var(--theme-primary-light-border);
+  max-width: 22rem;
+  justify-self: end;
+  width: 100%;
+}
+
+.feeStructureBottomCardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin: 0 0 1.25rem;
+}
+
+.feeStructureScholarshipGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+.feeStructureScholarshipGrid .crmFormField {
+  gap: 0.75rem;
+}
+
+.feeStructurePayableList {
+  margin: 0;
+}
+
+.feeStructurePayableRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+
+.feeStructurePayableRow dt {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-secondary);
+}
+
+.feeStructurePayableRow dd {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.feeStructurePayableDiscount {
+  color: var(--theme-text-secondary);
+}
+
+.feeStructurePayableRowHighlight {
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--theme-primary-light-border);
+}
+
+.feeStructurePayableRowHighlight dt {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.feeStructurePayableRowHighlight .feeStructurePayableAmount {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--theme-primary);
+  letter-spacing: -0.02em;
+}
+
+.feeStructurePayableAmount {
+  font-weight: 700;
+  color: var(--theme-primary);
+}
+
+.feeStructureSectionDelay1 {
+  animation-delay: 0.08s;
+}
+
+.feeStructureSectionDelay2 {
+  animation-delay: 0.14s;
+}
+
+.feeHeadModal {
+  max-width: 760px;
+}
+
+.feeHeadModalCompact {
+  max-width: 32rem;
+  padding: 1.25rem;
+}
+
+.feeHeadModalCompact .crmModalHeader {
+  margin-bottom: 0.75rem;
+}
+
+.feeHeadModalCompact .crmModalTitle {
+  font-size: 1.0625rem;
+}
+
+.feeHeadModalCompact .crmModalSubtitle {
+  font-size: 0.75rem;
+}
+
+.feeHeadModalCompact .feeHeadModalGrid {
+  gap: 0.75rem 1rem;
+}
+
+.feeHeadModalCompact .crmModalFooter {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.feeHeadModalGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.feeHeadModalError {
+  margin: 0 0 1rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid rgba(220, 38, 38, 0.24);
+  border-radius: var(--theme-radius-sm);
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--theme-danger);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 1100px) {
+  .feeStructureConfigGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feeStructureScholarshipGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .feeStructureBottomRow {
+    grid-template-columns: 1fr;
+  }
+
+  .feeStructurePayableCard {
+    max-width: none;
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 768px) {
+  .feeStructureConfigCard {
+    padding: 1.25rem;
+    overflow-x: auto;
+  }
+
+  .feeStructureConfigGrid {
+    grid-template-columns: repeat(4, minmax(5.5rem, 1fr));
+    gap: 0.75rem;
+    min-width: min(100%, 22rem);
+  }
+
+  .feeStructurePageCard {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .feeStructurePageBody {
+    padding: 1rem 1.25rem 1.25rem;
+  }
+
+  .feeStructurePageTabs {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .feeStructureTableWrap {
+    margin: 0;
+  }
+
+  .feeStructureCellInput {
+    min-width: 3.5rem;
+    max-width: 5rem;
+    font-size: 0.75rem;
+    padding: 0.4rem 0.5rem;
+  }
+
+  .feeStructureCategoryInput {
+    min-width: 6rem;
+    max-width: 8rem;
+  }
+
+  .feeStructureBottomRow {
+    grid-template-columns: 1fr;
+  }
+
+  .feeStructurePayableCard {
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .feeStructureScholarshipGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .feeStructureAddCategoryBtn {
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .feeHeadModalGrid {
+    grid-template-columns: 1fr;
+  }
+}

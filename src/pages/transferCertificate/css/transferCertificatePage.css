@@ -1,0 +1,263 @@
+.transferCertificatePage .transferCertificatePageHeader {
+  width: 100%;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+/* Equal-height two-column row */
+.transferCertificateRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 1.25rem;
+  align-items: stretch;
+}
+
+.transferCertificateIssueCard,
+.transferCertificatePreviewCard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  padding: 1.5rem;
+}
+
+.transferCertificateCardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin-bottom: 1.25rem;
+}
+
+/* Issue TC form */
+.transferCertificateIssueCard .crmFormFieldFull {
+  margin-bottom: 1rem;
+}
+
+.transferCertificateDateGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.transferCertificateRemarks {
+  flex: 1;
+  margin-bottom: 1rem;
+  min-height: 0;
+}
+
+.transferCertificateRemarks .crmFormTextarea {
+  min-height: 6.5rem;
+  resize: vertical;
+}
+
+.transferCertificateIssueActions {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.transferCertificateGenerateBtn {
+  width: 100%;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  font-weight: 600;
+}
+
+/* TC Preview */
+.transferCertificatePreviewHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.transferCertificatePreviewHeader .transferCertificateCardTitle {
+  margin-bottom: 0;
+}
+
+.transferCertificatePreviewActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.transferCertificateDocument {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-bg-page);
+}
+
+.transferCertificateDocHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.transferCertificateDocLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--theme-primary);
+  color: var(--theme-text-inverse);
+  flex-shrink: 0;
+}
+
+.transferCertificateDocSchoolName {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--theme-text-primary);
+  margin: 0 0 0.25rem;
+  line-height: 1.35;
+}
+
+.transferCertificateDocSchoolLine {
+  font-size: 0.6875rem;
+  color: var(--theme-text-secondary);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.transferCertificateDocTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-align: center;
+  color: var(--theme-primary);
+  margin: 0 0 0.5rem;
+}
+
+.transferCertificateDocMeta {
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  text-align: center;
+  margin: 0 0 1.25rem;
+  letter-spacing: 0.01em;
+}
+
+.transferCertificateDocFields {
+  flex: 1;
+  margin: 0;
+  padding: 0.25rem 0;
+}
+
+.transferCertificateDocRow {
+  display: grid;
+  grid-template-columns: minmax(9.5rem, 42%) 1fr;
+  column-gap: 2.5rem;
+  align-items: baseline;
+  padding: 0.875rem 0;
+  border-bottom: 1px dashed var(--theme-border);
+}
+
+.transferCertificateDocRow:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0.25rem;
+}
+
+.transferCertificateDocRow dt {
+  font-size: 0.875rem;
+  color: var(--theme-text-label);
+  font-weight: 400;
+  margin: 0;
+}
+
+.transferCertificateDocRow dd {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  text-align: left;
+}
+
+.transferCertificateDocSignatures {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  font-size: 0.75rem;
+  color: var(--theme-text-muted);
+}
+
+@media (max-width: 1100px) {
+  .transferCertificateRow {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .transferCertificateIssueCard,
+  .transferCertificatePreviewCard {
+    padding: 1.25rem;
+  }
+
+  .transferCertificateDateGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.875rem;
+  }
+
+  .transferCertificateGenerateBtn {
+    width: 100%;
+  }
+
+  .transferCertificatePreviewHeader {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .transferCertificatePreviewActions {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+
+  .transferCertificatePreviewActions .crmBtn {
+    flex: 0 1 auto;
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .transferCertificateDocument {
+    padding: 1rem 1.125rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .transferCertificateDateGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .transferCertificatePreviewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transferCertificatePreviewActions {
+    width: 100%;
+  }
+
+  .transferCertificatePreviewActions .crmBtn {
+    flex: 1;
+  }
+}

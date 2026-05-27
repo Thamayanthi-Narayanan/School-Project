@@ -1,11 +1,16 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
+import { routePaths } from '../../../constants/routePaths';
 import '../css/loginPage.css';
 import { useLoginForm } from '../hooks/useLoginForm';
+import { loginPageMock } from '../../../data/mocks/login/loginPage.mock';
 import { appConfig } from '../../../constants/appConfig';
+import { getRememberedLogin } from '../../../services/authSession';
 import loginHeroImage from '../../../assets/images/loginHero.png';
 
 const GraduationCapIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <path
       d="M12 3L2 8.5l10 5.5 10-5.5L12 3z"
       stroke="currentColor"
@@ -76,6 +81,30 @@ const ShieldIcon = () => (
   </svg>
 );
 
+const UserInputIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.6" />
+    <path
+      d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+const LockInputIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.6" />
+    <path
+      d="M8 11V8a4 4 0 0 1 8 0v3"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
 const brandStats = [
   { id: 'students', icon: UsersIcon, label: '1,284 Students' },
   { id: 'fees', icon: ReceiptIcon, label: '₹38.6L Collected' },
@@ -83,10 +112,13 @@ const brandStats = [
 ];
 
 const LoginPage = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const location = useLocation();
+  const successMessage = location.state?.message;
   const { form, errors, isLoading, updateField, handleSubmit } = useLoginForm();
 
   useEffect(() => {
-    const remembered = localStorage.getItem('rememberEmail');
+    const remembered = getRememberedLogin();
     if (remembered) {
       updateField('email', remembered);
       updateField('rememberMe', true);
@@ -98,7 +130,8 @@ const LoginPage = () => {
       className="loginPage"
       style={{ '--login-hero-image': `url(${loginHeroImage})` }}
     >
-      <div className="loginPageBg" aria-hidden="true" />
+      <div className="loginPageBg loginPageBgBlur" aria-hidden="true" />
+      <div className="loginPageBg loginPageBgSharp" aria-hidden="true" />
       <div className="loginPageOverlay" aria-hidden="true" />
 
       <div className="loginPageContent">
@@ -128,10 +161,7 @@ const LoginPage = () => {
               ))}
             </ul>
 
-            <footer className="loginBrandFooter">
-              © {new Date().getFullYear()} {appConfig.appName} — built for school
-              administrators.
-            </footer>
+            <footer className="loginBrandFooter">{appConfig.footerText}</footer>
           </div>
         </section>
 
@@ -144,21 +174,38 @@ const LoginPage = () => {
               </header>
 
               <form className="loginForm" onSubmit={handleSubmit} noValidate>
+                {successMessage && (
+                  <p className="loginFormSuccessBanner" role="status">
+                    {successMessage}
+                  </p>
+                )}
+                {errors.general && (
+                  <p className="loginFormError loginFormErrorBanner" role="alert">
+                    {errors.general}
+                  </p>
+                )}
+
                 <div className="loginFormField">
                   <label className="loginFormLabel" htmlFor="login-email">
-                    Email address
+                    {loginPageMock.emailOrPhoneLabel}
                   </label>
-                  <input
-                    id="login-email"
-                    className={`loginFormInput${errors.email ? ' loginFormInputError' : ''}`}
-                    type="email"
-                    name="email"
-                    autoComplete="email"
-                    placeholder="you@school.edu"
-                    value={form.email}
-                    onChange={(e) => updateField('email', e.target.value)}
-                    disabled={isLoading}
-                  />
+                  <div className="loginFormInputWrap">
+                    <span className="loginFormInputIcon">
+                      <UserInputIcon />
+                    </span>
+                    <input
+                      id="login-email"
+                      className={`loginFormInput${errors.email ? ' loginFormInputError' : ''}`}
+                      type="text"
+                      name="email"
+                      autoComplete="username"
+                      inputMode="text"
+                      placeholder={loginPageMock.emailOrPhonePlaceholder}
+                      value={form.email}
+                      onChange={(e) => updateField('email', e.target.value)}
+                      disabled={isLoading}
+                    />
+                  </div>
                   {errors.email && (
                     <p className="loginFormError" role="alert">
                       {errors.email}
@@ -171,21 +218,35 @@ const LoginPage = () => {
                     <label className="loginFormLabel" htmlFor="login-password">
                       Password
                     </label>
-                    <a className="loginFormLink" href="#forgot-password">
+                    <Link className="loginFormLink" to={routePaths.forgotPassword}>
                       Forgot password?
-                    </a>
+                    </Link>
                   </div>
-                  <input
-                    id="login-password"
-                    className={`loginFormInput${errors.password ? ' loginFormInputError' : ''}`}
-                    type="password"
-                    name="password"
-                    autoComplete="current-password"
-                    placeholder="••••••••"
-                    value={form.password}
-                    onChange={(e) => updateField('password', e.target.value)}
-                    disabled={isLoading}
-                  />
+                  <div className="loginFormInputWrap loginFormInputWrapPassword">
+                    <span className="loginFormInputIcon">
+                      <LockInputIcon />
+                    </span>
+                    <input
+                      id="login-password"
+                      className={`loginFormInput loginFormInputWithToggle${errors.password ? ' loginFormInputError' : ''}`}
+                      type={passwordVisible ? 'text' : 'password'}
+                      name="password"
+                      autoComplete="current-password"
+                      placeholder="••••••••"
+                      value={form.password}
+                      onChange={(e) => updateField('password', e.target.value)}
+                      disabled={isLoading}
+                    />
+                    <button
+                      type="button"
+                      className="loginFormPasswordToggle"
+                      onClick={() => setPasswordVisible((visible) => !visible)}
+                      aria-label={passwordVisible ? 'Hide password' : 'Show password'}
+                      disabled={isLoading}
+                    >
+                      {passwordVisible ? DashboardIcons.eyeOff(16) : DashboardIcons.eye(16)}
+                    </button>
+                  </div>
                   {errors.password && (
                     <p className="loginFormError" role="alert">
                       {errors.password}
@@ -216,14 +277,14 @@ const LoginPage = () => {
                   Encrypted, secure login
                 </p>
               </form>
-            </div>
 
-            <p className="loginFormFooter">
-              Need help?{' '}
-              <a className="loginFormLink" href="#support">
-                Contact support
-              </a>
-            </p>
+              <p className="loginFormFooter">
+                Need help?{' '}
+                <a className="loginFormFooterLink" href="#support">
+                  Contact support
+                </a>
+              </p>
+            </div>
           </div>
         </section>
       </div>

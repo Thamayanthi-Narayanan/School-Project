@@ -1,0 +1,43 @@
+export const transferCertificatePageMock = {
+  title: 'Transfer Certificate',
+  subtitle: 'Issue and download student transfer certificates.',
+  issueForm: {
+    cardTitle: 'Issue TC',
+    studentLabel: 'Student',
+    loadingLabel: 'Loading…',
+    leavingDateLabel: 'Leaving date',
+    lastAttendedLabel: 'Last attended',
+    datePlaceholder: 'dd-mm-yyyy',
+    reasonLabel: 'Reason for transfer',
+    reasonPlaceholder: 'e.g. Family relocation',
+    remarksLabel: 'Remarks',
+    remarksPlaceholder: 'Conduct, achievements, dues...',
+    generateLabel: 'Generate TC',
+  },
+  preview: {
+    cardTitle: 'TC Preview',
+    printLabel: 'Print',
+    downloadPdfLabel: 'Download PDF',
+    school: {
+      name: 'GREENFIELD INTERNATIONAL SCHOOL',
+      address: '12, Park Avenue, Bengaluru 560001',
+      affiliation: 'Affiliation No. 830067',
+    },
+    documentTitle: 'TRANSFER CERTIFICATE',
+    meta: 'TC No. TC-2026-0142 · Issued 20 May 2026',
+    fields: [
+      { label: 'Name of student', value: 'Kabir Nair' },
+      { label: "Father's name", value: 'Anil Nair' },
+      { label: 'Date of birth', value: '08 March 2008' },
+      { label: 'Class last attended', value: 'XII — A' },
+      { label: 'Date of admission', value: '14 June 2020' },
+      { label: 'Date of leaving', value: '20 May 2026' },
+      { label: 'Reason for leaving', value: 'Course completed' },
+      { label: 'Conduct', value: 'Excellent' },
+    ],
+    signatures: {
+      left: 'Class Teacher',
+      right: 'Principal — Seal',
+    },
+  },
+};

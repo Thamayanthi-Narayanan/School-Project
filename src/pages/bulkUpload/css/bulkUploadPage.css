@@ -1,0 +1,152 @@
+.bulkUploadPage .bulkUploadPageHeader {
+  width: 100%;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.bulkUploadBanner {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--theme-success-text, #15803d);
+  background: var(--theme-success-bg, #f0fdf4);
+  border: 1px solid var(--theme-success-border, #86efac);
+  border-radius: var(--theme-radius-md);
+}
+
+.bulkUploadBannerWarn {
+  color: var(--theme-warning-text, #a16207);
+  background: var(--theme-warning-bg, #fffbeb);
+  border-color: var(--theme-warning-border, #fcd34d);
+}
+
+.bulkUploadErrorBanner {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--theme-danger-text, #b91c1c);
+  background: var(--theme-danger-bg, #fef2f2);
+  border: 1px solid var(--theme-danger-border, #fecaca);
+  border-radius: var(--theme-radius-md);
+}
+
+.bulkUploadCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: min(28rem, calc(100vh - 16rem));
+  padding: 2rem 1.25rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.bulkUploadCenterActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.bulkUploadCenterActions .bulkUploadCenterBtn {
+  min-width: 14.5rem;
+  padding: 0.875rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  gap: 0.5rem;
+  border-radius: var(--theme-radius-lg, 0.75rem);
+}
+
+.bulkUploadCenterHint {
+  margin: 1.5rem 0 0;
+  max-width: 26rem;
+  font-size: 0.9375rem;
+  line-height: 1.45;
+  color: var(--theme-text-secondary);
+}
+
+.bulkUploadCenterFile {
+  margin: 0.75rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--theme-text-primary);
+}
+
+.bulkUploadFileInputHidden {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bulkUploadResultsCard {
+  margin-top: 0.5rem;
+}
+
+.bulkUploadResultsHeader {
+  padding: 1rem 1.25rem 0.75rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.bulkUploadResultsTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.bulkUploadResultsMeta {
+  margin: 0.35rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+.bulkUploadResultsEmpty {
+  padding: 1.25rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+}
+
+.bulkUploadStatus {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--theme-radius-sm);
+}
+
+.bulkUploadStatusFailed {
+  color: var(--theme-danger-text, #b91c1c);
+  background: var(--theme-danger-bg, #fef2f2);
+}
+
+.bulkUploadErrorsCell {
+  max-width: 18rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--theme-text-secondary);
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .bulkUploadCenter {
+    min-height: min(22rem, calc(100vh - 14rem));
+    padding: 1.5rem 1rem;
+  }
+
+  .bulkUploadCenterActions {
+    flex-direction: column;
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .bulkUploadCenterActions .bulkUploadCenterBtn {
+    width: 100%;
+    min-width: 0;
+    padding: 1rem 1.5rem;
+  }
+}

@@ -1,0 +1,570 @@
+/* Page header */
+.scholarshipsPage .scholarshipsPageHeader {
+  width: 100%;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+/* Scheme cards */
+.scholarshipsSchemes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.scholarshipsSchemeCard {
+  display: flex;
+  flex-direction: column;
+  min-height: 9.5rem;
+  padding: 1.25rem;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.scholarshipsSchemeCard:hover {
+  box-shadow: var(--theme-shadow-card);
+  transform: translateY(-2px);
+}
+
+.scholarshipsSchemeTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.scholarshipsSchemeTitle {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  line-height: 1.3;
+  padding-right: 0.25rem;
+}
+
+.scholarshipsSchemeBadge {
+  flex-shrink: 0;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--theme-primary);
+  background: var(--theme-primary-light);
+  border-radius: var(--theme-radius-pill);
+  white-space: nowrap;
+}
+
+.scholarshipsSchemeDesc {
+  flex: 1;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
+}
+
+.scholarshipsSchemeCardActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.25rem;
+}
+
+.scholarshipsSchemeEdit {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--theme-primary);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.scholarshipsSchemeEdit:hover {
+  color: var(--theme-primary-hover);
+}
+
+.scholarshipsSchemeDelete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-sm);
+  background: var(--theme-bg-card);
+  color: var(--theme-danger-text, #b91c1c);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.scholarshipsSchemeDelete:hover {
+  background: var(--theme-danger-bg, #fef2f2);
+  border-color: var(--theme-danger-border, #fecaca);
+}
+
+/* Pending requests table */
+.scholarshipsTableCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  padding: 1.25rem 1.5rem 1.5rem;
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.scholarshipsTableTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin-bottom: 1rem;
+}
+
+.scholarshipsTableWrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scholarshipsTable th {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--theme-text-muted);
+}
+
+.scholarshipsTable tbody tr.scholarshipsTableRowAlt {
+  background: rgba(37, 99, 235, 0.03);
+}
+
+.scholarshipsTableDate {
+  vertical-align: middle;
+}
+
+.scholarshipsTable th:last-child,
+.scholarshipsTableActionCell {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.scholarshipsTableActionCell .scholarshipsViewLink {
+  display: inline-block;
+}
+
+.scholarshipsRowActions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+
+.scholarshipsActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.875rem;
+  border-radius: var(--theme-radius-md);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.scholarshipsActionBtnApprove {
+  border: 1px solid #86efac;
+  background: var(--theme-bg-card);
+  color: #15803d;
+}
+
+.scholarshipsActionBtnApprove:hover {
+  background: #f0fdf4;
+}
+
+.scholarshipsActionBtnReject {
+  border: 1px solid #fca5a5;
+  background: var(--theme-bg-card);
+  color: #b91c1c;
+}
+
+.scholarshipsActionBtnReject:hover {
+  background: #fef2f2;
+}
+
+.scholarshipsViewLink {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--theme-primary);
+  cursor: pointer;
+}
+
+.scholarshipsViewLink:hover {
+  color: var(--theme-primary-hover);
+}
+
+.scholarshipsSectionDelay05 {
+  animation-delay: 0.04s;
+}
+
+.scholarshipsSectionDelay1 {
+  animation-delay: 0.08s;
+}
+
+.scholarshipsSchemesMessage {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.scholarshipsListState {
+  margin: 0;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+}
+
+.scholarshipsListError {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-danger-bg, #fef2f2);
+  border: 1px solid var(--theme-danger-border, #fecaca);
+}
+
+.scholarshipsListError p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--theme-danger-text, #b91c1c);
+}
+
+/* Merit bands */
+.scholarshipsMeritCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.scholarshipsMeritHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.scholarshipsMeritTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.scholarshipsMeritHint {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--theme-text-secondary);
+}
+
+.scholarshipsMeritYearField {
+  min-width: min(14rem, 100%);
+  flex-shrink: 0;
+}
+
+.scholarshipsMeritBody {
+  min-width: 0;
+}
+
+.scholarshipsMeritTableWrap {
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+}
+
+.scholarshipsMeritTable th {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--theme-text-muted);
+}
+
+.scholarshipsMeritPreview {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--theme-border);
+}
+
+.scholarshipsMeritPreviewTitle {
+  margin: 0 0 0.35rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.scholarshipsMeritPreviewHint {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+.scholarshipsMeritPreviewForm {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem 1rem;
+  align-items: end;
+  max-width: 28rem;
+}
+
+.scholarshipsMeritPreviewBtn {
+  margin-bottom: 0.1rem;
+}
+
+.scholarshipsMeritPreviewResult {
+  margin-top: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-primary-light);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.scholarshipsMeritPreviewResultMuted {
+  background: var(--theme-bg-page);
+  border-color: var(--theme-border);
+}
+
+.scholarshipsMeritPreviewResultMain {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.scholarshipsMeritPreviewResultSub {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+.scholarshipsPageBanner {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--theme-success-text, #15803d);
+  background: var(--theme-success-bg, #f0fdf4);
+  border: 1px solid var(--theme-success-border, #86efac);
+  border-radius: var(--theme-radius-md);
+}
+
+/* Create scheme modal */
+.scholarshipSchemeFormModal {
+  max-width: min(36rem, 100vw - 2rem);
+}
+
+.scholarshipSchemeDeleteModal {
+  max-width: min(28rem, 100vw - 2rem);
+}
+
+.scholarshipSchemeDeleteModalHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.scholarshipSchemeDeleteModalIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-danger-bg, #fef2f2);
+  color: var(--theme-danger-text, #b91c1c);
+}
+
+.scholarshipSchemeDeleteModalHint {
+  margin: 0 0 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--theme-text-secondary);
+}
+
+.scholarshipSchemeDeleteConfirmBtn {
+  background: var(--theme-danger-text, #b91c1c);
+  border-color: var(--theme-danger-text, #b91c1c);
+}
+
+.scholarshipSchemeDeleteConfirmBtn:hover {
+  background: #991b1b;
+  border-color: #991b1b;
+}
+
+.scholarshipSchemeModalGrid {
+  gap: 0.875rem 1rem;
+}
+
+.scholarshipSchemeFormError {
+  margin: 0 0 1rem;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.8125rem;
+  color: var(--theme-danger-text, #b91c1c);
+  background: var(--theme-danger-bg, #fef2f2);
+  border: 1px solid var(--theme-danger-border, #fecaca);
+  border-radius: var(--theme-radius-sm);
+}
+
+/* Scheme detail modal */
+.scholarshipSchemeModal {
+  max-width: min(28rem, 100vw - 2rem);
+}
+
+.scholarshipSchemeModalBody {
+  min-height: 6rem;
+}
+
+.scholarshipSchemeModalHero {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.scholarshipSchemeModalName {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.scholarshipSchemeModalDesc {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--theme-text-secondary);
+}
+
+.scholarshipSchemeModalDetails {
+  margin: 0;
+  display: grid;
+  gap: 0.625rem;
+}
+
+.scholarshipSchemeModalDetailRow {
+  display: grid;
+  grid-template-columns: minmax(6rem, 38%) 1fr;
+  gap: 0.5rem 1rem;
+  font-size: 0.8125rem;
+}
+
+.scholarshipSchemeModalDetailRow dt {
+  margin: 0;
+  font-weight: 600;
+  color: var(--theme-text-muted);
+}
+
+.scholarshipSchemeModalDetailRow dd {
+  margin: 0;
+  color: var(--theme-text-primary);
+}
+
+@media (max-width: 1200px) {
+  .scholarshipsSchemes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .scholarshipsMeritHeader {
+    flex-direction: column;
+  }
+
+  .scholarshipsMeritYearField {
+    width: 100%;
+  }
+
+  .scholarshipsMeritPreviewForm {
+    grid-template-columns: 1fr;
+    max-width: none;
+  }
+
+  .scholarshipsMeritPreviewBtn {
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .scholarshipsSchemes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .scholarshipsSchemeCard {
+    min-height: 8.5rem;
+    padding: 1rem;
+  }
+
+  .scholarshipsSchemeTitle {
+    font-size: 0.875rem;
+  }
+
+  .scholarshipsSchemeDesc {
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .scholarshipsTableCard {
+    padding: 1rem 1.125rem 1.25rem;
+  }
+
+  .scholarshipsTable th,
+  .scholarshipsTable td {
+    padding: 0.625rem 0.375rem;
+    font-size: 0.75rem;
+  }
+
+  .scholarshipsRowActions {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.375rem;
+  }
+
+  .scholarshipsActionBtn {
+    padding: 0.35rem 0.625rem;
+    font-size: 0.75rem;
+  }
+
+  /* Mobile screenshot: Approve only in action column */
+  .scholarshipsActionBtnRejectDesktop {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .scholarshipsSchemes {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scholarshipsSchemeCard {
+    transition: none;
+  }
+
+  .scholarshipsSchemeCard:hover {
+    transform: none;
+  }
+}

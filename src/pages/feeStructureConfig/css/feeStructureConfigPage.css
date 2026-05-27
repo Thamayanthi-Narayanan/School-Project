@@ -1,0 +1,12 @@
+.feeStructureConfigPage .feeStructureConfigGrid .crmFormField .crmSearchBar {
+  width: 100%;
+  min-width: 0;
+}
+
+.feeStructureConfigPage .feeStructurePageCard {
+  margin-bottom: 0;
+}
+
+.feeStructureConfigPage .feeStructureCategoriesHeader {
+  margin-bottom: 1rem;
+}
