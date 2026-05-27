@@ -1,15 +1,22 @@
-export const getFeeHeadId = (head) => head?.feeHeadId ?? head?.id ?? null;
+export const getFeeHeadId = (item) =>
+  item?.feeTypeId ?? item?.feeHeadId ?? item?.id ?? null;
+
+export const getFeeHeadCode = (item) =>
+  item?.feeTypeCode ?? item?.feeHeadCode ?? '';
+
+export const getFeeHeadName = (item) =>
+  item?.feeTypeName ?? item?.feeHeadName ?? item?.name ?? '';
 
 export const sortFeeHeadsByDisplayOrder = (heads) =>
   [...heads].sort((a, b) => (a.displayOrder ?? 0) - (b.displayOrder ?? 0));
 
 /**
- * Map API fee head to a fee-structure table row, preserving quarter inputs when refetching.
+ * Map API fee type/head to a fee-structure table row, preserving quarter inputs when refetching.
  */
 export const mapFeeHeadToCategoryRow = (head, existingRow) => ({
   id: getFeeHeadId(head),
-  name: head.feeHeadName || head.feeHeadCode || '',
-  feeHeadCode: head.feeHeadCode ?? '',
+  name: getFeeHeadName(head) || getFeeHeadCode(head) || '',
+  feeHeadCode: getFeeHeadCode(head),
   description: head.description ?? '',
   feeCategory: head.feeCategory ?? '',
   mandatory: Boolean(head.mandatory),

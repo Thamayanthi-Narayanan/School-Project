@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { deleteFeeHead, listFeeHeads } from '../../../apis/feesApi';
+import { deleteFeeType, listFeeTypes } from '../../../apis/feesApi';
 import { parseApiError } from '../../../utils/apiError';
 import { mapFeeHeadsToCategoryRows } from '../../../utils/feeHeadMapper';
 import {
@@ -24,7 +24,7 @@ export const useFeeStructureCategories = (categoriesCopy, deleteCopy) => {
     setLoadError(null);
 
     try {
-      const response = await listFeeHeads({ activeOnly: true });
+      const response = await listFeeTypes({ activeOnly: true });
 
       if (!response?.success) {
         setLoadError(response?.message || categoriesCopy.list.loadFailed);
@@ -105,7 +105,7 @@ export const useFeeStructureCategories = (categoriesCopy, deleteCopy) => {
     setDeleteSuccessMessage('');
 
     try {
-      const response = await deleteFeeHead(deleteTarget.id);
+      const response = await deleteFeeType(deleteTarget.id);
 
       if (!response?.success) {
         setDeleteError(response?.message || deleteCopy.deleteFailed);

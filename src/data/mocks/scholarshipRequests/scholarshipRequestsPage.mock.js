@@ -1,6 +1,10 @@
 export const scholarshipRequestsPageMock = {
   title: 'Scholarship Requests',
   subtitle: 'Review and approve pending scholarship applications.',
+  notificationSection: {
+    title: 'Related notification',
+    backLabel: 'Back to notifications',
+  },
   actions: {
     approveLabel: 'Approve',
     rejectLabel: 'Reject',
@@ -12,24 +16,27 @@ export const scholarshipRequestsPageMock = {
     rows: [
       {
         id: 'SCH-201',
-        student: 'Diya Patel',
-        scheme: 'Merit Cum Means',
-        discount: '30%',
+        applicationId: 555,
+        student: 'Asha',
+        scheme: 'Science Scholarship',
+        discount: '20%',
         date: '18 May 2026',
         status: 'Pending',
         showActions: true,
       },
       {
         id: 'SCH-200',
-        student: 'Arjun Singh',
-        scheme: 'Government EWS',
-        discount: '100%',
+        applicationId: 556,
+        student: 'Ravi',
+        scheme: 'Science Scholarship',
+        discount: '0%',
         date: '16 May 2026',
-        status: 'Approved',
+        status: 'Rejected',
         showActions: false,
       },
       {
         id: 'SCH-199',
+        applicationId: 549,
         student: 'Kabir Nair',
         scheme: 'Sports Scholarship',
         discount: '₹15,000',
@@ -39,6 +46,7 @@ export const scholarshipRequestsPageMock = {
       },
       {
         id: 'SCH-198',
+        applicationId: 548,
         student: 'Myra Gupta',
         scheme: 'Sibling Discount',
         discount: '10%',

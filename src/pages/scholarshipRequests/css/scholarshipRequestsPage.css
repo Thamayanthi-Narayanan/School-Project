@@ -5,6 +5,56 @@
   border-bottom: 1px solid var(--theme-border);
 }
 
+.scholarshipRequestsNotificationCard {
+  margin-bottom: 1.25rem;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  overflow: hidden;
+}
+
+.scholarshipRequestsNotificationCardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--theme-border);
+  background: var(--theme-bg-subtle, #f8fafc);
+}
+
+.scholarshipRequestsNotificationCardTitle {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.scholarshipRequestsNotificationBackLink {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--theme-primary);
+}
+
+.scholarshipRequestsNotificationBackLink:hover {
+  color: var(--theme-primary-hover);
+}
+
+.scholarshipRequestsNotificationItemWrap {
+  padding: 0;
+}
+
+.scholarshipRequestsNotificationItemWrap .notificationListItem {
+  border-bottom: none;
+}
+
+.scholarshipRequestsTableRowHighlight {
+  background: rgba(37, 99, 235, 0.08) !important;
+  box-shadow: inset 3px 0 0 var(--theme-primary);
+}
+
 .scholarshipRequestsTableCard {
   background: var(--theme-bg-card);
   border: 1px solid var(--theme-border);

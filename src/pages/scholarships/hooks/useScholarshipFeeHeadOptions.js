@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { listFeeHeads } from '../../../apis/feesApi';
+import { listFeeTypes } from '../../../apis/feesApi';
 import { parseApiError } from '../../../utils/apiError';
 
 export const useScholarshipFeeHeadOptions = (copy, { enabled = true } = {}) => {
@@ -14,7 +14,7 @@ export const useScholarshipFeeHeadOptions = (copy, { enabled = true } = {}) => {
     setLoadError(null);
 
     try {
-      const response = await listFeeHeads({ activeOnly: true });
+      const response = await listFeeTypes({ activeOnly: true });
 
       if (!response?.success) {
         setLoadError(response?.message || copy.loadFailed);
@@ -22,13 +22,18 @@ export const useScholarshipFeeHeadOptions = (copy, { enabled = true } = {}) => {
         return;
       }
 
-      const heads = response.data ?? [];
+      const types = response.data ?? [];
       setOptions(
-        heads
-          .map((head) => {
-            const id = head.feeHeadId ?? head.id;
+        types
+          .map((type) => {
+            const id = type.feeTypeId ?? type.feeHeadId ?? type.id;
             if (id == null) return null;
-            const name = head.feeHeadName || head.feeHeadCode || `Head ${id}`;
+            const name =
+              type.feeTypeName
+              || type.feeHeadName
+              || type.feeTypeCode
+              || type.feeHeadCode
+              || `Type ${id}`;
             return { label: name, value: String(id) };
           })
           .filter(Boolean),

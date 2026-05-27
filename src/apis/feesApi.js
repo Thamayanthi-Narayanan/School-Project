@@ -1,38 +1,76 @@
 import apiClient from './apiConfig';
 
+const FEE_TYPES_PATH = '/fees/types';
+
 /**
- * GET /api/v1/fees/heads
- * Returns fee head master records. Roles: ADMIN, PRINCIPAL, ACCOUNTANT.
+ * GET /api/v1/fees/types
+ * List fee types (optional activeOnly).
  */
-export const listFeeHeads = async ({ activeOnly = false } = {}) => {
+export const listFeeTypes = async ({ activeOnly = false } = {}) => {
   const params = activeOnly ? { activeOnly: true } : undefined;
-  const { data } = await apiClient.get('/fees/heads', { params });
+  const { data } = await apiClient.get(FEE_TYPES_PATH, { params });
   return data;
 };
 
 /**
- * POST /api/v1/fees/heads
- * Creates one fee head master row. Requires ADMIN or PRINCIPAL.
+ * GET /api/v1/fees/types/{id}
+ * Get one fee type.
  */
-export const createFeeHead = async (payload) => {
-  const { data } = await apiClient.post('/fees/heads', payload);
+export const getFeeTypeById = async (id) => {
+  const { data } = await apiClient.get(`${FEE_TYPES_PATH}/${id}`);
   return data;
 };
 
 /**
- * PUT /api/v1/fees/heads/{id}
- * Partial update of a fee head. Requires ADMIN or PRINCIPAL.
+ * POST /api/v1/fees/types
+ * Create fee type.
  */
-export const updateFeeHead = async (id, payload) => {
-  const { data } = await apiClient.put(`/fees/heads/${id}`, payload);
+export const createFeeType = async (payload) => {
+  const { data } = await apiClient.post(FEE_TYPES_PATH, payload);
   return data;
 };
 
 /**
- * DELETE /api/v1/fees/heads/{id}
- * Soft-deletes a fee head (sets active = false). Requires ADMIN or PRINCIPAL.
+ * POST /api/v1/fees/types/bulk
+ * Bulk create fee types.
  */
-export const deleteFeeHead = async (id) => {
-  const { data } = await apiClient.delete(`/fees/heads/${id}`);
+export const bulkCreateFeeTypes = async (payload) => {
+  const { data } = await apiClient.post(`${FEE_TYPES_PATH}/bulk`, payload);
   return data;
 };
+
+/**
+ * PUT /api/v1/fees/types/{id}
+ * Update fee type.
+ */
+export const updateFeeType = async (id, payload) => {
+  const { data } = await apiClient.put(`${FEE_TYPES_PATH}/${id}`, payload);
+  return data;
+};
+
+/**
+ * DELETE /api/v1/fees/types/{id}
+ * Soft delete fee type.
+ */
+export const deleteFeeType = async (id) => {
+  const { data } = await apiClient.delete(`${FEE_TYPES_PATH}/${id}`);
+  return data;
+};
+
+/** @deprecated Use listFeeTypes */
+export const listFeeHeads = listFeeTypes;
+
+/** @deprecated Use getFeeTypeById */
+export const getFeeHeadById = getFeeTypeById;
+
+/** @deprecated Use createFeeType */
+export const createFeeHead = createFeeType;
+
+/** @deprecated Use bulkCreateFeeTypes */
+export const bulkCreateFeeHeads = bulkCreateFeeTypes;
+
+/** @deprecated Use updateFeeType */
+export const updateFeeHead = updateFeeType;
+
+/** @deprecated Use deleteFeeType */
+export const deleteFeeHead = deleteFeeType;

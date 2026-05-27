@@ -14,8 +14,8 @@ export const initialFeeHeadForm = {
 };
 
 export const feeHeadFromApiToForm = (head) => ({
-  feeHeadCode: head?.feeHeadCode ?? '',
-  feeHeadName: head?.feeHeadName ?? head?.name ?? '',
+  feeHeadCode: head?.feeTypeCode ?? head?.feeHeadCode ?? '',
+  feeHeadName: head?.feeTypeName ?? head?.feeHeadName ?? head?.name ?? '',
   description: head?.description ?? '',
   mandatory: toYesNo(head?.mandatory),
   active: head?.active === false ? 'No' : YES,
@@ -74,8 +74,11 @@ export const buildUpdateFeeHeadPayload = (form, original) => {
   const order = form.displayOrder.trim();
   const originalOrder = original?.displayOrder != null ? String(original.displayOrder) : '';
 
-  if (code && code !== (original?.feeHeadCode ?? '')) payload.feeHeadCode = code;
-  if (name && name !== (original?.feeHeadName ?? original?.name ?? '')) payload.feeHeadName = name;
+  const originalCode = original?.feeTypeCode ?? original?.feeHeadCode ?? '';
+  const originalName = original?.feeTypeName ?? original?.feeHeadName ?? original?.name ?? '';
+
+  if (code && code !== originalCode) payload.feeHeadCode = code;
+  if (name && name !== originalName) payload.feeHeadName = name;
 
   if (description !== (original?.description ?? '')) {
     payload.description = description;

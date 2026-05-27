@@ -6,6 +6,8 @@ import { navbarMock } from '../../../data/mocks/navbar/navbar.mock';
 import { pageTitles } from '../../../constants/pageTitles';
 import { DashboardIcons } from '../../common/js/dashboardIcons';
 import NotificationBellIcon from '../../common/js/notificationBellIcon';
+import { useNotificationContext } from '../../../context/notificationContext';
+
 const DashboardNavbar = ({ onMenuClick, onLogout }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -20,6 +22,7 @@ const DashboardNavbar = ({ onMenuClick, onLogout }) => {
   } = navbarMock;
 
   const currentPageTitle = pageTitles[pathname] || defaultPageTitle;
+  const { unreadCount } = useNotificationContext();
   const [profileOpen, setProfileOpen] = useState(false);
   const profileRef = useRef(null);
 
@@ -86,9 +89,22 @@ const DashboardNavbar = ({ onMenuClick, onLogout }) => {
         <button type="button" className="dashboardNavbarIconBtn" aria-label="Help">
           {DashboardIcons.help(18)}
         </button>
-        <button type="button" className="dashboardNavbarIconBtnNotify" aria-label="Notifications">
+        <button
+          type="button"
+          className="dashboardNavbarIconBtnNotify"
+          aria-label={
+            unreadCount > 0
+              ? `Notifications, ${unreadCount} unread`
+              : 'Notifications'
+          }
+          onClick={() => navigate(routePaths.notifications)}
+        >
           <NotificationBellIcon size="sm" />
-          <span className="dashboardNavbarNotifyDot" />
+          {unreadCount > 0 ? (
+            <span className="dashboardNavbarNotifyBadge" aria-hidden="true">
+              {unreadCount > 99 ? '99+' : unreadCount}
+            </span>
+          ) : null}
         </button>
         <button
           type="button"

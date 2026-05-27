@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { updateFeeHead } from '../../../apis/feesApi';
+import { updateFeeType } from '../../../apis/feesApi';
 import { parseApiError } from '../../../utils/apiError';
 import {
   buildUpdateFeeHeadPayload,
@@ -63,7 +63,7 @@ export const useEditFeeHeadForm = (copy, editTarget, onUpdated) => {
     setSuccessMessage('');
 
     try {
-      const response = await updateFeeHead(editTarget.id, payload);
+      const response = await updateFeeType(editTarget.id, payload);
 
       if (!response?.success) {
         setErrors({ general: response?.message || copy.updateFailed });

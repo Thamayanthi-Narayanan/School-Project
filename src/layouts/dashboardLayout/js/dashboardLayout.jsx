@@ -8,6 +8,7 @@ import { logoutPopupMock } from '../../../data/mocks/auth/logout.mock';
 import useSidebarDrawer from '../hooks/useSidebarDrawer';
 import useLogoutFlow from '../hooks/useLogoutFlow';
 import { MasterDataProvider } from '../../../context/masterDataContext';
+import { NotificationProvider } from '../../../context/notificationContext';
 
 const DashboardLayout = () => {
   const { isOpen, toggle, close } = useSidebarDrawer();
@@ -15,6 +16,7 @@ const DashboardLayout = () => {
 
   return (
     <MasterDataProvider>
+    <NotificationProvider>
     <div className={`dashboardLayout${isOpen ? ' dashboardLayoutSidebarOpen' : ''}`}>
       <button
         type="button"
@@ -35,6 +37,7 @@ const DashboardLayout = () => {
         message={logoutPopupMock.message}
       />
     </div>
+    </NotificationProvider>
     </MasterDataProvider>
   );
 };

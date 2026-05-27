@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { createFeeHead } from '../../../apis/feesApi';
+import { createFeeType } from '../../../apis/feesApi';
 import { parseApiError } from '../../../utils/apiError';
 import {
   buildCreateFeeHeadPayload,
@@ -42,7 +42,7 @@ export const useCreateFeeHeadForm = (copy, onCreated) => {
     setSuccessMessage('');
 
     try {
-      const response = await createFeeHead(payload);
+      const response = await createFeeType(payload);
 
       if (!response?.success) {
         setErrors({ general: response?.message || copy.createFailed });
