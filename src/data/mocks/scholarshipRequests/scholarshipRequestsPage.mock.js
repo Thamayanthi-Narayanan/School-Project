@@ -1,0 +1,51 @@
+export const scholarshipRequestsPageMock = {
+  title: 'Scholarship Requests',
+  subtitle: 'Review and approve pending scholarship applications.',
+  actions: {
+    approveLabel: 'Approve',
+    rejectLabel: 'Reject',
+    viewLabel: 'View',
+  },
+  table: {
+    sectionTitle: 'Pending requests',
+    columns: ['ID', 'STUDENT', 'SCHEME', 'DISCOUNT', 'DATE', 'STATUS', 'ACTION'],
+    rows: [
+      {
+        id: 'SCH-201',
+        student: 'Diya Patel',
+        scheme: 'Merit Cum Means',
+        discount: '30%',
+        date: '18 May 2026',
+        status: 'Pending',
+        showActions: true,
+      },
+      {
+        id: 'SCH-200',
+        student: 'Arjun Singh',
+        scheme: 'Government EWS',
+        discount: '100%',
+        date: '16 May 2026',
+        status: 'Approved',
+        showActions: false,
+      },
+      {
+        id: 'SCH-199',
+        student: 'Kabir Nair',
+        scheme: 'Sports Scholarship',
+        discount: '₹15,000',
+        date: '14 May 2026',
+        status: 'Approved',
+        showActions: false,
+      },
+      {
+        id: 'SCH-198',
+        student: 'Myra Gupta',
+        scheme: 'Sibling Discount',
+        discount: '10%',
+        date: '12 May 2026',
+        status: 'Rejected',
+        showActions: false,
+      },
+    ],
+  },
+};

@@ -13,6 +13,7 @@ import StaffPage from '../pages/staff/js/staffPage';
 import AdmissionPage from '../pages/admission/js/admissionPage';
 import AttendancePage from '../pages/attendance/js/attendancePage';
 import ScholarshipsPage from '../pages/scholarships/js/scholarshipsPage';
+import ScholarshipRequestsPage from '../pages/scholarshipRequests/js/scholarshipRequestsPage';
 import InvoicesPage from '../pages/invoices/js/invoicesPage';
 import PaymentsPage from '../pages/payments/js/paymentsPage';
 import SettingsPage from '../pages/settings/js/settingsPage';
@@ -45,6 +46,7 @@ const AppRouter = () => {
           <Route path={routePaths.admission} element={<AdmissionPage />} />
           <Route path={routePaths.attendance} element={<AttendancePage />} />
           <Route path={routePaths.scholarships} element={<ScholarshipsPage />} />
+          <Route path={routePaths.scholarshipRequests} element={<ScholarshipRequestsPage />} />
           <Route path={routePaths.invoices} element={<InvoicesPage />} />
           <Route path={routePaths.payments} element={<PaymentsPage />} />
           <Route path={routePaths.settings} element={<SettingsPage />} />

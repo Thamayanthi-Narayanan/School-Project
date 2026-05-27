@@ -7,6 +7,7 @@ export const pageTitles = {
   [routePaths.admission]: 'Admission',
   [routePaths.attendance]: 'Attendance',
   [routePaths.scholarships]: 'Scholarships',
+  [routePaths.scholarshipRequests]: 'Scholarship Requests',
   [routePaths.invoices]: 'Invoices',
   [routePaths.payments]: 'Payments',
   [routePaths.settings]: 'Settings',

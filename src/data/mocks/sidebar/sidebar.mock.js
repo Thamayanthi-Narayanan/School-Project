@@ -27,6 +27,12 @@ export const sidebarMock = {
         { id: 'feeHead', label: 'Fee Head', path: '/fee-head', icon: 'fileDollar' },
         { id: 'payments', label: 'Payments', path: '/payments', icon: 'wallet' },
         { id: 'scholarships', label: 'Scholarships', path: '/scholarships', icon: 'award' },
+        {
+          id: 'scholarshipRequests',
+          label: 'Scholarship Requests',
+          path: '/scholarship-requests',
+          icon: 'clipboard',
+        },
       ],
     },
     {

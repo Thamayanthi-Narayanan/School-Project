@@ -12,6 +12,7 @@ export const routePaths = {
   admission: '/admission',
   attendance: '/attendance',
   scholarships: '/scholarships',
+  scholarshipRequests: '/scholarship-requests',
   invoices: '/invoices',
   payments: '/payments',
   settings: '/settings',
