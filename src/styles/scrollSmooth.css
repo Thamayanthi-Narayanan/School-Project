@@ -1,0 +1,54 @@
+/**
+ * Smooth scrolling + hidden scrollbars for overflow containers app-wide.
+ * Imported from main.jsx after global.css.
+ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+.dashboardMainScroll,
+.sidebarNavScroll,
+.crmTableWrap,
+.crmFilterToolbar,
+.crmScrollSelectMenu,
+.userCreationPanelBody,
+.dashboardTableWrap,
+.scholarshipsTableWrap,
+.scholarshipsMeritTableWrap,
+.feeStructureTableWrap,
+.feeStructureConfigCard,
+.paymentsTableWrap,
+.paymentsMethodTiles,
+.bulkUploadTableWrap,
+.scholarshipRequestsTableWrap {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.dashboardMainScroll::-webkit-scrollbar,
+.sidebarNavScroll::-webkit-scrollbar,
+.crmTableWrap::-webkit-scrollbar,
+.crmFilterToolbar::-webkit-scrollbar,
+.crmScrollSelectMenu::-webkit-scrollbar,
+.userCreationPanelBody::-webkit-scrollbar,
+.dashboardTableWrap::-webkit-scrollbar,
+.scholarshipsTableWrap::-webkit-scrollbar,
+.scholarshipsMeritTableWrap::-webkit-scrollbar,
+.feeStructureTableWrap::-webkit-scrollbar,
+.feeStructureConfigCard::-webkit-scrollbar,
+.paymentsTableWrap::-webkit-scrollbar,
+.paymentsMethodTiles::-webkit-scrollbar,
+.scholarshipRequestsTableWrap::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}

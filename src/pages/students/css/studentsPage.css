@@ -1,0 +1,25 @@
+.studentsListAlert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.875rem 1rem;
+  border: 1px solid #fecaca;
+  border-radius: var(--theme-radius-sm);
+  background: #fef2f2;
+}
+
+.studentsListAlertText {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #b91c1c;
+}
+
+.studentsListState {
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--theme-text-muted);
+}

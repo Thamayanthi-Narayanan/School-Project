@@ -1,0 +1,35 @@
+/* Shared notification bell — outline icon on light blue circle */
+.crmNotificationBell {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--theme-notif-icon-bg);
+  color: var(--theme-notif-accent);
+}
+
+.crmNotificationBell svg {
+  display: block;
+}
+
+.crmNotificationBellSm {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+.crmNotificationBellLg {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+/* Sidebar nav — icon only, no circle background */
+.crmNotificationBellPlain {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+}

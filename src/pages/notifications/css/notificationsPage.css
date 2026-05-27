@@ -1,0 +1,115 @@
+.notificationsPage .notificationsPageHeader {
+  width: 100%;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.notificationsFilterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.notificationsFilterBtn {
+  padding: 0.45rem 0.875rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--theme-text-secondary);
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-pill);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.notificationsFilterBtn:hover:not(:disabled) {
+  background: var(--theme-bg-page);
+}
+
+.notificationsFilterBtnActive {
+  color: var(--theme-primary);
+  border-color: var(--theme-primary);
+  background: rgba(37, 99, 235, 0.08);
+}
+
+.notificationsFilterBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.notificationsListAlert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  padding: 0.875rem 1rem;
+  background: var(--theme-danger-bg, #fef2f2);
+  border: 1px solid var(--theme-danger-border, #fecaca);
+  border-radius: var(--theme-radius-md);
+}
+
+.notificationsListAlertText {
+  flex: 1 1 12rem;
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--theme-danger-text, #b91c1c);
+}
+
+.notificationsCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  overflow: hidden;
+}
+
+.notificationsList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notificationsListState {
+  margin: 0;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+}
+
+.notificationsListFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+  padding: 0.875rem 1.25rem;
+  border-top: 1px solid var(--theme-border);
+  background: var(--theme-bg-subtle, #f8fafc);
+}
+
+.notificationsListCount {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+.notificationsPagination {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .notificationsListFooter {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .notificationsPagination {
+    justify-content: space-between;
+  }
+}

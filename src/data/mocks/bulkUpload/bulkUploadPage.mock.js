@@ -1,0 +1,40 @@
+export const bulkUploadPageMock = {
+  title: 'Bulk Upload',
+  subtitle: 'Import student admissions from the Excel template (.xlsx only, max 500 rows).',
+  actions: {
+    bulkUploadLabel: 'Bulk Upload',
+    bulkUploadAriaLabel: 'Upload student admissions Excel file',
+    downloadFormatLabel: 'Download Format',
+    downloadFormatAriaLabel: 'Download student admission Excel template',
+    templateFileName: 'student-admission-template.xlsx',
+    uploadingLabel: 'Uploading…',
+    downloadingLabel: 'Downloading…',
+  },
+  center: {
+    hint: 'Download the format, fill student rows (row 2 onward), then upload the .xlsx file.',
+  },
+  validation: {
+    fileRequired: 'Choose a file to upload.',
+    fileType: 'Only .xlsx Excel files are supported.',
+    fileSize: 'File must be 10 MB or smaller.',
+  },
+  messages: {
+    uploadSuccess: 'Student admission bulk upload completed.',
+    uploadFailed: 'Could not upload file. Please try again.',
+    downloadFailed: 'Could not download template. Please try again.',
+  },
+  results: {
+    title: 'Upload results',
+    failuresSectionTitle: 'Rows that need correction',
+    rowLabel: 'Row {rowNumber}',
+    validationFailedMessage: 'Validation failed',
+    statsSucceeded: 'succeeded',
+    statsFailed: 'failed',
+    statsRequested: 'requested',
+    dryRunTag: 'dry run',
+    summary: '{successCount} admitted, {failedCount} failed out of {requestedCount} rows.',
+    dryRunSummary: 'Validation (dry run): {successCount} valid, {failedCount} failed out of {requestedCount} rows.',
+    statusFailed: 'Failed',
+    emptyFailed: 'All rows processed successfully.',
+  },
+};

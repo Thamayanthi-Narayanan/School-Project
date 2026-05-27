@@ -1,0 +1,10 @@
+export const AUTH_TOKEN_KEY = 'authToken';
+export const AUTH_USER_KEY = 'authUser';
+export const AUTH_EXPIRES_IN_KEY = 'authExpiresIn';
+export const REMEMBER_LOGIN_KEY = 'rememberLogin';
+export const PENDING_OTP_IDENTIFIER_KEY = 'pendingOtpIdentifier';
+export const FIRST_LOGIN_PASSWORD_STEP_KEY = 'firstLoginPasswordStep';
+export const OTP_LOGIN_NOTICE_KEY = 'otpLoginNotice';
+export const PENDING_RESET_IDENTIFIER_KEY = 'pendingResetIdentifier';
+export const FORGOT_PASSWORD_NOTICE_KEY = 'forgotPasswordNotice';
+export const PASSWORD_RESET_TOKEN_KEY = 'passwordResetToken';
