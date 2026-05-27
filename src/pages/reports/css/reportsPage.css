@@ -17,8 +17,18 @@
 
 .reportsFilterRow {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.reportsFilterRowPrimary {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.reportsFilterRowRange {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--theme-border);
 }
 
 .reportsFilterRow .crmScrollSelect {
@@ -118,17 +128,55 @@
   animation-delay: 0.08s;
 }
 
+.reportsListAlert {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1.25rem;
+  padding: 0.875rem 1rem;
+  background: var(--theme-danger-bg, #fef2f2);
+  border: 1px solid var(--theme-danger-border, #fecaca);
+  border-radius: var(--theme-radius-md);
+}
+
+.reportsListAlertText {
+  flex: 1 1 12rem;
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--theme-danger-text, #b91c1c);
+}
+
+.reportsGridState {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+}
+
 @media (max-width: 1100px) {
   .reportsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .reportsFilterRowRange {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 /* Mobile — below 769px */
 @media (max-width: 768px) {
-  .reportsFilterRow {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .reportsFilterRowPrimary,
+  .reportsFilterRowRange {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.5rem;
+  }
+
+  .reportsFilterRowRange {
+    margin-top: 0.875rem;
+    padding-top: 0.875rem;
   }
 
   .reportsFilterCard {
@@ -166,7 +214,8 @@
 }
 
 @media (max-width: 480px) {
-  .reportsFilterRow {
+  .reportsFilterRowPrimary,
+  .reportsFilterRowRange {
     grid-template-columns: 1fr;
   }
 
