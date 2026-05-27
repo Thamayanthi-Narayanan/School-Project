@@ -87,6 +87,7 @@ export const useBulkUploadForm = (copy = bulkUploadPageMock) => {
 
       const payload = response.data ?? null;
       setUploadResult(payload);
+      setErrors({});
       setSuccessMessage(
         response.message || formatUploadSummaryMessage(payload, copy),
       );

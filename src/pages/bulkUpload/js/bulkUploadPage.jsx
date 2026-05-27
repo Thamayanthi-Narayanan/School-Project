@@ -3,18 +3,18 @@ import '../../../components/reusable/css/crmReusable.css';
 import '../css/bulkUploadPage.css';
 import { bulkUploadPageMock } from '../../../data/mocks/bulkUpload/bulkUploadPage.mock';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
-import { PageHeader, CrmButton, DataTableCard } from '../../../components/reusable/js/index';
-import {
-  formatRowErrors,
-  getFailedUploadRows,
-} from '../../../utils/bulkUploadResults';
+import { PageHeader, CrmButton } from '../../../components/reusable/js/index';
+import { getFailedUploadRows } from '../../../utils/bulkUploadResults';
 import { useBulkUploadForm } from '../hooks/useBulkUploadForm';
+import BulkUploadResultsView from './bulkUploadResultsView';
+import BulkUploadStructuredErrors from './bulkUploadStructuredErrors';
 
 const BULK_FILE_ACCEPT =
   '.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
 const BulkUploadPage = () => {
-  const { title, subtitle, actions, center, messages, results } = bulkUploadPageMock;
+  const pageCopy = bulkUploadPageMock;
+  const { title, subtitle, actions, center, messages, results } = pageCopy;
 
   const inputRef = useRef(null);
 
@@ -32,6 +32,8 @@ const BulkUploadPage = () => {
 
   const failedRows = getFailedUploadRows(uploadResult?.results);
   const hasPartialFailures = (uploadResult?.failedCount ?? 0) > 0;
+  const showStructuredGeneralError =
+    Boolean(errors.general) && !uploadResult && /Row\s+\d+\s*:/i.test(errors.general);
 
   const handleBulkUploadClick = () => {
     inputRef.current?.click();
@@ -60,9 +62,19 @@ const BulkUploadPage = () => {
         </p>
       ) : null}
 
-      {errors.file || errors.general ? (
+      {errors.file ? (
         <p className="bulkUploadErrorBanner" role="alert">
-          {errors.file || errors.general || messages.uploadFailed}
+          {errors.file}
+        </p>
+      ) : null}
+
+      {showStructuredGeneralError ? (
+        <BulkUploadStructuredErrors message={errors.general} copy={pageCopy} />
+      ) : null}
+
+      {errors.general && !showStructuredGeneralError && !uploadResult ? (
+        <p className="bulkUploadErrorBanner" role="alert">
+          {errors.general || messages.uploadFailed}
         </p>
       ) : null}
 
@@ -100,52 +112,11 @@ const BulkUploadPage = () => {
       </section>
 
       {uploadResult ? (
-        <DataTableCard className="bulkUploadResultsCard crmSectionAnimate">
-          <header className="bulkUploadResultsHeader">
-            <h2 className="bulkUploadResultsTitle">{results.title}</h2>
-            {uploadResult.requestedCount != null ? (
-              <p className="bulkUploadResultsMeta">
-                {uploadResult.successCount ?? 0} succeeded · {uploadResult.failedCount ?? 0} failed
-                · {uploadResult.requestedCount ?? 0} requested
-                {uploadResult.dryRun ? ' (dry run)' : ''}
-              </p>
-            ) : null}
-          </header>
-          <table className="crmTable bulkUploadResultsTable">
-            <thead>
-              <tr>
-                <th>{results.columns.row}</th>
-                <th>{results.columns.admissionNo}</th>
-                <th>{results.columns.status}</th>
-                <th>{results.columns.message}</th>
-                <th>{results.columns.errors}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {failedRows.length === 0 ? (
-                <tr>
-                  <td colSpan={5} className="bulkUploadResultsEmpty">
-                    {results.emptyFailed}
-                  </td>
-                </tr>
-              ) : (
-                failedRows.map((row) => (
-                  <tr key={`row-${row.rowNumber}-${row.admissionNo}`} className="crmTableRow">
-                    <td className="crmTableId">{row.rowNumber}</td>
-                    <td>{row.admissionNo || '—'}</td>
-                    <td>
-                      <span className="bulkUploadStatus bulkUploadStatusFailed">
-                        {results.statusFailed}
-                      </span>
-                    </td>
-                    <td>{row.message || '—'}</td>
-                    <td className="bulkUploadErrorsCell">{formatRowErrors(row.errors)}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </DataTableCard>
+        <BulkUploadResultsView
+          uploadResult={uploadResult}
+          failedRows={failedRows}
+          copy={pageCopy}
+        />
       ) : null}
 
       <input
