@@ -97,6 +97,7 @@ export const feeStructurePageMock = {
     saveSuccess: 'Fee amounts updated.',
     noChanges: 'Change at least one amount before saving.',
     totalLabel: 'Row total',
+    emptyValueFallback: '—',
     fields: {
       q1: { label: 'Q1', placeholder: '0' },
       q2: { label: 'Q2', placeholder: '0' },
@@ -129,6 +130,7 @@ export const feeStructurePageMock = {
       q3: 'Q3',
       q4: 'Annual',
     },
+    emptyValueFallback: '—',
     list: {
       loadingMessage: 'Loading fee heads…',
       emptyMessage: 'No fee heads yet. Switch to Create to add a fee head.',

@@ -67,11 +67,11 @@ const FeeStructureConfigPage = () => {
     const hasInput = tableHasAnyQuarterInput(allRows);
 
     return {
-      q1: hasInput ? formatInrOrDash(q1) : '—',
-      q2: hasInput ? formatInrOrDash(q2) : '—',
-      q3: hasInput ? formatInrOrDash(q3) : '—',
-      q4: hasInput ? formatInrOrDash(q4) : '—',
-      grandTotal: hasInput ? formatInrOrDash(q1 + q2 + q3 + q4) : '—',
+      q1: hasInput ? formatInrOrDash(q1) : categories.emptyValueFallback,
+      q2: hasInput ? formatInrOrDash(q2) : categories.emptyValueFallback,
+      q3: hasInput ? formatInrOrDash(q3) : categories.emptyValueFallback,
+      q4: hasInput ? formatInrOrDash(q4) : categories.emptyValueFallback,
+      grandTotal: hasInput ? formatInrOrDash(q1 + q2 + q3 + q4) : categories.emptyValueFallback,
     };
   }, [allRows]);
 

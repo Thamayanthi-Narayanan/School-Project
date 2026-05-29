@@ -1,4 +1,5 @@
 import '../css/crmReusable.css';
+import '../css/crmButton.css';
 
 const variantClassMap = {
   primary: 'crmBtnPrimary',

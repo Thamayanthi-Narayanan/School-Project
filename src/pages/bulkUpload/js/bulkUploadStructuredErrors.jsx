@@ -1,5 +1,6 @@
 import { parseRowPrefixedErrorMessage } from '../../../utils/bulkUploadResults';
 import BulkUploadResultsView from './bulkUploadResultsView';
+import '../css/bulkUploadStructuredErrors.css';
 
 const BulkUploadStructuredErrors = ({ message, copy }) => {
   const parsedRows = parseRowPrefixedErrorMessage(message);

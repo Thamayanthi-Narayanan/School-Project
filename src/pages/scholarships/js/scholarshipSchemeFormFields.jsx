@@ -1,5 +1,6 @@
 import { FormInput, FormSelect } from '../../../components/reusable/js/index';
 import { APPLICABLE_TO } from '../../../utils/scholarshipSchemeFormUtils';
+import '../css/scholarshipSchemeFormFields.css';
 
 const ScholarshipSchemeFormFields = ({
   fields,

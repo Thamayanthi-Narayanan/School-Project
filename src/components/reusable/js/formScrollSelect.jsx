@@ -105,6 +105,16 @@ const FormScrollSelect = ({
     };
   }, [open, listId]);
 
+  useEffect(() => {
+    if (!open || !menuPosition) return;
+    const menuEl = document.getElementById(listId);
+    if (!menuEl) return;
+    menuEl.style.left = `${menuPosition.left}px`;
+    menuEl.style.width = `${menuPosition.width}px`;
+    menuEl.style.top = `${menuPosition.top}px`;
+    menuEl.style.transform = menuPosition.transform;
+  }, [open, menuPosition, listId]);
+
   const emitChange = (nextValue) => {
     if (!isControlled) {
       setInternalValue(String(nextValue));
@@ -138,7 +148,6 @@ const FormScrollSelect = ({
           className="crmScrollSelectMenu crmScrollSelectMenuPortal"
           role="listbox"
           aria-label={ariaLabel || label || placeholder}
-          style={menuPosition}
         >
           {normalizedOptions.map((option) => {
             const isActive = String(option.value) === String(value);

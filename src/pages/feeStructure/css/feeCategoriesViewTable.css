@@ -1,0 +1,142 @@
+.feeStructureTableSubHead {
+  text-align: center;
+  width: 4.5rem;
+  white-space: nowrap;
+}
+
+.feeStructureAmountCell {
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.feeStructureAmountCell:hover {
+  background: rgba(37, 99, 235, 0.06);
+}
+
+.feeStructureAmountCell:focus-visible {
+  outline: 2px solid var(--theme-primary);
+  outline-offset: -2px;
+}
+
+.feeStructureListError {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: var(--theme-radius-sm);
+  background: rgba(220, 38, 38, 0.06);
+}
+
+.feeStructureListError p {
+  margin: 0;
+  flex: 1;
+  min-width: 12rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--theme-danger);
+}
+
+.feeStructureListState {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--theme-text-muted);
+  font-size: 0.875rem;
+}
+
+.feeStructureTableWrap {
+  overflow-x: auto;
+  margin: 0 -0.25rem;
+  padding: 0 0.25rem;
+}
+
+.feeStructureTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+
+.feeStructureTable th {
+  padding: 0 0.5rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-align: left;
+  color: var(--theme-text-muted);
+  white-space: nowrap;
+}
+
+.feeStructureTable td {
+  padding: 0.5rem;
+  vertical-align: middle;
+  border-top: 1px solid var(--theme-border);
+}
+
+.feeStructureTableActionCell {
+  text-align: center;
+  width: 4.5rem;
+  vertical-align: middle;
+}
+
+.feeStructureCategoryCell {
+  min-width: 10rem;
+  vertical-align: middle;
+}
+
+.feeStructureCellText {
+  display: block;
+  min-width: 4.5rem;
+  max-width: 6.5rem;
+  margin: 0 auto;
+  padding: 0.5rem 0.625rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-primary);
+  text-align: center;
+}
+
+.feeStructureCategoryText {
+  max-width: none;
+  min-width: 8rem;
+  margin: 0;
+  text-align: left;
+}
+
+.feeStructureRowTotal {
+  font-weight: 700;
+  color: var(--theme-primary);
+  white-space: nowrap;
+  text-align: right;
+  padding-right: 0.75rem;
+}
+
+.feeStructureTotalsRow {
+  background: var(--theme-bg-page);
+}
+
+.feeStructureTotalsRow td {
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+  border-top: 1px solid var(--theme-border);
+}
+
+.feeStructureTotalsLabel {
+  font-weight: 700;
+  text-align: left;
+  padding-left: 0.5rem;
+}
+
+.feeStructureTotalsRow td:not(:first-child):not(.feeStructureGrandTotal) {
+  text-align: center;
+}
+
+.feeStructureGrandTotal {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--theme-primary);
+  text-align: right;
+  padding-right: 0.75rem;
+}

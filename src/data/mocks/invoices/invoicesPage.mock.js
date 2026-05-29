@@ -7,6 +7,7 @@ export const invoicesPageMock = {
     newInvoiceLabel: 'New Invoice',
   },
   invoice: {
+    tableColumns: ['DESCRIPTION', 'AMOUNT'],
     school: {
       name: 'Greenfield International School',
       address: '12, Park Avenue, Bengaluru 560001',

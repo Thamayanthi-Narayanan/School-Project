@@ -17,26 +17,26 @@
 }
 
 .statusPillSuccess {
-  background: #dcfce7;
-  color: #15803d;
+  background: var(--theme-attendance-present-bg);
+  color: var(--theme-attendance-present-text);
 }
 
 .statusPillPending {
-  background: #fef9c3;
-  color: #a16207;
+  background: var(--theme-warning-emphasis-bg);
+  color: var(--theme-warning-text);
 }
 
 .statusPillFeePending {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: var(--theme-attendance-absent-bg);
+  color: var(--theme-danger-text);
 }
 
 .statusPillReview {
-  background: #ffedd5;
-  color: #c2410c;
+  background: var(--theme-warning-soft-bg);
+  color: var(--theme-warning-soft-strong-text);
 }
 
 .statusPillRejected {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: var(--theme-attendance-absent-bg);
+  color: var(--theme-danger-text);
 }

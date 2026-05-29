@@ -1,0 +1,96 @@
+.bulkUploadResultsView {
+  margin-top: 1.25rem;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  overflow: hidden;
+}
+
+.bulkUploadResultsViewHeader {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--theme-border);
+  background: var(--theme-bg-subtle);
+}
+
+.bulkUploadResultsViewTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.bulkUploadResultsViewMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  margin: 0.4rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+.bulkUploadResultsViewMetaFailed {
+  font-weight: 600;
+  color: var(--theme-danger-text);
+}
+
+.bulkUploadResultsViewSuccess {
+  margin: 0;
+  padding: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+  text-align: center;
+}
+
+.bulkUploadFailedRows { padding: 1rem 1.25rem 1.25rem; }
+.bulkUploadFailedRowsTitle {
+  margin: 0 0 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--theme-danger-text);
+}
+.bulkUploadFailedRowsList { display: flex; flex-direction: column; gap: 0.875rem; }
+.bulkUploadFailedRow {
+  padding: 1rem 1.125rem;
+  background: var(--theme-danger-bg);
+  border: 1px solid var(--theme-danger-border);
+  border-radius: var(--theme-radius-md);
+}
+.bulkUploadFailedRowHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.625rem;
+}
+.bulkUploadFailedRowMeta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; min-width: 0; }
+.bulkUploadFailedRowBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-sm);
+}
+.bulkUploadFailedRowAdmission { font-size: 0.8125rem; font-weight: 600; word-break: break-word; }
+.bulkUploadFailedRowMessage { margin: 0 0 0.625rem; font-size: 0.8125rem; font-weight: 600; color: var(--theme-danger-text); }
+.bulkUploadFailedRowErrors { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.bulkUploadFailedRowErrorItem {
+  display: block;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-danger-border);
+  border-radius: var(--theme-radius-sm);
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .bulkUploadFailedRowHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

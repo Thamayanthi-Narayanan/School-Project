@@ -10,21 +10,27 @@ export const studentsPageMock = {
   },
   filters: {
     searchPlaceholder: 'Search by name or ID...',
+    searchAriaLabel: 'Search students',
     allClassesLabel: 'All classes',
     allSectionsLabel: 'All sections',
     defaultClass: 'All classes',
     defaultSection: 'All sections',
     defaultYear: '2025-26',
     loadingLabel: 'Loading…',
+    classAriaLabel: 'Filter by class',
+    sectionAriaLabel: 'Filter by section',
+    yearAriaLabel: 'Filter by academic year',
   },
   listErrors: {
     loadFailed: 'Could not load students. Please try again.',
     authFailed: 'Please sign in again to view students.',
     accessDenied: 'You do not have permission to view students.',
+    retryLabel: 'Try again',
   },
   list: {
     loadingMessage: 'Loading students…',
     emptyMessage: 'No students found.',
+    columns: ['ID', 'STUDENT NAME', 'CLASS', 'PARENT NAME', 'PHONE NUMBER', 'FEE STATUS', 'ACTIONS'],
   },
   pagination: {
     pageSize: 10,

@@ -1,4 +1,5 @@
 import '../css/crmReusable.css';
+import '../css/formSearchBar.css';
 import { DashboardIcons } from '../../common/js/dashboardIcons';
 
 const FormSearchBar = ({

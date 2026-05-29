@@ -1,5 +1,6 @@
 import StatusPill from '../../../components/common/js/statusPill';
 import { formatRowLabel, getRowErrorList } from '../../../utils/bulkUploadResults';
+import '../css/bulkUploadResultsView.css';
 
 const BulkUploadFailedRow = ({ row, copy, statusFailedLabel }) => {
   const errorItems = getRowErrorList(row.errors);

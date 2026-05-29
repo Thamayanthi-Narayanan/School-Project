@@ -118,53 +118,8 @@
   border-top: 1px solid var(--theme-border);
 }
 
-.feeStructureTableSubHead {
-  text-align: center;
-  width: 4.5rem;
-  white-space: nowrap;
-}
-
 .feeStructureCategoryCell .feeStructureCategoryMain {
   margin-bottom: 0;
-}
-
-.feeStructureAmountCell {
-  cursor: pointer;
-  transition: background 0.15s ease;
-}
-
-.feeStructureAmountCell:hover {
-  background: rgba(37, 99, 235, 0.06);
-}
-
-.feeStructureAmountCell:focus-visible {
-  outline: 2px solid var(--theme-primary);
-  outline-offset: -2px;
-}
-
-.feeHeadInlineGrid {
-  gap: 0.75rem 1rem;
-}
-
-.feeHeadInlineGrid .crmFormField {
-  gap: 0.35rem;
-}
-
-.feeHeadInlineGrid .crmFormLabel {
-  font-size: 0.8125rem;
-}
-
-.feeHeadInlineGrid .crmScrollSelectTrigger,
-.feeHeadInlineGrid .crmFormInput,
-.feeHeadInlineGrid .crmFormTextarea {
-  min-height: 2.25rem;
-  font-size: 0.8125rem;
-}
-
-.feeHeadInlineGrid .crmFormTextarea {
-  min-height: 4.5rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
 }
 
 .feeStructureConfigCard {
@@ -209,115 +164,7 @@
   font-weight: 600;
 }
 
-.feeStructureListError {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.875rem;
-  padding: 0.625rem 0.75rem;
-  border: 1px solid rgba(220, 38, 38, 0.2);
-  border-radius: var(--theme-radius-sm);
-  background: rgba(220, 38, 38, 0.06);
-}
 
-.feeStructureListError p {
-  margin: 0;
-  flex: 1;
-  min-width: 12rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--theme-danger);
-}
-
-.feeStructureListState {
-  padding: 2rem 1rem;
-  text-align: center;
-  color: var(--theme-text-muted);
-  font-size: 0.875rem;
-}
-
-.feeHeadDeleteModal {
-  max-width: 28rem;
-}
-
-.feeHeadDeleteModalHeader {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.feeHeadDeleteModalIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--theme-radius-md);
-  background: rgba(220, 38, 38, 0.1);
-  color: var(--theme-danger);
-}
-
-.feeHeadDeleteModalHint {
-  margin: 0 0 1.25rem;
-  font-size: 0.8125rem;
-  line-height: 1.5;
-  color: var(--theme-text-muted);
-}
-
-.feeHeadDeleteConfirmBtn {
-  background: var(--theme-danger);
-  border-color: var(--theme-danger);
-}
-
-.feeHeadDeleteConfirmBtn:hover:not(:disabled) {
-  filter: brightness(0.95);
-}
-
-.feeQuartersEditGrid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.feeQuartersEditTotal {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin: 0 0 1.25rem;
-  padding: 0.75rem 0.875rem;
-  border-radius: var(--theme-radius-sm);
-  background: var(--theme-bg-page);
-  font-size: 0.8125rem;
-  color: var(--theme-text-muted);
-}
-
-.feeQuartersEditTotal strong {
-  font-size: 0.9375rem;
-  color: var(--theme-primary);
-}
-
-.feeStructureTableWrap {
-  overflow-x: auto;
-  margin: 0 -0.25rem;
-  padding: 0 0.25rem;
-}
-
-.feeStructureTable {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.8125rem;
-}
-
-.feeStructureTable th {
-  padding: 0 0.5rem 0.75rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-align: left;
-  color: var(--theme-text-muted);
-  white-space: nowrap;
-}
 
 .feeStructureTable th:not(:first-child):not(:last-child) {
   text-align: center;
@@ -374,23 +221,12 @@
   padding-right: 0.75rem;
 }
 
-.feeStructureTableActionCell {
-  text-align: center;
-  width: 4.5rem;
-  vertical-align: middle;
-}
-
 .feeStructureTableActionCell .crmRowActions {
   justify-content: center;
 }
 
 .feeStructureTableActionCell .crmActionBtn {
   margin: 0 auto;
-}
-
-.feeStructureCategoryCell {
-  min-width: 10rem;
-  vertical-align: middle;
 }
 
 .feeStructureCategoryMain {
@@ -407,174 +243,6 @@
   color: var(--theme-text-muted);
 }
 
-.feeHeadRowActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.375rem;
-}
-
-.feeHeadActionBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.3rem 0.55rem;
-  border-radius: var(--theme-radius-sm);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-}
-
-.feeHeadActionBtnIcon {
-  display: flex;
-  flex-shrink: 0;
-}
-
-.feeHeadActionBtnEdit {
-  border: 1px solid var(--theme-primary-light-border);
-  background: #eff6ff;
-  color: var(--theme-primary);
-}
-
-.feeHeadActionBtnEdit:hover {
-  background: #dbeafe;
-}
-
-.feeHeadActionBtnDelete {
-  border: 1px solid #fecaca;
-  background: #fef2f2;
-  color: #b91c1c;
-}
-
-.feeHeadActionBtnDelete:hover {
-  background: #fee2e2;
-}
-
-.feeStructureRowActions {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.35rem;
-}
-
-.feeStructureActionBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
-  border-radius: var(--theme-radius-sm);
-  border: 1px solid var(--theme-border);
-  background: var(--theme-bg-card);
-  color: var(--theme-text-secondary);
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-}
-
-.feeStructureActionBtnEdit:hover {
-  border-color: var(--theme-primary-light-border);
-  background: #eff6ff;
-  color: var(--theme-primary);
-}
-
-.feeStructureActionBtnClear:hover {
-  border-color: #fcd34d;
-  background: #fffbeb;
-  color: #b45309;
-}
-
-.feeClearAmountsModal {
-  max-width: 24rem;
-}
-
-.feeClearAmountsModalHeader {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-}
-
-.feeClearAmountsModalIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--theme-radius-md);
-  background: #fffbeb;
-  color: #b45309;
-  flex-shrink: 0;
-}
-
-.feeClearAmountsModalHint {
-  margin: 0 0 1.25rem;
-  font-size: 0.8125rem;
-  line-height: 1.45;
-  color: var(--theme-text-secondary);
-}
-
-.feeClearAmountsConfirmBtn {
-  background: #d97706;
-  border-color: #d97706;
-}
-
-.feeClearAmountsConfirmBtn:hover:not(:disabled) {
-  filter: brightness(0.95);
-}
-
-.feeHeadDescriptionField {
-  margin-top: 0.25rem;
-}
-
-.feeStructureCellText {
-  display: block;
-  min-width: 4.5rem;
-  max-width: 6.5rem;
-  margin: 0 auto;
-  padding: 0.5rem 0.625rem;
-  font-size: 0.8125rem;
-  color: var(--theme-text-primary);
-  text-align: center;
-}
-
-.feeStructureCategoryText {
-  max-width: none;
-  min-width: 8rem;
-  margin: 0;
-  text-align: left;
-}
-
-/* Totals row */
-.feeStructureTotalsRow {
-  background: var(--theme-bg-page);
-}
-
-.feeStructureTotalsRow td {
-  padding-top: 0.875rem;
-  padding-bottom: 0.875rem;
-  font-weight: 600;
-  color: var(--theme-text-primary);
-  border-top: 1px solid var(--theme-border);
-}
-
-.feeStructureTotalsLabel {
-  font-weight: 700;
-  text-align: left;
-  padding-left: 0.5rem;
-}
-
-.feeStructureTotalsRow td:not(:first-child):not(.feeStructureGrandTotal) {
-  text-align: center;
-}
-
-.feeStructureGrandTotal {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--theme-primary);
-  text-align: right;
-  padding-right: 0.75rem;
-}
 
 /* Bottom cards */
 .feeStructureBottomRow {
@@ -679,50 +347,6 @@
   animation-delay: 0.14s;
 }
 
-.feeHeadModal {
-  max-width: 760px;
-}
-
-.feeHeadModalCompact {
-  max-width: 32rem;
-  padding: 1.25rem;
-}
-
-.feeHeadModalCompact .crmModalHeader {
-  margin-bottom: 0.75rem;
-}
-
-.feeHeadModalCompact .crmModalTitle {
-  font-size: 1.0625rem;
-}
-
-.feeHeadModalCompact .crmModalSubtitle {
-  font-size: 0.75rem;
-}
-
-.feeHeadModalCompact .feeHeadModalGrid {
-  gap: 0.75rem 1rem;
-}
-
-.feeHeadModalCompact .crmModalFooter {
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-}
-
-.feeHeadModalGrid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.feeHeadModalError {
-  margin: 0 0 1rem;
-  padding: 0.625rem 0.75rem;
-  border: 1px solid rgba(220, 38, 38, 0.24);
-  border-radius: var(--theme-radius-sm);
-  background: rgba(220, 38, 38, 0.08);
-  color: var(--theme-danger);
-  font-size: 0.8125rem;
-  line-height: 1.35;
-}
 
 @media (max-width: 1100px) {
   .feeStructureConfigGrid {
@@ -768,10 +392,6 @@
     padding: 0.5rem 0.75rem;
   }
 
-  .feeStructureTableWrap {
-    margin: 0;
-  }
-
   .feeStructureCellInput {
     min-width: 3.5rem;
     max-width: 5rem;
@@ -803,7 +423,4 @@
     padding: 0.5rem 0.75rem;
   }
 
-  .feeHeadModalGrid {
-    grid-template-columns: 1fr;
-  }
 }

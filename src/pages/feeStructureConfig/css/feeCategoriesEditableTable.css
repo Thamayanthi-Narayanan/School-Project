@@ -1,0 +1,29 @@
+.feeStructureListError {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.875rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  border-radius: var(--theme-radius-sm);
+  background: rgba(220, 38, 38, 0.06);
+}
+
+.feeStructureListError p {
+  margin: 0;
+  flex: 1;
+  min-width: 12rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--theme-danger);
+}
+
+.feeStructureTableWrap {
+  overflow-x: auto;
+}
+
+.feeStructureTableActionHead {
+  width: 6.5rem;
+  text-align: right;
+}

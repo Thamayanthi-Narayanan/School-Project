@@ -67,8 +67,9 @@ const InvoicesPage = () => {
         <table className="invoiceLineTable">
           <thead>
             <tr>
-              <th>DESCRIPTION</th>
-              <th>AMOUNT</th>
+              {invoice.tableColumns.map((column) => (
+                <th key={column}>{column}</th>
+              ))}
             </tr>
           </thead>
           <tbody>

@@ -1,13 +1,9 @@
 import { useEffect, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import '../css/admissionPage.css';
+import '../css/admissionSetupModal.css';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import { CrmButton, FormScrollSelect } from '../../../components/reusable/js/index';
 import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
-import {
-  ADMISSION_ACADEMIC_YEARS,
-  ADMISSION_CLASSES,
-} from '../../../utils/admissionForm';
 import { buildRoleLoadingOptions, MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
 const AdmissionSetupModal = ({
@@ -35,26 +31,12 @@ const AdmissionSetupModal = ({
 
   const classOptions = useMemo(() => {
     if (classLoading) return buildRoleLoadingOptions();
-    if (apiClassOptions.length > 1) return apiClassOptions;
-    return [
-      { label: classPlaceholder, value: '' },
-      ...ADMISSION_CLASSES.map((item) => ({
-        value: String(item.id),
-        label: item.label,
-      })),
-    ];
+    return apiClassOptions;
   }, [apiClassOptions, classLoading, classPlaceholder]);
 
   const yearOptions = useMemo(() => {
     if (yearLoading) return buildRoleLoadingOptions();
-    if (apiYearOptions.length > 1) return apiYearOptions;
-    return [
-      { label: yearPlaceholder, value: '' },
-      ...ADMISSION_ACADEMIC_YEARS.map((item) => ({
-        value: String(item.id),
-        label: item.label,
-      })),
-    ];
+    return apiYearOptions;
   }, [apiYearOptions, yearLoading, yearPlaceholder]);
 
   useEffect(() => {

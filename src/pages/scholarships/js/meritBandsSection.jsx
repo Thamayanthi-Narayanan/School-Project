@@ -3,6 +3,7 @@ import {
   FormInput,
   FormSelect,
 } from '../../../components/reusable/js/index';
+import '../css/meritBandsSection.css';
 
 const MeritBandsSection = ({
   copy,
@@ -129,10 +130,10 @@ const MeritBandsSection = ({
             {preview.matched ? (
               <>
                 <p className="scholarshipsMeritPreviewResultMain">
-                  {previewCopy.matchedLabel.replace('{band}', preview.bandLabel || '—')}
+                  {previewCopy.matchedLabel.replace('{band}', preview.bandLabel || previewCopy.emptyValueFallback)}
                 </p>
                 <p className="scholarshipsMeritPreviewResultSub">
-                  {previewCopy.discountLabel.replace('{discount}', preview.discountPercent || '—')}
+                  {previewCopy.discountLabel.replace('{discount}', preview.discountPercent || previewCopy.emptyValueFallback)}
                   {' · '}
                   {previewCopy.marksResultLabel.replace('{marks}', String(preview.marks ?? marks))}
                 </p>

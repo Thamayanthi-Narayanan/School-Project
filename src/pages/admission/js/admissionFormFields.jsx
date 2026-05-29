@@ -1,4 +1,5 @@
 import { FormInput, FormSelect, FormTextarea } from '../../../components/reusable/js/index';
+import '../css/admissionFormFields.css';
 
 const AdmissionFormFields = ({ fields }) => {
   if (!fields?.length) return null;

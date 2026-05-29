@@ -1,0 +1,50 @@
+.feeHeadModal {
+  max-width: 760px;
+}
+
+.feeHeadModalCompact {
+  max-width: 32rem;
+  padding: 1.25rem;
+}
+
+.feeHeadModalCompact .crmModalHeader {
+  margin-bottom: 0.75rem;
+}
+
+.feeHeadModalCompact .crmModalTitle {
+  font-size: 1.0625rem;
+}
+
+.feeHeadModalCompact .crmModalSubtitle {
+  font-size: 0.75rem;
+}
+
+.feeHeadModalCompact .feeHeadModalGrid {
+  gap: 0.75rem 1rem;
+}
+
+.feeHeadModalCompact .crmModalFooter {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+}
+
+.feeHeadModalGrid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.feeHeadModalError {
+  margin: 0 0 1rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid rgba(220, 38, 38, 0.24);
+  border-radius: var(--theme-radius-sm);
+  background: rgba(220, 38, 38, 0.08);
+  color: var(--theme-danger);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 768px) {
+  .feeHeadModalGrid {
+    grid-template-columns: 1fr;
+  }
+}

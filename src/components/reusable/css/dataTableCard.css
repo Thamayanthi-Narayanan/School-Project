@@ -1,0 +1,16 @@
+.crmTableCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+  overflow: hidden;
+  transition: box-shadow 0.25s ease;
+}
+
+.crmTableCard:hover {
+  box-shadow: var(--theme-shadow-card);
+}
+
+.crmTableWrap {
+  overflow-x: auto;
+}

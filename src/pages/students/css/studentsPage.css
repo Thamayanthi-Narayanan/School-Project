@@ -6,15 +6,15 @@
   gap: 0.75rem;
   margin-bottom: 1rem;
   padding: 0.875rem 1rem;
-  border: 1px solid #fecaca;
+  border: 1px solid var(--theme-danger-border);
   border-radius: var(--theme-radius-sm);
-  background: #fef2f2;
+  background: var(--theme-danger-bg);
 }
 
 .studentsListAlertText {
   margin: 0;
   font-size: 0.875rem;
-  color: #b91c1c;
+  color: var(--theme-danger-text);
 }
 
 .studentsListState {

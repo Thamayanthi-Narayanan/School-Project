@@ -1,158 +1,776 @@
 ---
-description: School CRM React SaaS — architecture, stack, and coding standards
+description: School CRM React SaaS — enterprise architecture, UI system, APIs, reusable components, responsiveness, and development standards
 alwaysApply: true
 ---
 
-# School CRM React Project
+# School CRM React SaaS Project Rules
 
-Production School CRM / School Management SaaS. Admin dashboard style.
+Production-level School CRM / School Management SaaS dashboard application.
 
-## Stack (strict)
+==================================================
+TECH STACK (STRICT)
+==================================================
 
-- React functional components + hooks only
-- React Router, Axios, normal CSS only
-- No TypeScript, Tailwind, Bootstrap, MUI, Chakra, styled-components, or CSS frameworks
-- No inline styles; separate camelCase CSS files per component
+Use ONLY:
 
-## Naming
+- React.js
+- React Router
+- Axios
+- Normal CSS
 
-- camelCase: files, folders, hooks, CSS, utils, services (e.g. `studentTable.jsx`, `useStudentData.js`)
-- PascalCase: React component names (e.g. `StudentTable`)
+Mandatory Rules:
 
-## Folder structure
+1. Use React functional components only.
+2. Use React hooks only.
+3. Do NOT use TypeScript.
+4. Do NOT use Tailwind CSS.
+5. Do NOT use Bootstrap.
+6. Do NOT use Material UI.
+7. Do NOT use Chakra UI.
+8. Do NOT use styled-components.
+9. Do NOT use any CSS framework.
+10. Do NOT use inline styles.
 
-```
+==================================================
+PROJECT PRIORITY
+==================================================
+
+Priority Order:
+
+1. Scalability
+2. Clean Architecture
+3. Reusability
+4. Responsiveness
+5. Maintainability
+6. Professional UI
+7. Stable Functionality
+8. Performance
+9. Accessibility
+
+==================================================
+NAMING CONVENTIONS
+==================================================
+
+Use camelCase for:
+
+- files
+- folders
+- hooks
+- CSS files
+- utility files
+- API files
+- services
+
+Examples:
+
+- studentTable.jsx
+- useStudentData.js
+- dashboardLayout.css
+- authApi.js
+
+Use PascalCase for:
+
+- React component names
+
+Examples:
+
+- StudentTable
+- DashboardLayout
+
+==================================================
+FOLDER STRUCTURE
+==================================================
+
+Use this structure strictly:
+
 src/
-  assets/{images,icons,fonts}
-  theme/          → theme.css (CSS variables), themeColors.js (JS constants)
-  apis/
-  components/{sidebar,navbar,dashboardCards,common,reusable}/ → each: js/, css/, hooks/
-  pages/ layouts/ routes/ hooks/ context/ utils/ constants/ services/ data/ styles/
-  App.jsx  main.jsx
-```
+│
+├── assets/
+│   ├── images/
+│   ├── icons/
+│   └── fonts/
+│
+├── theme/
+│   ├── theme.css
+│   └── themeColors.js
+│
+├── apis/
+│
+├── components/
+│   ├── sidebar/
+│   │   ├── js/
+│   │   ├── css/
+│   │   └── hooks/
+│   │
+│   ├── navbar/
+│   │   ├── js/
+│   │   ├── css/
+│   │   └── hooks/
+│   │
+│   ├── dashboardCards/
+│   │   ├── js/
+│   │   ├── css/
+│   │   └── hooks/
+│   │
+│   ├── reusable/
+│   │   ├── js/
+│   │   ├── css/
+│   │   └── hooks/
+│   │
+│   └── common/
+│
+├── pages/
+├── layouts/
+├── routes/
+├── hooks/
+├── context/
+├── utils/
+├── constants/
+├── services/
+├── data/
+│   └── mocks/
+├── styles/
+│
+├── App.jsx
+└── main.jsx
 
-## Theme colors
+==================================================
+COMPONENT STRUCTURE RULES
+==================================================
 
-- All shared colors live in `src/theme/theme.css` and `src/theme/themeColors.js`
-- Import `theme/theme.css` once in `main.jsx` (before `global.css`)
-- Use `var(--theme-*)` in CSS; use `themeColors` in JS when needed
-- Do not hardcode hex values in components — add new tokens to `theme/` first
+Every component folder must contain:
 
-Component folders: `js/` (components), `css/` (styles), `hooks/` (component-specific hooks).
+1. js/
+   → React component files
 
-## Mock data
+2. css/
+   → Component CSS files
 
-- All mock/static UI data lives in `src/data/mocks/`
-- One folder per area — never hardcode labels, rows, or nav in components:
-  - `sidebar/sidebar.mock.js` — brand, menu sections, logout
-  - `navbar/navbar.mock.js` — breadcrumbs, search, user profile
-  - `dashboard/dashboardPage.mock.js` — dashboard cards, tables, feeds
-  - `login/loginPage.mock.js` — login copy and stats
-  - `students/studentsPage.mock.js` — students list, filters, add-student modal fields
-  - `staff/staffPage.mock.js` — staff list, search, add-staff modal fields
-  - `admission/admissionPage.mock.js` — admission wizard steps, forms, tips
-  - `attendance/attendancePage.mock.js` — attendance calendar, tabs, monthly summary
-  - `scholarships/scholarshipsPage.mock.js` — scheme cards, pending requests table
-  - `invoices/invoicesPage.mock.js` — invoice document, line items, summary
-  - `payments/paymentsPage.mock.js` — collect fee form, receipt preview, recent payments
-  - `settings/settingsPage.mock.js` — profile, school, security, notification tabs
-  - `notifications/notificationsPage.mock.js` — alerts list, mark all read action
-  - `transferCertificate/transferCertificatePage.mock.js` — issue TC form, TC preview document
-  - `feeStructure/feeStructurePage.mock.js` — fee head page: view/create tabs, fee heads table
-  - `feeStructureConfig/feeStructureConfigPage.mock.js` — fee structure page: class config, editable categories table
-  - `reports/reportsPage.mock.js` — report filters, export cards grid
-  - `userCreation/userCreationPanel.mock.js` — user management panel sections, users list, form copy
-  - `bulkUpload/bulkUploadPage.mock.js` — bulk upload types, dropzone copy, upload history table
-- Export shared entries from `src/data/mocks/index.js`
-- Add a new mock file when creating each new screen or layout section
+3. hooks/
+   → Custom hooks related to that component
 
-## Reusable UI (`src/components/reusable/`)
+Example:
 
-**Always reuse** these for list pages (Students, Staff, and similar CRUD screens). Import from `components/reusable/js/index.js` and `components/reusable/css/crmReusable.css`.
+components/
+└── studentTable/
+    ├── js/
+    │   └── studentTable.jsx
+    ├── css/
+    │   └── studentTable.css
+    └── hooks/
+        └── useStudentTable.js
 
-| Component | Use for |
-|-----------|---------|
-| `CrmButton` | `primary`, `outline`, `pagination`, `icon` variants |
-| `PageHeader` | Page title, subtitle, action buttons slot |
-| `FormSearchBar` | Search inputs |
-| `FilterToolbar` | Search + dropdown filters + export (Students) |
-| `StaffSearchCard` | Single full-width search card (Staff) |
-| `FormInput` / `FormSelect` / `FormScrollSelect` / `FormTextarea` | Form fields; **`FormSelect` = custom scroll dropdown everywhere** (same as admission Academic year — portal menu, hidden scrollbar, `max-height: 8rem` — see `master-data-dropdowns.mdc`) |
-| `FormTipsPanel` | Side tips card (admission wizard — match form card height) |
-| `AdmissionFormFields` | Maps mock `fields[]` to reusable form inputs (`pages/admission/js/`) |
-| `EntityFormModal` | Add/Edit modals — pass `modalData` with `fields[]` from mock |
-| `DataTableCard` | White table container + optional footer |
-| `PersonCell` | Avatar + name + optional subtext |
-| `TableRowActions` | View (eye), Edit, Delete — uses `DashboardIcons` |
-| `useModal` | Open/close modal, body scroll lock, Escape key |
-| `useListPagination` | Paginated lists (pass `entityLabel`, e.g. `'students'`) |
+Rules:
 
-- **Icons:** always use `DashboardIcons` from `components/common/js/dashboardIcons.jsx` — never duplicate SVGs
-- **Modal fields:** define as array in mock: `{ id, type: 'text'|'select'|'tel', label, placeholder?, icon?, options? }`
-- New list pages: compose reusables + page mock; do not copy button/form/modal CSS into page files
+1. Keep components modular.
+2. Keep components reusable.
+3. Separate logic from UI.
+4. Avoid massive components.
+5. Use props properly.
+6. Preserve existing functionality while updating.
+7. every jsx files should have separate css files not common single css file
 
-## Sidebar layout
+==================================================
+FILE SIZE RULES
+==================================================
 
-- **Fixed (no scroll):** Scholaris brand + `SCHOOL ERP · V2.4` header, Logout footer
-- **Scrollable only:** navigation list between header and footer (`.sidebarNavScroll`)
-- Do not include Upgrade to Pro card
-- Do not show count badges on nav items (e.g. `1.2k`, `5`, `3`) unless the user explicitly asks for live counts from an API
+1. Avoid massive component files.
+2. Split components when file becomes too large.
+3. Keep business logic in hooks/services.
+4. Keep JSX components readable and modular.
 
-## Smooth scroll and hidden scrollbars (mandatory)
+==================================================
+CSS STRUCTURE RULES
+==================================================
 
-- Global styles live in `src/styles/scrollSmooth.css` (imported from `main.jsx` after `global.css`)
-- **Every overflow scroll container** in the app must use hidden scrollbars + smooth scrolling:
-  - `scroll-behavior: smooth`
-  - `-webkit-overflow-scrolling: touch`
-  - `scrollbar-width: none` and `-ms-overflow-style: none`
-  - `::-webkit-scrollbar { display: none; width: 0; height: 0; }`
-- When adding a new horizontally or vertically scrollable region (table wrap, filter row, panel body, dropdown menu, main content area), **add its class to `scrollSmooth.css`** — do not leave visible scrollbars on mobile or desktop
-- **All dropdowns** use `FormSelect` / `FormScrollSelect` (custom portal menu, `max-height: 8rem`, hidden scrollbar) — never native `<select>`; see `master-data-dropdowns.mdc`
-- Do not use `scrollbar-width: thin` or default visible scrollbars on responsive layouts
-- Respect `prefers-reduced-motion: reduce` for `html` smooth scroll (already in `scrollSmooth.css`)
+1. Every JSX component must have its own dedicated CSS file.
+2. Do not combine styles for multiple unrelated components into one CSS file.
+3. Keep component styles modular and isolated.
+4. Match CSS filenames with JSX filenames.
 
-## Development
+Example:
 
-- Reusable components; logic in hooks/services, not UI
-- async/await for APIs; loading/error/success states
-- API URLs via env vars; modules in `apis/` (e.g. `authApi.js`)
-- **Dropdown options:** use `GET /api/v1/master-data` only — see `.cursor/rules/master-data-dropdowns.mdc` (`masterDataApi.js`, `useMasterData`, `masterDataOptions.js`). Do not hardcode select options when a master-data key exists; integrate keys incrementally as API docs are shared.
-- Tables: pagination, search, filter, responsive scroll, empty/loading states
-- Forms: validation, friendly errors, disable submit while loading
-- Preserve existing behavior; minimal scope changes; no unnecessary files or renames
+admissionStudentStep.jsx
+admissionStudentStep.css
 
-## UI
+5. Shared reusable styles should live only inside reusable component CSS files or global theme/style files.
+6. Avoid massive CSS files for entire modules/pages.
 
-SaaS CRM dashboard: sidebar, navbar, cards, tables, forms. Professional, minimal, soft shadows, rounded corners, responsive media queries. Consistent spacing across modules (Dashboard, Students, Teachers, Attendance, Fees, Timetable, Exams, Results, Notifications, Parent Portal, Settings).
+==================================================
+THEME RULES
+==================================================
 
-## Responsive layout (mandatory — preserve when changing UI)
+All shared colors must live inside:
 
-**Do not break existing responsive behavior.** Any new or updated screen, panel, modal, or layout must work on **mobile**, **tablet**, and **desktop** using the project breakpoints below.
+- src/theme/theme.css
+- src/theme/themeColors.js
 
-| Breakpoint | Range | Behavior |
-|------------|-------|----------|
-| **Mobile** | `max-width: 768px` (below 769px) | Hamburger + drawer sidebar (`useSidebarDrawer`, `dashboardLayout`). Page tweaks in `src/styles/dashboardMobile.css`. Single-column forms, stacked buttons, horizontal scroll for tables/filters where needed. |
-| **Tablet** | `769px` – `1024px` | Sidebar visible; reduced padding; 2-column forms where appropriate; panels may be narrower (`min(36rem, 100vw)`). |
-| **Desktop** | `min-width: 1025px` | Full sidebar + navbar search; multi-column grids and side-by-side cards as designed. |
+Rules:
 
-**Rules when editing CSS or layout:**
+1. Import theme.css only once in main.jsx.
+2. Use CSS variables everywhere.
 
-1. Add page-specific responsive rules in the page CSS file **and** shared mobile rules in `dashboardMobile.css` when the change applies to many dashboard pages. Register any new scrollable selectors in `scrollSmooth.css`.
-2. Use `min-width: 0`, `max-width: 100%`, and `box-sizing: border-box` on flex/grid children to prevent horizontal clipping.
-3. Slide-over panels (e.g. user creation): desktop = right drawer; mobile = bottom sheet (`max-width: 768px`); nav tabs scroll horizontally on mobile, vertical on tablet/desktop.
-4. Test mentally at ~375px (phone), ~768px (boundary), and ~1280px (desktop) before claiming done.
-5. Do **not** remove or override `dashboardMobile.css` rules unless replacing them with equivalent behavior.
+Example:
 
-## Screenshot fidelity (mandatory)
+var(--theme-primary)
 
-When the user shares a **screenshot** or says **“exact same UI”**, **“like in screenshot”**, or similar:
+3. Do NOT hardcode hex values inside components.
+4. Add new colors inside theme files first.
+5. Maintain design consistency app-wide.
 
-1. **Match the screenshot first** — layout, spacing, typography, colors, borders, shadows, step order, button labels, placeholders, and section structure must match the reference image as closely as possible.
-2. **Do not simplify** — if the screenshot has a stepper, tips panel, dual-column form, or specific header actions, implement all of them even if similar pages omit them.
-3. **Reuse existing components** (`reusable/`, `DashboardIcons`, theme tokens) where they fit; add page-specific CSS only for layout not covered by reusables.
-4. **Mock all copy** in `src/data/mocks/<page>/` — no hardcoded labels in JSX.
-5. **Confirm route + sidebar** — wire `routePaths`, `pageTitles`, and sidebar path so the page is reachable and navbar breadcrumb is correct.
+==================================================
+ASSET RULES
+==================================================
 
-## Priority
+1. Store all assets inside assets folder only.
+2. Images → assets/images
+3. Icons → assets/icons
+4. Fonts → assets/fonts
+5. Never place assets randomly inside components.
 
-Scalability → clean architecture → reusability → responsiveness → maintainability → professional UI → stable functionality.
+==================================================
+ICON RULES (MANDATORY)
+==================================================
+
+1. Do NOT use SVG files directly.
+2. Do NOT create custom SVG icons manually.
+3. Use icon libraries/plugins only.
+4. Use free icon packages only.
+5. Preferred icon library:
+   - react-icons
+
+Install:
+npm install react-icons
+
+Allowed icon groups:
+- Fi (Feather Icons)
+- Hi (Heroicons)
+- Md (Material Icons)
+- Fa (Font Awesome Free)
+
+Examples:
+
+import { FiUsers } from "react-icons/fi";
+import { MdDashboard } from "react-icons/md";
+
+Rules:
+
+1. Keep icon usage consistent.
+2. Use lightweight icons.
+3. Avoid mixing many icon styles.
+4. Prefer outline icons for dashboard UI.
+5. Keep icon sizes responsive and consistent.
+6. Do not use paid icon packs.
+7. icon should match theme
+8. give exact same icon from my reference screenshot or documenet
+
+==================================================
+MOCK DATA RULES
+==================================================
+
+All static/mock data must live inside:
+
+src/data/mocks/
+
+Rules:
+
+1. One mock file per module/page.
+2. Never hardcode labels, rows, menu items, or table data inside components.
+3. Export shared mock data from:
+   src/data/mocks/index.js
+4. when the api is implemented automatically remove the related mock datas
+
+Examples:
+
+- sidebar/sidebar.mock.js
+- navbar/navbar.mock.js
+- dashboard/dashboardPage.mock.js
+- students/studentsPage.mock.js
+- staff/staffPage.mock.js
+- payments/paymentsPage.mock.js
+
+==================================================
+MASTER DATA DROPDOWN RULES
+==================================================
+
+Use `.cursor/rules/master-data-dropdowns.mdc` as the **single source of truth** for all dropdown/master-data implementation details.
+
+High-level policy only:
+
+1. All dropdown/select options must come from `GET /api/v1/master-data` when a key exists.
+2. Do not hardcode dropdown options where master-data is applicable.
+3. Always follow the detailed rules in `master-data-dropdowns.mdc` for:
+   - required infrastructure files
+   - `useMasterDataSelect` usage
+   - loading/disabled behavior
+   - `useIdAsValue` and value mapping
+   - dropdown UI consistency
+
+==================================================
+FORM RULES
+==================================================
+
+1. Use reusable form components.
+2. Use controlled inputs.
+3. Add validation before submit.
+4. Show inline validation errors.
+5. Highlight invalid fields visually.
+6. Disable submit button during loading.
+7. Prevent duplicate submissions.
+8. Use user-friendly validation messages.
+9. Trim input values before submit.
+10. Keep forms responsive.
+
+==================================================
+TABLE RULES
+==================================================
+
+All tables must support:
+
+- pagination
+- search
+- filter
+- responsive scroll
+- loading states
+- empty states
+
+Rules:
+
+1. Use reusable table components.
+2. Keep table layout responsive.
+3. Prevent horizontal overflow.
+4. Maintain consistent spacing.
+
+==================================================
+REUSABLE COMPONENT RULES
+==================================================
+
+Always reuse components from:
+
+src/components/reusable/
+
+Mandatory reusable components:
+
+- CrmButton
+- PageHeader
+- FormSearchBar
+- FilterToolbar
+- FormInput
+- FormSelect
+- FormScrollSelect
+- FormTextarea
+- EntityFormModal
+- DataTableCard
+- PersonCell
+- TableRowActions
+
+Rules:
+
+1. Do not duplicate reusable UI.
+2. Use shared components across all CRUD screens.
+3. Use reusable modal architecture.
+4. Use reusable table structures.
+5. Use reusable form fields.
+
+==================================================
+DROPDOWN UI RULES
+==================================================
+
+All dropdowns must use:
+
+- FormSelect
+OR
+- FormScrollSelect
+
+Never use:
+
+- native <select>
+- MUI Select
+- custom one-off dropdowns
+
+Dropdown Requirements:
+
+1. Portal dropdown menu.
+2. Hidden scrollbars.
+3. Smooth scrolling.
+4. Rounded corners.
+5. Soft shadow.
+6. Compact height.
+7. Consistent active states.
+8. Blue focus ring.
+
+==================================================
+SCROLL RULES
+==================================================
+
+Global scroll styles live inside:
+
+src/styles/scrollSmooth.css
+
+Rules:
+
+1. Every scroll container must:
+   - hide scrollbars
+   - use smooth scrolling
+   - support touch scrolling
+
+2. Add every new scrollable container class to scrollSmooth.css.
+
+3. Do not use visible scrollbars in dashboard layouts.
+
+4. Respect prefers-reduced-motion.
+
+==================================================
+STATE MANAGEMENT RULES
+==================================================
+
+1. Use local state for page-specific UI only.
+2. Use Context API for shared dashboard state.
+3. Avoid unnecessary global state.
+4. Separate API state from UI state.
+5. Avoid deeply nested state objects.
+6. Use reusable custom hooks for state logic.
+7. Preserve state consistency while updating.
+
+==================================================
+REACT RULES
+==================================================
+
+Use:
+
+- useState
+- useEffect
+- useMemo
+- useCallback
+
+when appropriate.
+
+Rules:
+
+1. Use reusable hooks.
+2. Separate business logic from UI.
+3. Avoid unnecessary re-renders.
+4. Use Context API when prop drilling becomes large.
+5. Use React Router for navigation.
+6. Lazy load large pages/routes.
+7. Keep JSX clean and readable.
+8. Avoid large inline objects/functions inside JSX.
+
+==================================================
+API RULES
+==================================================
+
+All API files must live inside:
+
+src/apis/
+
+Examples:
+
+- authApi.js
+- studentApi.js
+- teacherApi.js
+
+Rules:
+
+1. Use Axios only.
+2. Use async/await.
+3. Use centralized API configuration.
+4. Use environment variables for URLs.
+5. Never hardcode backend URLs.
+6. Handle loading/error/success states.
+7. Keep API logic separated from UI.
+8. Use reusable API methods.
+9. Use Axios interceptors for auth tokens.
+
+==================================================
+AUTHENTICATION RULES
+==================================================
+
+1. Store auth tokens securely.
+2. Protect dashboard routes.
+3. Redirect unauthorized users to login.
+4. Persist auth state after refresh.
+5. Clear auth state on logout.
+6. Handle token expiration gracefully.
+7. Use protected routes.
+
+==================================================
+ROUTING RULES
+==================================================
+
+1. Centralize all routes inside routes/.
+2. Separate auth routes from dashboard routes.
+3. Use protected routes for dashboard pages.
+4. Use lazy loading for routes when appropriate.
+5. Preserve breadcrumb consistency.
+6. Preserve sidebar active state consistency.
+
+==================================================
+PERFORMANCE RULES
+==================================================
+
+1. Avoid unnecessary re-renders.
+2. Memoize expensive computations using useMemo.
+3. Use useCallback when needed.
+4. Lazy load large pages.
+5. Keep bundle size optimized.
+6. Avoid unnecessary dependencies.
+7. Reuse existing components first.
+8. Avoid large inline objects/functions inside JSX.
+
+==================================================
+ACCESSIBILITY RULES
+==================================================
+
+1. Use semantic HTML.
+2. Add proper labels for form fields.
+3. Add proper button types.
+4. Ensure keyboard accessibility.
+5. Maintain accessible focus states.
+6. Use aria-label where necessary.
+7. Maintain proper color contrast.
+
+==================================================
+NOTIFICATION RULES
+==================================================
+
+1. Use centralized toast/notification system.
+2. Show success messages after actions.
+3. Show error notifications for failed APIs.
+4. Keep notification styles consistent.
+5. Do not use browser alert().
+
+==================================================
+LOADING UI RULES
+==================================================
+
+1. Use loading skeletons or loaders during API calls.
+2. Avoid blank white screens while loading.
+3. Keep loading UI consistent across pages.
+4. Disable actions during loading states.
+
+==================================================
+CODE COMMENT RULES
+==================================================
+
+1. Add clear comments for complex logic.
+2. Keep comments beginner-friendly.
+3. Explain reusable hooks and utilities briefly.
+4. Do not over-comment obvious code.
+5. Maintain readable and understandable code for new developers.
+
+==================================================
+LAYOUT RULES
+==================================================
+
+1. Use consistent spacing system.
+2. Use shared page container layouts.
+3. Keep card padding consistent.
+4. Maintain consistent section gaps.
+5. Preserve sidebar/navbar sizing.
+6. Prevent horizontal overflow.
+7. Use responsive grid layouts.
+
+==================================================
+ANIMATION RULES
+==================================================
+
+1. Use minimal animations only.
+2. Prefer subtle hover and transition effects.
+3. Keep animations between 150ms–300ms.
+4. Avoid heavy dashboard animations.
+5. Respect prefers-reduced-motion.
+
+==================================================
+SIDEBAR RULES
+==================================================
+
+Sidebar Structure:
+
+- Fixed header
+- Scrollable navigation only
+- Fixed logout footer
+
+Rules:
+
+1. Do not add Upgrade cards.
+2. Do not show fake count badges unless API provides counts.
+3. Maintain responsive drawer behavior on mobile.
+
+==================================================
+RESPONSIVE RULES (MANDATORY)
+==================================================
+
+Mobile:
+max-width: 768px
+
+Tablet:
+769px → 1024px
+
+Desktop:
+min-width: 1025px
+
+Rules:
+
+1. Never break responsiveness.
+2. Use responsive media queries.
+3. Prevent horizontal clipping.
+4. Use:
+   - min-width: 0
+   - max-width: 100%
+   - box-sizing: border-box
+
+5. Mobile:
+   - stacked layouts
+   - drawer sidebar
+   - single-column forms
+
+6. Tablet:
+   - reduced padding
+   - medium-width layouts
+
+7. Desktop:
+   - multi-column grids
+   - full sidebar
+
+8. Test mentally for:
+   - 375px
+   - 768px
+   - 1280px
+
+==================================================
+UI DESIGN RULES
+==================================================
+
+Design Style:
+
+- Modern SaaS CRM
+- Professional dashboard
+- Minimal design
+- Soft shadows
+- Rounded corners
+- Clean typography
+- Proper spacing
+- Minimal animations
+
+Required Sections:
+
+- Sidebar
+- Navbar
+- Dashboard cards
+- Tables
+- Search bars
+- Filters
+- Forms
+- Empty states
+- Loading states
+
+Avoid:
+
+- Over colorful UI
+- Random spacing
+- Huge animations
+- Messy layouts
+- Inconsistent typography
+
+==================================================
+SCREENSHOT FIDELITY RULES
+==================================================
+
+When user shares screenshots:
+
+1. Match screenshot layout exactly.
+2. Match spacing exactly.
+3. Match typography closely.
+4. Match colors and shadows.
+5. Match section structure.
+6. Do not simplify layouts.
+7. Reuse existing reusable components first.
+8. Move all labels/copy into mock files.
+9. Preserve responsive behavior.
+
+==================================================
+PROTECTION RULES
+==================================================
+
+Before modifying existing code:
+
+1. Understand current functionality first.
+2. Do not break working features.
+3. Preserve responsiveness.
+4. Preserve routing structure.
+5. Preserve state flow.
+6. Do not rename files unnecessarily.
+7. Only modify requested sections.
+8. Reuse existing components whenever possible.
+9. Avoid deleting working logic.
+10. Maintain backward compatibility.
+
+==================================================
+CURSOR AI BEHAVIOR RULES
+==================================================
+
+When generating code:
+
+1. Generate complete working code.
+2. Do not leave TODO placeholders.
+3. Keep code production-ready.
+4. Maintain architecture consistency.
+5. Avoid unnecessary dependencies.
+6. Ensure no syntax errors.
+7. Keep components reusable.
+8. Keep project scalable.
+9. Follow React best practices.
+10. Explain only complex logic briefly.
+11. Preserve responsiveness.
+12. Maintain clean structure.
+13. Do not generate unnecessary files.
+14. Respect all project rules strictly.
+
+==================================================
+CURSOR EXECUTION RULES
+==================================================
+
+1. Before generating, modifying, or implementing any code, always read and follow all Cursor rule files inside `.cursor/rules/`.
+
+2. Always understand the existing project architecture, folder structure, reusable components, and coding standards before implementation.
+
+3. Never start implementation without first checking:
+   - project rules
+   - reusable components
+   - theme structure
+   - API structure
+   - responsive rules
+   - master-data dropdown rules
+
+4. All generated code must strictly follow the defined Cursor rules.
+
+5. Reuse existing project patterns before creating new implementations.
+
+6. Preserve architecture consistency across the entire project.
+
+7. Before creating new components, check whether reusable components already exist.
+
+8. Before creating new styles, check existing theme and reusable CSS structure.
+
+9. Before implementing dropdowns/forms/tables/modals, first follow the reusable component architecture defined in the rules.
+
+10. Do not ignore or bypass any rule defined inside `.cursor/rules/`.
+
+==================================================
+FINAL PROJECT RULE
+==================================================
+
+This is an enterprise-level real-world School CRM SaaS application.
+
+All generated code must follow:
+
+- scalable architecture
+- reusable patterns
+- responsive layouts
+- centralized APIs
+- reusable forms/tables/modals
+- theme consistency
+- master-data driven dropdowns
+- production-ready React standards
+- professional SaaS dashboard UI

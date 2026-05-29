@@ -1,4 +1,5 @@
 import '../css/crmReusable.css';
+import '../css/filterToolbar.css';
 import { DashboardIcons } from '../../common/js/dashboardIcons';
 import FormSearchBar from './formSearchBar';
 import FormSelect from './formSelect';

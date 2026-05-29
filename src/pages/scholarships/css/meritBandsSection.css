@@ -1,0 +1,108 @@
+.scholarshipsMeritCard {
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  padding: 1.25rem 1.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.scholarshipsMeritHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.scholarshipsMeritTitle {
+  margin: 0 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.scholarshipsMeritHint {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--theme-text-secondary);
+}
+
+.scholarshipsMeritYearField {
+  min-width: min(14rem, 100%);
+  flex-shrink: 0;
+}
+
+.scholarshipsMeritBody { min-width: 0; }
+
+.scholarshipsMeritTableWrap {
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+}
+
+.scholarshipsMeritTable th {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  color: var(--theme-text-muted);
+}
+
+.scholarshipsMeritPreview {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--theme-border);
+}
+
+.scholarshipsMeritPreviewTitle {
+  margin: 0 0 0.35rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.scholarshipsMeritPreviewHint {
+  margin: 0 0 1rem;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+.scholarshipsMeritPreviewForm {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.75rem 1rem;
+  align-items: end;
+  max-width: 28rem;
+}
+
+.scholarshipsMeritPreviewBtn { margin-bottom: 0.1rem; }
+
+.scholarshipsMeritPreviewResult {
+  margin-top: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-primary-light);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.scholarshipsMeritPreviewResultMuted {
+  background: var(--theme-bg-page);
+  border-color: var(--theme-border);
+}
+
+.scholarshipsMeritPreviewResultMain {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.scholarshipsMeritPreviewResultSub {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+@media (max-width: 768px) {
+  .scholarshipsMeritHeader { flex-direction: column; }
+  .scholarshipsMeritYearField { width: 100%; }
+  .scholarshipsMeritPreviewForm { grid-template-columns: 1fr; max-width: none; }
+  .scholarshipsMeritPreviewBtn { width: 100%; margin-bottom: 0; }
+}

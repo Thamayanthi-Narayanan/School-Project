@@ -1,9 +1,10 @@
 import { CrmButton, TableRowActions } from '../../../components/reusable/js/index';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
+import '../css/feeCategoriesViewTable.css';
 
 const formatQuarterCell = (value) => {
   const trimmed = String(value ?? '').trim();
-  return trimmed === '' ? '—' : trimmed;
+  return trimmed;
 };
 
 const FeeCategoriesViewTable = ({
@@ -43,7 +44,7 @@ const FeeCategoriesViewTable = ({
             }
           }}
         >
-          <span className="feeStructureCellText">{formatQuarterCell(row.q1)}</span>
+          <span className="feeStructureCellText">{formatQuarterCell(row.q1) || categories.emptyValueFallback}</span>
         </td>
         <td
           className="feeStructureAmountCell"
@@ -57,7 +58,7 @@ const FeeCategoriesViewTable = ({
             }
           }}
         >
-          <span className="feeStructureCellText">{formatQuarterCell(row.q2)}</span>
+          <span className="feeStructureCellText">{formatQuarterCell(row.q2) || categories.emptyValueFallback}</span>
         </td>
         <td
           className="feeStructureAmountCell"
@@ -71,7 +72,7 @@ const FeeCategoriesViewTable = ({
             }
           }}
         >
-          <span className="feeStructureCellText">{formatQuarterCell(row.q3)}</span>
+          <span className="feeStructureCellText">{formatQuarterCell(row.q3) || categories.emptyValueFallback}</span>
         </td>
         <td
           className="feeStructureAmountCell"
@@ -86,7 +87,7 @@ const FeeCategoriesViewTable = ({
           }}
           aria-label={`${row.name} ${quarterAria.q4}`}
         >
-          <span className="feeStructureCellText">{formatQuarterCell(row.q4)}</span>
+          <span className="feeStructureCellText">{formatQuarterCell(row.q4) || categories.emptyValueFallback}</span>
         </td>
       </>
     );

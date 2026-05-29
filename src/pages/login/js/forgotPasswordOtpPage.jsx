@@ -1,8 +1,7 @@
 import LoginAuthShell from '../../../components/login/js/loginAuthShell';
 import { forgotPasswordMock } from '../../../data/mocks/login/forgotPassword.mock';
 import { useForgotPasswordOtp } from '../hooks/useForgotPasswordOtp';
-import '../css/otpPage.css';
-import '../css/forgotPasswordPage.css';
+import '../css/forgotPasswordOtpPage.css';
 
 const ForgotPasswordOtpPage = () => {
   const copy = forgotPasswordMock.otp;

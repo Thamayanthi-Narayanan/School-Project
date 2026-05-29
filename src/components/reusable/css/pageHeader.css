@@ -1,0 +1,28 @@
+.crmPageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.crmPageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.crmPageSubtitle {
+  font-size: 0.9375rem;
+  color: var(--theme-text-secondary);
+}
+
+.crmPageActions {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+}

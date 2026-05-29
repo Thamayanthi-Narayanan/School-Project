@@ -11,6 +11,8 @@ export const scholarshipRequestsPageMock = {
     viewLabel: 'View',
   },
   table: {
+    emptyValueFallback: '—',
+    pendingStatusLabel: 'Pending',
     sectionTitle: 'Pending requests',
     columns: ['ID', 'STUDENT', 'SCHEME', 'DISCOUNT', 'DATE', 'STATUS', 'ACTION'],
     rows: [

@@ -1,0 +1,13 @@
+.crmSearchCard {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.crmSearchCard .crmSearchBar {
+  width: 100%;
+  background: var(--theme-bg-page);
+}

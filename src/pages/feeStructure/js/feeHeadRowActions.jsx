@@ -1,4 +1,4 @@
-import '../css/feeStructurePage.css';
+import '../css/feeHeadRowActions.css';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 
 const FeeHeadRowActions = ({ labels, feeHeadName, onEditHead, onDeleteHead }) => (

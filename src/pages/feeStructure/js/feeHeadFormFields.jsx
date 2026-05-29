@@ -1,4 +1,5 @@
 import { FormInput, FormSelect, FormTextarea } from '../../../components/reusable/js/index';
+import '../css/feeHeadFormFields.css';
 
 const FeeHeadFormFields = ({ fields, form, errors, isSubmitting, onChange, variant = 'modal' }) => (
   <div className={`crmModalGrid feeHeadModalGrid${variant === 'inline' ? ' feeHeadInlineGrid' : ''}`}>

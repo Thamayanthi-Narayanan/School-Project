@@ -17,7 +17,7 @@
 
 /* Blurred hallway layer (same hero image, CSS blur) */
 .loginPageBgBlur {
-  background-image: var(--login-hero-image);
+  background-image: url('../../../assets/images/loginHero.png');
   background-position: 42% center;
   filter: blur(6px);
   transform: scale(1.04);
@@ -25,7 +25,7 @@
 
 /* Sharp girl on top — same position, no blur */
 .loginPageBgSharp {
-  background-image: var(--login-hero-image);
+  background-image: url('../../../assets/images/loginHero.png');
   background-position: 42% center;
   z-index: 1;
   mask-image: linear-gradient(
@@ -160,7 +160,7 @@
   font-weight: 700;
   line-height: 1.4;
   letter-spacing: 0.01em;
-  color: #ffffff;
+  color: var(--theme-text-inverse);
   max-width: 22rem;
   text-shadow: var(--theme-brand-text-shadow);
   animation: loginBrandNameShine 3.5s ease-in-out infinite;
@@ -281,7 +281,7 @@
   background: linear-gradient(
     90deg,
     var(--theme-primary) 0%,
-    #60a5fa 50%,
+    var(--theme-primary-accent) 50%,
     var(--theme-primary-light) 100%
   );
   box-shadow: 0 0 12px rgba(37, 99, 235, 0.45);
@@ -410,20 +410,20 @@
 }
 
 .loginFormInputError {
-  border-color: #ef4444;
+  border-color: var(--theme-danger);
 }
 
 .loginFormError {
   font-size: 0.8125rem;
-  color: #ef4444;
+  color: var(--theme-danger);
 }
 
 .loginFormErrorBanner {
   margin: 0;
   padding: 0.625rem 0.75rem;
   line-height: 1.4;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  background: var(--theme-danger-bg);
+  border: 1px solid var(--theme-danger-border);
   border-radius: var(--theme-radius-sm);
 }
 
@@ -432,9 +432,9 @@
   padding: 0.625rem 0.75rem;
   font-size: 0.8125rem;
   line-height: 1.4;
-  color: #15803d;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
+  color: var(--theme-success-text);
+  background: var(--theme-success-bg);
+  border: 1px solid var(--theme-success-border-soft);
   border-radius: var(--theme-radius-sm);
 }
 

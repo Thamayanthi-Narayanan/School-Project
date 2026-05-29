@@ -68,21 +68,21 @@ const StudentsPage = () => {
   const filterSelects = [
     {
       id: 'class',
-      ariaLabel: 'Filter by class',
+      ariaLabel: filters.classAriaLabel,
       options: classOptions,
       defaultValue: filters.defaultClass,
       disabled: classLoading,
     },
     {
       id: 'section',
-      ariaLabel: 'Filter by section',
+      ariaLabel: filters.sectionAriaLabel,
       options: sectionOptions,
       defaultValue: filters.defaultSection,
       disabled: sectionLoading,
     },
     {
       id: 'year',
-      ariaLabel: 'Filter by academic year',
+      ariaLabel: filters.yearAriaLabel,
       options: yearOptions,
       defaultValue: filters.defaultYear,
       disabled: yearLoading,
@@ -113,7 +113,7 @@ const StudentsPage = () => {
 
       <FilterToolbar
         searchPlaceholder={filters.searchPlaceholder}
-        searchAriaLabel="Search students"
+        searchAriaLabel={filters.searchAriaLabel}
         selects={filterSelects}
         showExport
         exportAriaLabel="Export students"
@@ -125,7 +125,7 @@ const StudentsPage = () => {
             {error}
           </p>
           <CrmButton variant="secondary" type="button" onClick={refetch}>
-            Try again
+            {studentsPageMock.listErrors.retryLabel}
           </CrmButton>
         </div>
       )}
@@ -156,13 +156,9 @@ const StudentsPage = () => {
         <table className="crmTable">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>STUDENT NAME</th>
-              <th>CLASS</th>
-              <th>PARENT NAME</th>
-              <th>PHONE NUMBER</th>
-              <th>FEE STATUS</th>
-              <th>ACTIONS</th>
+              {list.columns.map((column) => (
+                <th key={column}>{column}</th>
+              ))}
             </tr>
           </thead>
           <tbody>
@@ -180,11 +176,10 @@ const StudentsPage = () => {
                 </td>
               </tr>
             )}
-            {!isLoading && !error && students.map((student, index) => (
+            {!isLoading && !error && students.map((student) => (
               <tr
                 key={student.id}
                 className="crmTableRow"
-                style={{ animationDelay: `${0.04 * index}s` }}
               >
                 <td className="crmTableId">{student.displayId}</td>
                 <td>

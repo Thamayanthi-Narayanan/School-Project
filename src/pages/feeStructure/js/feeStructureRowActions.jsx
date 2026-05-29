@@ -1,4 +1,4 @@
-import '../css/feeStructurePage.css';
+import '../css/feeStructureRowActions.css';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 
 const FeeStructureRowActions = ({ categoryName, onEditAmounts, onClearAmounts }) => (

@@ -30,6 +30,7 @@ export const admissionPageMock = {
     studentDetails: {
       sectionTitle: 'Student Details',
       fields: {
+        loadingLabel: 'Loading…',
         setupSummaryLabel: 'Admission for',
         identificationTitle: 'Identification',
         personalTitle: 'Personal information',
@@ -52,6 +53,7 @@ export const admissionPageMock = {
     parentDetails: {
       sectionTitle: 'Parent Details',
       fields: {
+        loadingLabel: 'Loading…',
         fatherTitle: 'Father details',
         motherTitle: 'Mother details',
         guardianTitle: 'Guardian details (optional)',
@@ -80,6 +82,8 @@ export const admissionPageMock = {
       fields: {
         sectionTitle: 'Profile photo',
         sectionHint: 'Upload a passport-size photo. Maximum file size: 1 MB (JPG, PNG, or WEBP).',
+        previewAlt: 'Student profile preview',
+        uploadedLabel: 'Uploaded',
         uploadTitle: 'Upload profile photo',
         uploadHint: 'Image must be below 1 MB',
         browseLabel: 'Browse photo',
@@ -91,6 +95,7 @@ export const admissionPageMock = {
       sectionTitle: 'Review',
       subtitle: 'Review all student, parent, and document information before submitting.',
       labels: {
+        emptyValue: '—',
         studentTitle: 'Student',
         parentsTitle: 'Parents',
         documentsTitle: 'Documents',
@@ -125,6 +130,7 @@ export const admissionPageMock = {
         guardianRelationship: 'Guardian relationship',
         primaryContact: 'Primary contact',
         profilePhoto: 'Profile photo',
+        uploadedLabel: 'Uploaded',
       },
     },
   },

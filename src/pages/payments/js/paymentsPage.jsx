@@ -48,7 +48,7 @@ const PaymentsPage = () => {
   const effectiveMethod = paymentMethod || paymentMethods[0]?.id || '';
 
   const selectedMethodLabel =
-    paymentMethods.find((m) => m.id === effectiveMethod)?.label ?? '—';
+    paymentMethods.find((m) => m.id === effectiveMethod)?.label ?? collectForm.emptyValueFallback;
 
   return (
     <div className="crmListPage paymentsPage">
@@ -181,11 +181,10 @@ const PaymentsPage = () => {
               </tr>
             </thead>
             <tbody>
-              {recentPayments.rows.map((row, index) => (
+              {recentPayments.rows.map((row) => (
                 <tr
                   key={row.id}
                   className="crmTableRow"
-                  style={{ animationDelay: `${0.04 * index}s` }}
                 >
                   <td className="crmTableId">{row.receipt}</td>
                   <td>
@@ -199,7 +198,13 @@ const PaymentsPage = () => {
                     <StatusPill status={row.status} />
                   </td>
                   <td>
-                    <CrmButton variant="icon" ariaLabel={`View receipt ${row.receipt}`}>
+                    <CrmButton
+                      variant="icon"
+                      ariaLabel={recentPayments.viewReceiptAriaLabelTemplate.replace(
+                        '{receiptNo}',
+                        row.receipt,
+                      )}
+                    >
                       {DashboardIcons.eye(16)}
                     </CrmButton>
                   </td>

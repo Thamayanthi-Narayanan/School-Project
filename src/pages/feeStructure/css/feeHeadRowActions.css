@@ -1,0 +1,43 @@
+.feeHeadRowActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.feeHeadActionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--theme-radius-sm);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.feeHeadActionBtnIcon {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.feeHeadActionBtnEdit {
+  border: 1px solid var(--theme-primary-light-border);
+  background: var(--theme-info-bg);
+  color: var(--theme-primary);
+}
+
+.feeHeadActionBtnEdit:hover {
+  background: var(--theme-primary-light);
+}
+
+.feeHeadActionBtnDelete {
+  border: 1px solid var(--theme-danger-border);
+  background: var(--theme-danger-bg);
+  color: var(--theme-danger-text);
+}
+
+.feeHeadActionBtnDelete:hover {
+  background: var(--theme-attendance-absent-bg);
+}

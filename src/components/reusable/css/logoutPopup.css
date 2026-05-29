@@ -60,7 +60,7 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: #e0e7ff;
+  background: var(--theme-violet-soft-bg);
   animation: logoutPopupRingPulse 1s ease-out 0.1s both;
 }
 
@@ -85,8 +85,8 @@
   width: 2.125rem;
   height: 2.125rem;
   border-radius: 50%;
-  color: #fff;
-  background: var(--theme-primary, #4f46e5);
+  color: var(--theme-text-inverse);
+  background: var(--theme-primary);
   animation: logoutPopupIconPop 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
 

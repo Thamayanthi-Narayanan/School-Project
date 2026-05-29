@@ -1,4 +1,4 @@
-import '../css/admissionPage.css';
+import '../css/admissionStepper.css';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 
 const AdmissionStepper = ({ steps, currentStep, onStepClick }) => (

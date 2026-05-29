@@ -1,0 +1,24 @@
+.admissionFormGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.25rem;
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  /* Keep 2-column fields per mobile design */
+  .admissionFormGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.875rem 0.75rem;
+  }
+
+  .admissionFormGrid .crmFormFieldFull {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 400px) {
+  .admissionFormGrid {
+    grid-template-columns: 1fr;
+  }
+}

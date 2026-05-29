@@ -1,4 +1,5 @@
 export const otpPageMock = {
+  stepLabel: 'Step 1 of 2',
   title: 'Verify your account',
   subtitle:
     'A 6-digit code was sent when you signed in. Enter it below to continue.',
@@ -9,6 +10,7 @@ export const otpPageMock = {
   verifyLabel: 'Verify OTP',
   verifyingLabel: 'Verifying…',
   resendLabel: 'Resend OTP',
+  resendingLabel: 'Sending…',
   resendCooldownLabel: 'Resend OTP in {seconds}s',
   backToLoginLabel: 'Back to sign in',
   verifyFailed: 'Could not verify OTP. Please try again.',

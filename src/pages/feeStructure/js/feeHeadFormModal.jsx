@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import { CrmButton } from '../../../components/reusable/js/index';
 import FeeHeadFormFields from './feeHeadFormFields';
+import '../css/feeHeadFormModal.css';
 
 const FeeHeadFormModal = ({
   isOpen,

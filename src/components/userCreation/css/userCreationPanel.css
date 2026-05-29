@@ -222,15 +222,15 @@
 }
 
 .userCreationAlertError {
-  color: #b91c1c;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  color: var(--theme-danger-text);
+  background: var(--theme-danger-bg);
+  border: 1px solid var(--theme-danger-border);
 }
 
 .userCreationAlertSuccess {
-  color: #15803d;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
+  color: var(--theme-success-text);
+  background: var(--theme-success-bg);
+  border: 1px solid var(--theme-success-border-soft);
 }
 
 .userCreationPanelWide {
@@ -378,7 +378,7 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: #dcfce7;
+  background: var(--theme-attendance-present-bg);
   animation: userCreatedPopupRingPulse 1.2s ease-out 0.15s both;
 }
 
@@ -403,8 +403,8 @@
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  background: #16a34a;
-  color: #fff;
+  background: var(--theme-attendance-present-text);
+  color: var(--theme-text-inverse);
   animation: userCreatedPopupIconPop 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
@@ -532,15 +532,15 @@
 }
 
 .userCreationStatusBadge {
-  color: #15803d;
-  background: #dcfce7;
+  color: var(--theme-success-text);
+  background: var(--theme-attendance-present-bg);
 }
 
 .userCreationWarningCard {
   margin-top: 1rem;
   padding: 1rem 1.125rem;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  background: var(--theme-danger-bg);
+  border: 1px solid var(--theme-danger-border);
   border-radius: var(--theme-radius-md);
 }
 
@@ -548,13 +548,13 @@
   margin: 0 0 0.35rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: #b91c1c;
+  color: var(--theme-danger-text);
 }
 
 .userCreationWarningText {
   margin: 0;
   font-size: 0.8125rem;
-  color: #991b1b;
+  color: var(--theme-danger-hover);
   line-height: 1.45;
 }
 
@@ -586,11 +586,11 @@
 }
 
 .userCreationDeleteBtn {
-  background: #dc2626;
+  background: var(--theme-danger);
 }
 
 .userCreationDeleteBtn:hover:not(:disabled) {
-  background: #b91c1c;
+  background: var(--theme-danger-text);
   box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
 }
 

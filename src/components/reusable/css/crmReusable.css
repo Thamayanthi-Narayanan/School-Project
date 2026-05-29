@@ -49,198 +49,6 @@
 .crmSectionDelay1 { animation-delay: 0.08s; }
 .crmSectionDelay2 { animation-delay: 0.14s; }
 
-/* Page header */
-.crmPageHeader {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 1.5rem;
-  margin-bottom: 1.25rem;
-  flex-wrap: wrap;
-}
-
-.crmPageTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--theme-text-primary);
-  letter-spacing: -0.02em;
-  margin-bottom: 0.35rem;
-}
-
-.crmPageSubtitle {
-  font-size: 0.9375rem;
-  color: var(--theme-text-secondary);
-}
-
-.crmPageActions {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  flex-shrink: 0;
-}
-
-/* Buttons */
-.crmBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  border-radius: var(--theme-radius-md);
-  cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
-}
-
-.crmBtn:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.crmBtn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.crmBtnPrimary {
-  padding: 0.5rem 1rem;
-  border: none;
-  background: var(--theme-primary);
-  color: var(--theme-text-inverse);
-  font-weight: 600;
-}
-
-.crmBtnPrimary:hover:not(:disabled) {
-  transform: translateY(-1px);
-  background: var(--theme-primary-hover);
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
-}
-
-.crmBtnOutline {
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--theme-border);
-  background: var(--theme-bg-card);
-  color: var(--theme-text-primary);
-}
-
-.crmBtnOutline:hover:not(:disabled) {
-  transform: translateY(-1px);
-  border-color: var(--theme-primary-light);
-  box-shadow: var(--theme-shadow-sm);
-}
-
-.crmBtnPagination {
-  padding: 0.4rem 0.875rem;
-  border: 1px solid var(--theme-primary-light);
-  background: var(--theme-primary-light);
-  color: var(--theme-primary);
-  font-weight: 600;
-}
-
-.crmBtnPagination:hover:not(:disabled) {
-  transform: translateY(-1px);
-  background: var(--theme-primary-light-hover);
-  border-color: var(--theme-primary-light-border);
-  color: var(--theme-primary-hover);
-}
-
-.crmBtnPagination:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.crmBtnIcon {
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
-  border: 1px solid var(--theme-border);
-  background: var(--theme-bg-card);
-  color: var(--theme-text-secondary);
-}
-
-.crmBtnIcon:hover:not(:disabled) {
-  transform: translateY(-1px);
-  border-color: var(--theme-primary-light);
-  color: var(--theme-primary);
-}
-
-/* Search bars */
-.crmSearchBar {
-  display: flex;
-  align-items: center;
-  padding: 0 0.875rem;
-  height: 2.5rem;
-  background: var(--theme-bg-page);
-  border: 1px solid var(--theme-border);
-  border-radius: var(--theme-radius-md);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.crmSearchBar:focus-within {
-  border-color: var(--theme-border-focus);
-  box-shadow: 0 0 0 3px var(--theme-primary-focus-ring);
-}
-
-.crmSearchBarIcon {
-  display: flex;
-  color: var(--theme-text-muted);
-  margin-right: 0.5rem;
-}
-
-.crmSearchBarInput {
-  flex: 1;
-  border: none;
-  background: transparent;
-  font-size: 0.875rem;
-  color: var(--theme-text-primary);
-  min-width: 0;
-}
-
-.crmSearchBarInput:focus {
-  outline: none;
-}
-
-.crmSearchBarInput::placeholder {
-  color: var(--theme-text-muted);
-}
-
-.crmFilterToolbar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  background: var(--theme-bg-card);
-  border: 1px solid var(--theme-border);
-  border-radius: var(--theme-radius-lg);
-  box-shadow: var(--theme-shadow-sm);
-  flex-wrap: wrap;
-}
-
-.crmFilterToolbar .crmSearchBar {
-  flex: 1;
-  min-width: 200px;
-}
-
-.crmFilterToolbarRight {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-shrink: 0;
-  margin-left: auto;
-}
-
-.crmFilterSelects {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.crmFilterExportBtn {
-  flex-shrink: 0;
-}
 
 /* Form select */
 .crmSelectWrap {
@@ -278,38 +86,6 @@
   display: flex;
 }
 
-/* Staff simple search card */
-.crmSearchCard {
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-  background: var(--theme-bg-card);
-  border: 1px solid var(--theme-border);
-  border-radius: var(--theme-radius-lg);
-  box-shadow: var(--theme-shadow-sm);
-}
-
-.crmSearchCard .crmSearchBar {
-  width: 100%;
-  background: var(--theme-bg-page);
-}
-
-/* Data table */
-.crmTableCard {
-  background: var(--theme-bg-card);
-  border: 1px solid var(--theme-border);
-  border-radius: var(--theme-radius-lg);
-  box-shadow: var(--theme-shadow-sm);
-  overflow: hidden;
-  transition: box-shadow 0.25s ease;
-}
-
-.crmTableCard:hover {
-  box-shadow: var(--theme-shadow-card);
-}
-
-.crmTableWrap {
-  overflow-x: auto;
-}
 
 .crmTable {
   width: 100%;
@@ -419,23 +195,23 @@
 }
 
 .crmAvatarSky {
-  background: #e0f2fe;
-  color: #0284c7;
+  background: var(--theme-info-soft-bg);
+  color: var(--theme-info-soft-text);
 }
 
 .crmAvatarGreen {
-  background: #dcfce7;
-  color: #16a34a;
+  background: var(--theme-attendance-present-bg);
+  color: var(--theme-attendance-present-text);
 }
 
 .crmAvatarOrange {
-  background: #ffedd5;
-  color: #ea580c;
+  background: var(--theme-warning-soft-bg);
+  color: var(--theme-warning-soft-text);
 }
 
 .crmAvatarViolet {
-  background: #ede9fe;
-  color: #7c3aed;
+  background: var(--theme-violet-soft-bg);
+  color: var(--theme-violet-soft-text);
 }
 
 .crmTableRow:hover .crmAvatar {
@@ -490,14 +266,14 @@
 }
 
 .crmActionBtnDanger {
-  color: #dc2626;
+  color: var(--theme-danger);
 }
 
 .crmActionBtnDanger:hover {
   transform: translateY(-1px);
-  border-color: #fecaca;
-  background: #fef2f2;
-  color: #b91c1c;
+  border-color: var(--theme-danger-border);
+  background: var(--theme-danger-bg);
+  color: var(--theme-danger-text);
 }
 
 /* Table footer */
@@ -611,14 +387,14 @@
 
 .crmFormInputError,
 .crmFormInputError:focus {
-  border-color: #f87171;
+  border-color: var(--theme-danger-border-strong);
   box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.2);
 }
 
 .crmFormError {
   margin: 0;
   font-size: 0.75rem;
-  color: #dc2626;
+  color: var(--theme-danger);
   line-height: 1.35;
 }
 
@@ -752,7 +528,7 @@
 }
 
 .crmScrollSelectError .crmScrollSelectTrigger {
-  border-color: #f87171;
+  border-color: var(--theme-danger-border-strong);
 }
 
 .crmScrollSelectValue {
@@ -845,7 +621,7 @@
 }
 
 .crmScrollSelectOptionActive {
-  background: #eff6ff;
+  background: var(--theme-info-bg);
   color: var(--theme-primary);
   font-weight: 600;
 }
@@ -879,43 +655,6 @@
   grid-column: 1 / -1;
 }
 
-/* Tips panel (admission wizard — matches form card height via parent grid) */
-.crmFormTipsPanel {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 100%;
-  background: var(--theme-bg-card);
-  border: 1px solid var(--theme-border);
-  border-radius: var(--theme-radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--theme-shadow-sm);
-  box-sizing: border-box;
-}
-
-.crmFormTipsTitle {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--theme-text-primary);
-  margin-bottom: 0.875rem;
-}
-
-.crmFormTipsList {
-  list-style: disc;
-  padding-left: 1.125rem;
-  margin: 0;
-}
-
-.crmFormTipsList li {
-  font-size: 0.875rem;
-  color: var(--theme-text-secondary);
-  line-height: 1.5;
-  margin-bottom: 0.5rem;
-}
-
-.crmFormTipsList li:last-child {
-  margin-bottom: 0;
-}
 
 .crmModalFooter {
   display: flex;

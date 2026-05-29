@@ -1,4 +1,5 @@
 import { FormInput, FormSelect, FormTextarea } from '../../../components/reusable/js/index';
+import '../css/admissionStudentStep.css';
 import { useMasterDataContext } from '../../../context/masterDataContext';
 import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
 import {
@@ -9,22 +10,23 @@ import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
 const AdmissionStudentStep = ({ student, fields, errors = {}, onChange }) => {
   const { data: masterData } = useMasterDataContext();
+  const loadingLabel = fields.loadingLabel;
 
   const { options: genderOptions, isLoading: genderLoading } = useMasterDataSelect(
     MASTER_DATA_KEYS.gender,
-    { includeEmpty: true, loadingLabel: 'Loading…' },
+    { includeEmpty: true, loadingLabel },
   );
   const { options: bloodGroupOptions, isLoading: bloodLoading } = useMasterDataSelect(
     MASTER_DATA_KEYS.bloodGroup,
-    { includeEmpty: true, loadingLabel: 'Loading…' },
+    { includeEmpty: true, loadingLabel },
   );
   const { options: religionOptions, isLoading: religionLoading } = useMasterDataSelect(
     MASTER_DATA_KEYS.religion,
-    { includeEmpty: true, loadingLabel: 'Loading…' },
+    { includeEmpty: true, loadingLabel },
   );
   const { options: communityOptions, isLoading: communityLoading } = useMasterDataSelect(
     MASTER_DATA_KEYS.community,
-    { includeEmpty: true, loadingLabel: 'Loading…' },
+    { includeEmpty: true, loadingLabel },
   );
 
   return (

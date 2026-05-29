@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import { CrmButton } from '../../../components/reusable/js/index';
 import ScholarshipSchemeFormFields from './scholarshipSchemeFormFields';
+import '../css/scholarshipSchemeFormModal.css';
 
 const ScholarshipSchemeFormModal = ({
   isOpen,

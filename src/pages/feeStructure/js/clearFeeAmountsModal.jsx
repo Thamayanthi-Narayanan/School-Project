@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import { CrmButton } from '../../../components/reusable/js/index';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
+import '../css/clearFeeAmountsModal.css';
 
 const ClearFeeAmountsModal = ({
   isOpen,

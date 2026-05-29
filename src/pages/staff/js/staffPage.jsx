@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import '../../../components/reusable/css/crmReusable.css';
+import '../css/staffPage.css';
 import { staffPageMock } from '../../../data/mocks/staff/staffPage.mock';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import {
@@ -69,11 +70,10 @@ const StaffPage = () => {
             </tr>
           </thead>
           <tbody>
-            {staff.map((member, index) => (
+            {staff.map((member) => (
               <tr
                 key={member.id}
                 className="crmTableRow"
-                style={{ animationDelay: `${0.04 * index}s` }}
               >
                 <td className="crmTableId">{member.id}</td>
                 <td>

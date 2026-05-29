@@ -26,3 +26,6 @@ env/.env.production
 *.njsproj
 *.sln
 *.sw?
+
+# Placeholder files
+.gitkeep

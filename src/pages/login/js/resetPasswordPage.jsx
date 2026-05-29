@@ -3,20 +3,7 @@ import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import LoginAuthShell from '../../../components/login/js/loginAuthShell';
 import { forgotPasswordMock } from '../../../data/mocks/login/forgotPassword.mock';
 import { useResetPasswordForm } from '../hooks/useResetPasswordForm';
-import '../css/forgotPasswordPage.css';
-import '../css/firstLoginChangePasswordPage.css';
-
-const LockIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.6" />
-    <path
-      d="M8 11V8a4 4 0 0 1 8 0v3"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    />
-  </svg>
-);
+import '../css/resetPasswordPage.css';
 
 const ResetPasswordPage = () => {
   const copy = forgotPasswordMock.reset;
@@ -63,7 +50,7 @@ const ResetPasswordPage = () => {
 
         <div className="firstLoginSecurityBanner">
           <span className="firstLoginSecurityIcon">
-            <LockIcon />
+            {DashboardIcons.lock(18)}
           </span>
           <p className="firstLoginSecurityText">
             Your verification code was accepted. Set a new password to complete the reset.
@@ -84,7 +71,7 @@ const ResetPasswordPage = () => {
               </label>
               <div className="loginFormInputWrap loginFormInputWrapPassword">
                 <span className="loginFormInputIcon">
-                  <LockIcon />
+                  {DashboardIcons.lock(18)}
                 </span>
                 <input
                   id={`reset-${field.id}`}

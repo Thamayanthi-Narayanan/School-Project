@@ -77,9 +77,9 @@
 }
 
 .settingsAlertError {
-  color: #b91c1c;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  color: var(--theme-danger-text);
+  background: var(--theme-danger-bg);
+  border: 1px solid var(--theme-danger-border);
 }
 
 .settingsProfileLoading {

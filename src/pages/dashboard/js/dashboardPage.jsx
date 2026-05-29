@@ -4,6 +4,7 @@ import { DashboardIcons, renderNavIcon } from '../../../components/common/js/das
 import StatusPill from '../../../components/common/js/statusPill';
 import { useNavigate } from 'react-router-dom';
 import { routePaths } from '../../../constants/routePaths';
+import { CrmButton } from '../../../components/reusable/js/index';
 
 const Sparkline = ({ tone = 'green' }) => (
   <div className={`dashboardSparkline dashboardSparkline${tone.charAt(0).toUpperCase() + tone.slice(1)}`} aria-hidden="true">
@@ -34,6 +35,7 @@ const MetricCard = ({ metric }) => (
 const DashboardPage = () => {
   const {
     welcome,
+    sections,
     metrics,
     summaryStats,
     recentPayments,
@@ -55,7 +57,9 @@ const DashboardPage = () => {
     <div className="dashboardPage">
       <section className="dashboardWelcome dashboardSectionAnimate">
         <div className="dashboardWelcomeText">
-          <h1 className="dashboardWelcomeTitle">Welcome back, {welcome.userName} 👋</h1>
+          <h1 className="dashboardWelcomeTitle">
+            {welcome.titleTemplate.replace('{userName}', welcome.userName)}
+          </h1>
           <p className="dashboardWelcomeSubtitle">{welcome.subtitle}</p>
           <div className="dashboardWelcomeMeta">
             <span className="dashboardLiveBadge">{welcome.liveLabel}</span>
@@ -63,22 +67,24 @@ const DashboardPage = () => {
           </div>
         </div>
         <div className="dashboardWelcomeActions">
-          <button
+          <CrmButton
+            variant="outline"
             type="button"
-            className="dashboardBtnOutline"
+            className="dashboardWelcomeActionBtn"
             onClick={() => navigate(routePaths.admission)}
           >
             {DashboardIcons.plus(16)}
-            New Admission
-          </button>
-          <button
+            {welcome.actions.newAdmissionLabel}
+          </CrmButton>
+          <CrmButton
+            variant="primary"
             type="button"
-            className="dashboardBtnPrimary"
+            className="dashboardWelcomeActionBtn"
             onClick={() => navigate(routePaths.payments)}
           >
             {DashboardIcons.wallet(16)}
-            Collect Fee
-          </button>
+            {welcome.actions.collectFeeLabel}
+          </CrmButton>
         </div>
       </section>
 
@@ -108,22 +114,20 @@ const DashboardPage = () => {
         <article className="dashboardCard dashboardCardAnimate">
           <header className="dashboardCardHeader">
             <div>
-              <h2 className="dashboardCardTitle">Recent Payments</h2>
-              <p className="dashboardCardSub">Live transactions from the last 7 days</p>
+              <h2 className="dashboardCardTitle">{sections.recentPayments.title}</h2>
+              <p className="dashboardCardSub">{sections.recentPayments.subtitle}</p>
             </div>
             <a href="#payments" className="dashboardCardLink">
-              View all {DashboardIcons.arrowRight(14)}
+              {sections.recentPayments.viewAllLabel} {DashboardIcons.arrowRight(14)}
             </a>
           </header>
           <div className="dashboardTableWrap">
             <table className="dashboardTable">
               <thead>
                 <tr>
-                  <th>RECEIPT</th>
-                  <th>STUDENT</th>
-                  <th>AMOUNT</th>
-                  <th>METHOD</th>
-                  <th>STATUS</th>
+                  {sections.recentPayments.columns.map((column) => (
+                    <th key={column}>{column}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -154,8 +158,8 @@ const DashboardPage = () => {
         <article className="dashboardCard dashboardCardAnimate">
           <header className="dashboardCardHeader">
             <div className="dashboardCardTitleRow">
-              <h2 className="dashboardCardTitle">Activity Feed</h2>
-              <span className="dashboardFeedBadge">4 new</span>
+              <h2 className="dashboardCardTitle">{sections.activityFeed.title}</h2>
+              <span className="dashboardFeedBadge">{sections.activityFeed.badgeLabel}</span>
             </div>
           </header>
           <ul className="dashboardActivityList">
@@ -177,21 +181,20 @@ const DashboardPage = () => {
         <article className="dashboardCard dashboardCardAnimate">
           <header className="dashboardCardHeader">
             <div>
-              <h2 className="dashboardCardTitle">Recent Admissions</h2>
-              <p className="dashboardCardSub">Applications awaiting review</p>
+              <h2 className="dashboardCardTitle">{sections.recentAdmissions.title}</h2>
+              <p className="dashboardCardSub">{sections.recentAdmissions.subtitle}</p>
             </div>
             <a href="#admissions" className="dashboardCardLink">
-              Manage {DashboardIcons.arrowRight(14)}
+              {sections.recentAdmissions.manageLabel} {DashboardIcons.arrowRight(14)}
             </a>
           </header>
           <div className="dashboardTableWrap">
             <table className="dashboardTable">
               <thead>
                 <tr>
-                  <th>APPLICATION</th>
-                  <th>NAME</th>
-                  <th>CLASS</th>
-                  <th>STATUS</th>
+                  {sections.recentAdmissions.columns.map((column) => (
+                    <th key={column}>{column}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -213,21 +216,20 @@ const DashboardPage = () => {
         <article className="dashboardCard dashboardCardAnimate">
           <header className="dashboardCardHeader">
             <div>
-              <h2 className="dashboardCardTitle">Pending Scholarship Approvals</h2>
-              <p className="dashboardCardSub">Requires your attention</p>
+              <h2 className="dashboardCardTitle">{sections.scholarshipApprovals.title}</h2>
+              <p className="dashboardCardSub">{sections.scholarshipApprovals.subtitle}</p>
             </div>
             <a href="#scholarships" className="dashboardCardLink">
-              Review {DashboardIcons.arrowRight(14)}
+              {sections.scholarshipApprovals.reviewLabel} {DashboardIcons.arrowRight(14)}
             </a>
           </header>
           <div className="dashboardTableWrap">
             <table className="dashboardTable">
               <thead>
                 <tr>
-                  <th>STUDENT</th>
-                  <th>SCHEME</th>
-                  <th>AMOUNT</th>
-                  <th>STATUS</th>
+                  {sections.scholarshipApprovals.columns.map((column) => (
+                    <th key={column}>{column}</th>
+                  ))}
                 </tr>
               </thead>
               <tbody>

@@ -1,0 +1,28 @@
+.feeHeadDescriptionField {
+  margin-top: 0.25rem;
+}
+
+.feeHeadInlineGrid {
+  gap: 0.75rem 1rem;
+}
+
+.feeHeadInlineGrid .crmFormField {
+  gap: 0.35rem;
+}
+
+.feeHeadInlineGrid .crmFormLabel {
+  font-size: 0.8125rem;
+}
+
+.feeHeadInlineGrid .crmScrollSelectTrigger,
+.feeHeadInlineGrid .crmFormInput,
+.feeHeadInlineGrid .crmFormTextarea {
+  min-height: 2.25rem;
+  font-size: 0.8125rem;
+}
+
+.feeHeadInlineGrid .crmFormTextarea {
+  min-height: 4.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}

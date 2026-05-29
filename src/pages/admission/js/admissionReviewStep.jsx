@@ -1,4 +1,4 @@
-import '../css/admissionPage.css';
+import '../css/admissionReviewStep.css';
 import { useMasterDataContext } from '../../../context/masterDataContext';
 import {
   getClassLabel,
@@ -6,19 +6,19 @@ import {
 } from '../../../utils/admissionForm';
 import { getMasterDataLabel, MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
-const formatIncome = (value) => {
-  if (value === '' || value == null) return '—';
+const formatIncome = (value, emptyValue) => {
+  if (value === '' || value == null) return emptyValue;
   return `₹${Number(value).toLocaleString('en-IN')}`;
 };
 
-const ReviewBlock = ({ title, rows }) => (
+const ReviewBlock = ({ title, rows, emptyValue }) => (
   <div className="admissionReviewBlock">
     <h3 className="admissionReviewBlockTitle">{title}</h3>
     <dl className="admissionReviewList">
       {rows.map((row) => (
         <div key={row.label} className="admissionReviewItem">
           <dt>{row.label}</dt>
-          <dd>{row.value || '—'}</dd>
+          <dd>{row.value || emptyValue}</dd>
         </div>
       ))}
     </dl>
@@ -29,6 +29,7 @@ const AdmissionReviewStep = ({ subtitle, form, labels }) => {
   const { data: masterData } = useMasterDataContext();
   const { student, parents, documents } = form;
   const studentName = [student.firstName, student.lastName].filter(Boolean).join(' ');
+  const emptyValue = labels.emptyValue;
 
   const labelOrRaw = (key, value) => {
     if (value == null || value === '') return '';
@@ -43,6 +44,7 @@ const AdmissionReviewStep = ({ subtitle, form, labels }) => {
       <div className="admissionReviewBlocks">
         <ReviewBlock
           title={labels.studentTitle}
+          emptyValue={emptyValue}
           rows={[
             { label: labels.admissionNo, value: student.admissionNo },
             { label: labels.aadharNumber, value: student.aadharNumber },
@@ -60,23 +62,24 @@ const AdmissionReviewStep = ({ subtitle, form, labels }) => {
             { label: labels.bloodGroup, value: labelOrRaw(MASTER_DATA_KEYS.bloodGroup, student.bloodGroup) },
             { label: labels.religion, value: labelOrRaw(MASTER_DATA_KEYS.religion, student.religion) },
             { label: labels.community, value: labelOrRaw(MASTER_DATA_KEYS.community, student.community) },
-            { label: labels.annualIncome, value: formatIncome(student.annualIncome) },
+            { label: labels.annualIncome, value: formatIncome(student.annualIncome, emptyValue) },
           ]}
         />
 
         <ReviewBlock
           title={labels.parentsTitle}
+          emptyValue={emptyValue}
           rows={[
             { label: labels.fatherName, value: parents.fatherName },
             { label: labels.fatherPhone, value: parents.fatherPhone },
             { label: labels.fatherEmail, value: parents.fatherEmail },
             { label: labels.fatherOccupation, value: parents.fatherOccupation },
-            { label: labels.fatherAnnualIncome, value: formatIncome(parents.fatherAnnualIncome) },
+            { label: labels.fatherAnnualIncome, value: formatIncome(parents.fatherAnnualIncome, emptyValue) },
             { label: labels.motherName, value: parents.motherName },
             { label: labels.motherPhone, value: parents.motherPhone },
             { label: labels.motherEmail, value: parents.motherEmail },
             { label: labels.motherOccupation, value: parents.motherOccupation },
-            { label: labels.motherAnnualIncome, value: formatIncome(parents.motherAnnualIncome) },
+            { label: labels.motherAnnualIncome, value: formatIncome(parents.motherAnnualIncome, emptyValue) },
             { label: labels.guardianName, value: parents.guardianName },
             { label: labels.guardianPhone, value: parents.guardianPhone },
             { label: labels.guardianEmail, value: parents.guardianEmail },
@@ -91,10 +94,11 @@ const AdmissionReviewStep = ({ subtitle, form, labels }) => {
 
         <ReviewBlock
           title={labels.documentsTitle}
+          emptyValue={emptyValue}
           rows={[
             {
               label: labels.profilePhoto,
-              value: documents.profilePhotoName || (documents.profilePhotoUrl ? 'Uploaded' : ''),
+              value: documents.profilePhotoName || (documents.profilePhotoUrl ? labels.uploadedLabel : ''),
             },
           ]}
         />

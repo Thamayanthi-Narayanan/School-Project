@@ -7,69 +7,6 @@ export const TEMP_API_CLASS_ID = 1;
 export const PROFILE_PHOTO_MAX_BYTES = 1024 * 1024;
 export const PROFILE_PHOTO_ACCEPT = 'image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp';
 
-const CLASS_LABELS = [
-  'LKG',
-  'UKG',
-  'Class 1',
-  'Class 2',
-  'Class 3',
-  'Class 4',
-  'Class 5',
-  'Class 6',
-  'Class 7',
-  'Class 8',
-  'Class 9',
-  'Class 10',
-  'Class 11',
-  'Class 12',
-];
-
-export const ADMISSION_CLASSES = CLASS_LABELS.map((label, index) => ({
-  id: index + 1,
-  label,
-}));
-
-const formatAcademicYearLabel = (startYear) =>
-  `${startYear}-${String(startYear + 1).slice(-2)}`;
-
-export const getCurrentAcademicStartYear = () => {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
-  return month >= 3 ? year : year - 1;
-};
-
-export const buildAdmissionAcademicYears = () => {
-  const currentStart = getCurrentAcademicStartYear();
-  const pastCount = 15;
-  const futureCount = 3;
-  const years = [];
-
-  for (let offset = 0; offset <= pastCount; offset += 1) {
-    const startYear = currentStart - offset;
-    years.push({
-      id: years.length + 1,
-      label: formatAcademicYearLabel(startYear),
-      startYear,
-      isCurrent: offset === 0,
-    });
-  }
-
-  for (let offset = 1; offset <= futureCount; offset += 1) {
-    const startYear = currentStart + offset;
-    years.push({
-      id: years.length + 1,
-      label: formatAcademicYearLabel(startYear),
-      startYear,
-      isCurrent: false,
-    });
-  }
-
-  return years;
-};
-
-export const ADMISSION_ACADEMIC_YEARS = buildAdmissionAcademicYears();
-
 export const validateProfilePhoto = (file) => {
   if (!file) return null;
 
@@ -132,16 +69,11 @@ export const createInitialAdmissionForm = () => ({
 });
 
 export const getClassLabel = (classId, masterData) => {
-  const fromApi = getMasterDataLabelById(masterData, MASTER_DATA_KEYS.class, classId);
-  if (fromApi) return fromApi;
-  return ADMISSION_CLASSES.find((item) => String(item.id) === String(classId))?.label ?? '';
+  return getMasterDataLabelById(masterData, MASTER_DATA_KEYS.class, classId) || '';
 };
 
 export const getAcademicYearLabel = (academicYearId, masterData) => {
-  const fromApi = getMasterDataLabelById(masterData, MASTER_DATA_KEYS.academicYear, academicYearId);
-  if (fromApi) return fromApi;
-  return ADMISSION_ACADEMIC_YEARS.find((item) => String(item.id) === String(academicYearId))?.label
-    ?? '';
+  return getMasterDataLabelById(masterData, MASTER_DATA_KEYS.academicYear, academicYearId) || '';
 };
 
 const toNumberOrNull = (value) => {

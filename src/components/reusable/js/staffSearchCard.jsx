@@ -1,4 +1,5 @@
 import '../css/crmReusable.css';
+import '../css/staffSearchCard.css';
 import FormSearchBar from './formSearchBar';
 
 const StaffSearchCard = ({ placeholder, ariaLabel, value, onChange }) => (

@@ -1,0 +1,13 @@
+.scholarshipSchemeFormModal {
+  max-width: min(36rem, 100vw - 2rem);
+}
+
+.scholarshipSchemeFormError {
+  margin: 0 0 1rem;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.8125rem;
+  color: var(--theme-danger-text);
+  background: var(--theme-danger-bg);
+  border: 1px solid var(--theme-danger-border);
+  border-radius: var(--theme-radius-sm);
+}

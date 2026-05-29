@@ -1,6 +1,7 @@
 import { createPortal } from 'react-dom';
 import { CrmButton, FormInput } from '../../../components/reusable/js/index';
 import { formatInrAmount } from '../../../utils/feeStructureAmounts';
+import '../css/editFeeQuartersModal.css';
 
 const EditFeeQuartersModal = ({
   isOpen,
@@ -18,7 +19,7 @@ const EditFeeQuartersModal = ({
 
   const { fields } = copy;
   const subtitle = copy.subtitle.replace('{name}', categoryName || copy.fallbackName);
-  const totalDisplay = previewTotal > 0 ? formatInrAmount(previewTotal) : '—';
+  const totalDisplay = previewTotal > 0 ? formatInrAmount(previewTotal) : copy.emptyValueFallback;
 
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) onClose();

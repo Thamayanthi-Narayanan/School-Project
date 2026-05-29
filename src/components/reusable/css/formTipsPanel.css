@@ -1,0 +1,36 @@
+.crmFormTipsPanel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100%;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--theme-shadow-sm);
+  box-sizing: border-box;
+}
+
+.crmFormTipsTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+  margin-bottom: 0.875rem;
+}
+
+.crmFormTipsList {
+  list-style: disc;
+  padding-left: 1.125rem;
+  margin: 0;
+}
+
+.crmFormTipsList li {
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.crmFormTipsList li:last-child {
+  margin-bottom: 0;
+}

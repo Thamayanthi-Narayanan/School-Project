@@ -28,7 +28,7 @@ const OtpPage = () => {
 
   return (
     <LoginAuthShell title={otpPageMock.title} subtitle={otpPageMock.subtitle}>
-      <p className="firstLoginStepBadge firstLoginStepBadgeOtp">Step 1 of 2</p>
+      <p className="firstLoginStepBadge firstLoginStepBadgeOtp">{otpPageMock.stepLabel}</p>
       <form className="loginForm" onSubmit={handleVerify} noValidate>
         {sendNotice && !errors.general && (
           <p className="loginFormSuccessBanner" role="status">
@@ -79,7 +79,7 @@ const OtpPage = () => {
           onClick={handleResend}
           disabled={cooldown > 0 || isResending || isVerifying}
         >
-          {isResending ? 'Sending…' : resendLabel}
+          {isResending ? otpPageMock.resendingLabel : resendLabel}
         </button>
 
         <p className="loginOtpBackWrap">

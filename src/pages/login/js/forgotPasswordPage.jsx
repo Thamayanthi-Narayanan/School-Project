@@ -1,19 +1,8 @@
 import LoginAuthShell from '../../../components/login/js/loginAuthShell';
+import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import { forgotPasswordMock } from '../../../data/mocks/login/forgotPassword.mock';
 import { useForgotPasswordRequest } from '../hooks/useForgotPasswordRequest';
 import '../css/forgotPasswordPage.css';
-
-const UserInputIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <circle cx="12" cy="8" r="3.5" stroke="currentColor" strokeWidth="1.6" />
-    <path
-      d="M5 20c0-3.9 3.1-7 7-7s7 3.1 7 7"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    />
-  </svg>
-);
 
 const ForgotPasswordPage = () => {
   const copy = forgotPasswordMock.request;
@@ -43,7 +32,7 @@ const ForgotPasswordPage = () => {
           </label>
           <div className="loginFormInputWrap">
             <span className="loginFormInputIcon">
-              <UserInputIcon />
+              {DashboardIcons.users(18)}
             </span>
             <input
               id="forgot-identifier"

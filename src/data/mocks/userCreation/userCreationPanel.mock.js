@@ -1,6 +1,16 @@
 export const userCreationPanelMock = {
   title: 'User management',
   subtitle: 'Create, view, edit and remove workspace users.',
+  ui: {
+    tabsAriaLabel: 'User management sections',
+    retryRolesLabel: 'Try again',
+    closeEditUserAriaLabel: 'Close edit user',
+    unknownUserLabel: 'User',
+    emptyValueFallback: '—',
+    creatingLabel: 'Creating…',
+    savingLabel: 'Saving…',
+    removingLabel: 'Removing…',
+  },
   sections: [
     { id: 'create', label: 'Create new user', shortLabel: 'Create', icon: 'userPlus' },
     { id: 'view', label: 'View users', shortLabel: 'View', icon: 'eye' },
@@ -34,6 +44,7 @@ export const userCreationPanelMock = {
     tableColumns: ['ID', 'NAME', 'ROLE', 'EMAIL', 'PHONE', 'STATUS', 'ACTIONS'],
     emptyMessage: 'No users found.',
     loadingMessage: 'Loading users…',
+    emptyValueFallback: '—',
   },
   createSuccessPopup: {
     title: 'User created',

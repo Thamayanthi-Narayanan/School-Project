@@ -189,6 +189,7 @@ export const scholarshipsPageMock = {
       discountLabel: 'Discount: {discount}',
       marksResultLabel: 'Marks: {marks}',
       noMatchLabel: 'No band covers {marks} marks for this academic year.',
+      emptyValueFallback: '—',
     },
   },
   pendingRequests: {

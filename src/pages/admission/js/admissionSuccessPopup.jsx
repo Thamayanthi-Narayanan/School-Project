@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom';
-import '../css/admissionPage.css';
+import '../css/admissionSuccessPopup.css';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import { CrmButton } from '../../../components/reusable/js/index';
 

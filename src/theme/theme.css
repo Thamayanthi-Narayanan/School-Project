@@ -74,6 +74,31 @@
   --theme-success: #16a34a;
   --theme-success-muted: #64748b;
   --theme-danger: #dc2626;
+  --theme-danger-text: #b91c1c;
+  --theme-danger-bg: #fef2f2;
+  --theme-danger-border: #fecaca;
+  --theme-danger-border-strong: #f87171;
+  --theme-info-bg: #eff6ff;
+  --theme-bg-subtle: #f8fafc;
+  --theme-success-bg: #f0fdf4;
+  --theme-success-text: #15803d;
+  --theme-success-border: #86efac;
+  --theme-warning-bg: #fffbeb;
+  --theme-warning-text: #a16207;
+  --theme-warning-border: #fcd34d;
+  --theme-warning-emphasis-bg: #fef9c3;
+  --theme-warning-emphasis-text: #b45309;
+  --theme-warning-soft-strong-text: #c2410c;
+  --theme-success-border-soft: #bbf7d0;
+  --theme-border-subtle: #cbd5e1;
+  --theme-primary-accent: #60a5fa;
+  --theme-danger-hover: #991b1b;
+  --theme-info-soft-bg: #e0f2fe;
+  --theme-info-soft-text: #0284c7;
+  --theme-warning-soft-bg: #ffedd5;
+  --theme-warning-soft-text: #ea580c;
+  --theme-violet-soft-bg: #ede9fe;
+  --theme-violet-soft-text: #7c3aed;
 
   /* Report cards */
   --theme-report-icon-blue-bg: #dbeafe;

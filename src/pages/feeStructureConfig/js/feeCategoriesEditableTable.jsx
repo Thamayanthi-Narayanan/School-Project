@@ -1,4 +1,5 @@
 import { CrmButton, TableRowActions } from '../../../components/reusable/js/index';
+import '../css/feeCategoriesEditableTable.css';
 
 const FeeCategoriesEditableTable = ({
   categories,
@@ -35,7 +36,7 @@ const FeeCategoriesEditableTable = ({
               {columns.map((col) => (
                 <th key={col}>{col}</th>
               ))}
-              <th className="feeStructureTableActionHead" aria-label="Row actions" />
+              <th className="feeStructureTableActionHead" aria-label={quarterAria.rowActions} />
             </tr>
           </thead>
           <tbody>
@@ -61,8 +62,8 @@ const FeeCategoriesEditableTable = ({
                     className="feeStructureCellInput feeStructureCategoryInput"
                     value={row.name}
                     onChange={(event) => onChangeCategory(row.id, event.target.value)}
-                    aria-label={`${quarterAria.category} ${row.name || 'new'}`}
-                    placeholder="Category name"
+                    aria-label={`${quarterAria.category} ${row.name || categories.newCategoryFallback}`}
+                    placeholder={categories.categoryPlaceholder}
                   />
                 </td>
                 {(['q1', 'q2', 'q3', 'q4']).map((key) => (
@@ -73,15 +74,15 @@ const FeeCategoriesEditableTable = ({
                       className="feeStructureCellInput"
                       value={row[key] ?? ''}
                       onChange={(event) => onChangeQuarter(row.id, key, event.target.value)}
-                      aria-label={`${row.name || 'Category'} ${quarterAria[key]}`}
-                      placeholder="0"
+                      aria-label={`${row.name || categories.unnamedCategoryFallback} ${quarterAria[key]}`}
+                      placeholder={categories.amountPlaceholder}
                     />
                   </td>
                 ))}
                 <td className="feeStructureRowTotal">{getRowTotalDisplay(row)}</td>
                 <td className="feeStructureTableActionCell">
                   <TableRowActions
-                    entityName={row.name || 'category'}
+                    entityName={row.name || categories.entityCategoryFallback}
                     showView={false}
                     onEdit={() => onEditRow(row)}
                     onDelete={() => onDeleteRow(row)}

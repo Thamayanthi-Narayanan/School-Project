@@ -17,6 +17,7 @@ export const paymentsPageMock = {
       saveDraftLabel: 'Save as draft',
       collectLabel: 'Collect & Generate Receipt',
     },
+    emptyValueFallback: '—',
   },
   receiptPreview: {
     cardTitle: 'Receipt Preview',
@@ -83,5 +84,6 @@ export const paymentsPageMock = {
       },
     ],
     receiptActionLabel: 'Receipt',
+    viewReceiptAriaLabelTemplate: 'View receipt {receiptNo}',
   },
 };

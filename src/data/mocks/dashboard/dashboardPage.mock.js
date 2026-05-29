@@ -1,9 +1,38 @@
 export const dashboardPageMock = {
   welcome: {
     userName: 'Kavita',
+    titleTemplate: 'Welcome back, {userName} 👋',
     subtitle: "Here's what's happening across your school today.",
     liveLabel: 'Live',
     syncText: 'Last synced just now · Academic Year 2025-26',
+    actions: {
+      newAdmissionLabel: 'New Admission',
+      collectFeeLabel: 'Collect Fee',
+    },
+  },
+  sections: {
+    recentPayments: {
+      title: 'Recent Payments',
+      subtitle: 'Live transactions from the last 7 days',
+      viewAllLabel: 'View all',
+      columns: ['RECEIPT', 'STUDENT', 'AMOUNT', 'METHOD', 'STATUS'],
+    },
+    activityFeed: {
+      title: 'Activity Feed',
+      badgeLabel: '4 new',
+    },
+    recentAdmissions: {
+      title: 'Recent Admissions',
+      subtitle: 'Applications awaiting review',
+      manageLabel: 'Manage',
+      columns: ['APPLICATION', 'NAME', 'CLASS', 'STATUS'],
+    },
+    scholarshipApprovals: {
+      title: 'Pending Scholarship Approvals',
+      subtitle: 'Requires your attention',
+      reviewLabel: 'Review',
+      columns: ['STUDENT', 'SCHEME', 'AMOUNT', 'STATUS'],
+    },
   },
   metrics: [
     {

@@ -22,7 +22,7 @@
   gap: 0.5rem 1rem;
   padding: 1rem 1.25rem;
   border-bottom: 1px solid var(--theme-border);
-  background: var(--theme-bg-subtle, #f8fafc);
+  background: var(--theme-bg-subtle);
 }
 
 .scholarshipRequestsNotificationCardTitle {
@@ -120,23 +120,23 @@
 }
 
 .scholarshipRequestsActionBtnApprove {
-  border: 1px solid var(--theme-success-border, #86efac);
+  border: 1px solid var(--theme-success-border);
   background: var(--theme-bg-card);
-  color: var(--theme-success-text, #15803d);
+  color: var(--theme-success-text);
 }
 
 .scholarshipRequestsActionBtnApprove:hover {
-  background: var(--theme-success-bg, #f0fdf4);
+  background: var(--theme-success-bg);
 }
 
 .scholarshipRequestsActionBtnReject {
-  border: 1px solid var(--theme-danger-border, #fca5a5);
+  border: 1px solid var(--theme-danger-border);
   background: var(--theme-bg-card);
-  color: var(--theme-danger-text, #b91c1c);
+  color: var(--theme-danger-text);
 }
 
 .scholarshipRequestsActionBtnReject:hover {
-  background: var(--theme-danger-bg, #fef2f2);
+  background: var(--theme-danger-bg);
 }
 
 .scholarshipRequestsViewLink {

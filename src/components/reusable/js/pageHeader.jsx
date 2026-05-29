@@ -1,4 +1,5 @@
 import '../css/crmReusable.css';
+import '../css/pageHeader.css';
 
 const PageHeader = ({ title, subtitle, children, className = '' }) => (
   <header className={`crmPageHeader crmSectionAnimate ${className}`.trim()}>

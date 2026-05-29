@@ -1,0 +1,33 @@
+.feeStructureRowActions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.feeStructureActionBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border-radius: var(--theme-radius-sm);
+  border: 1px solid var(--theme-border);
+  background: var(--theme-bg-card);
+  color: var(--theme-text-secondary);
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.feeStructureActionBtnEdit:hover {
+  border-color: var(--theme-primary-light-border);
+  background: var(--theme-info-bg);
+  color: var(--theme-primary);
+}
+
+.feeStructureActionBtnClear:hover {
+  border-color: var(--theme-warning-border);
+  background: var(--theme-warning-bg);
+  color: var(--theme-warning-emphasis-text);
+}

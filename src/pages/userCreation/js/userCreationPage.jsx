@@ -99,11 +99,10 @@ const UsersViewTable = ({ users, labels, isLoading, onEdit, onDelete }) => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user, index) => (
+            {users.map((user) => (
               <tr
                 key={user.id}
                 className="crmTableRow userCreationTableRow"
-                style={{ animationDelay: `${0.04 * index}s` }}
               >
                 <td className="crmTableId">{formatUserDisplayId(user.id)}</td>
                 <td>
@@ -123,7 +122,7 @@ const UsersViewTable = ({ users, labels, isLoading, onEdit, onDelete }) => {
                   {user.status ? (
                     <span className="userCreationStatusBadge">{user.status}</span>
                   ) : (
-                    '—'
+                    labels.emptyValueFallback
                   )}
                 </td>
                 <td>
@@ -205,12 +204,13 @@ const UserEditModal = ({
   copy,
   isLoading,
   isSubmitting,
+  ui,
   onClose,
   onSubmit,
 }) => {
   if (!isOpen) return null;
 
-  const displayName = user?.userName || form.userName || 'User';
+  const displayName = user?.userName || form.userName || ui.unknownUserLabel;
   const initials = getUserInitials(displayName);
   const tone = getAvatarToneForUser(user?.id ?? 0);
   const avatarClass = avatarToneClassMap[tone] || avatarToneClassMap.blue;
@@ -239,7 +239,7 @@ const UserEditModal = ({
           <button
             type="button"
             className="userEditModalClose"
-            aria-label="Close edit user"
+            aria-label={ui.closeEditUserAriaLabel}
             onClick={onClose}
             disabled={isSubmitting}
           >
@@ -269,7 +269,7 @@ const UserEditModal = ({
             <div className="userEditModalMeta">
               <div className="userEditModalMetaItem">
                 <span className="userEditModalMetaLabel">{fields.username.label}</span>
-                <span className="userEditModalMetaValue">@{form.username || '—'}</span>
+                <span className="userEditModalMetaValue">@{form.username || ui.emptyValueFallback}</span>
               </div>
               <div className="userEditModalMetaItem">
                 <span className="userEditModalMetaLabel">{fields.userName.label}</span>
@@ -328,7 +328,7 @@ const UserEditModal = ({
                 {copy.cancelLabel}
               </CrmButton>
               <CrmButton variant="primary" type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Saving…' : copy.submitLabel}
+                {isSubmitting ? ui.savingLabel : copy.submitLabel}
               </CrmButton>
             </footer>
           </form>
@@ -345,6 +345,7 @@ const UserDeleteModal = ({
   copy,
   errors,
   isSubmitting,
+  ui,
   onClose,
   onConfirm,
 }) => {
@@ -417,7 +418,7 @@ const UserDeleteModal = ({
             disabled={isSubmitting}
             onClick={onConfirm}
           >
-            {isSubmitting ? 'Removing…' : copy.submitLabel}
+            {isSubmitting ? ui.removingLabel : copy.submitLabel}
           </CrmButton>
         </footer>
       </div>
@@ -431,6 +432,7 @@ const UserCreationPage = () => {
   const {
     title,
     subtitle,
+    ui,
     sections,
     fields,
     create,
@@ -491,7 +493,7 @@ const UserCreationPage = () => {
       <PageHeader title={title} subtitle={subtitle} />
 
       <div className="userCreationPageCard crmSectionAnimate crmSectionDelay1">
-        <nav className="userCreationPageTabs" aria-label="User management sections">
+        <nav className="userCreationPageTabs" aria-label={ui.tabsAriaLabel}>
           {sections.map((section) => {
             const Icon = sectionIconMap[section.icon];
             const isActive = activeSection === section.id;
@@ -523,7 +525,7 @@ const UserCreationPage = () => {
             <div className="userCreationAlert userCreationAlertError userCreationRolesError">
               <p role="alert">{roleOptionsError}</p>
               <CrmButton variant="outline" type="button" onClick={refetchRoles}>
-                Try again
+                {ui.retryRolesLabel}
               </CrmButton>
             </div>
           )}
@@ -569,7 +571,7 @@ const UserCreationPage = () => {
                   type="submit"
                   disabled={isSubmitting || isLoadingRoles || Boolean(roleOptionsError)}
                 >
-                  {isSubmitting ? 'Creating…' : create.submitLabel}
+                  {isSubmitting ? ui.creatingLabel : create.submitLabel}
                 </CrmButton>
               </footer>
             </form>
@@ -609,6 +611,7 @@ const UserCreationPage = () => {
         copy={edit}
         isLoading={isLoadingEditUser}
         isSubmitting={isSubmitting}
+        ui={ui}
         onClose={closeEditUser}
         onSubmit={handleEditSubmit}
       />
@@ -625,6 +628,7 @@ const UserCreationPage = () => {
         copy={deleteCopy}
         errors={errors}
         isSubmitting={isSubmitting}
+        ui={ui}
         onClose={closeDeleteUser}
         onConfirm={handleDeleteSubmit}
       />

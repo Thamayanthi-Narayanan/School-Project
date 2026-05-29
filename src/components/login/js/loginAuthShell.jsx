@@ -1,30 +1,9 @@
 import { appConfig } from '../../../constants/appConfig';
-import loginHeroImage from '../../../assets/images/loginHero.png';
 import '../../../pages/login/css/loginPage.css';
-
-const GraduationCapIcon = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <path
-      d="M12 3L2 8.5l10 5.5 10-5.5L12 3z"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M6 11.5V16c0 0 2.5 3 6 3s6-3 6-3v-4.5"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-    />
-    <path d="M22 8.5v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-  </svg>
-);
+import { DashboardIcons } from '../../common/js/dashboardIcons';
 
 const LoginAuthShell = ({ title, subtitle, children }) => (
-  <div
-    className="loginPage"
-    style={{ '--login-hero-image': `url(${loginHeroImage})` }}
-  >
+  <div className="loginPage">
     <div className="loginPageBg loginPageBgBlur" aria-hidden="true" />
     <div className="loginPageBg loginPageBgSharp" aria-hidden="true" />
     <div className="loginPageOverlay" aria-hidden="true" />
@@ -34,7 +13,7 @@ const LoginAuthShell = ({ title, subtitle, children }) => (
         <div className="loginBrandInner">
           <header className="loginBrandHeader">
             <span className="loginBrandLogoIcon">
-              <GraduationCapIcon />
+              {DashboardIcons.graduationCap(22)}
             </span>
             <span className="loginBrandName">{appConfig.appName}</span>
           </header>

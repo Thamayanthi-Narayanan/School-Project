@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import '../../../components/reusable/css/crmReusable.css';
+import '../css/feeHeadPage.css';
 import '../css/feeStructurePage.css';
 import { feeStructurePageMock } from '../../../data/mocks/feeStructure/feeStructurePage.mock';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
@@ -180,7 +181,7 @@ const FeeHeadPage = () => {
   );
 
   return (
-    <div className="crmListPage feeStructurePage">
+    <div className="crmListPage feeHeadPage feeStructurePage">
       <PageHeader title={title} subtitle={subtitle} className="feeStructurePageHeader">
         <CrmButton variant="primary">
           {DashboardIcons.save(16)}

@@ -1,0 +1,38 @@
+.crmSearchBar {
+  display: flex;
+  align-items: center;
+  padding: 0 0.875rem;
+  height: 2.5rem;
+  background: var(--theme-bg-page);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crmSearchBar:focus-within {
+  border-color: var(--theme-border-focus);
+  box-shadow: 0 0 0 3px var(--theme-primary-focus-ring);
+}
+
+.crmSearchBarIcon {
+  display: flex;
+  color: var(--theme-text-muted);
+  margin-right: 0.5rem;
+}
+
+.crmSearchBarInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  color: var(--theme-text-primary);
+  min-width: 0;
+}
+
+.crmSearchBarInput:focus {
+  outline: none;
+}
+
+.crmSearchBarInput::placeholder {
+  color: var(--theme-text-muted);
+}

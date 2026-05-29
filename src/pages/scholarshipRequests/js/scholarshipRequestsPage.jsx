@@ -43,17 +43,20 @@ const ScholarshipRequestsPage = () => {
         ? `${payload.approvedDiscountPercent}%`
         : payload.requestedDiscountPercent != null
           ? `${payload.requestedDiscountPercent}%`
-          : '—';
+          : table.emptyValueFallback;
 
     return [
       {
         id: `APP-${applicationId}`,
         applicationId,
-        student: payload.studentName || '—',
-        scheme: payload.schemeName || '—',
+        student: payload.studentName || table.emptyValueFallback,
+        scheme: payload.schemeName || table.emptyValueFallback,
         discount,
-        date: fromNotification.timeLabel || '—',
-        status: payload.status === 'PENDING' ? 'Pending' : payload.status || 'Pending',
+        date: fromNotification.timeLabel || table.emptyValueFallback,
+        status:
+          payload.status === 'PENDING'
+            ? table.pendingStatusLabel
+            : payload.status || table.pendingStatusLabel,
         showActions: payload.status === 'PENDING',
       },
       ...table.rows,

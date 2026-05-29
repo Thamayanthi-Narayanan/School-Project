@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import '../css/admissionPage.css';
+import '../css/admissionDocumentsStep.css';
 import { CrmButton } from '../../../components/reusable/js/index';
 import { DashboardIcons } from '../../../components/common/js/dashboardIcons';
 import { PROFILE_PHOTO_ACCEPT } from '../../../utils/admissionForm';
@@ -27,7 +27,7 @@ const AdmissionDocumentsStep = ({ documents, fields, photoError, onPhotoSelect, 
             <div className="admissionPhotoPreview">
               <img
                 src={documents.profilePhotoUrl}
-                alt="Student profile preview"
+                alt={fields.previewAlt}
                 className="admissionPhotoPreviewImg"
               />
               <div className="admissionPhotoPreviewMeta">

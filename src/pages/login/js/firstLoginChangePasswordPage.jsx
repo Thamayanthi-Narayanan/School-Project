@@ -5,18 +5,6 @@ import { firstLoginChangePasswordMock } from '../../../data/mocks/login/firstLog
 import { useFirstLoginChangePassword } from '../hooks/useFirstLoginChangePassword';
 import '../css/firstLoginChangePasswordPage.css';
 
-const LockIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.6" />
-    <path
-      d="M8 11V8a4 4 0 0 1 8 0v3"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
 const FirstLoginChangePasswordPage = () => {
   const copy = firstLoginChangePasswordMock;
   const {
@@ -69,7 +57,7 @@ const FirstLoginChangePasswordPage = () => {
 
         <div className="firstLoginSecurityBanner">
           <span className="firstLoginSecurityIcon">
-            <LockIcon />
+            {DashboardIcons.lock(20)}
           </span>
           <p className="firstLoginSecurityText">
             Use the password you signed in with as your current password, then choose a new one.
@@ -96,7 +84,7 @@ const FirstLoginChangePasswordPage = () => {
               </label>
               <div className="loginFormInputWrap loginFormInputWrapPassword">
                 <span className="loginFormInputIcon">
-                  <LockIcon />
+                  {DashboardIcons.lock(18)}
                 </span>
                 <input
                   id={`first-login-${field.id}`}

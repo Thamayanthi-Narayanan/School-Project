@@ -1,11 +1,13 @@
 import { FormInput, FormSelect } from '../../../components/reusable/js/index';
+import '../css/admissionParentsStep.css';
 import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
 import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
 
 const AdmissionParentsStep = ({ parents, fields, errors = {}, onChange }) => {
+  const loadingLabel = fields.loadingLabel;
   const { options: primaryContactOptions, isLoading: contactLoading } = useMasterDataSelect(
     MASTER_DATA_KEYS.primaryContact,
-    { loadingLabel: 'Loading…' },
+    { loadingLabel },
   );
 
   return (
