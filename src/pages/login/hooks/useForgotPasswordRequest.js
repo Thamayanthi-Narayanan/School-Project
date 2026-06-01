@@ -4,12 +4,8 @@ import { forgotPassword } from '../../../apis/authApi';
 import { routePaths } from '../../../constants/routePaths';
 import { forgotPasswordMock } from '../../../data/mocks/login/forgotPassword.mock';
 import {
-  setForgotPasswordNotice,
-  setPendingResetIdentifier,
-} from '../../../services/authSession';
-import {
-  buildIdentifierOnlyPayload,
-  isValidEmailOrPhone,
+  buildPhoneOnlyPayload,
+  validatePhoneField,
 } from '../../../utils/loginIdentifier';
 import { parseApiError } from '../../../utils/apiError';
 
@@ -20,9 +16,11 @@ export const useForgotPasswordRequest = () => {
   const [identifier, setIdentifier] = useState('');
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const updateIdentifier = useCallback((value) => {
     setIdentifier(value);
+    setSuccessMessage('');
     setErrors((prev) => {
       if (!prev.email && !prev.general) return prev;
       const next = { ...prev };
@@ -33,13 +31,9 @@ export const useForgotPasswordRequest = () => {
   }, []);
 
   const validate = useCallback(() => {
-    const trimmed = identifier.trim();
-    if (!trimmed) {
-      setErrors({ email: 'Email or phone number is required.' });
-      return false;
-    }
-    if (!isValidEmailOrPhone(trimmed)) {
-      setErrors({ email: 'Enter a valid email address or phone number.' });
+    const phoneError = validatePhoneField(identifier);
+    if (phoneError) {
+      setErrors({ email: phoneError });
       return false;
     }
     return true;
@@ -52,31 +46,25 @@ export const useForgotPasswordRequest = () => {
 
       setIsSubmitting(true);
       setErrors({});
+      setSuccessMessage('');
 
       try {
-        const response = await forgotPassword(buildIdentifierOnlyPayload(identifier));
+        const response = await forgotPassword(buildPhoneOnlyPayload(identifier));
 
         if (!response?.success) {
           setErrors({ general: response?.message || copy.requestFailed });
           return;
         }
 
-        const message = response.message || copy.defaultSuccessMessage;
-        setPendingResetIdentifier(identifier.trim());
-        setForgotPasswordNotice(message);
-
-        navigate(routePaths.forgotPasswordOtp, {
-          replace: false,
-          state: { otpSentMessage: message },
-        });
+        setSuccessMessage(response.message || copy.successMessage);
       } catch (error) {
-        const { general } = parseApiError(error, 'otp');
+        const { general } = parseApiError(error);
         setErrors({ general: general || copy.requestFailed });
       } finally {
         setIsSubmitting(false);
       }
     },
-    [identifier, validate, navigate],
+    [identifier, validate],
   );
 
   const handleBackToLogin = useCallback(() => {
@@ -87,6 +75,7 @@ export const useForgotPasswordRequest = () => {
     identifier,
     errors,
     isSubmitting,
+    successMessage,
     updateIdentifier,
     handleSubmit,
     handleBackToLogin,

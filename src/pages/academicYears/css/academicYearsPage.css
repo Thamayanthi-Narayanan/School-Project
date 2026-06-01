@@ -1,0 +1,58 @@
+.academicYearsEmpty {
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--theme-text-muted);
+}
+
+.academicYearsRowInactive {
+  opacity: 0.55;
+}
+
+.academicYearsName {
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.academicYearsCurrentBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.625rem;
+  border-radius: var(--theme-radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--theme-primary);
+  background: var(--theme-primary-bg);
+  border: 1px solid var(--theme-primary-border);
+}
+
+.academicYearsCurrentToggle {
+  padding: 0 1.5rem 1rem;
+}
+
+.academicYearsToggleLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--theme-text-primary);
+  cursor: pointer;
+}
+
+.academicYearsWarning {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--theme-warning-text);
+}
+
+.academicYearsConfirmText {
+  margin: 0 1.5rem 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--theme-text-secondary);
+}
+
+.academicYearsConfirmModal {
+  max-width: 28rem;
+}

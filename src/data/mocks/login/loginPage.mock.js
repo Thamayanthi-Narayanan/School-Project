@@ -1,12 +1,12 @@
 export const loginPageMock = {
   brandName: 'SRI AYYAN VIDYASHRAM HR.SEC.SCHOOL',
-  emailOrPhoneLabel: 'Email / phone number',
-  emailOrPhonePlaceholder: 'you@school.edu',
+  phoneLabel: 'Phone number',
+  phonePlaceholder: '9876543210',
   passwordLabel: 'Password',
   passwordPlaceholder: '••••••••',
   forgotPasswordLabel: 'Forgot password?',
   rememberMeLabel: 'Remember me on this device',
-  continueLabel: 'Continue',
+  continueLabel: 'Login',
   signingInLabel: 'Signing in…',
   secureLoginLabel: 'Encrypted, secure login',
   helpPrefix: 'Need help?',
@@ -18,7 +18,7 @@ export const loginPageMock = {
   footerText: '© Infinite vision — built for school administrators',
   headline: 'Run your school. Simply.',
   subtitle:
-    'One workspace for students, staff, attendance, fees, and reports — built for modern school teams.',
+    'One workspace for students, fees, scholarships, and reports — built for modern school teams.',
   stats: [
     { id: 'students', icon: 'users', label: '1,284 Students' },
     { id: 'fees', icon: 'receipt', label: '₹38.6L Collected' },

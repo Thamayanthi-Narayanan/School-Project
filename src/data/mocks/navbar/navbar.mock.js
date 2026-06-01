@@ -1,9 +1,9 @@
 export const navbarMock = {
   schoolName: 'Greenfield International School',
   pageTitle: 'Dashboard',
-  searchPlaceholder: 'Search students, invoices, staff...',
+  searchPlaceholder: 'Search students, invoices…',
   searchShortcut: '⌘ K',
-  quickAddLabel: 'Quick Add',
+  quickAddLabel: 'Admit Student',
   user: {
     name: 'Kavita M.',
     fullName: 'Kavita Menon',
@@ -14,11 +14,13 @@ export const navbarMock = {
   profileMenu: {
     sectionLabel: 'Account',
     items: [
-      { id: 'profile', label: 'Profile settings', path: '/settings?tab=profile' },
-      { id: 'school', label: 'School preferences', path: '/settings?tab=school' },
-      { id: 'notifications', label: 'Notifications', path: '/settings?tab=notifications' },
+      { id: 'settings', label: 'Settings', path: '/settings?tab=security' },
     ],
-    signOutLabel: 'Sign out',
+    signOutLabel: 'Logout',
     signOutPath: '/login',
+  },
+  sessionExpiry: {
+    message: 'Your session expires in 5 minutes. Click to extend.',
+    extendLabel: 'Extend session',
   },
 };

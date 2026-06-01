@@ -3,28 +3,55 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { routePaths } from '../../../constants/routePaths';
 import '../css/dashboardNavbar.css';
 import { navbarMock } from '../../../data/mocks/navbar/navbar.mock';
-import { pageTitles } from '../../../constants/pageTitles';
+import { resolvePageTitle } from '../../../constants/pageTitles';
 import { DashboardIcons } from '../../common/js/dashboardIcons';
 import NotificationBellIcon from '../../common/js/notificationBellIcon';
+import NotificationPanel from './notificationPanel';
+import SessionExpiryBanner from './sessionExpiryBanner';
 import { useNotificationContext } from '../../../context/notificationContext';
+import useSessionExpiry from '../../../hooks/useSessionExpiry';
+import useAuthRole from '../../../hooks/useAuthRole';
+import { getAuthUser } from '../../../services/authSession';
+import { getRoleLabel } from '../../../constants/userRoles';
 
 const DashboardNavbar = ({ onMenuClick, onLogout }) => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const {
     schoolName,
-    pageTitle: defaultPageTitle,
     searchPlaceholder,
     searchShortcut,
     quickAddLabel,
-    user,
     profileMenu,
   } = navbarMock;
 
-  const currentPageTitle = pageTitles[pathname] || defaultPageTitle;
+  const authUser = getAuthUser();
+  const { roleLabel } = useAuthRole();
+  const user = authUser
+    ? {
+        name: authUser.name || authUser.fullName || navbarMock.user.name,
+        fullName: authUser.fullName || authUser.name || navbarMock.user.fullName,
+        email: authUser.email || navbarMock.user.email,
+        role: roleLabel || authUser.role || navbarMock.user.role,
+        initials: (authUser.name || authUser.fullName || 'U')
+          .split(' ')
+          .map((part) => part[0])
+          .join('')
+          .slice(0, 2)
+          .toUpperCase(),
+      }
+    : navbarMock.user;
+
+  const currentPageTitle = resolvePageTitle(pathname);
   const { unreadCount } = useNotificationContext();
   const [profileOpen, setProfileOpen] = useState(false);
+  const [notificationPanelOpen, setNotificationPanelOpen] = useState(false);
   const profileRef = useRef(null);
+  const { visible: sessionExpiryVisible, extendSession } = useSessionExpiry({
+    onExtend: async () => {
+      // Token refresh endpoint wiring when available
+    },
+  });
 
   useEffect(() => {
     setProfileOpen(false);
@@ -59,7 +86,9 @@ const DashboardNavbar = ({ onMenuClick, onLogout }) => {
   };
 
   return (
-    <header className="dashboardNavbar">
+    <>
+      <SessionExpiryBanner visible={sessionExpiryVisible} onExtend={extendSession} />
+      <header className="dashboardNavbar">
       <button
         type="button"
         className="dashboardNavbarMenuBtn"
@@ -97,7 +126,7 @@ const DashboardNavbar = ({ onMenuClick, onLogout }) => {
               ? `Notifications, ${unreadCount} unread`
               : 'Notifications'
           }
-          onClick={() => navigate(routePaths.notifications)}
+          onClick={() => setNotificationPanelOpen(true)}
         >
           <NotificationBellIcon size="sm" />
           {unreadCount > 0 ? (
@@ -182,7 +211,12 @@ const DashboardNavbar = ({ onMenuClick, onLogout }) => {
           )}
         </div>
       </div>
-    </header>
+      </header>
+      <NotificationPanel
+        isOpen={notificationPanelOpen}
+        onClose={() => setNotificationPanelOpen(false)}
+      />
+    </>
   );
 };
 

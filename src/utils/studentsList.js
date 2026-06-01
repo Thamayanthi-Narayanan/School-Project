@@ -22,13 +22,16 @@ export const getInitialsFromName = (name) => {
 
 export const mapApiStudentToRow = (item) => ({
   id: item.studentId,
-  displayId: item.studentIdCardNo || String(item.studentId ?? ''),
+  displayId: item.studentIdCardNo || item.admissionNumber || String(item.studentId ?? ''),
   initials: getInitialsFromName(item.studentName),
   name: item.studentName?.trim() || '—',
   className: item.className?.trim() || '—',
+  sectionName: item.sectionName?.trim() || item.section?.trim() || '—',
+  academicYear: item.academicYearName?.trim() || item.academicYear?.trim() || '—',
   parent: item.parentName?.trim() || '—',
   phone: item.parentPhone?.trim() || '—',
   feeStatus: formatFeeStatus(item.feesPaymentStatus),
+  studentStatus: item.studentStatus || item.status || 'ACTIVE',
 });
 
 export const buildStudentsShowingText = (page, size, totalElements) => {

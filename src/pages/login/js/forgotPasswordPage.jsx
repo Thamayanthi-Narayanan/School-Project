@@ -10,6 +10,7 @@ const ForgotPasswordPage = () => {
     identifier,
     errors,
     isSubmitting,
+    successMessage,
     updateIdentifier,
     handleSubmit,
     handleBackToLogin,
@@ -17,9 +18,12 @@ const ForgotPasswordPage = () => {
 
   return (
     <LoginAuthShell title={copy.title} subtitle={copy.subtitle}>
-      <p className="forgotPasswordStepBadge">{copy.stepLabel}</p>
-
       <form className="loginForm" onSubmit={handleSubmit} noValidate>
+        {successMessage && (
+          <p className="loginFormSuccessBanner" role="status">
+            {successMessage}
+          </p>
+        )}
         {errors.general && (
           <p className="loginFormError loginFormErrorBanner" role="alert">
             {errors.general}
@@ -54,7 +58,7 @@ const ForgotPasswordPage = () => {
           )}
         </div>
 
-        <button type="submit" className="loginFormSubmit" disabled={isSubmitting}>
+        <button type="submit" className="loginFormSubmit" disabled={isSubmitting || Boolean(successMessage)}>
           {isSubmitting ? copy.submittingLabel : copy.submitLabel}
         </button>
 

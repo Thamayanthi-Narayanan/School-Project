@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import '../../../components/reusable/css/crmReusable.css';
 import '../css/studentsPage.css';
 import { studentsPageMock } from '../../../data/mocks/students/studentsPage.mock';
@@ -14,10 +15,12 @@ import {
 } from '../../../components/reusable/js/index';
 import { useStudentsList } from '../hooks/useStudentsList';
 import { useMasterDataSelect } from '../../../hooks/useMasterDataSelect';
-import { downloadStudentsImportTemplate } from '../../../utils/studentsImportTemplate';
 import { MASTER_DATA_KEYS } from '../../../utils/masterDataOptions';
+import { routePaths, buildStudentDetailPath } from '../../../constants/routePaths';
+import { useFilterPersistence } from '../../../hooks/useFilterPersistence';
 
 const StudentsPage = () => {
+  const navigate = useNavigate();
   const {
     title,
     subtitle,
@@ -38,6 +41,14 @@ const StudentsPage = () => {
     goToNext,
     refetch,
   } = useStudentsList(pagination.pageSize);
+
+  const { filters: persistedFilters, updateFilter } = useFilterPersistence('studentsListFilters', {
+    class: filters.defaultClass,
+    section: filters.defaultSection,
+    year: filters.defaultYear,
+    status: filters.defaultStatus,
+    search: '',
+  });
 
   const { options: classOptions, isLoading: classLoading } = useMasterDataSelect(
     MASTER_DATA_KEYS.class,
@@ -65,55 +76,77 @@ const StudentsPage = () => {
     },
   );
 
+  const statusOptions = [
+    { label: filters.allStatusesLabel, value: filters.allStatusesLabel },
+    { label: filters.activeStatusLabel, value: filters.activeStatusLabel },
+    { label: filters.discontinuedStatusLabel, value: filters.discontinuedStatusLabel },
+  ];
+
   const filterSelects = [
     {
       id: 'class',
       ariaLabel: filters.classAriaLabel,
       options: classOptions,
-      defaultValue: filters.defaultClass,
+      value: persistedFilters.class,
+      onChange: (event) => updateFilter('class', event.target.value),
       disabled: classLoading,
     },
     {
       id: 'section',
       ariaLabel: filters.sectionAriaLabel,
       options: sectionOptions,
-      defaultValue: filters.defaultSection,
+      value: persistedFilters.section,
+      onChange: (event) => updateFilter('section', event.target.value),
       disabled: sectionLoading,
     },
     {
       id: 'year',
       ariaLabel: filters.yearAriaLabel,
       options: yearOptions,
-      defaultValue: filters.defaultYear,
+      value: persistedFilters.year,
+      onChange: (event) => updateFilter('year', event.target.value),
       disabled: yearLoading,
+    },
+    {
+      id: 'status',
+      ariaLabel: filters.statusAriaLabel,
+      options: statusOptions,
+      value: persistedFilters.status,
+      onChange: (event) => updateFilter('status', event.target.value),
     },
   ];
 
-  const handleDownloadFormat = () => {
-    downloadStudentsImportTemplate(actions.templateFileName);
+  const handleRowClick = (student) => {
+    navigate(buildStudentDetailPath(student.displayId || student.id));
   };
 
   return (
     <div className="crmListPage studentsPage">
       <PageHeader title={title} subtitle={subtitle}>
-        <CrmButton variant="outline" type="button" aria-label={actions.bulkUploadAriaLabel}>
+        <CrmButton
+          variant="outline"
+          type="button"
+          aria-label={actions.bulkUploadAriaLabel}
+          onClick={() => navigate(routePaths.bulkUpload)}
+        >
           {DashboardIcons.upload(16)}
           {actions.bulkUploadLabel}
         </CrmButton>
         <CrmButton
           variant="primary"
           type="button"
-          onClick={handleDownloadFormat}
-          aria-label={actions.downloadFormatAriaLabel}
+          onClick={() => navigate(routePaths.admission)}
         >
-          {DashboardIcons.download(16)}
-          {actions.downloadFormatLabel}
+          {DashboardIcons.userPlus(16)}
+          {actions.admitStudentLabel}
         </CrmButton>
       </PageHeader>
 
       <FilterToolbar
         searchPlaceholder={filters.searchPlaceholder}
         searchAriaLabel={filters.searchAriaLabel}
+        searchValue={persistedFilters.search}
+        onSearchChange={(event) => updateFilter('search', event.target.value)}
         selects={filterSelects}
         showExport
         exportAriaLabel="Export students"
@@ -124,7 +157,7 @@ const StudentsPage = () => {
           <p className="studentsListAlertText" role="alert">
             {error}
           </p>
-          <CrmButton variant="secondary" type="button" onClick={refetch}>
+          <CrmButton variant="outline" type="button" onClick={refetch}>
             {studentsPageMock.listErrors.retryLabel}
           </CrmButton>
         </div>
@@ -164,14 +197,14 @@ const StudentsPage = () => {
           <tbody>
             {isLoading && !error && (
               <tr>
-                <td colSpan={7} className="studentsListState">
+                <td colSpan={8} className="studentsListState">
                   {list.loadingMessage}
                 </td>
               </tr>
             )}
             {!isLoading && !error && students.length === 0 && (
               <tr>
-                <td colSpan={7} className="studentsListState">
+                <td colSpan={8} className="studentsListState">
                   {list.emptyMessage}
                 </td>
               </tr>
@@ -179,7 +212,8 @@ const StudentsPage = () => {
             {!isLoading && !error && students.map((student) => (
               <tr
                 key={student.id}
-                className="crmTableRow"
+                className="crmTableRow studentsTableRowClickable"
+                onClick={() => handleRowClick(student)}
               >
                 <td className="crmTableId">{student.displayId}</td>
                 <td>
@@ -190,14 +224,15 @@ const StudentsPage = () => {
                   />
                 </td>
                 <td>{student.className}</td>
-                <td>{student.parent}</td>
+                <td>{student.sectionName}</td>
+                <td>{student.academicYear}</td>
                 <td className="crmTablePhone">
                   <PhoneCell phone={student.phone} />
                 </td>
                 <td>
                   <StatusPill status={student.feeStatus} type="fee" />
                 </td>
-                <td>
+                <td onClick={(event) => event.stopPropagation()}>
                   <TableRowActions entityName={student.name} showDelete={false} />
                 </td>
               </tr>

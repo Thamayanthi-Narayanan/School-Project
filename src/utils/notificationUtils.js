@@ -9,6 +9,12 @@ export const SCHOLARSHIP_NOTIFICATION_TYPES = new Set([
   'SCHOLARSHIP_REJECTED',
 ]);
 
+export const REFUND_NOTIFICATION_TYPES = new Set([
+  'REFUND_TRIGGERED',
+  'REFUND_CREATED',
+  'REFUND_PENDING',
+]);
+
 export const parseNotificationPayload = (payloadJson) => {
   if (!payloadJson || typeof payloadJson !== 'string') return null;
 
@@ -49,6 +55,19 @@ export const isScholarshipNotification = (notification) => {
     SCHOLARSHIP_NOTIFICATION_TYPES.has(type)
     || referenceType === 'SCHOLARSHIP_APPLICATION'
     || type.startsWith('SCHOLARSHIP_')
+  );
+};
+
+export const isRefundNotification = (notification) => {
+  if (!notification) return false;
+
+  const type = notification.notificationType ?? '';
+  const referenceType = notification.referenceType ?? '';
+
+  return (
+    REFUND_NOTIFICATION_TYPES.has(type)
+    || referenceType === 'REFUND'
+    || type.startsWith('REFUND_')
   );
 };
 

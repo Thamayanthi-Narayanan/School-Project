@@ -1,0 +1,211 @@
+.schoolSetupHeader {
+  margin-bottom: 1.25rem;
+}
+
+.schoolSetupStepper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.schoolSetupStepperItemWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.schoolSetupStepperItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border: none;
+  border-radius: var(--theme-radius-sm);
+  background: transparent;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--theme-text-secondary);
+  cursor: pointer;
+}
+
+.schoolSetupStepperItemActive {
+  background: var(--theme-primary-bg);
+  color: var(--theme-primary);
+  font-weight: 600;
+}
+
+.schoolSetupStepperItemCompleted {
+  color: var(--theme-success-text);
+}
+
+.schoolSetupStepperNum,
+.schoolSetupStepperCheck {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--theme-bg-page);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.schoolSetupStepperSep {
+  color: var(--theme-text-muted);
+}
+
+.schoolSetupCard {
+  padding: 1.5rem;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.schoolSetupCardTitle {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.schoolSetupCardDescription {
+  margin: 0 0 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--theme-text-secondary);
+}
+
+.schoolSetupFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.schoolSetupLogoUpload {
+  margin-bottom: 1.25rem;
+  padding: 1.25rem;
+  border: 1px dashed var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-bg-page);
+  text-align: center;
+}
+
+.schoolSetupLogoUploadLabel {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.schoolSetupLogoUploadHint {
+  margin: 0.375rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--theme-text-muted);
+}
+
+.schoolSetupWarning {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--theme-warning-text);
+  background: var(--theme-warning-bg);
+  border: 1px solid var(--theme-warning-border);
+  border-radius: var(--theme-radius-sm);
+}
+
+.schoolSetupTermTableWrap {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.schoolSetupTermTotal {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-danger-text);
+}
+
+.schoolSetupTermTotalValid {
+  color: var(--theme-success-text);
+}
+
+.schoolSetupSequencePreview {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+}
+
+.schoolSetupFooter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--theme-border);
+}
+
+.schoolSetupPageSuccess {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 24rem;
+}
+
+.schoolSetupSuccessCard {
+  max-width: 28rem;
+  padding: 2rem;
+  text-align: center;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-md);
+}
+
+.schoolSetupSuccessIcon {
+  display: inline-flex;
+  color: var(--theme-success-text);
+  margin-bottom: 1rem;
+}
+
+.schoolSetupSuccessTitle {
+  margin: 0 0 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.schoolSetupSuccessMessage {
+  margin: 0 0 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--theme-text-secondary);
+}
+
+.schoolSetupSectionDelay1 {
+  animation-delay: 0.05s;
+}
+
+.schoolSetupSectionDelay2 {
+  animation-delay: 0.1s;
+}
+
+@media (max-width: 768px) {
+  .schoolSetupFormGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .schoolSetupStepperLabel {
+    display: none;
+  }
+}

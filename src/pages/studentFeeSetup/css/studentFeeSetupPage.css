@@ -1,0 +1,126 @@
+.studentFeeSetupSelectors {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.studentFeeSetupHint {
+  margin: 0;
+  padding: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--theme-text-muted);
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+}
+
+.studentFeeSetupContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.studentFeeSetupSection {
+  padding: 1.25rem;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.studentFeeSetupSectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.studentFeeSetupSectionTitle {
+  margin: 0 0 0.375rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.studentFeeSetupSectionDesc {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}
+
+.studentFeeSetupToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--theme-text-primary);
+  cursor: pointer;
+}
+
+.studentFeeSetupSplitGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.studentFeeSetupSplitField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.studentFeeSetupSplitLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--theme-text-muted);
+}
+
+.studentFeeSetupEmpty {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--theme-text-muted);
+}
+
+.studentFeeSetupTypeBadge {
+  display: inline-flex;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--theme-radius-pill);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.studentFeeSetupTypeClass {
+  color: var(--theme-primary);
+  background: var(--theme-primary-bg);
+}
+
+.studentFeeSetupTypeAdditional {
+  color: var(--theme-success-text);
+  background: var(--theme-success-bg);
+}
+
+.studentFeeSetupFooter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+}
+
+@media (max-width: 768px) {
+  .studentFeeSetupSelectors {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .studentFeeSetupSplitGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,11 +1,20 @@
+import { useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import '../css/sidebar.css';
 import { sidebarMock } from '../../../data/mocks/sidebar/sidebar.mock';
 import { renderNavIcon, DashboardIcons } from '../../common/js/dashboardIcons';
-import NotificationBellIcon from '../../common/js/notificationBellIcon';
+import { filterSidebarSections } from '../../../utils/sidebarAccess';
+import useAuthRole from '../../../hooks/useAuthRole';
+
 const Sidebar = ({ isOpen = false, onNavigate, onLogout }) => {
   const { pathname } = useLocation();
   const { brand, sections, footer } = sidebarMock;
+  const { role } = useAuthRole();
+
+  const visibleSections = useMemo(
+    () => filterSidebarSections(sections, role),
+    [sections, role],
+  );
 
   const isActive = (path) => pathname === path;
 
@@ -25,7 +34,7 @@ const Sidebar = ({ isOpen = false, onNavigate, onLogout }) => {
 
       <div className="sidebarNavScroll">
         <nav className="sidebarNav">
-          {sections.map((section) => (
+          {visibleSections.map((section) => (
             <div key={section.id} className="sidebarSection">
               <p className="sidebarSectionLabel">{section.label}</p>
               <ul className="sidebarMenu">
@@ -37,11 +46,7 @@ const Sidebar = ({ isOpen = false, onNavigate, onLogout }) => {
                   const linkContent = (
                     <>
                       <span className="sidebarLinkIcon">
-                        {item.id === 'notifications' ? (
-                          <NotificationBellIcon size="sm" variant="plain" />
-                        ) : (
-                          renderNavIcon(item.icon)
-                        )}
+                        {renderNavIcon(item.icon)}
                       </span>
                       <span className="sidebarLinkLabel">{item.label}</span>
                     </>

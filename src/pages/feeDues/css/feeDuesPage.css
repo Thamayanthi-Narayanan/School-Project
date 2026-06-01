@@ -1,0 +1,35 @@
+.feeDuesStudentLink {
+  font-weight: 600;
+  color: var(--theme-primary);
+  text-decoration: none;
+}
+
+.feeDuesStudentLink:hover {
+  text-decoration: underline;
+}
+
+.feeDuesAmount {
+  font-variant-numeric: tabular-nums;
+  color: var(--theme-text-secondary);
+}
+
+.feeDuesTotal {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--theme-text-primary);
+}
+
+.feeDuesEmpty {
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--theme-text-muted);
+}
+
+.feeDuesSummaryRow td {
+  padding-top: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+  border-top: 1px solid var(--theme-border);
+}

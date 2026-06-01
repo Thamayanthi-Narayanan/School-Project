@@ -3,6 +3,7 @@ import '../css/dashboardLayout.css';
 import Sidebar from '../../../components/sidebar/js/sidebar';
 import DashboardNavbar from '../../../components/navbar/js/dashboardNavbar';
 import LogoutPopup from '../../../components/reusable/js/logoutPopup';
+import SchoolSetupBlocker from '../../../components/common/js/schoolSetupBlocker';
 import { sidebarMock } from '../../../data/mocks/sidebar/sidebar.mock';
 import { logoutPopupMock } from '../../../data/mocks/auth/logout.mock';
 import useSidebarDrawer from '../hooks/useSidebarDrawer';
@@ -36,6 +37,7 @@ const DashboardLayout = () => {
         title={logoutPopupMock.title}
         message={logoutPopupMock.message}
       />
+      <SchoolSetupBlocker />
     </div>
     </NotificationProvider>
     </MasterDataProvider>

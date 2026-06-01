@@ -8,13 +8,20 @@ import CrmButton from './crmButton';
 const FilterToolbar = ({
   searchPlaceholder,
   searchAriaLabel,
+  searchValue,
+  onSearchChange,
   selects = [],
   showExport = false,
   exportAriaLabel = 'Export',
   className = '',
 }) => (
   <div className={`crmFilterToolbar crmSectionAnimate crmSectionDelay1 ${className}`.trim()}>
-    <FormSearchBar placeholder={searchPlaceholder} ariaLabel={searchAriaLabel} />
+    <FormSearchBar
+      placeholder={searchPlaceholder}
+      ariaLabel={searchAriaLabel}
+      value={searchValue}
+      onChange={onSearchChange}
+    />
     {(selects.length > 0 || showExport) && (
       <div className="crmFilterToolbarRight">
         {selects.length > 0 && (
@@ -24,7 +31,9 @@ const FilterToolbar = ({
                 key={select.id}
                 ariaLabel={select.ariaLabel}
                 options={select.options}
+                value={select.value}
                 defaultValue={select.defaultValue}
+                onChange={select.onChange}
                 variant="filter"
                 disabled={select.disabled}
               />

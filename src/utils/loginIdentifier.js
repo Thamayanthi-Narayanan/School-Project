@@ -1,18 +1,11 @@
-const EMAIL_MAX_LENGTH = 255;
 const PHONE_MIN_LENGTH = 10;
 const PHONE_MAX_LENGTH = 20;
 const PASSWORD_MIN_LENGTH = 8;
 const PASSWORD_MAX_LENGTH = 255;
 
-export const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-
 export const normalizePhoneForApi = (value) => {
   const digits = value.replace(/\D/g, '');
-
-  if (digits.length === 12 && digits.startsWith('91')) {
-    return digits.slice(2);
-  }
-
+  if (digits.length === 12 && digits.startsWith('91')) return digits.slice(2);
   return digits;
 };
 
@@ -21,59 +14,26 @@ export const isValidPhone = (value) => {
   return phone.length >= PHONE_MIN_LENGTH && phone.length <= PHONE_MAX_LENGTH;
 };
 
-export const isValidEmailOrPhone = (value) => {
-  const trimmed = value.trim();
+/**
+ * Login API expects: { phone, password } or { email, password }
+ */
+export const buildLoginPayload = (phone, password) => ({
+  phone: normalizePhoneForApi(phone),
+  password,
+});
 
-  if (!trimmed) return false;
-  if (trimmed.length > EMAIL_MAX_LENGTH) return false;
+export const buildPhoneOnlyPayload = (phone) => ({
+  phone: normalizePhoneForApi(phone),
+});
 
-  if (isValidEmail(trimmed)) return true;
-
-  return isValidPhone(trimmed);
-};
-
-export const buildIdentifierOnlyPayload = (identifier) => {
-  const trimmed = identifier.trim();
-
-  if (isValidEmail(trimmed)) {
-    return { email: trimmed };
-  }
-
-  return { phone: normalizePhoneForApi(trimmed) };
-};
-
-export const validateOtp = (otp) => {
-  if (!otp) {
-    return 'OTP is required.';
-  }
-
-  if (!/^\d{6}$/.test(otp)) {
-    return 'OTP must be exactly 6 digits.';
-  }
-
-  return null;
-};
-
-export const buildLoginPayload = (identifier, password) => {
-  const trimmed = identifier.trim();
-
-  if (isValidEmail(trimmed)) {
-    return { email: trimmed, password };
-  }
-
-  return { phone: normalizePhoneForApi(trimmed), password };
-};
-
-export const validateLoginForm = (identifier, password) => {
+export const validateLoginForm = (phone, password) => {
   const errors = {};
-  const trimmedIdentifier = identifier.trim();
+  const trimmedPhone = phone.trim();
 
-  if (!trimmedIdentifier) {
-    errors.email = 'Email or phone number is required.';
-  } else if (trimmedIdentifier.length > EMAIL_MAX_LENGTH) {
-    errors.email = 'Email must be at most 255 characters.';
-  } else if (!isValidEmailOrPhone(trimmedIdentifier)) {
-    errors.email = 'Enter a valid email address or phone number.';
+  if (!trimmedPhone) {
+    errors.email = 'Phone number is required.';
+  } else if (!isValidPhone(trimmedPhone)) {
+    errors.email = 'Enter a valid phone number (10 digits).';
   }
 
   if (!password) {
@@ -85,4 +45,33 @@ export const validateLoginForm = (identifier, password) => {
   }
 
   return errors;
+};
+
+export const validatePhoneField = (phone) => {
+  const trimmed = phone.trim();
+  if (!trimmed) return 'Phone number is required.';
+  if (!isValidPhone(trimmed)) return 'Enter a valid phone number (10 digits).';
+  return null;
+};
+
+export const validateOtp = (otp) => {
+  if (!otp) return 'OTP is required.';
+  if (!/^\d{6}$/.test(otp)) return 'OTP must be exactly 6 digits.';
+  return null;
+};
+
+export const isValidEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+
+export const isValidEmailOrPhone = (value) => {
+  const trimmed = value.trim();
+  if (!trimmed) return false;
+  if (isValidEmail(trimmed)) return true;
+  return isValidPhone(trimmed);
+};
+
+/** Forgot-password and similar flows — prefer phone when input is a phone number. */
+export const buildIdentifierOnlyPayload = (identifier) => {
+  const trimmed = identifier.trim();
+  if (isValidEmail(trimmed)) return { email: trimmed };
+  return { phone: normalizePhoneForApi(trimmed) };
 };

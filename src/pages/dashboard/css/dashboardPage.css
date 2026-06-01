@@ -131,6 +131,25 @@
   box-shadow: var(--theme-shadow-md);
 }
 
+.dashboardMetricCardClickable {
+  width: 100%;
+  border: 1px solid var(--theme-border);
+  background: var(--theme-bg-card);
+  border-radius: var(--theme-radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--theme-shadow-sm);
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.dashboardMetricCardClickable:hover {
+  transform: translateY(-4px);
+  border-color: rgba(37, 99, 235, 0.2);
+  box-shadow: var(--theme-shadow-md);
+}
+
 .dashboardMetricTop {
   display: flex;
   align-items: flex-start;

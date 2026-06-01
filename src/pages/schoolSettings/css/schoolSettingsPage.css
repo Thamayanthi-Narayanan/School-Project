@@ -1,0 +1,67 @@
+.schoolSettingsPage .settingsCard {
+  max-width: 960px;
+}
+
+.schoolSettingsLogoRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.schoolSettingsLogoPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: var(--theme-radius-md);
+  background: var(--theme-primary-bg);
+  border: 1px solid var(--theme-primary-border);
+}
+
+.schoolSettingsLogoInitials {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--theme-primary);
+}
+
+.schoolSettingsWarning {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--theme-warning-text);
+  background: var(--theme-warning-bg);
+  border: 1px solid var(--theme-warning-border);
+  border-radius: var(--theme-radius-sm);
+}
+
+.schoolSettingsTermTableWrap {
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.schoolSettingsTermTable .crmFormField {
+  margin-bottom: 0;
+}
+
+.schoolSettingsTermTotal {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.schoolSettingsTermTotalValid {
+  color: var(--theme-success-text);
+}
+
+.schoolSettingsTermTotalInvalid {
+  color: var(--theme-danger-text);
+}
+
+.schoolSettingsPreviewCell {
+  font-size: 0.8125rem;
+  color: var(--theme-text-secondary);
+}

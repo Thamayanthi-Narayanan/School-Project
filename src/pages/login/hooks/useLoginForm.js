@@ -1,14 +1,12 @@
 import { useState, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { routePaths } from '../../../constants/routePaths';
 import { login } from '../../../apis/authApi';
 import {
   setAuthSession,
   setRememberedLogin,
   clearRememberedLogin,
-  setPendingOtpIdentifier,
-  setOtpLoginNotice,
-  requiresOtpVerification,
+  setFirstLoginPasswordStep,
 } from '../../../services/authSession';
 import { buildLoginPayload, validateLoginForm } from '../../../utils/loginIdentifier';
 import { extractAuthSessionFromResponse } from '../../../utils/authResponse';
@@ -20,8 +18,24 @@ const initialForm = {
   rememberMe: true,
 };
 
+const isFirstLoginRequired = (response) => {
+  const data = response?.data ?? response;
+  return (
+    data?.firstLogin === true
+    || data?.mustChangePassword === true
+    || data?.user?.mustChangePassword === true
+    || data?.user?.firstLogin === true
+  );
+};
+
+const isInactiveAccountError = (message) => {
+  const lower = String(message || '').toLowerCase();
+  return lower.includes('deactivat') || lower.includes('inactive');
+};
+
 export const useLoginForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -56,39 +70,27 @@ export const useLoginForm = () => {
         const response = await login(payload);
 
         if (!response?.success) {
+          const message = response?.message || 'Incorrect phone number or password.';
           setErrors({
-            general: response?.message || 'Login failed. Please try again.',
+            general: isInactiveAccountError(message)
+              ? 'Your account has been deactivated. Contact your administrator.'
+              : message,
           });
           return;
         }
 
-        if (requiresOtpVerification(response)) {
-          const identifier = form.email.trim();
-          const otpSentMessage =
-            response.message || 'OTP sent successfully. Check your email or phone.';
-
-          setPendingOtpIdentifier(identifier);
-          setOtpLoginNotice(otpSentMessage);
-
-          if (form.rememberMe) {
-            setRememberedLogin(identifier);
-          } else {
-            clearRememberedLogin();
-          }
-
-          navigate(routePaths.loginOtp, {
-            replace: true,
-            state: { otpSentMessage },
-          });
+        if (isFirstLoginRequired(response)) {
+          const session = extractAuthSessionFromResponse(response);
+          if (session) setAuthSession(session);
+          setFirstLoginPasswordStep();
+          navigate(routePaths.firstLoginChangePassword, { replace: true });
           return;
         }
 
         const session = extractAuthSessionFromResponse(response);
 
         if (!session) {
-          setErrors({
-            general: response?.message || 'Login failed. Please try again.',
-          });
+          setErrors({ general: 'Incorrect phone number or password.' });
           return;
         }
 
@@ -100,18 +102,21 @@ export const useLoginForm = () => {
           clearRememberedLogin();
         }
 
-        navigate(routePaths.dashboard, { replace: true });
+        const redirectTo = location.state?.from || routePaths.dashboard;
+        navigate(redirectTo, { replace: true });
       } catch (error) {
-        const { general, fieldErrors } = parseApiError(error);
+        const { general, status } = parseApiError(error);
+        const message = general || 'Incorrect phone number or password.';
         setErrors({
-          ...fieldErrors,
-          ...(general ? { general } : {}),
+          general: status === 403 && isInactiveAccountError(message)
+            ? 'Your account has been deactivated. Contact your administrator.'
+            : message,
         });
       } finally {
         setIsLoading(false);
       }
     },
-    [form, validate, navigate],
+    [form, validate, navigate, location.state],
   );
 
   return {

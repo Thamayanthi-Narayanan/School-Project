@@ -1,0 +1,88 @@
+.notificationPanelBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  border: none;
+  background: rgba(15, 23, 42, 0.35);
+  cursor: pointer;
+}
+
+.notificationPanel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1201;
+  display: flex;
+  flex-direction: column;
+  width: min(24rem, 100vw);
+  height: 100vh;
+  background: var(--theme-surface);
+  box-shadow: -8px 0 24px rgba(15, 23, 42, 0.12);
+}
+
+.notificationPanelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1rem 0.75rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.notificationPanelTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.notificationPanelHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.notificationPanelCloseBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--theme-text-secondary);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.notificationPanelCloseBtn:hover {
+  background: var(--theme-surface-muted);
+}
+
+.notificationPanelBody {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.5rem 0;
+}
+
+.notificationPanelList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notificationPanelState {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--theme-text-secondary);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .notificationPanel {
+    width: 100vw;
+  }
+}

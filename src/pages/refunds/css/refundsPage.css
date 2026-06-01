@@ -1,0 +1,35 @@
+.refundsFilter {
+  max-width: 14rem;
+  margin-bottom: 1rem;
+}
+
+.refundsStudentName {
+  font-weight: 600;
+}
+
+.refundsAmount {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.refundsEmpty {
+  padding: 2rem 1rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--theme-text-muted);
+}
+
+.refundsConfirmModal {
+  max-width: 32rem;
+}
+
+.refundsConfirmText {
+  margin: 0 1.5rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--theme-text-secondary);
+}
+
+.refundsRemarksField {
+  padding: 0 1.5rem 1rem;
+}

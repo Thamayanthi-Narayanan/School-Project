@@ -1,0 +1,36 @@
+.schoolSetupBlocker {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--theme-overlay-backdrop);
+  backdrop-filter: blur(2px);
+}
+
+.schoolSetupBlockerCard {
+  width: 100%;
+  max-width: 26rem;
+  padding: 2rem 1.75rem;
+  text-align: center;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-lg);
+}
+
+.schoolSetupBlockerTitle {
+  margin: 0 0 0.75rem;
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.schoolSetupBlockerMessage {
+  margin: 0 0 1.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--theme-text-secondary);
+}

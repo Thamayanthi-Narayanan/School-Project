@@ -27,7 +27,8 @@ html {
 .paymentsTableWrap,
 .paymentsMethodTiles,
 .bulkUploadTableWrap,
-.scholarshipRequestsTableWrap {
+.scholarshipRequestsTableWrap,
+.notificationPanelBody {
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -47,7 +48,8 @@ html {
 .feeStructureConfigCard::-webkit-scrollbar,
 .paymentsTableWrap::-webkit-scrollbar,
 .paymentsMethodTiles::-webkit-scrollbar,
-.scholarshipRequestsTableWrap::-webkit-scrollbar {
+.scholarshipRequestsTableWrap::-webkit-scrollbar,
+.notificationPanelBody::-webkit-scrollbar {
   display: none;
   width: 0;
   height: 0;

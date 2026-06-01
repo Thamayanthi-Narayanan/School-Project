@@ -107,6 +107,22 @@ export const useNotificationsList = (listCopy = notificationsPageMock.list) => {
     }
   }, []);
 
+  const [isMarkingAll, setIsMarkingAll] = useState(false);
+
+  const markAllAsRead = useCallback(async () => {
+    const unreadItems = items.filter((item) => item.status === 'UNREAD');
+    if (unreadItems.length === 0) return;
+
+    setIsMarkingAll(true);
+
+    try {
+      await Promise.all(unreadItems.map((item) => markNotificationAsRead(item.notificationId)));
+      setItems((prev) => prev.map((item) => ({ ...item, status: 'READ' })));
+    } finally {
+      setIsMarkingAll(false);
+    }
+  }, [items]);
+
   const showingText = useMemo(() => {
     if (meta.totalElements === 0) return listCopy.emptyMessage;
     const start = meta.page * meta.size + 1;
@@ -132,5 +148,7 @@ export const useNotificationsList = (listCopy = notificationsPageMock.list) => {
     isNextDisabled: meta.last || isLoading,
     showingText,
     markAsRead,
+    markAllAsRead,
+    isMarkingAll,
   };
 };

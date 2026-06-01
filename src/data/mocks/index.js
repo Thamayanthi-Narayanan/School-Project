@@ -18,3 +18,12 @@ export { feeStructureConfigPageMock } from './feeStructureConfig/feeStructureCon
 export { reportsPageMock } from './reports/reportsPage.mock';
 export { userCreationPanelMock } from './userCreation/userCreationPanel.mock';
 export { bulkUploadPageMock } from './bulkUpload/bulkUploadPage.mock';
+export { academicYearsPageMock } from './academicYears/academicYearsPage.mock';
+export { classesSectionsPageMock } from './classesSections/classesSectionsPage.mock';
+export { schoolSettingsPageMock } from './schoolSettings/schoolSettingsPage.mock';
+export { schoolSetupPageMock } from './schoolSetup/schoolSetupPage.mock';
+export { schoolSetupBlockerMock } from './schoolSetup/schoolSetupBlocker.mock';
+export { studentDetailPageMock } from './studentDetail/studentDetailPage.mock';
+export { studentFeeSetupPageMock } from './studentFeeSetup/studentFeeSetupPage.mock';
+export { feeDuesPageMock } from './feeDues/feeDuesPage.mock';
+export { refundsPageMock } from './refunds/refundsPage.mock';

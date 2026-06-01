@@ -8,19 +8,35 @@ export const routePaths = {
   resetPassword: '/forgot-password/reset',
   dashboard: '/dashboard',
   students: '/students',
+  studentDetail: '/students/:studentId',
   staff: '/staff',
   admission: '/admission',
   attendance: '/attendance',
   scholarships: '/scholarships',
   scholarshipRequests: '/scholarship-requests',
+  scholarshipRequestForm: '/students/:studentId/scholarship-request',
   invoices: '/invoices',
   payments: '/payments',
+  collectFee: '/payments',
   settings: '/settings',
   notifications: '/notifications',
   transferCertificate: '/transfer-certificate',
   feeHead: '/fee-head',
   feeStructure: '/fee-structure',
+  studentFeeSetup: '/student-fee-setup',
+  feeDues: '/fee-dues',
+  refunds: '/refunds',
   reports: '/reports',
-  userCreation: '/user-creation',
+  users: '/users',
+  userCreation: '/users',
   bulkUpload: '/bulk-upload',
+  schoolSetup: '/school-setup',
+  schoolSettings: '/school-settings',
+  academicYears: '/academic-years',
+  classesSections: '/classes-sections',
 };
+
+export const buildStudentDetailPath = (studentId) => `/students/${studentId}`;
+
+export const buildScholarshipRequestPath = (studentId) =>
+  `/students/${studentId}/scholarship-request`;

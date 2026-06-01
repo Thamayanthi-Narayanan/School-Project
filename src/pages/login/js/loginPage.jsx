@@ -78,7 +78,7 @@ const LoginPage = () => {
 
                 <div className="loginFormField">
                   <label className="loginFormLabel" htmlFor="login-email">
-                    {loginPageMock.emailOrPhoneLabel}
+                    {loginPageMock.phoneLabel}
                   </label>
                   <div className="loginFormInputWrap">
                     <span className="loginFormInputIcon">
@@ -87,11 +87,11 @@ const LoginPage = () => {
                     <input
                       id="login-email"
                       className={`loginFormInput${errors.email ? ' loginFormInputError' : ''}`}
-                      type="text"
-                      name="email"
-                      autoComplete="username"
-                      inputMode="text"
-                      placeholder={loginPageMock.emailOrPhonePlaceholder}
+                      type="tel"
+                      name="phone"
+                      autoComplete="tel"
+                      inputMode="numeric"
+                      placeholder={loginPageMock.phonePlaceholder}
                       value={form.email}
                       onChange={(e) => updateField('email', e.target.value)}
                       disabled={isLoading}

@@ -1,0 +1,216 @@
+.studentDetailHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.studentDetailIdentity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.studentDetailMeta {
+  min-width: 0;
+}
+
+.studentDetailAdmission {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+}
+
+.studentDetailMetaLabel {
+  margin-right: 0.375rem;
+}
+
+.studentDetailClassLine {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--theme-text-primary);
+}
+
+.studentDetailTabs {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 0.25rem;
+  margin-bottom: 1.25rem;
+  background: var(--theme-bg-page);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-md);
+  gap: 0.25rem;
+  max-width: 100%;
+}
+
+.studentDetailTab {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--theme-radius-sm);
+  background: transparent;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--theme-text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.studentDetailTabActive {
+  background: var(--theme-bg-card);
+  color: var(--theme-text-primary);
+  font-weight: 600;
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.studentDetailPanel {
+  padding: 1.25rem;
+  background: var(--theme-bg-card);
+  border: 1px solid var(--theme-border);
+  border-radius: var(--theme-radius-lg);
+  box-shadow: var(--theme-shadow-sm);
+}
+
+.studentDetailPanelActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.studentDetailSection {
+  margin-bottom: 1.5rem;
+}
+
+.studentDetailSectionTitle {
+  margin: 0 0 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+.studentDetailFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1.25rem;
+  margin: 0;
+}
+
+.studentDetailField {
+  min-width: 0;
+}
+
+.studentDetailFieldFull {
+  grid-column: 1 / -1;
+}
+
+.studentDetailField dt {
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--theme-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.studentDetailField dd {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--theme-text-primary);
+}
+
+.studentDetailDestructiveWrap {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--theme-border);
+}
+
+.studentDetailDiscontinueBtn {
+  color: var(--theme-danger-text);
+  border-color: var(--theme-danger-border);
+}
+
+.studentDetailFeeEmpty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.studentDetailFeeEmpty p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--theme-text-secondary);
+}
+
+.studentDetailFeeActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.studentDetailLink {
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-primary);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.studentDetailTermCard {
+  margin-bottom: 1.25rem;
+}
+
+.studentDetailTermHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.studentDetailTermHeader h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.studentDetailTermDue {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--theme-text-primary);
+}
+
+.studentDetailFeeTable {
+  min-width: 48rem;
+}
+
+.studentDetailEmpty,
+.studentDetailNotFound {
+  padding: 2rem 0;
+}
+
+.studentDetailNotFound .crmPageSubtitle {
+  margin-bottom: 1.25rem;
+}
+
+.studentDetailSectionDelay1 {
+  animation-delay: 0.05s;
+}
+
+@media (max-width: 768px) {
+  .studentDetailFields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

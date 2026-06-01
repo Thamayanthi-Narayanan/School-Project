@@ -1,0 +1,845 @@
+School ERP - UI PRD
+Let me analyze the existing frontend codebase first.
+Good, I have a thorough picture of what exists. Now writing the UI flow document.
+SCHOOL ERP — UI FLOW & SCREEN REQUIREMENTS
+Frontend User Experience Document — Phase 1 This document covers every screen, user
+action, and navigation flow. No technical implementation details.
+PART A — OVERALL NAVIGATION STRUCTURE
+A.1 Application Shell
+The application has two distinct shells:
+Public shell (no sidebar, no header): Used for all login and password-related screens.
+Authenticated shell (with sidebar + header): Used for all post-login screens.
+A.2 Sidebar Navigation
+The sidebar is always visible once logged in. It contains grouped navigation links:
+1 	SCHOOL
+2 	├── Dashboard
+3 	├── Students
+4 	└── Admissions
+5
+6 	ACADEMICS
+7 	├── Academic Years
+8 	├── Classes & Sections
+9 	└── Fee Heads
+10
+11 	FEE MANAGEMENT
+12 	├── Fee Structure (Class-level)
+13 	├── Student Fee Setup
+14 	└── Fee Dues
+15
+16 	PAYMENTS
+17 	├── Collect Fee
+18 	├── Invoices
+19 	└── Refunds
+20
+21 	SCHOLARSHIPS
+22 	├── Schemes
+23 	└── Requests
+24
+25 	REPORTS
+26 	└── Reports
+27
+
+-- 1 of 25 --
+
+Sidebar items visible to a user depend on their role. Restricted items are hidden, not greyed out.
+A.3 Header
+Persistent header bar at the top:
+School name and logo (left)
+Notification bell icon with unread count badge (right)
+User avatar with name and role label (right); clicking opens a small dropdown: "Settings" and
+"Logout"
+A.4 Session Expiry Warning
+When the user's session has 5 minutes remaining, a banner appears at the top of every screen:
+"Your session expires in 5 minutes. Click to extend." Clicking calls the refresh endpoint. If
+session expires without extension, user is redirected to login; after logging back in, they are
+returned to the page they were on.
+PART B — AUTHENTICATION FLOWS
+B.1 Login
+Screen: Full-page two-panel layout. Left panel: school branding. Right panel: login form.
+What the user does:
+1. Enters their username and password
+2. Clicks "Login"
+3. If credentials are valid → lands on Dashboard
+4. If account is inactive → sees error: "Your account has been deactivated. Contact your
+administrator."
+5. If wrong credentials → sees error: "Incorrect username or password."
+Existing flow covers this. Changes needed:
+Login field must accept username (not email or phone — current code uses email/phone)
+Remove OTP step from login — this is not in scope for Phase 1
+28 	ADMINISTRATION
+29 	├── Users
+30 	└── School Settings
+31
+32 	[Notification Bell] 	← top-right header
+33 	[User avatar + name] ← top-right header, click → Settings / Logout
+34
+
+-- 2 of 25 --
+
+B.2 Forgot Password
+User journey:
+1. On login screen, clicks "Forgot password?"
+2. Enters their username → clicks "Send Reset Link"
+3. Screen shows: "If this username exists, a reset link has been sent to the registered email."
+4. User opens email → clicks reset link → lands on Reset Password screen
+5. Enters new password + confirm password → clicks "Reset Password"
+6. Success message shown → link to go back to Login
+B.3 First Login — Forced Password Change
+User journey:
+1. First time a user logs in with a system-assigned password, they are automatically redirected
+to the Change Password screen
+2. They enter their current (temporary) password and a new password
+3. After saving, they land on Dashboard
+B.4 Change Password (from Settings)
+User journey:
+1. User is logged in, clicks their avatar → "Settings"
+2. On Settings page, clicks "Security" tab
+3. Enters current password, new password, confirm new password
+4. Clicks "Update Password" → sees success message
+PART C — SCHOOL SETUP WIZARD
+Shown only to OWNER on first login. Until setup is complete, all other screens show a blocker.
+C.1 Setup Blocker
+If school setup is not complete, every screen (including Dashboard) shows a full-screen overlay:
+"Welcome! Please complete your school setup to get started." with a single button: "Begin
+Setup". No other navigation is accessible.
+C.2 Setup Flow (4 steps)
+Step 1 — School Profile
+User fills in:
+
+-- 3 of 25 --
+
+School name (required)
+Address (required)
+Contact email and phone (required)
+Logo upload — drag-and-drop or click to browse; shows preview after upload (optional, max
+2MB, PNG/JPG)
+Affiliation number (optional)
+Clicks "Next."
+Step 2 — Term Configuration
+User sees 3 term rows (Terms cannot be added or removed — always exactly 3):
+Name: editable text (e.g., "First Term", "Term 1", "April–July")
+Due date: approximate date when fees are due (used in reports)
+Split %: must sum to exactly 100
+A live counter at the bottom shows the current sum: "Total: 100% ✓" or "Total: 95% — must
+equal 100%."
+Warning banner: "Term configuration cannot be changed after students are admitted. Please
+review carefully."
+Clicks "Next."
+Step 3 — Number Sequences
+Three rows, one per sequence type:
+Term 1 	[editable] 	[date picker] 	[%]
+Term 2 	[editable] 	[date picker] 	[%]
+Term 3 	[editable] 	[date picker] 	[%]
+Term 	Name 	Due Date 	Split %
+Admission Numbers 	[text input] 	[number input]
+Receipt Numbers 	[text input] 	[number input]
+Invoice Numbers 	[text input] 	[number input]
+Type 	Prefix 	Starting Number
+
+-- 4 of 25 --
+
+Live preview shown: e.g., "Admission numbers will look like: SAV00001, SAV00002..."
+Clicks "Next."
+Step 4 — Create First Admin User
+User fills in:
+Full name
+Username
+Email
+Phone
+Password + Confirm password
+Clicks "Complete Setup."
+On success: Setup overlay removed. User lands on Dashboard. A success toast: "School setup
+complete. Welcome to [School Name]!"
+PART D — DASHBOARD
+D.1 Dashboard Screen
+The dashboard is the landing page after login. Content varies by role.
+Visible to all roles:
+Total active students (current academic year)
+Pending scholarship requests count (click → Scholarship Requests page)
+Pending refunds count (click → Refunds page)
+Quick action buttons: "Admit New Student" and "Collect Fee"
+Recent payments list (last 5) — each row shows: receipt number, student name, amount, date
+Visible to OWNER and PRINCIPAL only:
+Today's collection (₹ amount)
+Month-to-date collection (₹ amount)
+Total outstanding dues (₹ amount + count of students)
+Visible to ACCOUNTANT:
+Today's collection (₹ amount)
+Total outstanding dues (₹ amount + count of students)
+
+-- 5 of 25 --
+
+Month-to-date collection is NOT shown
+ADMIN sees: Student count, pending scholarship requests, pending refunds, quick actions
+only. No financial amounts.
+Clicking "Admit New Student" → navigates to Admissions. Clicking "Collect Fee" → navigates to
+Collect Fee screen.
+PART E — SCHOOL SETTINGS
+E.1 School Settings Page
+Access: Sidebar → School Settings (OWNER and ADMIN only)
+Tabbed interface:
+Tab: School Profile
+Displays current school name, address, contact email, phone, affiliation number
+All fields are editable inline
+Logo: shows current logo with "Change Logo" button (opens file picker; preview before save)
+Save button at bottom; success toast on save
+Tab: Term Configuration
+Shows the 3 configured terms with their names, due dates, and split percentages
+Fields are editable
+Warning shown if students have already been admitted: "Changing term configuration after
+admission may affect existing fee structures. Proceed carefully."
+Save button; success toast on save
+Tab: Number Sequences
+Shows current prefix and next number for Admission, Receipt, Invoice
+Prefix is editable; starting number is read-only once any number has been issued
+If no numbers issued yet: both prefix and starting number are editable
+Save button; success toast on save
+PART F — ACADEMIC SETUP
+F.1 Academic Years
+Access: Sidebar → Academic Years
+
+-- 6 of 25 --
+
+Screen layout:
+Page header: "Academic Years" + "Add Academic Year" button
+Table: columns — Name, Start Date, End Date, Status (Active/Inactive), Current Year badge,
+Actions (Edit, Deactivate)
+Add / Edit Academic Year:
+Opens a modal with fields: Name, Start Date, End Date, "Set as Current Year" toggle
+Setting as current year shows warning: "This will unset the current academic year
+designation from [previous year name]."
+Save button
+Deactivate:
+Clicking Deactivate shows a confirmation modal: "Are you sure you want to deactivate [Year
+Name]? This will hide it from dropdowns."
+Deactivated years are shown greyed out in the table; can be reactivated
+F.2 Classes & Sections
+Access: Sidebar → Classes & Sections
+Screen layout:
+Two-panel layout (or two tab sections): Classes list on the left, Sections panel on the right
+Classes panel:
+List of classes with their display order
+"Add Class" button → modal with fields: Class Name, Display Order
+Row actions: Edit (opens same modal), Deactivate
+Sections panel:
+Dropdown to select which class to view sections for
+List of sections for that class
+"Add Section" button → modal with field: Section Name
+Row actions: Edit, Deactivate
+F.3 Fee Heads
+Access: Sidebar → Fee Heads
+Screen layout:
+
+-- 7 of 25 --
+
+Table: columns — Fee Head Name, Description, Active status, Actions (Edit, Deactivate)
+"Add Fee Head" button
+Add / Edit Fee Head:
+Modal with fields: Name (required), Description (optional)
+Cannot deactivate a fee head that is used in an active class fee structure (shows error if
+attempted)
+PART G — USER MANAGEMENT
+G.1 Users List
+Access: Sidebar → Users (OWNER and ADMIN only)
+Screen layout:
+Table: columns — Name, Username, Email, Role, Status (Active/Inactive), Actions (Edit,
+Deactivate)
+"Add User" button
+G.2 Add / Edit User
+Clicking "Add User" or "Edit" opens a full-page form (not a modal, given the number of fields):
+Full Name (required)
+Username (required; must be unique; shown as read-only in edit mode)
+Email (required)
+Phone (required)
+Role (required): OWNER, ADMIN, PRINCIPAL, ACCOUNTANT — shown as radio buttons with
+role descriptions
+Password + Confirm Password (required for create; not shown for edit — separate "Reset
+Password" link shown instead)
+OWNER cannot change their own role. Cannot deactivate your own account.
+Role descriptions shown on screen:
+Owner: Full access to everything
+Admin: School operations — everything except scholarship approval and financial reports
+Principal: Can do everything Accountant can, plus approve/reject scholarship requests
+Accountant: Student management, fee collection, create and edit scholarship requests
+
+-- 8 of 25 --
+
+G.3 Deactivate User
+Confirmation modal: "Deactivate [User Name]? They will no longer be able to log in."
+PART H — STUDENT MANAGEMENT
+H.1 Student List
+Access: Sidebar → Students
+Screen layout:
+Filter toolbar: Search by name or admission number, Class dropdown, Section dropdown,
+Academic Year dropdown, Status dropdown (Active / Discontinued / All)
+"Admit New Student" button + "Bulk Upload" button
+Table: columns — Admission No, Student Name, Class, Section, Academic Year, Guardian
+Phone, Fee Status, Actions
+Fee Status shown as a badge: UP TO DATE / DUES PENDING / NOT SETUP
+Pagination at the bottom
+Clicking a student row → Student Detail page
+H.2 Student Detail Page
+Access: Click any student from the student list
+Layout: Student header (name, admission number, class, section, status badge) with tabs
+below:
+Tab: Personal Info
+All student details: name, DOB, gender, address, blood group, religion, community
+Father info: name, phone, email, occupation
+Mother info: name, phone, email, occupation
+Admission date, previous school
+"Edit" button → opens edit mode inline (all fields become editable); "Save" and "Cancel"
+buttons appear
+Tab: Fee & Payments
+See Section H.5 (Fee Ledger View)
+Tab: Scholarship
+See Section I.3 (Scholarship per student)
+
+-- 9 of 25 --
+
+Tab: History
+Class/section transfer history: table of past class assignments
+Shows: Academic Year, Class, Section, Assigned Date
+H.3 Admission Wizard
+Access: "Admit New Student" button on Student List or Dashboard
+Step 0 — Setup Modal (gate before wizard opens)
+Modal asking: Academic Year (dropdown) + Class (dropdown) + Section (dropdown)
+Cannot proceed without selecting all three
+"Begin Admission" button opens the 3-step wizard
+Step 1 — Student Information
+Fields:
+First Name, Last Name (required)
+Date of Birth (required; date picker)
+Gender (required; Male/Female/Other — radio)
+Blood Group (dropdown; optional)
+Nationality (dropdown; optional)
+Religion, Community (dropdowns; optional)
+Address (required; textarea)
+Previous School (optional)
+Admission Date (required; defaults to today)
+Step 2 — Parent / Guardian Information
+Father's details:
+Full Name (required), Phone (required), Email (optional), Occupation (optional)
+Mother's details:
+Full Name (required), Phone (required), Email (optional), Occupation (optional)
+Step 3 — Review & Submit
+Shows a summary of all entered data in read-only cards. User can click "Edit" on each card to
+jump back to that step.
+"Submit Admission" button at the bottom.
+
+-- 10 of 25 --
+
+On success:
+Full-screen success popup showing the assigned Admission Number (e.g., SAV00042)
+Options: "Admit Another Student" (resets wizard) or "View Student Profile"
+Navigation within wizard:
+Step indicator at the top shows Step 1 / 2 / 3 and completion status
+"Back" and "Next" buttons at the bottom
+Clicking a completed step in the indicator jumps to that step
+Cannot skip a step unless current step is valid
+"Change Class" link in the header allows going back to Step 0 setup modal
+H.4 Edit Student
+From Student Detail → Personal Info tab → "Edit" button:
+All fields become editable inline
+Class and section can be changed here (this counts as a section/class transfer — a history
+record is created)
+"Save Changes" and "Cancel" buttons
+Saving shows success toast
+Discontinue Student:
+"Discontinue Student" button (shown to OWNER, ADMIN, PRINCIPAL only; red, destructive
+button)
+Opens confirmation modal: "Mark [Student Name] as discontinued? Their outstanding fees
+will remain collectible."
+Input field: "Reason for discontinuation" (optional)
+Confirm → student status changes to DISCONTINUED; they move to "Discontinued" filter in
+the list
+H.5 Section Transfer
+Section transfer is handled within the student edit flow (same as Edit Student above). When the
+user changes the section and saves, the system records the transfer in history.
+No separate "Transfer" flow needed.
+H.6 Bulk Upload Students
+Access: "Bulk Upload" button on Student List
+
+-- 11 of 25 --
+
+Screen layout:
+1. Download template row: "Download the student import template" + "Download Template"
+button
+2. Upload zone: Drag-and-drop area or "Browse Files" button; accepts Excel files only
+3. After file selection: file name shown with "Upload" button
+After upload:
+If all rows succeed: green success banner with count; table shows all admitted students
+If some rows fail: amber warning banner "48 of 50 students uploaded successfully. 2 rows
+had errors."
+Error detail table shows: Row Number, Student Name (if available), Error Reason
+"Download Failed Rows" button to get a corrected template with only the failing rows
+PART I — FEE CONFIGURATION
+I.1 Class Fee Structure
+Access: Sidebar → Fee Structure
+Screen layout:
+Filter toolbar: Class (required), Academic Year (required) — table only loads when both are
+selected
+If no fee structure exists for selected class + year: "No fee structure set up. Click 'Configure'
+to begin."
+"Configure" button opens the configuration panel
+Fee Structure Configuration panel (full-page or large panel):
+Section A — Fee Lines:
+Table with columns: Fee Head (dropdown from configured fee heads), Annual Amount (₹
+input)
+"Add Row" button to add more fee heads
+Trash icon on each row to remove
+Section B — Term Split:
+3 rows (one per term), each with term name (from school config) and % input
+Live total shown: must sum to 100
+"Use default (30/30/40)" helper link to auto-fill
+
+-- 12 of 25 --
+
+Section C — Preview:
+Shown automatically as the user inputs data
+Table showing: Term 1 amounts per fee head, Term 2 amounts, Term 3 amounts, Annual total
+Term amounts are calculated as floor(annual × %)
+Last term absorbs rounding differences (shown with asterisk and note)
+"Save Fee Structure" button at the bottom.
+If a fee structure already exists for the selected class + year, it is shown pre-filled and can be
+edited.
+I.2 Student Fee Setup
+Access: Sidebar → Student Fee Setup (or from Student Detail → Fee tab → "Setup Fee
+Structure")
+Screen layout:
+Student selector at the top: search by name or admission number
+Academic Year selector
+Once student and year are selected, the panel loads
+Section A — Class Fee Structure Summary (read-only) Shows the class-level fee structure as
+a reference table.
+Section B — Term Split Override
+Toggle: "Use class default term split (X%/Y%/Z%)" — checked by default
+If unchecked: 3 input fields appear for custom term split percentages; same validation as
+class-level (must sum to 100)
+Section C — Additional Fees
+Table: Fee Head (dropdown), Annual Amount
+"Add Fee" button
+These fees are specific to this student only (e.g., transport, special coaching)
+Can be left empty
+Section D — Preview
+Live preview table showing the resulting fee per term per fee head (including additional fees)
+Clearly differentiates class fees vs additional fees
+Action buttons:
+
+-- 13 of 25 --
+
+"Save" — saves the configuration without generating ledgers
+"Save & Generate Ledger" — saves and creates the billing ledger + invoices for this student
+"Save & Generate Ledger" shows a confirmation modal: "This will generate billing records for all
+3 terms. You cannot regenerate ledgers once created. Continue?"
+After generation: success message; "View Ledger" button navigates to the fee ledger view for
+this student.
+If ledger already generated: "Ledger already generated on [date]." banner; only "Save" is
+available (to update additional fees or term split — but a warning notes this won't retroactively
+change already-generated ledger rows).
+PART J — SCHOLARSHIP MANAGEMENT
+J.1 Scholarship Schemes
+Access: Sidebar → Scholarships → Schemes
+Screen layout:
+Grid of scheme cards, each showing: Scheme Name, Discount Type badge (Percentage /
+Fixed Amount), Active/Inactive status
+"Add Scheme" button
+Add / Edit Scheme: Opens a modal with fields:
+Scheme Name (required)
+Description (optional)
+Discount Type: "Percentage" or "Fixed Amount" (radio)
+No other configuration needed at scheme level. Actual discount values are set per student at the
+request level.
+Deactivate Scheme:
+Deactivate button on card → confirmation modal
+Cannot deactivate if any PENDING or APPROVED requests reference this scheme
+J.2 Scholarship Requests List
+Access: Sidebar → Scholarships → Requests
+Screen layout:
+
+-- 14 of 25 --
+
+Filter toolbar: Status (All / Pending / Approved / Rejected / Superseded), Class, Academic
+Year, Search by student name
+Table: columns — Student Name, Class, Request Date, Status badge, Actions
+Actions by status:
+PENDING: "View" and "Approve/Reject" (for Principal/Owner); "View" and "Edit" (for
+Accountant)
+APPROVED: "View"
+REJECTED: "View" and "Re-apply" (creates a new request)
+SUPERSEDED: "View" (read-only)
+J.3 Scholarship — Student View
+Access: Student Detail → Scholarship tab
+This tab shows the scholarship status for this specific student:
+If no request exists:
+Message: "No scholarship request has been submitted for this student."
+"Create Scholarship Request" button (for ACCOUNTANT and PRINCIPAL)
+If request is PENDING:
+Yellow banner: "Scholarship request pending approval — fee collection is blocked for this
+student"
+Shows the request details (see below)
+"Edit Request" button (ACCOUNTANT/PRINCIPAL only)
+"Approve" and "Reject" buttons (PRINCIPAL/OWNER only)
+If request is APPROVED:
+Green banner: "Scholarship active"
+Shows approved request details
+"Modify Scholarship" button → creates a new PENDING request alongside the existing
+approved one; user sees warning: "A new request will be created. Fee collection will be
+blocked until the new request is reviewed."
+If a new PENDING request exists alongside an APPROVED one:
+Two cards shown: "Current Active Scholarship" (APPROVED) and "Pending Modification"
+(PENDING)
+
+-- 15 of 25 --
+
+Fee collection is blocked during this time
+Request detail card shows:
+Request status + date submitted + submitted by
+Table of line items: Scheme Name | Fee Head | Discount % | Annual Discount Amount
+Total annual discount amount
+Remarks
+J.4 Create / Edit Scholarship Request
+Opens as a full-page form (given complexity):
+Student info header (read-only): Name, Class, Admission No
+Line items section:
+Table with columns: Scholarship Scheme (dropdown), Fee Head (dropdown), Discount %
+(number input)
+Each row shows a live calculated preview: "₹X off per year on [Fee Head]"
+"Add Line Item" button to add more rows
+Trash icon to remove a row
+Remarks field (optional): free text
+Summary section:
+Shows total discount per fee head and grand total annual discount
+"Submit Request" button.
+On submission: redirects to Student Detail → Scholarship tab; PENDING banner shown.
+J.5 Approve / Reject Request
+Access: From Scholarship Request list or Student Detail → Scholarship tab
+Approve flow:
+"Approve" button → confirmation modal: "Approve scholarship request for [Student Name]?
+This will apply discounts to their fee ledger."
+Remarks field (optional)
+Confirm → status changes to APPROVED
+If refund is triggered (student already paid more than new net): toast: "Approval successful. A
+refund of ₹[amount] has been created for this student."
+
+-- 16 of 25 --
+
+Reject flow:
+"Reject" button → modal with required Remarks field: "Please enter a reason for rejection"
+Confirm → status changes to REJECTED
+Accountant who submitted receives in-app notification
+PART K — FEE COLLECTION & PAYMENTS
+K.1 Fee Ledger — Student View
+Access: Student Detail → "Fee & Payments" tab
+Layout:
+If ledger not yet generated:
+Message: "Fee structure has not been set up for this student for the current year."
+"Set Up Fee Structure" button → navigates to Student Fee Setup screen
+If scholarship is PENDING:
+Red warning banner at the top: "Fee collection is blocked — scholarship request #SR-XXXX is
+pending approval."
+[View Scholarship Request →] link
+All "Collect Payment" buttons are disabled
+Ledger section (3 collapsible term cards):
+Each term card shows:
+Term header: Term name + total due for this term
+Table: Fee Head | Annual Amount | Term % | Term Amount | Scholarship Discount | Net
+Amount | Paid | Balance | Status
+Status per row: PAID (green) / PARTIAL (amber) / UNPAID (red)
+"Collect Payment" button per term (disabled if scholarship pending)
+Footer:
+Grand total row: Total annual | Total net | Total paid | Total outstanding
+"View Payment History" link
+K.2 Collect Payment Modal
+Trigger: "Collect Payment" button on any term card
+
+-- 17 of 25 --
+
+Modal layout:
+Section 1 — Select Fee Items Checkbox list of all unpaid/partial rows for all 3 terms. Pre-
+selects the term the button was clicked from. User can check/uncheck rows across all terms.
+Per row shows: Term Name + Fee Head | Net Amount | Balance Due
+Section 2 — Amount to Collect
+Auto-calculated total of checked rows' balances
+Editable amount field (user can enter less than the total → partial payment)
+Validation: cannot exceed total balance of selected rows
+Section 3 — Payment Mode Breakdown
+Default: one row with mode = Cash and amount = collecting amount
+"Add Another Mode" button adds another row
+Each row: Mode dropdown (Cash/Cheque/DD/NEFT/UPI/Card) + Amount input
+Non-cash modes show a Reference Number field
+Validation: sum of all mode amounts must equal the total collecting amount
+Section 4 — Payment Date & Remarks
+Payment Date: date picker, defaults to today
+Remarks: optional text field
+Buttons: "Cancel" and "Confirm & Generate Receipt"
+On confirm: Modal closes; receipt is shown inline (or in a new modal); ledger table refreshes.
+K.3 Receipt View
+Immediately after a successful payment, a receipt is shown in a print-ready modal format (see
+PRD for receipt layout).
+Buttons: "Print Receipt" and "Download PDF."
+The receipt can also be accessed any time from Payment History.
+K.4 Payment History (per student)
+Access: Student Detail → Fee & Payments tab → "View Payment History" link
+Screen:
+Table: Receipt No | Date | Amount | Payment Modes | Term(s) Covered | Collected By |
+Actions
+
+-- 18 of 25 --
+
+"View Receipt" action on each row → opens receipt in a modal
+K.5 Invoices
+Access: Sidebar → Invoices
+Screen:
+Filter toolbar: Student (search), Class, Academic Year, Term, Status (Unpaid/Partial/Paid/All)
+Table: Invoice No | Student Name | Class | Term | Total Amount | Paid | Balance | Status |
+Actions
+"View Invoice" action → opens invoice in a print-ready modal
+Invoice modal: School header, student info, line-by-line fee breakdown, discount summary,
+totals, payment status, "Print" and "Download PDF" buttons.
+K.6 Fee Dues Dashboard
+Access: Sidebar → Fee Dues
+Screen:
+Academic Year filter (defaults to current year)
+Class filter, Section filter, Term filter (All / Term 1 / Term 2 / Term 3)
+Table: Student Name | Admission No | Class | Section | Term 1 Due | Term 2 Due | Term 3 Due
+| Total Outstanding
+Clicking a student name → navigates to Student Detail → Fee tab
+"Export CSV" button
+Summary row at the bottom: Total outstanding across filtered students.
+K.7 Refunds
+Access: Sidebar → Refunds
+Screen:
+Filter: Status (Pending / Completed / All)
+Table: Student Name | Admission No | Class | Amount | Reason | Date Triggered | Status |
+Actions
+Pending refunds:
+"Mark as Completed" action button
+
+-- 19 of 25 --
+
+Clicking opens a confirmation modal: "Confirm that cash of ₹[amount] has been handed over
+to [Student Name]'s guardian."
+Optional remarks field
+Confirm → status changes to COMPLETED; row moves to Completed filter
+PART L — REPORTS
+Access: Sidebar → Reports
+Single page with 4 report sections as tabs or cards.
+L.1 Fee Collection Summary
+(Visible to OWNER and PRINCIPAL only — hidden from ADMIN and ACCOUNTANT)
+Filters: Academic Year, Class (optional), Term (optional)
+Table: Fee Head | Term Billed | Term Collected | Term Due
+Summary: Total Billed | Total Collected | Collection %
+Buttons: "Export CSV" and "Export PDF"
+L.2 Student Strength
+Filters: Academic Year
+Table: Class | Section-wise counts | Class Total
+Summary: Total Active | Total Discontinued | Grand Total
+Button: "Export CSV"
+L.3 Pending Dues
+Filters: Academic Year, Class, Section
+Table: Student Name | Admission No | Class | 0–30 days | 31–60 days | 61–90 days | 90+ days |
+Total Due
+(Ageing buckets calculated from the term due dates configured in school settings)
+Summary: Total Outstanding
+Buttons: "Export CSV" and "Export PDF"
+
+-- 20 of 25 --
+
+L.4 Payment Register
+Filters: Date Range (From, To), Class
+Table: Receipt No | Date | Student Name | Amount | Payment Modes
+Summary: Total Collected in period | Mode-wise breakdown (Cash: X, UPI: Y, ...)
+Buttons: "Export CSV" and "Export PDF"
+PART M — NOTIFICATIONS
+M.1 Notification Bell
+The bell icon in the top-right header shows a count badge when unread notifications exist.
+Clicking the bell opens a side panel (not a full page).
+M.2 Notification Panel
+"Mark All Read" button at the top
+List of notifications, most recent first
+Each notification shows: Icon (based on type) + Message text + Relative timestamp ("2 hours
+ago")
+Unread notifications have a subtle highlighted background
+Clicking a notification marks it as read and navigates to the relevant screen if applicable:
+Scholarship submission → Scholarship Requests list
+Scholarship approved/rejected → Student's scholarship tab
+Refund triggered → Refunds page
+Notifications older than 30 days are not shown.
+PART N — SETTINGS
+Access: User avatar → "Settings"
+N.1 Profile Tab
+Read-only display of:
+Full name, Username, Email, Phone, Role, School Name
+N.2 Security Tab
+Change Password form: Current Password, New Password, Confirm New Password
+
+-- 21 of 25 --
+
+Password strength indicator under the new password field
+"Update Password" button
+Success message shown inline on save
+PART O — USER FLOW SUMMARY MAP
+1 	LOGIN
+2 	└── Login screen
+3 	├── Success → Dashboard
+4 	├── First login → Forced password change → Dashboard
+5 	└── Forgot password → Reset flow → Login
+6
+7 	FIRST-TIME SETUP (Owner only, blocks all else)
+8 	└── Wizard: School Profile → Terms → Number Sequences → Create Admin
+→ Dashboard
+9
+10 	DASHBOARD
+11 	├── Quick action: Admit New Student → Admission Wizard
+12 	├── Quick action: Collect Fee → Collect Fee screen
+13 	├── Pending scholarships (count) → Scholarship Requests list
+14 	└── Pending refunds (count) → Refunds page
+15
+16 	STUDENTS
+17 	├── Student List → [click row] → Student Detail
+18 	│ 	├── Personal Info tab → Edit / Discontinue
+19 	│ 	├── Fee & Payments tab
+20 	│ 	│ 	├── No ledger? → Student Fee Setup
+21 	│ 	│ 	├── Scholarship pending? → Warning banner (collect
+disabled)
+22 	│ 	│ 	├── Ledger rows → [Collect Payment] → Payment Modal →
+Receipt
+23 	│ 	│ 	└── [View Payment History] → History table → [View
+Receipt]
+24 	│ 	├── Scholarship tab
+25 	│ 	│ 	├── No request → [Create Request] → Request form
+26 	│ 	│ 	├── Pending request → [Edit] or [Approve/Reject]
+27 	│ 	│ 	└── Approved → [Modify] → New request form
+28 	│ 	└── History tab (read-only class history)
+29 	├── [Admit New Student] → Admission Wizard
+30 	└── [Bulk Upload] → Bulk Upload screen
+31
+32 	FEE MANAGEMENT
+33 	├── Fee Structure → select class + year → configure → save
+34 	├── Student Fee Setup → select student + year → override split, add
+fees → Save / Save & Generate
+35 	├── Invoices → filter → [View Invoice] → print/download
+36 	└── Fee Dues → filter → [click student] → Student Detail Fee tab
+37
+38 	SCHOLARSHIPS
+39 	├── Schemes → list → [Add/Edit/Deactivate scheme]
+40 	└── Requests → list → [View/Approve/Reject/Edit]
+41
+42 	PAYMENTS
+43 	└── Refunds → list → [Mark as Completed]
+44
+45 	REPORTS
+46 	├── Fee Collection Summary (Owner/Principal only)
+47 	├── Student Strength
+48 	├── Pending Dues
+49 	└── Payment Register
+50
+51 	ADMINISTRATION
+
+-- 22 of 25 --
+
+PART P — ROLE-BASED SCREEN ACCESS
+52 	├── Users → list → [Add/Edit/Deactivate user]
+53 	└── School Settings → Profile | Terms | Number Sequences tabs
+54
+55 	NOTIFICATIONS
+56 	└── Bell icon → side panel → [click notification → navigate to
+context]
+57
+58 	SETTINGS
+59 	└── User avatar → Settings → Profile tab | Security tab (change
+password)
+60
+Dashboard
+(financial
+widgets)
+✓ 	✗ 	✓ 	Partial
+School Settings 	✓ 	✓ 	✗ 	✗
+Academic Years 	✓ 	✓ 	✗ 	✗
+Classes &
+Sections
+✓ 	✓ 	✗ 	✗
+Fee Heads 	✓ 	✓ 	✗ 	✗
+User
+Management
+✓ 	✓ 	✗ 	✗
+Student List &
+Detail
+✓ 	✓ 	✓ 	✓
+Admit Student 	✓ 	✓ 	✓ 	✓
+Edit / Discontinue
+Student
+✓ 	✓ 	✓ 	✓
+Fee Structure
+(class)
+✓ 	✓ 	✗ 	✗
+Student Fee
+Setup
+✓ 	✓ 	✓ 	✓
+Collect Payment 	✓ 	✓ 	✓ 	✓
+Screen 	OWNER 	ADMIN 	PRINCIPAL 	ACCOUNTANT
+
+-- 23 of 25 --
+
+PART Q — KEY UX RULES
+These apply across all screens:
+1. Destructive actions always require confirmation. Deactivate, Discontinue, Delete, and
+Reject all open a confirmation modal before executing.
+2. Blocked states are visible, not hidden. When a user doesn't have access to an action (e.g.,
+Accountant cannot approve scholarships), the button is hidden. When a business rule blocks
+an action (e.g., scholarship pending), the button is visible but disabled with a tooltip
+explaining why.
+Invoices 	✓ 	✓ 	✓ 	✓
+Fee Dues 	✓ 	✓ 	✓ 	✓
+Refunds 	✓ 	✓ 	✓ 	✓
+Scholarship
+Schemes
+✓ 	✓ 	✓ 	✓
+Create / Edit
+Scholarship
+Request
+✓ 	✗ 	✓ 	✓
+Approve / Reject
+Scholarship
+✓ 	✗ 	✓ 	✗
+Fee Collection
+Summary report
+✓ 	✗ 	✓ 	✗
+Student Strength
+report
+✓ 	✓ 	✓ 	✓
+Pending Dues
+report
+✓ 	✗ 	✓ 	✓
+Payment Register
+report
+✓ 	✗ 	✓ 	✓
+Ledger Manual
+Adjust
+✓ 	✗ 	✗ 	✗
+
+-- 24 of 25 --
+
+3. Empty states are instructive. When a list is empty, show a message explaining why and
+what action to take (e.g., "No fee structure configured. Click 'Configure' to set one up.").
+4. Live calculation previews. Fee structure configuration and scholarship request forms show
+live-calculated totals as the user types. No need to click a "Calculate" button.
+5. Filters persist within a session. If a user filters the student list by "Class 8" and navigates
+away and back, the filter is still applied.
+6. Success feedback is always shown. Every save/create/update/delete shows a toast
+notification confirming the action. Errors are shown inline near the relevant field or at the top
+of the form.
+7. Navigation is never blocked by unsaved changes without warning. If a user has unsaved
+changes on a form and tries to navigate away, a browser-standard "You have unsaved
+changes. Leave anyway?" prompt appears.
+8. Paginated lists default to 20 items per page. All tables show "Showing X–Y of Z results"
+text.
+9. Dates are always displayed in DD-Mon-YYYY format (e.g., 28-May-2026). Date pickers
+accept keyboard input and calendar selection.
+10. Currency values are always shown with the ₹ symbol and formatted with Indian-style
+comma grouping (1,24,600).
+End of UI Flow Document — School ERP Phase 1 All flows reference the business rules and API
+details in the main PRD.
+
+-- 25 of 25 --
+
